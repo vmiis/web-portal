@@ -1,0 +1,517 @@
+<div id=D__ID>
+    <div class=h_img__ID>
+        <div class=h_txt__ID>
+            <h4>Authentication</h4>
+        </div>
+    </div>
+    <div id=panel__ID>
+        <div>
+                <span class=label__ID>Woolcock Zhiming Database</span>
+                <ul>
+                    <li><i class="fab fa-microsoft"></i> <a href='wzd_microsoft'>Microsoft</a> <span id=wzd_microsoft_email></span>     <a href='wzd_microsoft_signout' style='display:none'>Sign Out</a>  </li>
+                    <li><i class="fab fa-google"></i>    <a href='wzd_google'>Google</a>       <span id=wzd_google_email></span>        <a href='wzd_google_signout' style='display:none'>Sign Out</a> </li>
+                    <li><i class="fab fa-facebook"></i>  <a href='wzd_facebook'>Facebook</a>   <span id=wzd_facebook_email></span>      <a href='wzd_facebook_signout' style='display:none'>Sign Out</a> </li>
+                    <li><i class="fab fa-github"></i>    <a href='wzd_github'>GitHub</a>       <span id=wzd_github_email></span>        <a href='wzd_github_signout' style='display:none'>Sign Out</a> </li>
+                </ul>
+                <span class=label__ID>Wappsystem Database</span>
+                <ul>
+                    <li>                                 <a href='wapp_wappsystem'>Wappsystem</a> <span id=wapp_wappsystem_email></span>  <a href='wapp_wappsystem_signout' style='display:none'>Sign Out</a>  </li>
+                    <li><i class="fab fa-microsoft"></i> <a href='wapp_microsoft'>Microsoft</a>   <span id=wapp_microsoft_email></span>   <a href='wapp_microsoft_signout' style='display:none'>Sign Out</a>  </li>
+                    <li><i class="fab fa-google"></i>    <a href='wapp_google'>Google</a>         <span id=wapp_google_email></span>      <a href='wapp_google_signout' style='display:none'>Sign Out</a>  </li>
+                    <li><i class="fab fa-facebook"></i>  <a href='wapp_facebook'>Facebook</a>     <span id=wapp_facebook_email></span>    <a href='wapp_facebook_signout' style='display:none'>Sign Out</a> </li>
+                    <li><i class="fab fa-github"></i>    <a href='wapp_github'>GitHub</a>         <span id=wapp_github_email></span>      <a href='wapp_github_signout' style='display:none'>Sign Out</a> </li>
+                </ul>
+                <span class=label__ID>Woolcock Microsoft Dynamics 365</span>
+                <ul>
+                    <li><a href='microsoft2'>Sign in</a> <span id=microsoft2_username></span> <a href='microsoft2_signout' style='display:none'>Sign Out</a> </li>
+                </ul>
+                <span class=label__ID>Blackbaud</span>
+                <ul>
+                    <li><a href='blackbaud'>Sign in</a> <span id=blackbaud_username></span> <a href='blackbaud_signout' style='display:none'>Sign Out</a> </li>
+                </ul>
+                <span class=label__ID>Intuit</span>
+                <ul>
+                    <li><a href='intuit'>Sign in</a> <span id=intuit_username></span> <a href='intuit_signout' style='display:none'>Sign Out</a> </li>
+                </ul>
+                <span class=label__ID>DocuSign</span>
+                <ul>
+                    <li><a href='docusign'>Sign in</a> <span id=docusign_username></span> <a href='docusign_signout' style='display:none'>Sign Out</a> </li>
+                </ul>
+            
+            <!--
+                <span class=label__ID>Identity</span>
+                (Verify who you are by third-party identity services, permissions granted based on your email)
+                <ul>
+                    <li><i class="fab fa-microsoft"></i> <a href='microsoft'>Microsoft</a> <span id=microsoft_email></span> </li>
+                    <li><i class="fab fa-google"></i> <a href='google'>Google</a> <span id=google_email></span></li>
+                    <li><i class="fab fa-facebook"></i> <a href='facebook'>Facebook</a> <span id=facebook_email></span></li>
+                    <li><i class="fab fa-github"></i> <a href='github'>GitHub</a> <span id=github_email></span></li>
+                </ul>
+                <span class=label__ID>Resources</span>
+                (Get or refresh access token, accessing third party resources on behalf of you)
+                <ul>
+                    <li><a href='blackbaud'>Blackbaud</a> <span id=blackbaud_username></span> <a href='blackbaud_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='intuit'>Intuit</a> <span id=intuit_username></span> <a href='intuit_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='mailchimp'>Mailchimp</a> <span id=mailchimp_username></span> <a href='mailchimp_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='microsoft2'>Microsoft</a> <span id=microsoft_username></span> <a href='microsoft_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='docusign'>DocuSign</a> <span id=docusign_username></span> <a href='docusign_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='test'>Test</a></li>
+                </ul>
+            -->
+        </div>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var prefix=$vm.module_list["__MODULE__"].prefix;
+            if(prefix==undefined) prefix="";
+            //--------------------------------------------------------
+            var u=window.location.origin+"/auth.html"
+            //--------------------------------------------------------
+            $('#panel__ID a').on('click',function(e){
+                e.preventDefault();
+                var href=$(this).attr('href');
+                var url="";
+                if(href=="wzd_microsoft"){
+                    url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+                    //url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
+                    url+='?client_id=3bcb40c5-fec0-4b3b-ba67-f4d46d577f97'; //woolcock
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=openid user.read profile'; 
+                    url+='&response_mode=fragment';
+                    url+='&state=exchange-microsoft-token.wzd_microsoft';
+                    url+='&nonce=678910';
+                    window.open(url);
+                }
+                if(href=="wzd_google"){
+                    url='https://accounts.google.com/o/oauth2/v2/auth';
+                    url+='?client_id=485153637765-maqa89r5jm9rusuc1u87sh72lrlpckk3.apps.googleusercontent.com';
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=profile email';
+                    url+='&state=exchange-google-token.wzd_google';
+                    window.open(url);
+                }
+                if(href=="wzd_facebook"){
+                    url='https://graph.facebook.com/oauth/authorize';
+                    url+='?client_id=596805194160323';
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=public_profile email';
+                    url+='&state=exchange-facebook-token.wzd_facebook';
+                    window.open(url);
+                }
+                if(href=="wzd_github"){
+                    url='https://github.com/login/oauth/authorize';
+                    url+='?client_id=f739a345a5ed615ab8c0';
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=user';
+                    url+='&state=exchange-github-token.wzd_github';
+                    window.open(url);
+                }
+                if(href=="wapp_wappsystem"){
+                    window.open($vm.api_addresses['wapp']+"/signin.html","Sign In","width=600, height=700");
+                }
+                if(href=="wapp_microsoft"){
+                    url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+                    url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=openid user.read profile'; 
+                    url+='&response_mode=fragment';
+                    url+='&state=exchange-microsoft-token.wapp_microsoft';
+                    url+='&nonce=678910';
+                    window.open(url);
+                }
+              
+                if(href=="blackbaud"){
+                    url='https://oauth2.sky.blackbaud.com/authorization';
+                    url+='?response_type=code';
+                    url+='&client_id=03210bfe-d6b5-44c6-aa6a-d681ebbe5743';
+                    url+='&redirect_uri='+u;
+                    url+='&state=exchange-blackbaud-token.wzd_blackbaud';
+                    window.open(url);
+                }
+                if(href=="intuit"){
+                    url='https://appcenter.intuit.com/connect/oauth2';
+                    url+='?response_type=code';
+                    url+='&client_id=AB3IGe9rVvhsIQB7FlhIxHKV19XHVrhw7viI3dG8Y2pJ7V3Mxg';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=com.intuit.quickbooks.accounting openid profile email';
+                    url+='&state=exchange-intuit-token.wzd_intuit';
+                    window.open(url);
+                }
+                if(href=="mailchimp"){
+                    url='https://login.mailchimp.com/oauth2/authorize';
+                    url+='?response_type=code';
+                    url+='&client_id=333393775932';
+                    url+='&redirect_uri='+u;
+                    //url+='&redirect_uri=http://127.0.0.1:8000/auth.html';
+                    url+='&state=exchange-mailchimp-token';
+                    window.open(url);
+                }
+                if(href=="microsoft2"){
+                    url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+                    url+='?client_id=3bcb40c5-fec0-4b3b-ba67-f4d46d577f97'; //woolcock
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=https://woolcockdev.crm6.dynamics.com/.default'; 
+                    url+='&response_mode=fragment';
+                    url+='&state=exchange-microsoft2-token.wzd_microsoft2';
+                    url+='&nonce=678910';
+                    window.open(url);
+                }
+                if(href=="docusign"){
+                    url='https://account-d.docusign.com/oauth/auth';
+                    url+='?response_type=code';
+                    url+='&client_id=2c1e3065-9332-4ba6-b39c-2cd2d51e856c';
+                    url+='&redirect_uri='+u;
+                    url+='&state=exchange-docusign-token.wzd_docusign';
+                    window.open(url);
+                }
+                //---------------------------
+                //sign out
+                switch(href){
+                    case "wzd_microsoft_signout":   
+                    case "wzd_google_signout":   
+                    case "wzd_facebook_signout":   
+                    case "wzd_github_signout":   
+                        sessionStorage.removeItem("wzd provider");
+                        sessionStorage.removeItem("wzd username");
+                        sessionStorage.removeItem("wzd displayname");
+                        sessionStorage.removeItem("wzd group");
+                        sessionStorage.removeItem("wzd token");
+                        login_display_all();
+                        break;
+                    case "wapp_wappsystem_signout":   
+                    case "wapp_microsoft_signout":   
+                    case "wapp_google_signout":   
+                    case "wapp_facebook_signout":   
+                    case "wapp_github_signout":   
+                        sessionStorage.removeItem("wapp provider");
+                        sessionStorage.removeItem("wapp username");
+                        sessionStorage.removeItem("wapp displayname");
+                        sessionStorage.removeItem("wapp group");
+                        sessionStorage.removeItem("wapp token");
+                        login_display_all();
+                        break;
+                    
+                    case "mailchimp_signout":   sessionStorage.removeItem("mailchimp oauth");   $('#mailchimp_username').text('');  $('a[href=mailchimp_signout]').hide(); break;
+                    case "blackbaud_signout":   sessionStorage.removeItem("blackbaud oauth");   $('#blackbaud_username').text('');  $('a[href=blackbaud_signout]').hide(); break;
+                    case "intuit_signout":      sessionStorage.removeItem("intuit oauth");      $('#intuit_username').text('');     $('a[href=intuit_signout]').hide(); break;
+                    case "microsoft_signout":   sessionStorage.removeItem("microsoft oauth");   $('#microsoft_username').text('');  $('a[href=microsoft_signout]').hide(); break;
+                    case "docusign_signout":    sessionStorage.removeItem("docusign oauth");    $('#docusign_username').text('');   $('a[href=docusign_signout]').hide(); break;
+                    case "test": test(); break;
+                }
+            })
+            //--------------------------------------------------------
+            window.onmessage=function(e){
+                if (e.origin == window.location.origin) {
+                    var cmd=e.data.cmd;
+                    var code=e.data.code;
+                    var href=e.data.href;
+                    if(code!=undefined && cmd!=undefined) $vm.exchange_token(cmd,code,u,href); 
+                }
+                else if(e.origin==$vm.api_addresses['wapp']){
+                    if(e.data.username!=undefined && e.data.token!=undefined){
+                        sessionStorage.setItem("wapp provider","wappsystem");
+                        sessionStorage.setItem("wapp username",e.data.username);
+                        sessionStorage.setItem("wapp displayname","");
+                        sessionStorage.setItem("wapp group","");
+                        sessionStorage.setItem("wapp token",e.data.token);
+                        login_display("wapp_wappsystem");
+                    }
+                }
+            };
+            //------------------------------------
+            $vm.exchange_token=function(state,code,redirect_uri,href){
+                var cmd=state.split('.')[0];
+                var id=state.split('.').pop();
+                request_token(id,cmd,code,redirect_uri,href);
+            }
+            //------------------------------------
+            var request_token=function(id,cmd,code,redirect_uri,href){
+                var api_name=id.split('_')[0];
+                $vm.request({api_name:api_name,cmd:cmd,token:code,redirect_uri:redirect_uri},function(res){
+                    if(res.status=='ok'){
+                        switch(cmd){
+                            case "exchange-microsoft-token": process_identity(res,id); break;
+                            case "exchange-google-token":    process_identity(res,id); break;
+                            case "exchange-facebook-token":  process_identity(res,id); break;
+                            case "exchange-github-token":    process_identity(res,id); break;
+                            
+                            case "exchange-mailchimp-token":
+                                sessionStorage.setItem("mailchimp oauth",JSON.stringify(res.result));
+                                var host='us3.api.mailchimp.com';
+                                $vm.request({cmd:'mailchimp-api',access_token:res.result.access_token,host:host,path:"/3.0/"},function(res){
+                                    sessionStorage.setItem("mailchimp oauth profile",res.result);
+                                    login_display(id);
+                                })
+                                break;
+                            case "exchange-blackbaud-token":
+                                sessionStorage.setItem("blackbaud oauth",JSON.stringify(res.result));
+                                break;
+                            case "exchange-intuit-token":
+                                res.result.href=href;
+                                sessionStorage.setItem("intuit oauth",JSON.stringify(res.result));
+                                break;
+                            case "exchange-microsoft2-token":
+                                sessionStorage.setItem("microsoft2 oauth",JSON.stringify(res.result));
+                                break;
+                            case "exchange-docusign-token":
+                                sessionStorage.setItem("docusign oauth",JSON.stringify(res.result));
+                                var host='account-d.docusign.com';
+                                $vm.request({cmd:'docusign-api',access_token:res.result.access_token,host:host,path:"/oauth/userinfo"},function(res){
+                                    sessionStorage.setItem("docusign oauth profile",res.result);
+                                    login_display(id);
+                                })
+                                break;
+                        }
+                        login_display(id);
+                    }
+                })
+            }
+            //------------------------------------
+            var login_display=function(id){
+                var api_name=id.split('_')[0];
+                var provider=id.split('_').pop();
+                if(id=="wzd_blackbaud"){
+                    if(sessionStorage.getItem("blackbaud oauth")!=null){ 
+                        $('a[href=blackbaud_signout]').show(); 
+                        var a=JSON.parse(sessionStorage.getItem("blackbaud oauth"));
+                        $('#blackbaud_username').text(a.given_name+" "+a.family_name); 
+                    }
+                }
+                if(id=="wzd_intuit"){
+                    if(sessionStorage.getItem("intuit oauth")!=null){ 
+                        $('a[href=intuit_signout]').show(); 
+                        var r=JSON.parse(sessionStorage.getItem("intuit oauth"));
+                        if(r.b!=undefined){
+                            $('#intuit_username').text(r.b.givenName+" "+r.b.familyName); 
+                        }
+                    }
+                }
+                if(id=="wzd_docusign"){
+                    if(sessionStorage.getItem("docusign oauth")!=null){ 
+                        $('a[href=docusign_signout]').show(); 
+                        if(sessionStorage.getItem("docusign oauth profile")!=null){ 
+                            var a=JSON.parse(sessionStorage.getItem("docusign oauth profile"));
+                            $('#docusign_username').text(a.name); 
+                        }
+                    }
+                }
+                if(id=="wzd_microsoft2"){
+                    if(sessionStorage.getItem("microsoft2 oauth")!=null){ 
+                        $('a[href=microsoft2_signout]').show(); 
+                        var r=JSON.parse(sessionStorage.getItem("microsoft2 oauth"));
+                        if(r.d!=undefined){
+                            $('#microsoft2_username').text(r.d.payload.name); 
+                        }
+                    }
+                }
+                else if(api_name=="wzd"){
+                    $('#wzd_microsoft_email').text('');
+                    $('#wzd_google_email').text('');
+                    $('#wzd_facebook_email').text('');
+                    $('#wzd_github_email').text('');
+                    
+                    $('a[href=wzd_microsoft_signout]').hide(); 
+                    $('a[href=wzd_google_signout]').hide(); 
+                    $('a[href=wzd_facebook_signout]').hide(); 
+                    $('a[href=wzd_github_signout]').hide(); 
+                    
+                    var provider_s=sessionStorage.getItem(api_name+" provider");
+                    var username=sessionStorage.getItem(api_name+" username");
+                    $('#wzd_'+provider_s+'_email').text(username);
+                    $('a[href=wzd_'+provider_s+'_signout]').show(); 
+                }
+                else if(api_name=="wapp"){
+                    $('#wapp_wappsystem_email').text('');
+                    $('#wapp_microsoft_email').text('');
+                    $('#wapp_google_email').text('');
+                    $('#wapp_facebook_email').text('');
+                    $('#wapp_github_email').text('');
+                    
+                    $('a[href=wapp_wappsystem_signout]').hide(); 
+                    $('a[href=wapp_microsoft_signout]').hide(); 
+                    $('a[href=wapp_google_signout]').hide(); 
+                    $('a[href=wapp_facebook_signout]').hide(); 
+                    $('a[href=wapp_github_signout]').hide(); 
+                    
+                    var provider_s=sessionStorage.getItem(api_name+" provider");
+                    var username=sessionStorage.getItem(api_name+" username");
+                    $('#wapp_'+provider_s+'_email').text(username);
+                    $('a[href=wapp_'+provider_s+'_signout]').show(); 
+                }
+                return;
+                
+                
+                
+                if(sessionStorage.getItem("mailchimp_oauth")!=null){ 
+                    $('a[href=mailchimp_signout]').show(); 
+                    if(sessionStorage.getItem("mailchimp_oauth_root")!=null){ 
+                        var a=JSON.parse(sessionStorage.getItem("mailchimp_oauth_root"));
+                        $('#mailchimp_username').text(a.first_name+" "+a.last_name); 
+                    }
+                }
+            }
+            //--------------------------------------------------------
+            var login_display_all=function(){
+                login_display('wzd_microsoft');
+                login_display('wzd_google');
+                login_display('wzd_facebook');
+                login_display('wzd_github');
+                login_display("wapp_wappsystem");
+                login_display('wapp_microsoft');
+                login_display('wapp_google');
+                login_display('wapp_facebook');
+                login_display('wapp_github');
+                login_display('wzd_blackbaud');
+                login_display('wzd_intuit');
+                login_display('wzd_docusign');
+                login_display('wzd_microsoft2');
+            }
+            //--------------------------------------------------------
+            $('#D__ID').on('load',function(){
+                login_display_all();
+            })
+            //--------------------------------------------------------
+            var process_identity=function(res,id){
+                if(res.result!=undefined && res.status=="ok"){
+                    var api_name=id.split('_')[0];
+                    var provider=id.split('_').pop();
+                    var t=JSON.parse(res.result.token.split('|')[0]);
+                    sessionStorage.setItem(api_name+" provider",provider);
+                    sessionStorage.setItem(api_name+" username",res.result.user_name);
+                    sessionStorage.setItem(api_name+" displayname",res.result.displayname);
+                    sessionStorage.setItem(api_name+" group",t.groups);
+                    sessionStorage.setItem(api_name+" token",res.result.token);
+                    //compatible old
+                    if(api_name==$vm.api_default){
+                        sessionStorage.setItem("vm_token",res.result.token);
+                        $vm.user_name=res.result.user_name;
+                        $vm.displayname=res.result.displayname;
+                    }
+                }
+            }
+            //------------------------------------          
+            var http_request=function(input,callback){
+                var p={}
+                for(a in input){
+                    p[a]=input[a];
+                }
+                p.error=function(jqXHR,error, errorThrown){},
+                p.success=function(c,textStatus, request){callback(c)},
+                console.log(p);
+                $.ajax(p);
+            }
+            //------------------------------------
+            var test=function(){
+                var t=sessionStorage.getItem("mailchimp_oauth");
+                t=JSON.parse(t);
+                t=t.access_token;
+                /*
+                var headers={
+                    Authorization: "OAuth "+t
+                }
+                http_request(
+                    {
+                        url:"https://api.mailchimp.com/3.0/users/info",
+                        type:"GET",
+                        headers:headers
+                    }, 
+                    function(c){
+                        console.log(c)
+                    }
+                );
+                */
+               var path="/3.0/search-members?query=zhiming";
+               var dc="us3";
+               $vm.request({cmd:'mailchimp-api',access_token:t,path:path,dc:dc},function(res){
+                   console.log(res);
+
+               })
+            }
+            //------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        #panel__ID{
+            margin:0 auto;
+            max-width:1400px;
+    		padding:10px 0 0 20px;
+            font-size:14px;
+            padding:0px 50px 10px 50px;
+            font-size:14px;
+    		column-count: 1;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+    	}
+        #panel__ID a{
+            color:#555;
+        }
+        #panel__ID li a, #panel__ID li span{
+            margin-right:30px;
+        }        
+        #panel__ID a:hover{
+            color:red;
+        }
+        .h_img__ID{
+            margin:0 auto;
+            max-width:1400px;          
+            height:200px;
+            background-size: cover; background-position: top center; 
+            background-image: url(https://images.unsplash.com/photo-1463947628408-f8581a2f4aca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+            padding-top:60px;
+            margin-top:50px;
+            margin-bottom:50px;
+            border-radius: 5px;
+        }
+        .h_txt__ID{
+            color:#fff;
+            background-color: rgba(50,90,90,0.5) !important;
+            _width: 35%;
+            display:inline-block;
+            margin: 0% 0% 0% 6%!important;
+            padding:20px;
+            border-radius: 10px;
+			text-shadow: 2px 2px 2px #000;
+        }
+        .LT__ID{
+			color:#283f55;
+			font-weight: bold;
+            display:inline-block;
+            margin-top:10px;
+            margin-left:-15px;
+            margin-bottom:10px;
+            border-bottom: 2px solid #479824;
+            font-size: 18px;
+        }
+        #panel__ID div{
+            break-inside: avoid;
+        }
+        .label__ID{
+            font-size: 130%;
+            font-weight: bold;
+            color:#2b3c5a;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        @media screen and (max-width: 1000px) {
+            .h_img__ID{
+                margin-top:0px;
+                border-radius: 0px;
+            }
+        }
+    </style>
+</div>
+

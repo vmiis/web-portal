@@ -1,0 +1,491 @@
+<div id=D__ID>
+    <div id=layout__ID>
+        <div id=left__ID style='margin:auto 10px'>
+            <a id=desk_logo__ID href="home" style='color:#fff;text-decoration: none;font-size:38px;font-weight: bold;text-shadow: 2px 2px 2px #000'>
+                Web Portal
+            </a>
+        </div>
+        <div id=middle__ID style='margin:auto 0; padding-left:15px;padding-top:15px'>
+            <a id=mobile_logo__ID href="home" style='font-weight: bold;font-size:28px;color:#fff;text-decoration: none;'>
+            Web Portal</a>
+            <input id="hamburger__ID" type="checkbox" style='display:none'>
+            <div id=menu__ID>
+                <ul>
+                    <li><a href="?/home"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="?/data-panel"><i class="fas fa-table"></i> Data</a></li>
+                    <li><a href="?/app-panel"><i class="fas fa-table"></i> Apps</a></li>
+                    <li><a href="?/diagram"><i class="fas fa-project-diagram"></i> Diagram</a></li>
+                    <li><a w=1 href="https://www.vmiis.com"><i class="fa fa-info"></i> About</a></li>
+                    <li><a href="?/signin" id=_signin__ID ><i class="fa fa-user"></i> Authentication</a></li>
+                    <!--<li><a href="" id=signout__ID ><i class="fa fa-user"></i> Sign out</a></li>-->
+                </ul>
+            </div>
+        </div>    
+        <div id=right__ID style='margin-right: 10px'>
+            <div id=menu_right__ID>
+                <!--<a href="sys_editor" id=edit__ID >Content Edit</a>-->
+            </div>
+            <label id=m_icon__ID for="hamburger__ID" style='color:#fff;font-size:28px;'><i class="fa fa-bars"></i></label>
+        </div>   
+        <!-- 
+        <div top-right-corner id=top_right_corner__ID class='d-none d-xl-block'>
+            <div>
+                <span id=username__ID></span>
+            </div>
+        </div>
+        -->
+    </div>    
+    <!--<div style='padding:1px 0 5px 10px;background-color: #e5e9ec;font-size:13px;' id=nav__ID></div>-->
+    <script>
+        function F__ID(){
+            $('#signout__ID').hide();
+            //------------------------------------
+            $('#auth__ID').attr('src',$vm.api_address+"auth.html")
+            //--------------------------------------
+            $vm.header_ready=1;
+            if($vm.resize_content!=undefined) $vm.resize_content();
+            //--------------------------------------
+            $('#D__ID a').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var module_name=$(this).attr('href').replace('?\/','');
+                var w=$(this).attr('w');
+                if(w==1){
+                    window.open(module_name);
+                    return;
+                }
+                if(module_name=='dropdown'){
+                    var w=$(this).closest('li').width();
+                    var mh=$(this).closest('li').find('ul').first().css('max-height');
+                    if(mh=='0px'){
+                        close_all_dropdown();
+                        $(this).closest('li').find('ul').first().css('max-height','600px');
+                    }
+                    else $(this).closest('li').find('ul').first().css('max-height','0px');
+                    $(this).closest('li').find('ul').first().css('min-width',w+'px');
+                    return;
+                }
+                if(module_name!="") $vm.show_module(module_name,{})
+                close_all_dropdown();
+                $('#hamburger__ID').prop("checked", false);
+            })
+            //---------------------------------------------------------------
+            $('#hamburger__ID').on('change',function(e){
+                if($(this).prop("checked")==false) close_all_dropdown();
+            })
+            //---------------------------------------------------------------
+            $('body').on('click',function(){
+                close_all_dropdown();
+            })
+            $('#menu__ID>ul>li>a').on('mouseover',function(e){
+                //close_all_dropdown();
+            })
+            //---------------------------------------------------------------
+            $('#menu__ID>ul>li>ul').on('mouseleave',function(e){
+                close_all_dropdown();
+            })
+            //---------------------------------------------------------------
+            var close_all_dropdown=function(){
+                $('#D__ID ul').each(function(){
+                    if($(this).css('max-height')=='600px') $(this).css('max-height','0px');
+                })
+            }
+            //---------------------------------------------------------------
+            $('#search_box__ID').focus(function(){$('#search_box__ID').autocomplete("search","");});
+            $('#search_box__ID').autocomplete({
+                minLength:0,
+                source:function(request,response){
+                    var result=$vm.flexindex.search(request.term);
+                    var r=[]; 
+                    for(var i=0; i<result.length && i<35; i++){
+                        var t=result[i].title; if(t=="") t=result[i].id;
+                        t=t.replace(/-/g,' ').replace(/_/g,' ')
+                        r.push({label:t,value:result[i].id})
+                    }
+                    response(r);
+                },
+                select: function(event,ui){
+                    if(ui.item.value!='') $vm.show_module(ui.item.value,{})
+                    ui.item.value='';
+                }
+            })
+            //--------------------------------------
+            //$('#signin__ID').on('click',function(){
+            //    $vm.m365_signin();  
+            //})
+            //------------------------------------
+            $('#signout__ID').on('click',function(){
+                $vm.clear_token();
+                $vm.user_name="";
+                //$vm.m365_signout();  
+                //$vm.show_user();
+                //https://login.microsoftonline.com/common/oauth2/v2.0/logout              
+                location.reload();
+            })
+            //------------------------------------
+            $vm.show_user=function(){
+                if($vm.user_name==undefined || $vm.user_name=='guest'){
+                    $('#username__ID').text('');
+                    $('#signin__ID').show();
+                    $('#signout__ID').hide();
+                }
+                else{
+                    $('#username__ID').text('Welcome '+ $vm.displayname);
+                    $('#signin__ID').hide();
+                    $('#signout__ID').show();
+                }
+            }
+            //------------------------------------
+            $vm.exchange_microsoft_token=function(){
+                if($vm.microsoft_token!=undefined){
+                    $vm.request({cmd:'exchange-microsoft-token',token:$vm.microsoft_token},function(res){
+                        if(res.status=='ok'){
+                            $vm.user_name=res.result.user_name;
+                            $vm.displayname=res.result.displayname;
+                            $vm.set_token(res.result.token,res.result.username);
+                            $vm.show_user();
+                            var t=JSON.parse(res.result.token.split('|')[0]);
+                            $vm.groups=t.groups;
+                        }
+                    })
+                }
+            }
+            //------------------------------------
+            $vm.app_after_3rd_signin=function(){
+                $vm.exchange_microsoft_token();
+            }
+            //------------------------------------
+            $vm.init(function(){
+                $vm.init_status=1;
+                $vm.show_user();
+            })
+            //------------------------------------
+            $vm.sys_nav_path=function(){
+                var L=$vm.page_stack.length;
+                var I=L-5;
+                if(I<0) I=0;
+                var txt="";
+                for(var i=I;i<L;i++){
+                    if(txt!="") txt+=" -> ";
+                    var nm=$vm.page_stack[i].m_name;
+                    var title=$vm.module_list[nm].title;
+                    if(title==undefined) title=nm.replace(/_/g,' ').replace(/-/g,' ');
+                    if(i==L-1 || L==1) txt+=title;
+                    else txt+="<u nm="+nm+" style='cursor:pointer'>"+title+"</u>";
+                }
+                $('#nav__ID').html(txt);
+                $('#nav__ID u').on('click',function(){
+                    var nm=$(this).attr("nm");
+                    var K=$vm.page_stack.length-1;
+                    var N=0;
+                    for(var j=K;j>=0;j--){
+                        if(nm==$vm.page_stack[j].m_name) break;
+                        N++;
+                    }
+                    for(var j=0;j<N;j++) window.history.go(-1);
+                })
+            }
+            //------------------------------------
+            /*
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                } 
+                else if ( xhr.readyState == 4 && xhr.status != 200 ){
+                    alert("My computer (hosting database) is not online or your computer is not connected to the Uni Network, so you can not access some pretected data.");
+                }
+            };
+            xhr.open("GET",$vm.api_address,true);
+            xhr.send(null);
+            //------------------------------------
+            */
+
+$vm.api_addresses={
+    "wzd":"https://woolcock-zhiming-database.vmiis.com",
+    "wapp":"https://api.wappsystem.com"
+}
+$vm.api_default="wzd";
+
+$vm.request=function(req,callback,progress){
+    var api_url=$vm.api_address;
+    var token_name="vm_token";
+    if(req.api_name!=undefined){
+        api_url=$vm.api_addresses[req.api_name];
+        token_name=req.api_name+" token";
+    }
+    
+    $vm.sys_N++;
+    var this_N=$vm.sys_N;
+    $vm.sys_token="guest|where|when|scode";
+    if($vm.debug_message===true){
+        console.log("%c"+req.cmd+'('+this_N+') TO ',"color:orange",req);
+    }
+    var dt1=new Date().getTime();
+    $vm.ajax_server_error=0;
+    var token=sessionStorage.getItem(token_name);
+    if(token==undefined) token="";
+    
+    var param={
+        headers:{'Authorization':'Bearer ' + token},
+        type: "POST",
+        url: api_url,
+        contentType: "application/json",
+        charset:"utf-8",
+        dataType: "json",
+        error: function(jqXHR,error, errorThrown){ 
+            if(error && req.cmd=='file'){callback(404);}
+            if(jqXHR.status) {} 
+            else {}
+        },
+        data: JSON.stringify(req),
+        success: function(c,textStatus, request){
+            var dt2=new Date().getTime();
+            if($vm.debug_message===true){
+                if(c.status=='ok' || req.cmd=='file')  console.log("%c"+req.cmd+'('+this_N+') FROM'+" --- "+(dt2-dt1).toString()+"ms","color:lightgreen",c);
+                else                                   console.log("%c"+req.cmd+'('+this_N+') FROM'+" --- "+(dt2-dt1).toString()+"ms","color:red",c);
+            }
+            if($vm.ajax_server_error==1) return;
+            try{
+                if(callback!==undefined) callback(c,textStatus, request);
+            }catch(err){
+                alert(err.toString());
+            }
+        },
+        dataFilter: $vm.request_filter,
+    }
+    if(progress!=undefined){
+        param.xhr=function(){
+            var xhr = $.ajaxSettings.xhr() ;
+            xhr.upload.onprogress = function(evt){ progress(evt.loaded, evt.total); } ;
+            xhr.upload.onload = function(){ } ;
+            return xhr ;
+        }
+    }
+    if(req.cmd=="export"){
+        param.xhr=function(){
+            var i=1;
+            var xhr = new window.XMLHttpRequest();
+            xhr.addEventListener("progress", function(evt){
+                var N=-1,end="";
+                var len=xhr.responseText.length;
+                if(len>=5 && N==-1)  N=parseInt(xhr.responseText.substring(0,5));
+                if(len>=14) end=xhr.responseText.substring(len-9,len);
+                if(end=='__E_N_D__') i=-1;
+                callback(N,i,xhr.responseText);
+                i++;
+            }, false);
+            return xhr;
+        }
+    }
+    else if( req.cmd=="file" && req.datetime==undefined ){
+        delete param.dataType;
+        param.xhrFields={responseType: 'blob'};
+    }
+    $.ajax(param)
+};
+//-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------------
+$vm.jwt_decode=function(token){
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+};
+//------------------------------------
+
+
+//-----------------------------------------------------------------
+$vm.json_to_table=function(jdata,table_id){
+    var txt="";
+    var J=jdata[0].length;
+    for(var i=0;i<jdata.length;i++){
+        txt+="<tr>"
+        if(i==0) txt+="<th></th>";
+        else txt+="<td>"+i+"</td>"
+        for(var j=0;j<J;j++){
+            if(i==0) txt+="<th>"+jdata[i][j]+"</th>";
+            else{
+                var c="";
+                if(j<jdata[i].length) c=jdata[i][j];
+                if(c==undefined) c="";
+                txt+="<td>"+c+"</td>";
+            }
+        }
+        txt+="</tr>";
+    }
+    return txt
+}
+//-------------------------------
+$vm.get_file=function(table,UID,field,filename,callback){
+    var get_file_from_server=function(){
+        $vm.request({cmd:"file2",table:table,uid:UID,field:field,filename:filename},function(res, status, xhr){
+            if(res.status=='np') alert("No permissaion.");
+            else if(res.status=='err') alert("Error code: "+res.result);
+            if('caches' in window){
+                caches.open('VM').then(cache => {
+                    var aHeaders = new Headers();
+                    aHeaders.append('last-modifie',xhr.getResponseHeader('last-modified'));
+                    var rs=new Response(res, { "headers" :aHeaders} );
+                    cache.put(table+"-"+UID+"-"+field,rs);
+                    return;
+                })
+            }
+            callback(res);
+        });
+    }
+    var get_file_from_cache=function(){
+        if('caches' in window){
+            caches.open('VM').then(
+                cache => {
+                    cache.match(table+"-"+UID+"-"+field).then(response => {
+                        if(response){
+                            $vm.request({cmd:"file2",table:table,uid:UID,field:field,filename:filename,datetime:1},function(res){
+                                if(res.status=="np"){
+                                    alert("No permissaion.");
+                                    return;
+                                };
+                                var dtA=new Date(response.headers.get('last-modifie')).getTime();
+                                var dtB=new Date(res.result).getTime();
+                                dtA=dtA-dtA%1000;
+                                dtB=dtB-dtB%1000;
+                                if(dtA==dtB){
+                                    callback(response.result);
+                                    console.log(response)
+                                }
+                                else get_file_from_server();
+                            })
+                        }
+                        else{
+                            get_file_from_server();
+                        }
+                    })
+                }
+            )
+        }
+    }
+    get_file_from_cache();
+}
+//-------------------------------
+
+
+
+
+
+
+//-----------------------------------------------------------------
+
+
+
+        }
+    </script>
+    <style>
+        #D__ID{
+            /*background-color: lightslategray;*/
+        }
+        #top_right_corner__ID{
+            display:block;
+            position:fixed;
+            top:3px;
+            right:10px;
+            font-size:11px;
+            line-height:13px;
+            color:#fff;
+            z-index: 99999;
+        }
+        #layout__ID{
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            overflow:auto;
+        }
+        /*right menu*/
+        #menu_right__ID a{
+            font-size: 11px;
+            margin-left:6px;
+            margin-right:0px;
+            margin-bottom:0px;
+            color:#fff
+        }
+        #mobile_logo__ID,#hamburger__ID, #m_icon__ID{
+            display:none;
+        }
+        @media screen and (max-width: 768px) {
+            #mobile_logo__ID,#hamburger__ID, #m_icon__ID{
+                display:block;
+            }
+            #layout__ID{
+                display: grid;
+                grid-template-columns: 1fr auto;
+                overflow:auto;
+            }
+            #left__ID{
+                display:none;
+            }
+            #menu_right__ID{
+                display:none;
+            }
+            #hamburger__ID:checked ~ #menu__ID{
+                max-height:300px;
+            }
+            #right__ID label{
+                margin:0;
+            }
+        }
+        /*main menu*/
+        #menu__ID ul{
+            margin: 0;
+        }
+        #menu__ID li{
+            display: inline-block;
+        }
+        #menu__ID a{
+            display: inline-block;
+            padding:6px 10px;
+            color:#fff;
+            text-shadow: 2px 2px 2px #000;
+        }
+        #menu__ID a:hover {
+            background-color: #555;
+            color: #29eca6;
+            border-radius:4px;
+            text-decoration: none;
+        }
+        @media screen and (max-width: 768px) {
+            #menu__ID{
+                overflow:hidden;
+                max-height: 0;
+                transition: max-height 0.5s;
+            }
+            #menu__ID ul {
+                padding: 0;
+                padding-right: 10px;
+            }
+  
+            #menu__ID li {
+                display: block;
+                padding:0px 0 0 15px;
+            }
+            #menu__ID a {
+                padding: 5px 10px;
+                width: auto;
+            }
+        }
+
+    </style>
+</div>
