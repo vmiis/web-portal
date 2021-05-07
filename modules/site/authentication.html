@@ -15,7 +15,7 @@
                 </ul>
                 <span class=label__ID>Wappsystem Database</span>
                 <ul>
-                    <li>                                 <a href='wapp_wappsystem'>Wappsystem</a> <span id=wapp_wappsystem_email></span>  <a href='wapp_wappsystem_signout' style='display:none'>Sign Out</a>  </li>
+                    <li>                                 <a href='wapp_wappsystem'>Wappsystem</a> <span id=wapp_wappsystem_email></span>  <a href='wapp_wappsystem_signout' style='display:none'>Sign Out</a> </li>
                     <li><i class="fab fa-microsoft"></i> <a href='wapp_microsoft'>Microsoft</a>   <span id=wapp_microsoft_email></span>   <a href='wapp_microsoft_signout' style='display:none'>Sign Out</a>  </li>
                     <li><i class="fab fa-google"></i>    <a href='wapp_google'>Google</a>         <span id=wapp_google_email></span>      <a href='wapp_google_signout' style='display:none'>Sign Out</a>  </li>
                     <li><i class="fab fa-facebook"></i>  <a href='wapp_facebook'>Facebook</a>     <span id=wapp_facebook_email></span>    <a href='wapp_facebook_signout' style='display:none'>Sign Out</a> </li>
@@ -23,19 +23,23 @@
                 </ul>
                 <span class=label__ID>Woolcock Microsoft Dynamics 365</span>
                 <ul>
-                    <li><a href='microsoft2'>Sign in</a> <span id=microsoft2_username></span> <a href='microsoft2_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='microsoft2'>Sign in / Refresh</a> <span id=microsoft2_username></span> <a href='microsoft2_signout' style='display:none'>Sign Out</a>   <span id=microsoft2_expire></span> </li>
                 </ul>
                 <span class=label__ID>Blackbaud</span>
                 <ul>
-                    <li><a href='blackbaud'>Sign in</a> <span id=blackbaud_username></span> <a href='blackbaud_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='blackbaud'>Sign in / Refresh</a> <span id=blackbaud_username></span> <a href='blackbaud_signout' style='display:none'>Sign Out</a> <span id=blackbaud_expire></span> </li>
                 </ul>
                 <span class=label__ID>Intuit</span>
                 <ul>
-                    <li><a href='intuit'>Sign in</a> <span id=intuit_username></span> <a href='intuit_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='intuit'>Sign in / Refresh</a> <span id=intuit_username></span> <a href='intuit_signout' style='display:none'>Sign Out</a> <span id=intuit_expire></span> </li>
                 </ul>
                 <span class=label__ID>DocuSign</span>
                 <ul>
-                    <li><a href='docusign'>Sign in</a> <span id=docusign_username></span> <a href='docusign_signout' style='display:none'>Sign Out</a> </li>
+                    <li><a href='docusign'>Sign in / Refresh</a> <span id=docusign_username></span> <a href='docusign_signout' style='display:none'>Sign Out</a> <span id=docusign_expire></span> </li>
+                </ul>
+                <span class=label__ID>Mailchimp</span>
+                <ul>
+                    <li><a href='docusign'>Sign in / Refresh</a> <span id=mailchimp_username></span> <a href='mailchimp_signout' style='display:none'>Sign Out</a> </li>
                 </ul>
             
             <!--
@@ -149,7 +153,7 @@
                     url+='&client_id=333393775932';
                     url+='&redirect_uri='+u;
                     //url+='&redirect_uri=http://127.0.0.1:8000/auth.html';
-                    url+='&state=exchange-mailchimp-token';
+                    url+='&state=exchange-mailchimp-token.wzd_mailchimp';
                     window.open(url);
                 }
                 if(href=="microsoft2"){
@@ -173,6 +177,7 @@
                 }
                 //---------------------------
                 //sign out
+                
                 switch(href){
                     case "wzd_microsoft_signout":   
                     case "wzd_google_signout":   
@@ -201,7 +206,7 @@
                     case "mailchimp_signout":   sessionStorage.removeItem("mailchimp oauth");   $('#mailchimp_username').text('');  $('a[href=mailchimp_signout]').hide(); break;
                     case "blackbaud_signout":   sessionStorage.removeItem("blackbaud oauth");   $('#blackbaud_username').text('');  $('a[href=blackbaud_signout]').hide(); break;
                     case "intuit_signout":      sessionStorage.removeItem("intuit oauth");      $('#intuit_username').text('');     $('a[href=intuit_signout]').hide(); break;
-                    case "microsoft_signout":   sessionStorage.removeItem("microsoft oauth");   $('#microsoft_username').text('');  $('a[href=microsoft_signout]').hide(); break;
+                    case "microsoft2_signout":  sessionStorage.removeItem("microsoft2 oauth");  $('#microsoft2_username').text(''); $('#microsoft2_expire').text('');  $('a[href=microsoft2_signout]').hide(); break;
                     case "docusign_signout":    sessionStorage.removeItem("docusign oauth");    $('#docusign_username').text('');   $('a[href=docusign_signout]').hide(); break;
                     case "test": test(); break;
                 }
@@ -251,16 +256,24 @@
                                 })
                                 break;
                             case "exchange-blackbaud-token":
+                                var expires_in=res.result.expires_in;
+                                sessionStorage.setItem("blackbaud oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
                                 sessionStorage.setItem("blackbaud oauth",JSON.stringify(res.result));
                                 break;
                             case "exchange-intuit-token":
-                                res.result.href=href;
+                                //res.result.href=href;
+                                var expires_in=res.result.a.expires_in;
+                                sessionStorage.setItem("intuit oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
                                 sessionStorage.setItem("intuit oauth",JSON.stringify(res.result));
                                 break;
                             case "exchange-microsoft2-token":
+                                var expires_in=res.result.a.expires_in;
+                                sessionStorage.setItem("microsoft2 oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
                                 sessionStorage.setItem("microsoft2 oauth",JSON.stringify(res.result));
                                 break;
                             case "exchange-docusign-token":
+                                var expires_in=res.result.expires_in;
+                                sessionStorage.setItem("docusign oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
                                 sessionStorage.setItem("docusign oauth",JSON.stringify(res.result));
                                 var host='account-d.docusign.com';
                                 $vm.request({cmd:'docusign-api',access_token:res.result.access_token,host:host,path:"/oauth/userinfo"},function(res){
@@ -282,33 +295,48 @@
                         $('a[href=blackbaud_signout]').show(); 
                         var a=JSON.parse(sessionStorage.getItem("blackbaud oauth"));
                         $('#blackbaud_username').text(a.given_name+" "+a.family_name); 
+                        $('#blackbaud_expire').text("Expiry time: "+sessionStorage.getItem("blackbaud oauth expire"));
                     }
+                    else $('#blackbaud_expire').text("");
                 }
-                if(id=="wzd_intuit"){
+                else if(id=="wzd_intuit"){
                     if(sessionStorage.getItem("intuit oauth")!=null){ 
                         $('a[href=intuit_signout]').show(); 
                         var r=JSON.parse(sessionStorage.getItem("intuit oauth"));
                         if(r.b!=undefined){
                             $('#intuit_username').text(r.b.givenName+" "+r.b.familyName); 
+                            $('#intuit_expire').text("Expiry time: "+sessionStorage.getItem("intuit oauth expire"));
                         }
                     }
+                    else $('#intuit_expire').text("");
                 }
-                if(id=="wzd_docusign"){
+                else if(id=="wzd_docusign"){
                     if(sessionStorage.getItem("docusign oauth")!=null){ 
                         $('a[href=docusign_signout]').show(); 
                         if(sessionStorage.getItem("docusign oauth profile")!=null){ 
                             var a=JSON.parse(sessionStorage.getItem("docusign oauth profile"));
                             $('#docusign_username').text(a.name); 
+                            $('#docusign_expire').text("Expiry time: "+sessionStorage.getItem("docusign oauth expire"));
                         }
                     }
+                    else $('#docusign_expire').text("");
                 }
-                if(id=="wzd_microsoft2"){
+                else if(id=="wzd_microsoft2"){
                     if(sessionStorage.getItem("microsoft2 oauth")!=null){ 
                         $('a[href=microsoft2_signout]').show(); 
                         var r=JSON.parse(sessionStorage.getItem("microsoft2 oauth"));
                         if(r.d!=undefined){
                             $('#microsoft2_username').text(r.d.payload.name); 
+                            $('#microsoft2_expire').text("Expiry time: "+sessionStorage.getItem("microsoft2 oauth expire"));
                         }
+                    }
+                    else $('#microsoft2_expire').text("");
+                }
+                else if(id=="wzd_mailchimp"){
+                    if(sessionStorage.getItem("mailchimp oauth")!=null){ 
+                        $('a[href=mailchimp_signout]').show(); 
+                        var r=JSON.parse(sessionStorage.getItem("mailchimp oauth profile"));
+                        $('#mailchimp_username').text(r.first_name+" "+r.last_name); 
                     }
                 }
                 else if(api_name=="wzd"){
@@ -372,6 +400,7 @@
                 login_display('wzd_intuit');
                 login_display('wzd_docusign');
                 login_display('wzd_microsoft2');
+                login_display('wzd_mailchimp');
             }
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){

@@ -18,6 +18,19 @@
                 <li><a href='?/api_mongodb_1'>Top 100 Referrers</a></li>
                 <li><a href='?/coreplus-datatable-relationships'>Coreplus datatable relationships</a></li>
                 <li><a href='?/coreplus-referral-diagram'>Referral data example</a></li>
+                
+                
+                <li><a href='?/api_coreplus_8'>Practitioner</a></li>
+                <li><a href='?/api_coreplus_1'>Locations</a></li>
+                <li><a href='?/api_coreplus_2'>Specialty Type</a></li>
+                <li><a href='?/api_coreplus_3'>Today's first 100 appointments</a></li>
+                <li><a href='?/api_coreplus_4'>Today's second 100 appointments</a></li>
+                <li><a href='?/api_mongodb_3'>Therapy April</a></li>
+
+                
+
+
+                
             <span class=LT__ID>Dynamics CRM</span>
                 <!--
                 <li><a href='?/crm-volunteer-data'>Volunteers</a></li>
@@ -39,7 +52,15 @@
                 <li><a href='?/api_mailchimp_2'>Search audience</a></li>
             <span class=LT__ID>CMS</span>
                 <li><a href='?/cms-sleep-study'>Sleep studies</a></li>
-            <span class=LT__ID style='break-before:column;display:block;'>ThankQ Database</span>
+                <li><a href='?/api_sqlserver_1'>Number of sleep study by year and month</a></li>
+                <li><a href='?/api_sqlserver_2'>Sleep study status pivot table</a></li>
+                <li><a href='?/api_sqlserver_3'>Today's sleep study</a></li>
+                <li><a href='?/api_sqlserver_4'>Yestoday's sleep study</a></li>
+                
+            
+            
+            
+                <span class=LT__ID style='break-before:column;display:block;'>ThankQ Database</span>
                 <li><a href='?/thankq-all-people'>All People</a></li>
                 <li><a href='?/thankq-all-transactions'>All Transactions</a></li>
             <span class=LT__ID>Database Backup Files Check</span>
@@ -87,12 +108,16 @@
                 <li><a target=_blank href='https://www.researchvolunteer.org.au/'>Volunteer Portal</a></li>
                 <li><a target=_blank href='https://connx.cloud.micropay.com.au/connx50294/frmLogin.aspx'>ConnX</a></li>
                 <li><a target=_blank href='https://sydneyuni.service-now.com/'>Uni Services</a></li>
-            <span class=LT__ID>API</span>
-                <li><a href='?/mailchimp-api-data'>Mailchimp API Request</a></li>
-                <li><a href='?/blackbaud-api-data'>Blackbaud API Request</a></li>
-                <li><a href='?/intuit-api-data'>Intuit API Request</a></li>
-                <li><a href='?/microsoft-api-data'>Microsoft API Request</a></li>
-                <li><a href='?/mongodb-api-data'>MongoDB API Request</a></li>
+            <span class=LT__ID>API Request</span>
+                <li><a href='?/mailchimp-api-data'>Mailchimp</a></li>
+                <li><a href='?/blackbaud-api-data'>Blackbaud</a></li>
+                <li><a href='?/intuit-api-data'>Intuit</a></li>
+                <li><a href='?/microsoft-api-data'>Microsoft</a></li>
+                <li><a href='?/mongodb-api-data'>MongoDB</a></li>
+                <li><a href='?/cms-api-data'>SQL Server</a></li>
+                <li><a href='?/coreplus-api-data'>Coreplus</a></li>
+
+
     </div>
     <script>
         function F__ID(){
@@ -142,9 +167,11 @@
                     var aa=module_name.split('_');
                     if(aa.length==3){
                         switch(aa[1]){
-                            case "dynamics":  dynamics_365_query(parseInt(aa[2])); break;
-                            case "mailchimp": mailchimp_query(parseInt(aa[2])); break;
-                            case "mongodb": mongodb_query(parseInt(aa[2])); break;
+                            case "dynamics":    dynamics_365_query(parseInt(aa[2]));break;
+                            case "mailchimp":   mailchimp_query(parseInt(aa[2]));   break;
+                            case "mongodb":     mongodb_query(parseInt(aa[2]));     break;
+                            case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
+                            case "coreplus":    coreplus_query(parseInt(aa[2]));    break;
                         }
                     }
                 }
@@ -154,6 +181,8 @@
 			//VmInclude:__CURRENT_PATH__main-panel-dynamics_365.js
 			//VmInclude:__CURRENT_PATH__main-panel-mailchimp.js
 			//VmInclude:__CURRENT_PATH__main-panel-mongodb.js
+			//VmInclude:__CURRENT_PATH__main-panel-sqlserver.js
+			//VmInclude:__CURRENT_PATH__main-panel-coreplus.js
             //--------------------------------------------------------
             
         }
@@ -169,7 +198,7 @@
             padding:0px 50px 10px 50px;
             font-size:14px;
     		max-width: 100%;
-    		column-count: 4;
+    		column-count: 3;
     		column-width: 300px;
     		column-gap: 30px;
             font-size:14px;

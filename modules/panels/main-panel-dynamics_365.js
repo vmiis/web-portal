@@ -47,6 +47,6 @@ var dynamics_365_query=function(UID){
             }
         }
         else alert('No report.')
-        console.log(res);
+        //console.log(res);
     })
 }

@@ -249,12 +249,20 @@
         "blackbaud-api-form":{  url:$H+"/blackbaud/form.html",  Table:"blackbaud-api" },
         "intuit-api-data":{  url:$H+"/intuit/data.html",  Table:"intuit-api", form_module: 'intuit-api-form', router:1  },
         "intuit-api-form":{  url:$H+"/intuit/form.html",  Table:"intuit-api" },
-        "microsoft-api-data":{  url:$H+"/microsoft/data.html",  Table:"microsoft-api", form_module: 'microsoft-api-form', router:1  },
-        "microsoft-api-form":{  url:$H+"/microsoft/form.html",  Table:"microsoft-api" },
-        "mongodb-api-data":{  url:$H+"/mongodb/data.html",  Table:"mongodb-api", form_module: 'mongodb-api-form', router:1  },
-        "mongodb-api-form":{  url:$H+"/mongodb/form.html",  Table:"mongodb-api" },
+        "microsoft-api-data":{  url:$H+"/api/microsoft/data.html",  Table:"microsoft-api", form_module: 'microsoft-api-form', router:1  },
+        "microsoft-api-form":{  url:$H+"/api/microsoft/form.html",  Table:"microsoft-api" },
+        "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  Table:"mongodb-api", form_module: 'mongodb-api-form', router:1  },
+        "mongodb-api-form":{  url:$H+"/api/mongodb/form.html",  Table:"mongodb-api" },
+        "cms-api-data":{  url:$H+"/api/cms/data.html",  Table:"cms-api", form_module: 'cms-api-form', router:1  },
+        "cms-api-form":{  url:$H+"/api/cms/form.html",  Table:"cms-api" },
+        "coreplus-api-data":{  url:$H+"/api/coreplus/data.html",  Table:"coreplus-api", form_module: 'coreplus-api-form', router:1  },
+        "coreplus-api-form":{  url:$H+"/api/coreplus/form.html",  Table:"coreplus-api" },
+                
         "microsoft-data":{url:$vm.hosting_path+"/modules/microsoft/microsoft-data.html",form_module:"jsonv"},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
 })();
+
+
+

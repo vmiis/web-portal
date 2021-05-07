@@ -1,5 +1,5 @@
 var mailchimp_query=function(UID){
-    var t=sessionStorage.getItem("mailchimp_oauth");
+    var t=sessionStorage.getItem("mailchimp oauth");
     if(t==null){
         alert("You haven't login!");
         return "";
