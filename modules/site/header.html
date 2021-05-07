@@ -209,9 +209,9 @@ $vm.api_default="wzd";
 $vm.request=function(req,callback,progress){
     var api_url=$vm.api_address;
     var token_name="vm_token";
-    if(req.api_name!=undefined){
-        api_url=$vm.api_addresses[req.api_name];
-        token_name=req.api_name+" token";
+    if(req.api!=undefined){
+        api_url=$vm.api_addresses[req.api];
+        token_name=req.api+" token";
     }
     
     $vm.sys_N++;

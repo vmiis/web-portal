@@ -251,7 +251,7 @@
         "intuit-api-form":{  url:$H+"/intuit/form.html",  Table:"intuit-api" },
         "microsoft-api-data":{  url:$H+"/api/microsoft/data.html",  Table:"microsoft-api", form_module: 'microsoft-api-form', router:1  },
         "microsoft-api-form":{  url:$H+"/api/microsoft/form.html",  Table:"microsoft-api" },
-        "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  Table:"mongodb-api", form_module: 'mongodb-api-form', router:1  },
+        "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  Table:"mongodb-api", api:"wzd", form_module: 'mongodb-api-form', router:1  },
         "mongodb-api-form":{  url:$H+"/api/mongodb/form.html",  Table:"mongodb-api" },
         "cms-api-data":{  url:$H+"/api/cms/data.html",  Table:"cms-api", form_module: 'cms-api-form', router:1  },
         "cms-api-form":{  url:$H+"/api/cms/form.html",  Table:"cms-api" },
