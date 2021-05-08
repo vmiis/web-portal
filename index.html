@@ -55,6 +55,11 @@
             $('#content').css('min-height',$vm.min_height);
             $('#content').css('padding-top',60);
             $vm.root_layout_content_slot='content'
+            $vm.api_addresses={
+                "wzd":"https://woolcock-zhiming-database.vmiis.com",
+                "wapp":"https://api.wappsystem.com"
+            }
+            $vm.api_default="wzd";
             $vm.api_address='https://woolcock-zhiming-database.vmiis.com';
             if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){ 
                 $vm.localhost=true;

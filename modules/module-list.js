@@ -259,6 +259,9 @@
         "coreplus-api-form":{  url:$H+"/api/coreplus/form.html",  Table:"coreplus-api" },
                 
         "microsoft-data":{url:$vm.hosting_path+"/modules/microsoft/microsoft-data.html",form_module:"jsonv"},
+        
+        "wapp-query-data":{  url:$H+"/api/wappsystem/data.html",  api:"wapp",Table:"query", form_module: 'wapp-query-form', router:1  },
+        "wapp-query-form":{  url:$H+"/api/wappsystem/form.html",  api:"wapp",Table:"query" },
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
