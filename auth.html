@@ -5,6 +5,6 @@
 	var s=u.split('state=exchange').pop();
 	s="exchange"+s.split('&')[0];
 	s=s.split('#')[0];
-	window.opener.postMessage({cmd:s,code:c}, window.location.origin);
+	window.opener.postMessage({cmd:s,code:c,href:u}, window.location.origin);
 	window.close();
 </script>
