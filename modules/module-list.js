@@ -243,12 +243,7 @@
             description:"Sleep study",
             router:1,
         },
-        "mailchimp-api-data":{  url:$H+"/mailchimp/data.html",  Table:"mailchimp-api", form_module: 'mailchimp-api-form', router:1  },
-        "mailchimp-api-form":{  url:$H+"/mailchimp/form.html",  Table:"mailchimp-api" },
-        "blackbaud-api-data":{  url:$H+"/blackbaud/data.html",  Table:"blackbaud-api", form_module: 'blackbaud-api-form', router:1  },
-        "blackbaud-api-form":{  url:$H+"/blackbaud/form.html",  Table:"blackbaud-api" },
-        "intuit-api-data":{  url:$H+"/intuit/data.html",  Table:"intuit-api", form_module: 'intuit-api-form', router:1  },
-        "intuit-api-form":{  url:$H+"/intuit/form.html",  Table:"intuit-api" },
+        
         "microsoft-api-data":{  url:$H+"/api/microsoft/data.html",  Table:"microsoft-api", form_module: 'microsoft-api-form', router:1  },
         "microsoft-api-form":{  url:$H+"/api/microsoft/form.html",  Table:"microsoft-api" },
         "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  Table:"mongodb-api", api:"wzd", form_module: 'mongodb-api-form', router:1  },
@@ -258,10 +253,22 @@
         "coreplus-api-data":{  url:$H+"/api/coreplus/data.html",  Table:"coreplus-api", form_module: 'coreplus-api-form', router:1  },
         "coreplus-api-form":{  url:$H+"/api/coreplus/form.html",  Table:"coreplus-api" },
                 
-        "microsoft-data":{url:$vm.hosting_path+"/modules/microsoft/microsoft-data.html",form_module:"jsonv"},
+        "microsoft-data":{url:$vm.hosting_path+"/modules/api/woolcock-dynamics-365/microsoft-data.html",form_module:"jsonv"},
         
-        "wapp-query-data":{  url:$H+"/api/wappsystem/data.html",  api:"wapp",Table:"query", form_module: 'wapp-query-form', router:1  },
-        "wapp-query-form":{  url:$H+"/api/wappsystem/form.html",  api:"wapp",Table:"query" },
+        "mailchimp-api-data":{  url:$H+"/api/mailchimp/data.html",  api:'wapp',Table:"mailchimp-api", form_module: 'mailchimp-api-form', router:1  },
+        "mailchimp-api-form":{  url:$H+"/api/mailchimp/form.html",  api:'wapp',Table:"mailchimp-api" },
+        
+        "blackbaud-api-data":{  url:$H+"/api/blackbaud/data.html",  api:'wapp',Table:"blackbaud-api", form_module: 'blackbaud-api-form', router:1  },
+        "blackbaud-api-form":{  url:$H+"/api/blackbaud/form.html",  api:'wapp',Table:"blackbaud-api" },
+        
+        "intuit-api-data":{  url:$H+"/api/intuit/data.html",  api:'wapp',Table:"intuit-api", form_module: 'intuit-api-form', router:1  },
+        "intuit-api-form":{  url:$H+"/api/intuit/form.html",  api:'wapp',Table:"intuit-api" },
+        
+        "wapp-query-data":{  url:$H+"/api/wappsystem/data.html",  api:"wapp",Table:"wappsystem-query", form_module: 'wapp-query-form', router:1  },
+        "wapp-query-form":{  url:$H+"/api/wappsystem/form.html",  api:"wapp",Table:"wappsystem-query" },
+        
+        "woolcock-dynamics-365-query-data":{  url:$H+"/api/woolcock-dynamics-365/data.html",  api:"wapp",Table:"woolcock-dynamics-365-query", form_module: 'woolcock-dynamics-365-query-form', router:1  },
+        "woolcock-dynamics-365-query-form":{  url:$H+"/api/woolcock-dynamics-365/form.html",  api:"wapp",Table:"woolcock-dynamics-365-query" },
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@
             var host='us3.api.mailchimp.com';
             //-------------------------------------
             var get_token=function(){
-                var t=sessionStorage.getItem("mailchimp_oauth");
+                var t=sessionStorage.getItem("mailchimp oauth");
                 if(t==null){
                     alert("You haven't login!");
                     return "";
@@ -42,7 +42,7 @@
                                     if(p==null) return;
                                     path=path.replace('[INPUT]',p);
                                 }
-                                $vm.request({cmd:'mailchimp-api',access_token:t,host:host,path:"/3.0"+path},function(res){
+                                $vm.request({api:'wapp',cmd:'mailchimp-api',access_token:t,host:host,path:"/3.0"+path},function(res){
                                     var v={};
                                     try{
                                         v=JSON.parse(res.result);

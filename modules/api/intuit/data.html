@@ -16,7 +16,7 @@
             //-------------------------------------
             var realmId="";
             var get_token=function(){
-                var t=sessionStorage.getItem("intuit_oauth");
+                var t=sessionStorage.getItem("intuit oauth");
                 if(t==null){
                     alert("You haven't login!");
                     return "";
@@ -35,7 +35,7 @@
                             var t=get_token();
                             if(t!="" && realmId!=""){
                                 var path2="/v3/company/"+realmId+path;
-                                $vm.request({cmd:'intuit-api',access_token:t,path:path2},function(res){
+                                $vm.request({api:'wapp',cmd:'intuit-api',access_token:t,path:path2},function(res){
                                     $vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
                                 })
                             }
@@ -49,7 +49,7 @@
                 var t=get_token();
                 if(t!="" && realmId!=""){
                     var path2="/v3/company/"+realmId+path;
-                    $vm.request({cmd:'intuit-api',access_token:t,path:path2},function(res){
+                    $vm.request({api:'wapp',cmd:'intuit-api',access_token:t,path:path2},function(res){
                         $vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
                     })
                 }

@@ -20,15 +20,33 @@
                         td.html("<u style='cursor:pointer'>Send</u>");
                         td.find('u').on('click',function(){
                             var path=records[I].Data.Path;
-                            var t=sessionStorage.getItem("blackbaud_oauth");
+                            var array=records[I].Data.Array;
+                            var columns=records[I].Data.Columns;
+                            var t=sessionStorage.getItem("blackbaud oauth");
                             if(t==null){
                                 alert("You haven't login!");
                                 return;
                             }
                             t=JSON.parse(t);
                             t=t.access_token;
-                            $vm.request({cmd:'blackbaud-api',access_token:t,path:path},function(res){
-                                $vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
+                            $vm.request({api:'wapp',cmd:'blackbaud-api',access_token:t,path:path},function(res){
+                                //$vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
+                                var v={};
+                                try{
+                                    v=JSON.parse(res.result);
+                                }
+                                catch(e){
+                                    $vm.show_module('jsonv',{json_data:{err:v}});
+                                    return;
+                                }
+                                if(array!=""){
+                                    var type=columns.indexOf('|');
+                                    if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                                    else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                                }
+                                else{
+                                    $vm.show_module('jsonv',{json_data:v})
+                                }
                             })
                         })
                         break;
@@ -36,7 +54,7 @@
             }
             //-------------------------------------
             $('#go__ID').on('click',function(){
-                var t=sessionStorage.getItem("blackbaud_oauth");
+                var t=sessionStorage.getItem("blackbaud oauth");
                 if(t==null){
                     alert("You haven't login!");
                     return;
@@ -44,7 +62,7 @@
                 t=JSON.parse(t);
                 t=t.access_token;
                 var path=$('#path__ID').val();
-                $vm.request({cmd:'blackbaud-api',access_token:t,path:path},function(res){
+                $vm.request({api:'wapp',cmd:'blackbaud-api',access_token:t,path:path},function(res){
                     $vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
                 })
             })

@@ -1,5 +1,5 @@
 var dynamics_365_query=function(UID){
-    var t=sessionStorage.getItem("microsoft2 oauth");
+    var t=sessionStorage.getItem("wapp_woolcock-microsoft-dynamics oauth");
     if(t==null){
         alert("You haven't login!");
         return "";
@@ -12,7 +12,7 @@ var dynamics_365_query=function(UID){
         alert("Microsoft access token is expired! Please refresh.");
         return;
     }
-    $vm.request({cmd:"find",table:"microsoft-api",query:{UID:UID},options:{}},function(res){
+    $vm.request({api:'wapp',cmd:"find",table:"woolcock-dynamics-365-query",query:{UID:UID},options:{}},function(res){
         var records=res.result;
         if(records!=undefined && records.length==1){
             var host='woolcock.crm6.dynamics.com';
@@ -29,7 +29,7 @@ var dynamics_365_query=function(UID){
             path=path.replace(/\n/g,'').replace(/\r/g,'');
             if(path.indexOf("$top=")==-1 && path.indexOf("$count=true")!=-1 ) $vm.show_module('microsoft-data',{name:name,path:path,array:array,columns:columns})
             else{            
-                $vm.request({cmd:'microsoft-api',access_token:access_token,host:host,path:path},function(res){
+                $vm.request({api:'wapp',cmd:'microsoft-api',access_token:access_token,host:host,path:path},function(res){
                     var v=res.result;
                     if(res.status=="err"){
                         $vm.show_module('jsonv',{json_data:v})
@@ -47,6 +47,5 @@ var dynamics_365_query=function(UID){
             }
         }
         else alert('No report.')
-        //console.log(res);
     })
 }

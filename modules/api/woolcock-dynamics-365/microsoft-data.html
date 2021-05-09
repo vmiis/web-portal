@@ -26,7 +26,7 @@
             var host='woolcock.crm6.dynamics.com';
             //-------------------------------------
             var get_token=function(){
-                var t=sessionStorage.getItem("microsoft oauth");
+                var t=sessionStorage.getItem("wapp_woolcock-microsoft-dynamics oauth");
                 if(t==null){
                     alert("You haven't login!");
                     return "";
@@ -86,7 +86,7 @@
                 if(t!=""){
                     var pt=path;
                     if(m.link!='') pt=m.link;
-                    $vm.request({cmd:'microsoft-api',access_token:t,host:host,path:pt,pagesize:30},function(res){
+                    $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:pt,pagesize:30},function(res){
                         if(res.status=="err"){
                             $vm.show_module('jsonv',{json_data:res.result})
                         }
@@ -99,7 +99,7 @@
             //-------------------------------------
             var render=function(c){
                 var json_data=JSON.parse(c);
-                //console.log(json_data)                
+                console.log(json_data)                
                 
                 m.next_link=json_data['@odata.nextLink'];
                 m.links.push(m.link);
@@ -158,7 +158,7 @@
                         records.push(record);
                     }
                     */
-                    //console.log(records)
+                    console.log(records)
                 }
                 catch(e){
                     alert(e);

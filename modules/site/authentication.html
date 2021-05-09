@@ -24,7 +24,7 @@
                 </ul>
                 <span class=label__ID>Woolcock Microsoft Dynamics 365</span>
                 <ul>
-                    <li><a href='microsoft2'>Sign in / Refresh</a> <span id=microsoft2_username></span> <a href='microsoft2_signout' style='display:none'>Sign Out</a>   <span id=microsoft2_expire></span> </li>
+                    <li><a href='woolcock-microsoft-dynamics'>Sign in / Refresh</a> <span id=microsoft2_username></span> <a href='microsoft2_signout' style='display:none'>Sign Out</a>   <span id=microsoft2_expire></span> </li>
                 </ul>
                 <span class=label__ID>Blackbaud</span>
                 <ul>
@@ -109,13 +109,12 @@
                     url+='&nonce=678910';
                     window.open(url);
                 }
-              
                 if(href=="blackbaud"){
                     url='https://oauth2.sky.blackbaud.com/authorization';
                     url+='?response_type=code';
-                    url+='&client_id=03210bfe-d6b5-44c6-aa6a-d681ebbe5743';
+                    url+='&client_id=8768e445-dac8-4fe6-99ca-f0c9d4cf5cdd';
                     url+='&redirect_uri='+u;
-                    url+='&state=exchange-blackbaud-token.wzd_blackbaud';
+                    url+='&state=exchange-blackbaud-token.wapp_blackbaud';
                     window.open(url);
                 }
                 if(href=="intuit"){
@@ -124,26 +123,26 @@
                     url+='&client_id=AB3IGe9rVvhsIQB7FlhIxHKV19XHVrhw7viI3dG8Y2pJ7V3Mxg';
                     url+='&redirect_uri='+u;
                     url+='&scope=com.intuit.quickbooks.accounting openid profile email';
-                    url+='&state=exchange-intuit-token.wzd_intuit';
+                    url+='&state=exchange-intuit-token.wapp_intuit';
                     window.open(url);
                 }
                 if(href=="mailchimp"){
                     url='https://login.mailchimp.com/oauth2/authorize';
                     url+='?response_type=code';
-                    url+='&client_id=333393775932';
-                    url+='&redirect_uri='+u;
-                    //url+='&redirect_uri=http://127.0.0.1:8000/auth.html';
-                    url+='&state=exchange-mailchimp-token.wzd_mailchimp';
+                    url+='&client_id=167986166553';
+                    url+='&redirect_uri=http://127.0.0.1:8000/auth.html';
+                    url+='&state=exchange-mailchimp-token.wapp_mailchimp';
                     window.open(url);
                 }
-                if(href=="microsoft2"){
+                if(href=="woolcock-microsoft-dynamics"){
                     url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
-                    url+='?client_id=3bcb40c5-fec0-4b3b-ba67-f4d46d577f97'; //woolcock
+                    //url+='?client_id=3bcb40c5-fec0-4b3b-ba67-f4d46d577f97'; //woolcock
+                    url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
                     url+='&response_type=code';
                     url+='&redirect_uri='+u;
                     url+='&scope=https://woolcockdev.crm6.dynamics.com/.default'; 
                     url+='&response_mode=fragment';
-                    url+='&state=exchange-microsoft2-token.wzd_microsoft2';
+                    url+='&state=exchange-microsoft2-token.wapp_woolcock-microsoft-dynamics';
                     url+='&nonce=678910';
                     window.open(url);
                 }
@@ -152,7 +151,7 @@
                     url+='?response_type=code';
                     url+='&client_id=2c1e3065-9332-4ba6-b39c-2cd2d51e856c';
                     url+='&redirect_uri='+u;
-                    url+='&state=exchange-docusign-token.wzd_docusign';
+                    url+='&state=exchange-docusign-token.wapp_docusign';
                     window.open(url);
                 }
                 //---------------------------
@@ -184,10 +183,10 @@
                         break;
                     
                     case "mailchimp_signout":   sessionStorage.removeItem("mailchimp oauth");   $('#mailchimp_username').text('');  $('a[href=mailchimp_signout]').hide(); break;
-                    case "blackbaud_signout":   sessionStorage.removeItem("blackbaud oauth");   $('#blackbaud_username').text('');  $('a[href=blackbaud_signout]').hide(); break;
-                    case "intuit_signout":      sessionStorage.removeItem("intuit oauth");      $('#intuit_username').text('');     $('a[href=intuit_signout]').hide(); break;
+                    case "blackbaud_signout":   sessionStorage.removeItem("blackbaud oauth");   $('#blackbaud_username').text('');  $('#blackbaud_expire').text(''); $('a[href=blackbaud_signout]').hide(); break;
+                    case "intuit_signout":      sessionStorage.removeItem("intuit oauth");      $('#intuit_username').text('');     $('#intuit_expire').text(''); $('a[href=intuit_signout]').hide(); break;
                     case "microsoft2_signout":  sessionStorage.removeItem("microsoft2 oauth");  $('#microsoft2_username').text(''); $('#microsoft2_expire').text('');  $('a[href=microsoft2_signout]').hide(); break;
-                    case "docusign_signout":    sessionStorage.removeItem("docusign oauth");    $('#docusign_username').text('');   $('a[href=docusign_signout]').hide(); break;
+                    case "docusign_signout":    sessionStorage.removeItem("docusign oauth");    $('#docusign_username').text('');   $('#docusign_expire').text('');  $('a[href=docusign_signout]').hide(); break;
                     case "test": test(); break;
                 }
             })
@@ -219,7 +218,8 @@
             //------------------------------------
             var request_token=function(id,cmd,code,redirect_uri,href){
                 var api_name=id.split('_')[0];
-                $vm.request({api_name:api_name,cmd:cmd,token:code,redirect_uri:redirect_uri},function(res){
+                var session_key=id;
+                $vm.request({api:api_name,cmd:cmd,token:code,redirect_uri:redirect_uri},function(res){
                     if(res.status=='ok'){
                         switch(cmd){
                             case "exchange-microsoft-token": process_identity(res,id); break;
@@ -241,15 +241,15 @@
                                 sessionStorage.setItem("blackbaud oauth",JSON.stringify(res.result));
                                 break;
                             case "exchange-intuit-token":
-                                //res.result.href=href;
+                                res.result.href=href;
                                 var expires_in=res.result.a.expires_in;
                                 sessionStorage.setItem("intuit oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
                                 sessionStorage.setItem("intuit oauth",JSON.stringify(res.result));
                                 break;
                             case "exchange-microsoft2-token":
                                 var expires_in=res.result.a.expires_in;
-                                sessionStorage.setItem("microsoft2 oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
-                                sessionStorage.setItem("microsoft2 oauth",JSON.stringify(res.result));
+                                sessionStorage.setItem(session_key+" oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
+                                sessionStorage.setItem(session_key+" oauth",JSON.stringify(res.result));
                                 break;
                             case "exchange-docusign-token":
                                 var expires_in=res.result.expires_in;
@@ -270,7 +270,7 @@
             var login_display=function(id){
                 var api_name=id.split('_')[0];
                 var provider=id.split('_').pop();
-                if(id=="wzd_blackbaud"){
+                if(id=="wapp_blackbaud"){
                     if(sessionStorage.getItem("blackbaud oauth")!=null){ 
                         $('a[href=blackbaud_signout]').show(); 
                         var a=JSON.parse(sessionStorage.getItem("blackbaud oauth"));
@@ -279,7 +279,7 @@
                     }
                     else $('#blackbaud_expire').text("");
                 }
-                else if(id=="wzd_intuit"){
+                else if(id=="wapp_intuit"){
                     if(sessionStorage.getItem("intuit oauth")!=null){ 
                         $('a[href=intuit_signout]').show(); 
                         var r=JSON.parse(sessionStorage.getItem("intuit oauth"));
@@ -290,7 +290,7 @@
                     }
                     else $('#intuit_expire').text("");
                 }
-                else if(id=="wzd_docusign"){
+                else if(id=="wapp_docusign"){
                     if(sessionStorage.getItem("docusign oauth")!=null){ 
                         $('a[href=docusign_signout]').show(); 
                         if(sessionStorage.getItem("docusign oauth profile")!=null){ 
@@ -301,18 +301,18 @@
                     }
                     else $('#docusign_expire').text("");
                 }
-                else if(id=="wzd_microsoft2"){
-                    if(sessionStorage.getItem("microsoft2 oauth")!=null){ 
+                else if(id=="wapp_woolcock-microsoft-dynamics"){
+                    if(sessionStorage.getItem(id+" oauth")!=null){ 
                         $('a[href=microsoft2_signout]').show(); 
-                        var r=JSON.parse(sessionStorage.getItem("microsoft2 oauth"));
+                        var r=JSON.parse(sessionStorage.getItem(id+" oauth"));
                         if(r.d!=undefined){
                             $('#microsoft2_username').text(r.d.payload.name); 
-                            $('#microsoft2_expire').text("Expiry time: "+sessionStorage.getItem("microsoft2 oauth expire"));
+                            $('#microsoft2_expire').text("Expiry time: "+sessionStorage.getItem(id+" oauth expire"));
                         }
                     }
                     else $('#microsoft2_expire').text("");
                 }
-                else if(id=="wzd_mailchimp"){
+                else if(id=="wapp_mailchimp"){
                     if(sessionStorage.getItem("mailchimp oauth")!=null){ 
                         $('a[href=mailchimp_signout]').show(); 
                         var r=JSON.parse(sessionStorage.getItem("mailchimp oauth profile"));
@@ -376,11 +376,11 @@
                 login_display('wapp_google');
                 login_display('wapp_facebook');
                 login_display('wapp_github');
-                login_display('wzd_blackbaud');
-                login_display('wzd_intuit');
-                login_display('wzd_docusign');
-                login_display('wzd_microsoft2');
-                login_display('wzd_mailchimp');
+                login_display('wapp_blackbaud');
+                login_display('wapp_intuit');
+                login_display('wapp_docusign');
+                login_display('wapp_woolcock-microsoft-dynamics');
+                login_display('wapp_mailchimp');
             }
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){

@@ -6,7 +6,7 @@ var mailchimp_query=function(UID){
     }
     t=JSON.parse(t);
     var access_token=t.access_token;
-    $vm.request({cmd:"find",table:"mailchimp-api",query:{UID:UID},options:{}},function(res){
+    $vm.request({api:'wapp',cmd:"find",table:"mailchimp-api",query:{UID:UID},options:{}},function(res){
         var records=res.result;
         if(records!=undefined && records.length==1){
             var host='us3.api.mailchimp.com';
@@ -22,7 +22,7 @@ var mailchimp_query=function(UID){
             path=path.replace(/ /g,'%20');
             path=path.replace(/\n/g,'').replace(/\r/g,'');
             
-            $vm.request({cmd:'mailchimp-api',access_token:access_token,host:host,path:"/3.0"+path},function(res){
+            $vm.request({api:'wapp',cmd:'mailchimp-api',access_token:access_token,host:host,path:"/3.0"+path},function(res){
                 var v={};
                 try{
                     v=JSON.parse(res.result);

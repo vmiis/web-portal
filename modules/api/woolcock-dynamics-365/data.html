@@ -12,12 +12,12 @@
             //VmInclude:__COMPONENT__/g/grid.01.js
             //-------------------------------------
             var fields='ID|UID,Name';
-            m.fields="_Form,_Request,"+fields+",Submit_date,Submitted_by,_Delete";
+            m.fields="_Form,_Query,"+fields+",Submit_date,Submitted_by,_Delete";
             //-------------------------------------
             var host='woolcock.crm6.dynamics.com';
             //-------------------------------------
             var get_token=function(){
-                var t=sessionStorage.getItem("microsoft_oauth");
+                var t=sessionStorage.getItem("wapp_woolcock-microsoft-dynamics oauth");
                 if(t==null){
                     alert("You haven't login!");
                     return "";
@@ -35,8 +35,8 @@
             //-------------------------------------
             m.cell_render=function(records,I,field,td){
                 switch(field){
-                    case '_Request':
-                        td.html("<u style='cursor:pointer'>Send</u>");
+                    case '_Query':
+                        td.html("<u style='cursor:pointer'>Query</u>");
                         td.find('u').on('click',function(){
                             var t=get_token();
                             if(t!=""){
@@ -53,7 +53,7 @@
                                 path=path.replace(/\n/g,'').replace(/\r/g,'');
                                 if(path.indexOf("$top=")==-1 && path.indexOf("$count=true")!=-1 ) $vm.show_module('microsoft-data',{name:name,path:path,array:array,columns:columns})
                                 else{
-                                    $vm.request({cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
+                                    $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
                                         var v=res.result;
                                         if(res.status=="err"){
                                             $vm.show_module('jsonv',{json_data:v})
@@ -84,7 +84,7 @@
                     path=path.replace(/\n/g,'').replace(/\r/g,'');
                     if(path.indexOf("$top=")==-1 && path.indexOf("$count=true")!=-1 ) $vm.show_module('microsoft-data',{name:name,path:path,array:array,columns:columns})
                     else{
-                        $vm.request({cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
+                        $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
                             var v=res.result;
                             try {
                                 $vm.show_module('jsonv',{json_data:JSON.parse(v)})
