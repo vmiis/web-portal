@@ -58,30 +58,15 @@
                             if(ps[j].indexOf('@')!=-1) bb=[ps[j]];
                             var c=rows[i];
                             for(var k=0;k<bb.length;k++){
-                                c=c[bb[k]];
+                                if(c==undefined || c==null) break;
+                                if(bb[k]=='[0]') c=c[0];
+                                else c=c[bb[k]];
                             }
                             if(c==null) c="";
-                            //else if(c==true) c="<i style='color:green;padding-left:10px;cursor:pointer' class='fas fa-check'></i>";
-                            //else if(c==false) c="";
                             record[headers[j]]=c;
                         }
                         records.push(record);
                     }
-                    /*
-                    for(var i=0;i<rows.length;i++){
-                        var record=[];
-                        for(var j=0;j<headers.length;j++){
-                            var bb=ps[j].split('.');
-                            var c=rows[i];
-                            for(var k=0;k<bb.length;k++){
-                                c=c[bb[k]];
-                            }
-                            record.push(c);
-                        }
-                        records.push(record);
-                    }
-                    */
-                    console.log(records)
                 }
                 catch(e){
                     alert(e);

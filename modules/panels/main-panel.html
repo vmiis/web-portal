@@ -10,7 +10,7 @@
     </div>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
-            <span class=LT__ID>Coreplus</span>
+            <span class=LT__ID>Coreplus Offline</span>
             <div>
                 <li><a href='?/patients'>Patients</a></li>
                 <li><a href='?/clinics'>Clinics</a></li>
@@ -20,8 +20,9 @@
                 <li><a href='?/api_mongodb_1'>Top 100 Referrers</a></li>
                 <li><a href='?/coreplus-datatable-relationships'>Coreplus datatable relationships</a></li>
                 <li><a href='?/coreplus-referral-diagram'>Referral data example</a></li>
-                
-                
+            </div>
+            <span class=LT__ID>Coreplus Real Time</span>
+            <div>
                 <li><a href='?/api_coreplus_8'>Practitioner</a></li>
                 <li><a href='?/api_coreplus_1'>Locations</a></li>
                 <li><a href='?/api_coreplus_2'>Specialty Type</a></li>
@@ -62,11 +63,12 @@
                 
             
             
-            
-                <span class=LT__ID style='break-before:column;display:block;'>ThankQ Database</span>
+            <!--
+            <span class=LT__ID style='break-before:column;display:block;'>ThankQ Database</span>
                 <li><a href='?/thankq-all-people'>All People</a></li>
                 <li><a href='?/thankq-all-transactions'>All Transactions</a></li>
             </div>
+            -->
             <span class=LT__ID>Database Backup Files Check</span>
             <div>
                 <li><a href='?/database-backup-rt'>CMS and research database</a></li>
@@ -87,10 +89,14 @@
                 <li><a target=_blank href='https://woolcock-imr.github.io/volunteers/'>Volunteers (data from Dynamics 365)</a></li>
                 -->
             </div>
-            <span class=LT__ID>Database Migration</span>
+            <span class=LT__ID>Others</span>
             <div>
+                <li><a href='?/api_wappsystem_1'>Total number of Incosact survy response</a></li>
+                <li><a href='?/api_wappsystem_2'>Wappsystem 2018-2021 income/expense</a></li>
+                <!--
                 <li><a href='?/thankq-people-fields'>ThankQ People Fields and Raiser's Edge Constituent Fields Mapping</a></li>
                 <li><a href='?/thankq-t-fields'>ThankQ Transaction Fields and Raiser's Edge Gift Fields Mapping</a></li>
+                -->
             </div>
             <span class=LT__ID>Active Research Projects</span>
             <div>
@@ -201,6 +207,7 @@
                             case "mongodb":     mongodb_query(parseInt(aa[2]));     break;
                             case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    coreplus_query(parseInt(aa[2]));    break;
+                            case "wappsystem":  wappsystem_query(parseInt(aa[2]));  break;
                         }
                     }
                 }
@@ -212,6 +219,7 @@
 			//VmInclude:__CURRENT_PATH__main-panel-mongodb.js
 			//VmInclude:__CURRENT_PATH__main-panel-sqlserver.js
 			//VmInclude:__CURRENT_PATH__main-panel-coreplus.js
+			//VmInclude:__CURRENT_PATH__main-panel-wappsystem.js
             //--------------------------------------------------------
             
         }
