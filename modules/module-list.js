@@ -269,6 +269,8 @@
         
         "woolcock-dynamics-365-query-data":{  url:$H+"/api/woolcock-dynamics-365/data.html",  api:"wapp",Table:"woolcock-dynamics-365-query", form_module: 'woolcock-dynamics-365-query-form', router:1  },
         "woolcock-dynamics-365-query-form":{  url:$H+"/api/woolcock-dynamics-365/form.html",  api:"wapp",Table:"woolcock-dynamics-365-query" },
+        
+        "piano":{  url:$H+"/piano/piano.html"},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

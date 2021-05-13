@@ -98,6 +98,12 @@
                 <li><a href='?/thankq-t-fields'>ThankQ Transaction Fields and Raiser's Edge Gift Fields Mapping</a></li>
                 -->
             </div>
+            
+            <span class=LT__ID>Piano</span>
+            <div>
+                <li><a href='?/api_piano_1'>Test</a></li>
+            </div>
+        
             <span class=LT__ID>Active Research Projects</span>
             <div>
                 <li><a target=_blank href='https://cansleep.rt.org.au/'>Cansleep</a></li>
@@ -208,6 +214,7 @@
                             case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    coreplus_query(parseInt(aa[2]));    break;
                             case "wappsystem":  wappsystem_query(parseInt(aa[2]));  break;
+                            case "piano":  $vm.show_module('piano',{aaa:1});  break;
                         }
                     }
                 }
