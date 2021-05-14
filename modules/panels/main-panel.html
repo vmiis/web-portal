@@ -67,8 +67,8 @@
             <span class=LT__ID style='break-before:column;display:block;'>ThankQ Database</span>
                 <li><a href='?/thankq-all-people'>All People</a></li>
                 <li><a href='?/thankq-all-transactions'>All Transactions</a></li>
-            </div>
             -->
+            </div>
             <span class=LT__ID>Database Backup Files Check</span>
             <div>
                 <li><a href='?/database-backup-rt'>CMS and research database</a></li>
@@ -101,7 +101,8 @@
             
             <span class=LT__ID>Piano</span>
             <div>
-                <li><a href='?/api_piano_1'>Test</a></li>
+                <li><a href='?/api_piano_1'>An die ferne Geliebte</a></li>
+                <li><a href='?/api_piano_2'>Sonatina Op.36</a></li>
             </div>
         
             <span class=LT__ID>Active Research Projects</span>
@@ -138,6 +139,7 @@
                 <li><a target=_blank href='https://connx.cloud.micropay.com.au/connx50294/frmLogin.aspx'>ConnX</a></li>
                 <li><a target=_blank href='https://sydneyuni.service-now.com/'>Uni Services</a></li>
             </div>
+			<!--VmInclude:__CURRENT_PATH__main-panel-wappsystem-bookkeeping.html-->
             <span class=LT__ID>API Administrator</span>
             <div>
                 <li><a href='?/mailchimp-api-data'>Mailchimp</a></li>
@@ -189,8 +191,8 @@
                     for(var i=0;i<words.length;i++){
                         var word=words[i].toUpperCase(); 
                         if(word!=""){
-                            if(name.indexOf(word)!=-1){   $group.show(); $group.next('div').show();  }
-                            else                      {   $group.hide(); $group.next('div').hide();  }
+                            if(name.indexOf(word)!=-1){  $group.show(); $group.next('div').show();  }
+                            else                      {  $group.hide(); $group.next('div').hide();  }
                         }
                     }
                 })
@@ -214,7 +216,7 @@
                             case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    coreplus_query(parseInt(aa[2]));    break;
                             case "wappsystem":  wappsystem_query(parseInt(aa[2]));  break;
-                            case "piano":  $vm.show_module('piano',{aaa:1});  break;
+                            case "piano":  $vm.show_module('piano',{sheet:aa[2]});  break;
                         }
                     }
                 }

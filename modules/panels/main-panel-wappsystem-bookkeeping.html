@@ -1,0 +1,64 @@
+<span class=LT__ID>Wappsystem Bookkeeping</span>
+<div>
+    <li><a href='?/transaction-data-basic'>Transactions (sort by submit date) </a></li>
+    <li><a href='?/transaction-data-date'>Transactions (sort by transaction date) </a></li>
+    <li><a href='?/transaction-data-year-quarter'>Transactions (year-quarter)</a></li>
+    <li><a href='?/transaction-data-bas'>Transactions (BAS)</a></li>
+    <li><a href='?/transaction-data-year-quarter-bas'>Transactions (BAS, year-quarter)</a></li>
+    <li><a href='?/transaction-data-tax-return'>Transactions (Tax return)</a></li>
+    <li><a href='?/transaction-data-year-quarter-tax-return'>Transactions (Tax return, year-quarter)</a></li>
+</div>
+
+<script>
+(function(){
+    //-------------------------------------------------------------------------------------
+    var api="wapp";
+    var set_prefix=function(prefix, modules){
+        for(m in modules){ 
+            if($vm.module_list[prefix+m]!=undefined) alert(m+" is existed"); 
+            else{
+                $vm.module_list[prefix+m]=modules[m];
+                $vm.module_list[prefix+m].prefix=prefix;
+                $vm.module_list[prefix+m].api=api;
+            }
+        }
+    }
+    //-------------------------------------------------------------------------------------
+    prefix='';
+    $H=$vm.hosting_path+"/apps/bookkeeping/modules";
+    var pre_item="predefined-transaction-item-wappsystem";
+    var transaction="transaction-wappsystem";
+    var aggregation="ato-bas-quarter-aggregation-wappsystem";
+    var aggregation_ie="income-expense-month-aggregation-wappsystem";
+    var aggregation_year_ie="income-expense-year-aggregation-wappsystem";
+    var aggregation_item="item-month-aggregation-wappsystem";
+    var aggregation_tax="ato-tax-return-yearly-aggregation-wappsystem";
+    var modules={
+        "predefined_transaction_item_data":         {url:$H+"/predefined-transaction-item/data.html",Table:pre_item,form_module:"predefined_transaction_item_form",router:1},
+        "predefined_transaction_item_form":         {url:$H+"/predefined-transaction-item/form.html",Table:pre_item},
+        "transaction-data-basic":                   {url:$H+"/transaction-records/data-basic.html",                   Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-data-date":                    {url:$H+"/transaction-records/data-date.html",                    Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-data-year-quarter":            {url:$H+"/transaction-records/data-year-quarter.html",            Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-data-bas":                     {url:$H+"/transaction-records/data-bas.html",                     Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-data-year-quarter-bas":        {url:$H+"/transaction-records/data-year-quarter-bas.html",        Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-data-tax-return":              {url:$H+"/transaction-records/data-tax-return.html",              Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-data-year-quarter-tax-return": {url:$H+"/transaction-records/data-year-quarter-tax-return.html", Table:transaction,form_module:"transaction-form",router:1},
+        "transaction-form":                         {url:$H+"/transaction-records/form.html",                         Table:transaction,item_table:pre_item,router:1},
+        "ato-bas-quarter-aggregation-data":         {url:$H+"/aggregations/ato-bas-quarter-aggregation-data.html",  Table:aggregation,transaction_table:transaction,form_module:'ato-bas-quarter-aggregation-form',router:1},
+        "ato-bas-quarter-aggregation-form":         {url:$H+"/aggregations/ato-bas-quarter-aggregation-form.html",  Table:aggregation,router:1},
+        "income-expense-month-aggregation-data":    {url:$H+"/aggregations/income-expense-month-aggregation-data.html", Table:aggregation_ie,transaction_table:transaction,form_module:'income-expense-month-aggregation-form',router:1},
+        "income-expense-month-aggregation-form":    {url:$H+"/aggregations/income-expense-month-aggregation-form.html", Table:aggregation_ie,router:1},
+        "income-expense-month-aggregation-chart":   {url:$H+"/aggregations/income-expense-month-aggregation-chart.html",Table:aggregation_ie,router:1},
+        "income-expense-year-aggregation-data":     {url:$H+"/aggregations/income-expense-year-aggregation-data.html", Table:aggregation_year_ie,transaction_table:transaction,form_module:'income-expense-year-aggregation-form',router:1},
+        "income-expense-year-aggregation-form":     {url:$H+"/aggregations/income-expense-year-aggregation-form.html", Table:aggregation_year_ie,router:1},
+        "item-monthly-aggregation-data":            {url:$H+"/aggregations/item-month-aggregation-data.html",   Table:aggregation_item,transaction_table:transaction,form_module:'item-monthly-aggregation-form',router:1},
+        "item-monthly-aggregation-form":            {url:$H+"/aggregations/item-month-aggregation-form.html",   Table:aggregation_item,router:1},
+        "item-monthly-aggregation-chart":           {url:$H+"/aggregations/item-month-aggregation-chart.html",  Table:"vm-demo-item-monthly-aggregation",router:1},
+        "tax-return-yearly-aggregation-data":       {url:$H+"/aggregations/ato-tax-return-yearly-aggregation-data.html",    Table:aggregation_tax,transaction_table:transaction,form_module:'tax-return-yearly-aggregation-form',router:1},
+        "tax-return-yearly-aggregation-form":       {url:$H+"/aggregations/ato-tax-return-yearly-aggregation-form.html",    Table:aggregation_tax,router:1},
+        "tax-return-yearly-aggregation-chart":      {url:$H+"/aggregations/ato-tax-return-yearly-aggregation-chart.html",   Table:aggregation_tax,router:1},
+    }
+    set_prefix(prefix,modules);
+    //-------------------------------------------------------------------------------------
+})();
+</script>
