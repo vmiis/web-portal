@@ -12,11 +12,9 @@ var mongodb_query=function(UID){
             if(query.indexOf('[INPUT]')!=-1){
                 var p=prompt("Input", "");
                 if(p==null) return;
+                p=p.replace(/\"/g,'\\\"');
                 query=query.replace('[INPUT]',p);
             }      
-            var array=records[0].Data.Array;
-            var columns=records[0].Data.Columns;
-            
             var pipeline;
             try{
                 pipeline=JSON.parse(query);

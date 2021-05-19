@@ -22,6 +22,12 @@
                             var query=records[I].Data.Query;
                             var array=records[I].Data.Array;
                             var columns=records[I].Data.Columns;
+                            if(query.indexOf('[INPUT]')!=-1){
+                                var p=prompt("Input", "");
+                                if(p==null) return;
+                                p=p.replace(/\"/g,'\\\"');
+                                query=query.replace('[INPUT]',p);
+                            }      
                             var pipeline;
                             try{
                                 pipeline=JSON.parse(query);
