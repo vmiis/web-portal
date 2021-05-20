@@ -15,7 +15,8 @@
             //-------------------------------------------------
             var name="";
             var headers=[];
-            var ps=[];                
+            var ps=[];
+            var tp=[];                
             var records=[];
             //-------------------------------------------------
             $('#export__ID').on('click',function(){
@@ -30,6 +31,7 @@
                 $('#name__ID').text(name);
                 headers=[];
                 ps=[];                
+                tp=[];                
                 records=[];                
                 try{
                     var rows;
@@ -49,13 +51,15 @@
                             var pp=bb[1];
                             headers.push(nm);
                             ps.push(pp.replace('\r',''));
+                            if(bb.length==3) tp.push(bb[2].replace('\r',''));
+                            else tp.push('');
                         }
                     }
                     for(var i=0;i<rows.length;i++){
                         var record={};
                         for(var j=0;j<headers.length;j++){
                             var bb=ps[j].split('.');
-                            if(ps[j].indexOf('@')!=-1) bb=[ps[j]];
+                            if(ps[j].indexOf('@')!=-1) bb=[ps[j]];  //ignore '.', bb contains only one element
                             var c=rows[i];
                             for(var k=0;k<bb.length;k++){
                                 if(c==undefined || c==null) break;
@@ -63,6 +67,8 @@
                                 else c=c[bb[k]];
                             }
                             if(c==null) c="";
+                            if(tp[j]=='DATE') c=c.substr(0,10);
+                            if(tp[j]=='TIME') c=c.substr(11,5);
                             record[headers[j]]=c;
                         }
                         records.push(record);

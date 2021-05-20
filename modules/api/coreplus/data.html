@@ -23,10 +23,15 @@
                             var input="";
                             var path=records[I].Data.Path;
                             if(path.indexOf('[INPUT]')!=-1){
-                                var input=prompt("Input", "");
+                                input=prompt("Input", "");
+                                input=input.replace(/ /g,'%20');
                                 if(input==null) return;
                             }
-                            $vm.request({cmd:'coreplus-api',input:input,uid:uid},function(res){
+                            var today="";
+                            if(path.indexOf('[TODAY]')!=-1){
+                                today=new Date().toISOString().substr(0,10);
+                            }
+                            $vm.request({cmd:'coreplus-api',input:input,today:today,uid},function(res){
                                 if(res.status=="err"){
                                     $vm.show_module('jsonv',{json_data:res.result})
                                     return;
@@ -41,9 +46,9 @@
                                     return;
                                 }
                                 if(array!=""){
-console.log(array)                                    
-console.log(data)                                    
-console.log(data[array])                                    
+//console.log(array)                                    
+//console.log(data)                                    
+//console.log(data[array])                                    
                                     var type=columns.indexOf('|');
                                     if(type!=-1) $vm.show_module('gridv',{name:name,json_data:data,array:array,columns:columns})
                                     else $vm.show_module('arrayv',{name:name,json_data:data,array:array,columns:columns})
