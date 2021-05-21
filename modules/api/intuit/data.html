@@ -11,7 +11,7 @@
             //-------------------------------------
             //VmInclude:__COMPONENT__/g/grid.01.js
             //-------------------------------------
-            var fields='ID|UID,Name,Path';
+            var fields='ID|UID,Name';
             m.fields="_Form,_Request,"+fields+",Submit_date,Submitted_by,_Delete";
             //-------------------------------------
             var realmId="";
@@ -31,12 +31,29 @@
                     case '_Request':
                         td.html("<u style='cursor:pointer'>Send</u>");
                         td.find('u').on('click',function(){
-                            var path=records[I].Data.Path.replace(/ /g,'%20');
+                            var name=records[I].Data.Name;
+                            var array=records[I].Data.Array;
+                            var columns=records[I].Data.Columns;
+
+                            var path=encodeURI(records[I].Data.Path);
                             var t=get_token();
                             if(t!="" && realmId!=""){
                                 var path2="/v3/company/"+realmId+path;
                                 $vm.request({api:'wapp',cmd:'intuit-api',access_token:t,path:path2},function(res){
-                                    $vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
+                                    var v=JSON.parse(res.result);
+                                    console.log(v)
+                                    //$vm.show_module('jsonv',{json_data:JSON.parse(res.result)})
+                                    if(res.status=="err"){
+                                        $vm.show_module('jsonv',{json_data:v})
+                                    }
+                                    else if(array!=""){
+                                        var type=columns.indexOf('|');
+                                        if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                                        else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                                    }
+                                    else{
+                                        $vm.show_module('jsonv',{json_data:v})
+                                    }
                                 })
                             }
                         })

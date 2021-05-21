@@ -69,6 +69,7 @@
                             if(c==null) c="";
                             if(tp[j]=='DATE') c=c.substr(0,10);
                             if(tp[j]=='TIME') c=c.substr(11,5);
+                            if(tp[j]=='DOLLAR') c="$"+c;
                             record[headers[j]]=c;
                         }
                         records.push(record);
@@ -88,7 +89,8 @@
                     txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+"></i></td>"
                     for(var j=0;j<N;j++){
                         //txt+="<td>"+records[i][j]+"</td>";
-                        txt+="<td>"+records[i][headers[j]]+"</td>";
+                        if(tp[j]=='DOLLAR') txt+="<td style='text-align:right'>"+records[i][headers[j]]+"</td>";
+                        else txt+="<td>"+records[i][headers[j]]+"</td>";
                     }
                     txt+="</tr>"
                 }

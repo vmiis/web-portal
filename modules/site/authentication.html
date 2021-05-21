@@ -26,6 +26,10 @@
                 <ul>
                     <li><a href='woolcock-microsoft-dynamics'>Sign in / Refresh</a> <span id=microsoft2_username></span> <a href='microsoft2_signout' style='display:none'>Sign Out</a>   <span id=microsoft2_expire></span> </li>
                 </ul>
+                <span class=label__ID>Woolcock Microsoft SharePoint</span>
+                <ul>
+                    <li><a href='woolcock-microsoft-sharepoint'>Sign in / Refresh</a> <span id=microsoft3_username></span> <a href='microsoft3_signout' style='display:none'>Sign Out</a>   <span id=microsoft3_expire></span> </li>
+                </ul>
                 <span class=label__ID>Blackbaud</span>
                 <ul>
                     <li><a href='blackbaud'>Sign in / Refresh</a> <span id=blackbaud_username></span> <a href='blackbaud_signout' style='display:none'>Sign Out</a> <span id=blackbaud_expire></span> </li>
@@ -143,6 +147,17 @@
                     url+='&scope=https://woolcockdev.crm6.dynamics.com/.default'; 
                     url+='&response_mode=fragment';
                     url+='&state=exchange-microsoft2-token.wapp_woolcock-microsoft-dynamics';
+                    url+='&nonce=678910';
+                    window.open(url);
+                }
+                if(href=="woolcock-microsoft-sharepoint"){
+                    url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+                    url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=https://woolcockmed.sharepoint.com/.default'; 
+                    url+='&response_mode=fragment';
+                    url+='&state=exchange-microsoft2-token.wapp_woolcock-microsoft-sharepoint';
                     url+='&nonce=678910';
                     window.open(url);
                 }
@@ -312,6 +327,17 @@
                     }
                     else $('#microsoft2_expire').text("");
                 }
+                else if(id=="wapp_woolcock-microsoft-sharepoint"){
+                    if(sessionStorage.getItem(id+" oauth")!=null){ 
+                        $('a[href=microsoft3_signout]').show(); 
+                        var r=JSON.parse(sessionStorage.getItem(id+" oauth"));
+                        if(r.d!=undefined){
+                            $('#microsoft3_username').text(r.d.payload.name); 
+                            $('#microsoft3_expire').text("Expiry time: "+sessionStorage.getItem(id+" oauth expire"));
+                        }
+                    }
+                    else $('#microsoft2_expire').text("");
+                }
                 else if(id=="wapp_mailchimp"){
                     if(sessionStorage.getItem("mailchimp oauth")!=null){ 
                         $('a[href=mailchimp_signout]').show(); 
@@ -380,6 +406,7 @@
                 login_display('wapp_intuit');
                 login_display('wapp_docusign');
                 login_display('wapp_woolcock-microsoft-dynamics');
+                login_display('wapp_woolcock-microsoft-sharepoint');
                 login_display('wapp_mailchimp');
             }
             //--------------------------------------------------------

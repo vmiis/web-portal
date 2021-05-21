@@ -99,6 +99,7 @@
             <span class=LT__ID>Others</span>
             <div>
                 <li><a href='?/api_wappsystem_1'>Total number of Incosact survy response</a></li>
+                <li><a href='?/api_wappsystem_4'>Incosact response by language</a></li>
                 <li><a href='?/api_wappsystem_2'>Wappsystem 2018-2021 income/expense</a></li>
                 <!--
                 <li><a href='?/thankq-people-fields'>ThankQ People Fields and Raiser's Edge Constituent Fields Mapping</a></li>
@@ -112,6 +113,13 @@
                 <li><a href='?/api_piano_2'>Sonatina Op.36</a></li>
             </div>
         
+            <span class=LT__ID>QuickBooks</span>
+            <div>
+                <li><a href='?/api_quickbooks_1'>Conpamy information</a></li>
+                <li><a href='?/api_quickbooks_2'>Account list</a></li>
+                <li><a href='?/api_quickbooks_3'>Purchases on March</a></li>
+            </div>
+            
             <span class=LT__ID>Active Research Projects</span>
             <div>
                 <li><a target=_blank href='https://cansleep.rt.org.au/'>Cansleep</a></li>
@@ -217,6 +225,7 @@
                     var aa=module_name.split('_');
                     if(aa.length==3){
                         switch(aa[1]){
+                            case "quickbooks":  quickbooks_query(parseInt(aa[2]));break;
                             case "dynamics":    dynamics_365_query(parseInt(aa[2]));break;
                             case "mailchimp":   mailchimp_query(parseInt(aa[2]));   break;
                             case "mongodb":     mongodb_query(parseInt(aa[2]));     break;
@@ -236,6 +245,7 @@
 			//VmInclude:__CURRENT_PATH__main-panel-sqlserver.js
 			//VmInclude:__CURRENT_PATH__main-panel-coreplus.js
 			//VmInclude:__CURRENT_PATH__main-panel-wappsystem.js
+			//VmInclude:__CURRENT_PATH__main-panel-quickbooks.js
             //--------------------------------------------------------
             
         }
