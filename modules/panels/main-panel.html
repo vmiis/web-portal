@@ -44,15 +44,23 @@
                 <li><a href='?/crm-project-data'>Projects</a></li>
                 <li><a href='?/crm-study-data'>Studies</a></li>
                 -->
-                <li><a href='?/api_dynamics_5'>Volunteers</a></li>
-                <li><a href='?/api_dynamics_4'>Latest 200 stuties</a></li>
-                <li><a href='?/api_dynamics_2'>Latest 200 projects</a></li>
-                <li><a href='?/api_dynamics_3'>Total number of volunteers, projects and studies</a></li>
-                <li><a href='?/api_dynamics_6'>Search volunteers by name</a></li>
-                <li><a href='?/api_dynamics_1'>Search projects</a></li>
-                <li><a href='?/api_dynamics_7'>Search studies</a></li>
-                <li><a href='?/api_dynamics_8'>Query for Sinthia<br><span style='font-size:11px; font-weight:normal; color:#555'>(Age>40, with COPD or Eemphysema or Chronic Bronchitis)</span></a></li>
-                <li><a href='?/api_dynamics_9'>Optimising Maintenance Therapy<br><span style='font-size:11px; font-weight:normal; color:#555'>(Age>=40, with COPD or Eemphysema or Chronic Bronchitis or Healthy and NO Lung Cancer)</span></a></li>
+                <li><a href='?/api_microsoft_5'>Volunteers</a></li>
+                <li><a href='?/api_microsoft_4'>Latest 200 stuties</a></li>
+                <li><a href='?/api_microsoft_2'>Latest 200 projects</a></li>
+                <li><a href='?/api_microsoft_3'>Total number of volunteers, projects and studies</a></li>
+                <li><a href='?/api_microsoft_6'>Search volunteers by name</a></li>
+                <li><a href='?/api_microsoft_1'>Search projects</a></li>
+                <li><a href='?/api_microsoft_7'>Search studies</a></li>
+                <li><a href='?/api_microsoft_8'>Query for Sinthia<br><span style='font-size:11px; font-weight:normal; color:#555'>(Age>40, with COPD or Eemphysema or Chronic Bronchitis)</span></a></li>
+                <li><a href='?/api_microsoft_9'>Optimising Maintenance Therapy<br><span style='font-size:11px; font-weight:normal; color:#555'>(Age>=40, with COPD or Eemphysema or Chronic Bronchitis or Healthy and NO Lung Cancer)</span></a></li>
+                	
+            </div>
+            <span class=LT__ID>Woolcock SharePoint</span>
+            <div>
+                
+                <li><a href='?/api_microsoft_18'>Communal order form</a></li>
+                <li><a href='?/api_microsoft_17'>Incident report</a></li>
+                <li><a href='?/api_microsoft_14'>SharePoint sites</a></li>
                 	
             </div>
             <span class=LT__ID>Mailchimp Marketing</span>
@@ -155,7 +163,7 @@
                 <li><a target=_blank href='https://sydneyuni.service-now.com/'>Uni Services</a></li>
             </div>
 			<!--VmInclude:__CURRENT_PATH__main-panel-wappsystem-bookkeeping.html-->
-            <span class=LT__ID>API Administrator</span>
+            <span class=LT__ID>Data Administrator</span>
             <div>
                 <li><a href='?/mailchimp-api-data'>Mailchimp</a></li>
                 <li><a href='?/blackbaud-api-data'>Blackbaud</a></li>
@@ -225,8 +233,8 @@
                     var aa=module_name.split('_');
                     if(aa.length==3){
                         switch(aa[1]){
-                            case "quickbooks":  quickbooks_query(parseInt(aa[2]));break;
-                            case "dynamics":    dynamics_365_query(parseInt(aa[2]));break;
+                            case "quickbooks":  $vm.intuit_query(parseInt(aa[2])); /*quickbooks_query(parseInt(aa[2]));*/break;
+                            case "microsoft":   $vm.microsoft_query(parseInt(aa[2]));break;
                             case "mailchimp":   mailchimp_query(parseInt(aa[2]));   break;
                             case "mongodb":     mongodb_query(parseInt(aa[2]));     break;
                             case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
@@ -239,13 +247,11 @@
                 else if(module_name!="") $vm.show_module(module_name,{})
             })
             //--------------------------------------------------------
-			//VmInclude:__CURRENT_PATH__main-panel-dynamics_365.js
 			//VmInclude:__CURRENT_PATH__main-panel-mailchimp.js
 			//VmInclude:__CURRENT_PATH__main-panel-mongodb.js
 			//VmInclude:__CURRENT_PATH__main-panel-sqlserver.js
 			//VmInclude:__CURRENT_PATH__main-panel-coreplus.js
 			//VmInclude:__CURRENT_PATH__main-panel-wappsystem.js
-			//VmInclude:__CURRENT_PATH__main-panel-quickbooks.js
             //--------------------------------------------------------
             
         }

@@ -1,0 +1,78 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            //-------------------------------------------------------------------------------------------------------
+            $vm.get_microsoft_token=function(host, callback){
+                var t;
+                var scope=""
+                var session_key="";
+                if(host=='woolcock.crm6.dynamics.com'){
+                    t=sessionStorage.getItem("wapp_woolcock-microsoft-dynamics oauth");
+                    session_key="wapp_woolcock-microsoft-dynamics";
+                    scope="https://woolcockdev.crm6.dynamics.com/user_impersonation https://woolcockdev.crm6.dynamics.com/.default offline_access";
+                }
+                else{
+                    t=sessionStorage.getItem("wapp_microsoft-graph oauth");
+                    session_key="wapp_microsoft-graph";
+                    scope="Sites.Read.All offline_access";
+                }
+                if(t==null){
+                    alert("You haven't login!");
+                    callback('');
+                    return "";
+                }
+                t=JSON.parse(t);
+                var access_token=t.a.access_token;
+                var dt=$vm.jwt_decode(access_token);
+                var exp=dt.exp;
+                if(Date.now() >= exp * 1000){
+                    //--------------------------------------------
+                    var refresh_token=t.a.refresh_token;
+                    var mhost="login.microsoftonline.com";
+                    var path="/common/oauth2/v2.0/token";
+                    var scope=""
+                    $vm.request({api:"wapp",cmd:"refresh-microsoft-token",token:refresh_token,host:mhost,path:path,scope:scope},function(res){
+                        var expires_in=res.result.a.expires_in;
+                        var expire=new Date(new Date().getTime()+expires_in*1000).toLocaleString();
+                        sessionStorage.setItem(session_key+" oauth expire",expire);
+                        sessionStorage.setItem(session_key+" oauth",JSON.stringify(res.result));
+                        $('#microsoft2_expire').text("Expiry time: "+expire);
+                        callback(res.result.a.access_token);
+                    })
+                    //--------------------------------------------
+                    return;
+                }
+                callback(access_token);
+            }
+            //-------------------------------------------------------------------------------------------------------
+            $vm.get_intuit_token=function(callback){
+                var t=sessionStorage.getItem("intuit oauth");
+                if(t==null){
+                    alert("You haven't login!");
+                    return "";
+                }
+                t=JSON.parse(t);
+                var realmId=t.href.split("ealmId=").pop().split('&')[0];
+                
+                var ttt=sessionStorage.getItem("intuit oauth expire");
+                var dt=new Date(ttt).getTime()-new Date().getTime();
+                if(dt<0){
+                    var refresh_token=t.a.refresh_token;
+                    $vm.request({api:"wapp",cmd:"refresh-intuit-token",token:refresh_token},function(res){
+                        var expires_in=res.result.a.expires_in;
+                        var expire=new Date(new Date().getTime()+expires_in*1000).toLocaleString();
+                        sessionStorage.setItem("intuit oauth expire",expire);
+                        t.a=res.result.a;
+                        sessionStorage.setItem("intuit oauth",JSON.stringify(t));
+                        $('#intuit_expire').text("Expiry time: "+expire);
+                        callback(realmId, res.result.a.access_token);
+                    })
+                    //--------------------------------------------
+                    return;
+                }
+                callback(realmId,t.a.access_token);
+            }
+            //-------------------------------------------------------------------------------------------------------
+        }
+    </script>   
+</div>

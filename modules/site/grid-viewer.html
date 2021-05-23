@@ -17,6 +17,7 @@
             var headers=[];
             var ps=[];
             var tp=[];                
+            var uid=[];                
             var records=[];
             //-------------------------------------------------
             $('#export__ID').on('click',function(){
@@ -24,14 +25,18 @@
             })
             //-------------------------------------------------
             $('#D__ID').on('load',function(){
-                var json_data=m.input.json_data
-                var array=m.input.array
-                var columns=m.input.columns
+                var json_data=m.input.json_data;
+                var array=m.input.array;
+                var columns=m.input.columns;
+                var ID1=m.input.ID1;
+                var ID2=m.input.ID2;
+                var ID3=m.input.ID3;
                 name=m.input.name;
                 $('#name__ID').text(name);
                 headers=[];
                 ps=[];                
-                tp=[];                
+                tp=[];
+                uid=[];                
                 records=[];                
                 try{
                     var rows;
@@ -51,8 +56,22 @@
                             var pp=bb[1];
                             headers.push(nm);
                             ps.push(pp.replace('\r',''));
-                            if(bb.length==3) tp.push(bb[2].replace('\r',''));
-                            else tp.push('');
+                            if(bb.length==2){
+                                tp.push('');
+                                uid.push('');
+                            }
+                            else if(bb.length==3){
+                                tp.push(bb[2].replace('\r',''));
+                                uid.push('');
+                            }
+                            else if(bb.length==4) {
+                                tp.push(bb[2].replace('\r','')); 
+                                uid.push(bb[3].replace('\r','')); 
+                            }     
+                            else{
+                                tp.push('');
+                                uid.push('');
+                            }
                         }
                     }
                     for(var i=0;i<rows.length;i++){
@@ -70,6 +89,14 @@
                             if(tp[j]=='DATE') c=c.substr(0,10);
                             if(tp[j]=='TIME') c=c.substr(11,5);
                             if(tp[j]=='DOLLAR') c="$"+c;
+                            if(tp[j]=='LINK') c="<a target=_blank href="+c+">"+c+"</a>";
+                            /*
+                            if(tp[j].substr(0,4)=="LEN_"){
+                                var len=tp[j].split('_').pop();
+                                len=parseInt(len);
+                                c=c.substr(0,len)+"...";
+                            }
+                            */
                             record[headers[j]]=c;
                         }
                         records.push(record);
@@ -79,6 +106,7 @@
                     alert(e);
                     return;
                 }
+                //console.log(tp)
                 var txt="<tr><th></th><th></th>";
                 var N=headers.length;
                 for(var i=0;i<N;i++){
@@ -88,9 +116,19 @@
                 for(var i=0;i<records.length;i++){
                     txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+"></i></td>"
                     for(var j=0;j<N;j++){
-                        //txt+="<td>"+records[i][j]+"</td>";
-                        if(tp[j]=='DOLLAR') txt+="<td style='text-align:right'>"+records[i][headers[j]]+"</td>";
-                        else txt+="<td>"+records[i][headers[j]]+"</td>";
+                            if(tp[j]=='DOLLAR') txt+="<td style='text-align:right'>"+records[i][headers[j]]+"</td>";
+                            else if(tp[j]=='WRAP') txt+="<td style='white-space: break-spaces'>"+records[i][headers[j]]+"</td>";
+                            else if(tp[j]=='MQ') txt+="<td><u style='cursor:pointer' uid="+uid[j]+" mq_id="+records[i][headers[j]]+">"+headers[j]+"</u></td>";
+                            else if(tp[j].substr(0,4)=="LEN_"){
+                                var len=tp[j].split('_').pop();
+                                len=parseInt(len);
+                                var c=records[i][headers[j]].substr(0,len)+"...";
+                                txt+="<td>"+c+"</td>";
+                            }
+                            else if(tp[j]=='webUrl'){
+                                txt+="<td><a target=_black style='text-decoration: underline;color:black' href='"+rows[i]['webUrl']+"'>"+records[i][headers[j]]+"</a></td>";
+                            }
+                            else txt+="<td>"+records[i][headers[j]]+"</td>";
                     }
                     txt+="</tr>"
                 }
@@ -99,8 +137,21 @@
                     i=$(this).attr('i');
                     $vm.show_module('jsonv',{json_data:rows[i]})
                 });
-
                 $('#total__ID').text(records.length);
+
+                //--------------------------------------------------------
+                $('#grid__ID u').on('click',function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var uid=$(this).attr('uid');
+                    var mq_id=$(this).attr('mq_id');
+                    
+                    var m_name='__MODULE__'
+                    if(m_name=="gridv") ID1=mq_id
+                    else if(m_name=="gridv2") ID2=mq_id;
+                    if(mq_id!=undefined) $vm.microsoft_query(parseInt(uid),ID1,ID2,ID3);
+                })
+                //--------------------------------------------------------
             })
             //-------------------------------------------------
         }
@@ -135,12 +186,17 @@
         }
         #grid__ID td{
             font-weight: 300;
-            background-color:#FFF;
+            /*background-color:#FFF;*/
             padding:3px;
             border: 1px solid #CCC;
             vertical-align: top;
             white-space: pre;
         }
+
+        #grid__ID tr:hover { 
+            background-color:#EEE; 
+        }        
+        
         #grid__ID tr td:first-child{
             padding-left:10px;
             padding-right:10px;
