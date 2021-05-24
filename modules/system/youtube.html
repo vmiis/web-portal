@@ -1,0 +1,24 @@
+<div id=D__ID>
+    <iframe id=iframe__ID width="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <script>
+        function F__ID(){
+            $('#D__ID').css('min-height',$vm.min_height+"px");
+            $("#iframe__ID").attr("height",$vm.min_height+"px");
+            
+            var old_src="";
+            var m=$vm.module_list['__MODULE__'];
+            $('#D__ID').on('load',function(){
+                var src="";
+                if(m.input!=undefined) src=m.input.src; 
+                if(src!="" && src!=old_src){old_src=src; $("#iframe__ID").attr("src",src);}
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            padding:0;
+            background-color: #fff;
+        }
+    </style>
+</div>

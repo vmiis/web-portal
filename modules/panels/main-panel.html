@@ -18,9 +18,9 @@
                 <li><a href='?/referrals'>Referrals</a></li>
                 <li><a href='?/api_mongodb_2'>Referrers since 2020-10-23</a></li>
                 <li><a href='?/api_mongodb_1'>Top 100 Referrers</a></li>
-                <li><a href='?/api_mongodb_3'>Appointment aggregation with tag from 2021-01-01 2021-05-17</a></li>
-                <li><a href='?/api_mongodb_4'>Appointment records with tag from 2021-01-01 2021-05-17</a></li>
-                <li><a href='?/api_mongodb_5'>Search appointments with tag (up to 2021-05-17)</a></li>
+                <li><a href='?/api_mongodb_3'>Appointment aggregation with tag</a></li>
+                <li><a href='?/api_mongodb_4'>Appointment records with tag</a></li>
+                <li><a href='?/api_mongodb_5'>Search appointments with tag</a></li>
 
                 
 
@@ -128,6 +128,22 @@
                 <li><a href='?/api_quickbooks_3'>Purchases on March</a></li>
             </div>
             
+            
+            <span class=LT__ID>Clinical Trials Data Collection</span>
+            <div>
+                <li><a href='?/mlist_02_001_form'>Activity morning eveningness questionnaire</a> / <a href='?/mlist_02_001_data'>Data</a></li>
+                <li><a href='?/mlist_02_002_form'>Adverse event</a> / <a href='?/mlist_02_002_data'>Data</a></li>
+                <li><a href='?/mlist_02_003_form'>Anthropometry age sex</a> / <a href='?/mlist_02_003_data'>Data</a></li>
+                <li><a href='?/mlist_02_004_form'>Basic psychological need satisfaction scale</a> / <a href='?/mlist_02_004_data'>Data</a></li>
+
+            </div>
+
+            <span class=LT__ID>Videos</span>
+            <div>
+                <li><a href='?/api_youtube_1'>Data Sharing and Management</a></li>
+                <li><a href='?/api_youtube_2'>Neural Network</a></li>
+            </div>
+            
             <span class=LT__ID>Active Research Projects</span>
             <div>
                 <li><a target=_blank href='https://cansleep.rt.org.au/'>Cansleep</a></li>
@@ -173,6 +189,7 @@
                 <li><a href='?/coreplus-api-data'>Coreplus</a></li>
                 <li><a href='?/wapp-query-data'>Wappsystem data services</a></li>
                 <li><a href='?/woolcock-dynamics-365-query-data'>Woolcock dynamics 365</a></li>
+                <li><a href='?/youtube-data'>Youtube</a></li>
             </div>
         </ul>
     </div>
@@ -240,11 +257,13 @@
                             case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    coreplus_query(parseInt(aa[2]));    break;
                             case "wappsystem":  wappsystem_query(parseInt(aa[2]));  break;
-                            case "piano":  $vm.show_module('piano',{sheet:aa[2]});  break;
+                            case "piano":       $vm.show_module('piano',{sheet:aa[2]});  break;
+                            case "youtube":     $vm.youtube_query(parseInt(aa[2]));       break;
                         }
                     }
                 }
-                else if(module_name!="") $vm.show_module(module_name,{})
+                else if(module_name!="") $vm.show_module(module_name,{}); 
+                //else if(module_name!=""){ console.log(module_name); $vm.show_module(module_name,{}); }
             })
             //--------------------------------------------------------
 			//VmInclude:__CURRENT_PATH__main-panel-mailchimp.js

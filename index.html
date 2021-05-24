@@ -27,7 +27,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.53,0.02]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.55,0.02]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -44,7 +44,7 @@
                 signin: {url:$vm.hosting_path+"/modules/site/authentication.html",description:"Iing In"},
                 api_token: {url:$vm.hosting_path+"/modules/site/api-token.html"},
                 api_query: {url:$vm.hosting_path+"/modules/site/api-query.html"},
-
+                youtube: {url:$vm.hosting_path+"/modules/system/youtube.html"},
             }
             //---------------------------------------------
             $vm.first_module='home';
@@ -128,7 +128,38 @@
                 }
             }
             //---------------------------------------------
+            var module_list_array=[
+                "/modules/module-list-01.js",
+                "/modules/module-list-02.js"
+            ]
+            //---------------------------------------------
             $vm.get_module_list=function(){
+                var N=module_list_array.length;
+                var I=0;
+                var end=function(){
+                    I++;
+                    if(I==N) $vm.install();
+                }
+                for(var i=0;i<N;i++){
+                    var url=module_list_array[i];
+                    var ver=localStorage.getItem($vm.hosting_path+url+"ver");
+                    var txt=localStorage.getItem($vm.hosting_path+url+"txt");
+                    if(ver!=$vm.ver[0] || txt==null || $vm.localhost==true){
+                        $.get($vm.hosting_path+url+'?_='+new Date().getTime(),function(new_txt){
+                            localStorage.setItem($vm.hosting_path+url+"txt",new_txt);
+                            localStorage.setItem($vm.hosting_path+url+"ver",$vm.ver[0]);
+                            console.log('%cloading from url. '+url+' '+ver+'/'+$vm.ver[1],"color:#b55");
+                            $('head').append('<scr'+'ipt>'+new_txt+'</scr'+'ipt>');
+                            end();
+                        },'text');
+                    }
+                    else{
+                        console.log('%cloading from storage. '+url+' '+ver+'/'+$vm.ver[1],"color:#055");
+                        $('head').append('<scr'+'ipt>'+txt+'</scr'+'ipt>');
+                        end();
+                    }
+                }
+                /*
                 var url="/modules/module-list.js";
                 var ver=localStorage.getItem($vm.hosting_path+url+"ver");
                 var txt=localStorage.getItem($vm.hosting_path+url+"txt");
@@ -146,6 +177,7 @@
                     $('head').append('<scr'+'ipt>'+txt+'</scr'+'ipt>');
                     $vm.install();
                 }
+                */
             }
             //---------------------------------------------
             $vm.install=function(){

@@ -83,6 +83,17 @@
                 })
             }
             //-------------------------------------------------------------------------------------------------------
+            $vm.youtube_query=function(UID){
+                $vm.request({api:'wapp',cmd:"find",table:"youtube",query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        var src=records[0].Data.Src;
+                        $vm.show_module('youtube',{src:src})
+                    }
+                    else alert('No video was found.')
+                })
+            }
+            //-------------------------------------------------------------------------------------------------------
         }
     </script>   
 </div>

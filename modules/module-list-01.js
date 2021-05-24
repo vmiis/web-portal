@@ -270,6 +270,9 @@
         "woolcock-dynamics-365-query-data":{  url:$H+"/api/woolcock-dynamics-365/data.html",  api:"wapp",Table:"woolcock-dynamics-365-query", form_module: 'woolcock-dynamics-365-query-form', router:1  },
         "woolcock-dynamics-365-query-form":{  url:$H+"/api/woolcock-dynamics-365/form.html",  api:"wapp",Table:"woolcock-dynamics-365-query" },
         
+        "youtube-data":{  url:$H+"/api/youtube/data.html",  api:"wapp",Table:"youtube", form_module: 'youtube-form', router:1  },
+        "youtube-form":{  url:$H+"/api/youtube/form.html",  api:"wapp",Table:"youtube" },
+        
         "piano":{  url:$H+"/piano/piano.html"},
     }
     set_prefix(prefix,modules);
