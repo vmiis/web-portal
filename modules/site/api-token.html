@@ -151,6 +151,36 @@
                 callback(realmId,t.a.access_token);
             }
             //-------------------------------------------------------------------------------------------------------
+            $vm.get_google_firebase_token=function(callback){
+                var t=sessionStorage.getItem("wzd_google_firebase oauth");
+                if(t==null){
+                    alert("You haven't login!");
+                    return "";
+                }
+                t=JSON.parse(t);
+                
+                var ttt=sessionStorage.getItem("wzd_google_firebase oauth expire");
+                var dt=new Date(ttt).getTime()-new Date().getTime();
+                if(dt<0){
+                    alert('Expired');
+                    /*
+                    var refresh_token=t.a.refresh_token;
+                    $vm.request({api:"wapp",cmd:"refresh-intuit-token",token:refresh_token},function(res){
+                        var expires_in=res.result.a.expires_in;
+                        var expire=new Date(new Date().getTime()+expires_in*1000).toLocaleString();
+                        sessionStorage.setItem("intuit oauth expire",expire);
+                        t.a=res.result.a;
+                        sessionStorage.setItem("intuit oauth",JSON.stringify(t));
+                        $('#intuit_expire').text("Expiry time: "+expire);
+                        callback(realmId, res.result.a.access_token);
+                    })
+                    //--------------------------------------------
+                    */
+                    return;
+                }
+                callback(t.a.access_token);
+            }
+            //-------------------------------------------------------------------------------------------------------
         }
     </script>   
 </div>

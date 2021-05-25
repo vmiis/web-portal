@@ -396,8 +396,14 @@
                 login_display_all();
             })
             //--------------------------------------------------------
-            
+                        
             var http_request=function(){
+                $vm.get_google_firebase_token( function(t){
+                    if(t!=''){
+                        
+                    }
+
+                })
                 var p={}
                 p.url="https://firestore.googleapis.com/v1/projects/flirbase/databases/(default)/documents/Clients";
                 var t="ya29.a0AfH6SMDfmPDaHXYM2OW8snHBlKSwk7Cd8sBiTg4_RUg_Xn5ZY0MPupA19IH16e0yO_x-6CODytrAZ1J4JSz_t0MrMsZ6uPKTB2KagErUtKixL4IYn8PopmnZvnl1WgPvs-MpoOyc0fkRKshcp87w0raGwg-A";
