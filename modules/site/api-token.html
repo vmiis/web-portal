@@ -53,6 +53,12 @@
                                 sessionStorage.setItem("intuit oauth",JSON.stringify(res.result));
                                 callback(id);
                                 break;
+                            case "exchange-google2-token":   
+                                var expires_in=res.result.a.expires_in;
+                                sessionStorage.setItem(id+" oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
+                                sessionStorage.setItem(id+" oauth",JSON.stringify(res.result));
+                                callback(id);
+                                break;
                             case "exchange-microsoft2-token":
                                 var expires_in=res.result.a.expires_in;
                                 sessionStorage.setItem(session_key+" oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
