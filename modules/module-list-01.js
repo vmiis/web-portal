@@ -2,7 +2,8 @@
     //-------------------------------------------------------------------------------------
     var set_prefix=function(prefix, modules){
         for(m in modules){ 
-            if($vm.module_list[prefix+m]!=undefined) alert(m+" is existed"); 
+            console.log(m)
+            if($vm.module_list[prefix+m]!=undefined){}// alert(m+" is existed"); 
             else{
                 $vm.module_list[prefix+m]=modules[m];
                 $vm.module_list[prefix+m].prefix=prefix;
