@@ -7,7 +7,7 @@
     </div>
     <div id=panel__ID>
         <div>
-            <span class=label__ID>Woolcock Zhiming Database</span>
+            <span class=label__ID>Woolcock Data Services</span>
             <ul>
                 <li><i class="fab fa-microsoft"></i> <a href='wzd_microsoft'>Sign in with Microsoft</a> <span id=wzd_microsoft_email></span>     <a href='wzd_microsoft_signout' style='display:none'>Sign Out</a>  </li>
                 <li><i class="fab fa-google"></i>    <a href='wzd_google'>Sign in with Google</a>       <span id=wzd_google_email></span>        <a href='wzd_google_signout' style='display:none'>Sign Out</a> </li>
@@ -76,7 +76,7 @@
                     url+='&response_type=code';
                     url+='&redirect_uri='+u;
                     url+='&scope=profile email https://www.googleapis.com/auth/datastore';
-                    url+='&state=exchange-google2-token.wzd_google_firebase';
+                    url+='&state=require-google-token.wapp_google_firebase';
                     window.open(url);
                 }
                 if(href=="wzd_microsoft"){
@@ -132,6 +132,33 @@
                     url+='&state=exchange-microsoft-token.wapp_microsoft';
                     url+='&nonce=678910';
                     url+='&prompt=select_account';
+                    window.open(url);
+                }
+                if(href=="wapp_google"){
+                    url='https://accounts.google.com/o/oauth2/v2/auth';
+                    url+='?client_id=485153637765-maqa89r5jm9rusuc1u87sh72lrlpckk3.apps.googleusercontent.com';
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=profile email';
+                    url+='&state=exchange-google-token.wapp_google';
+                    window.open(url);
+                }
+                if(href=="wapp_facebook"){
+                    url='https://graph.facebook.com/oauth/authorize';
+                    url+='?client_id=596805194160323';
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=public_profile email';
+                    url+='&state=exchange-facebook-token.wapp_facebook';
+                    window.open(url);
+                }
+                if(href=="wapp_github"){
+                    url='https://github.com/login/oauth/authorize';
+                    url+='?client_id=f739a345a5ed615ab8c0';
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=user';
+                    url+='&state=exchange-github-token.wapp_github';
                     window.open(url);
                 }
                 if(href=="blackbaud"){
@@ -226,16 +253,26 @@
                     case "microsoft2_signout":  sessionStorage.removeItem("wapp_woolcock-microsoft-dynamics oauth");    $('#microsoft2_username').text(''); $('#microsoft2_expire').text('');  $('a[href=microsoft2_signout]').hide(); break;
                     case "microsoft3_signout":  sessionStorage.removeItem("wapp_microsoft-graph oauth");                $('#microsoft3_username').text(''); $('#microsoft3_expire').text('');  $('a[href=microsoft3_signout]').hide(); break;
                     case "docusign_signout":    sessionStorage.removeItem("docusign oauth");                            $('#docusign_username').text('');   $('#docusign_expire').text('');  $('a[href=docusign_signout]').hide(); break;
+                    
+                    case "google_firebase_signout":    sessionStorage.removeItem("wapp_google_firebase oauth");                            $('#google_firebase_username').text('');   $('#google_firebase_expire').text('');  $('a[href=google_firebase_signout]').hide(); break;
+                    
                     case "test": test(); break;
                 }
             })
             //--------------------------------------------------------
             window.onmessage=function(e){
                 if (e.origin == window.location.origin) {
-                    var cmd=e.data.cmd;
+                    var state=e.data.cmd;
                     var code=e.data.code;
                     var href=e.data.href;
-                    if(code!=undefined && cmd!=undefined) $vm.exchange_token(cmd,code,u,href); 
+                    if(code!=undefined && state!=undefined){
+                        //$vm.exchange_token(cmd,code,u,href); 
+                        var cmd=state.split('.')[0];
+                        var id=state.split('.').pop();
+                        $vm.request_token(id,cmd,code,u,href,function(id,res){
+                            login_display(id)
+                        });
+                    }
                 }
                 else if(e.origin==$vm.api_addresses['wapp']){
                     if(e.data.username!=undefined && e.data.token!=undefined){
@@ -249,25 +286,20 @@
                 }
             };
             //------------------------------------
+            /*
             $vm.exchange_token=function(state,code,redirect_uri,href){
                 var cmd=state.split('.')[0];
                 var id=state.split('.').pop();
                 $vm.request_token(id,cmd,code,redirect_uri,href,function(id,res){
-                    /*
-                    if(id=="wzd_google"){
-                        gt=res.result.a.access_token;
-                        //alert(res.result.a.access_token)
-                    }
-                    */
-
                     login_display(id)
                 });
             }
+            */
             //------------------------------------
             var login_display=function(id){
                 var api_name=id.split('_')[0];
                 var provider=id.split('_').pop();
-                if(id=="wzd_google_firebase"){
+                if(id=="wapp_google_firebase"){
                     if(sessionStorage.getItem(id+" oauth")!=null){ 
                         $('a[href=google_firebase_signout]').show(); 
                         var r=JSON.parse(sessionStorage.getItem(id+" oauth"));
@@ -389,7 +421,7 @@
                 login_display('wapp_woolcock-microsoft-dynamics');
                 login_display('wapp_microsoft-graph');
                 login_display('wapp_mailchimp');
-                login_display('wzd_google_firebase');
+                login_display('wapp_google_firebase');
             }
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
@@ -398,15 +430,17 @@
             //--------------------------------------------------------
                         
             var http_request=function(){
+                /*
                 $vm.get_google_firebase_token( function(t){
                     if(t!=''){
 
                     }
 
                 })
+                */
                 var p={}
                 p.url="https://firestore.googleapis.com/v1/projects/flirbase/databases/(default)/documents/Clients";
-                var t="ya29.a0AfH6SMDfmPDaHXYM2OW8snHBlKSwk7Cd8sBiTg4_RUg_Xn5ZY0MPupA19IH16e0yO_x-6CODytrAZ1J4JSz_t0MrMsZ6uPKTB2KagErUtKixL4IYn8PopmnZvnl1WgPvs-MpoOyc0fkRKshcp87w0raGwg-A";
+                var t="ya29.a0AfH6SMBsgUhIBISh9T6k4yZeCF2ugBh7CPtlat5FFjiAT1-_wOSyOyA5IZ0A_RpRv9_rDG1a01Z2RoeR8fRK_lBd1iRqWWvepzegmCmsf6eaZ4PcbFPlvsTFXumz09D_RH7iCVESFcg8pGQzO1Eq6hEyt7n-";
                 p.headers={'Authorization':'Bearer ' + t},
                 p.type="GET",
                 p.contentType="application/json",

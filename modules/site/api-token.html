@@ -53,7 +53,7 @@
                                 sessionStorage.setItem("intuit oauth",JSON.stringify(res.result));
                                 callback(id);
                                 break;
-                            case "exchange-google2-token":   
+                            case "require-google-token":   
                                 var expires_in=res.result.a.expires_in;
                                 sessionStorage.setItem(id+" oauth expire",new Date(new Date().getTime()+expires_in*1000).toLocaleString());
                                 sessionStorage.setItem(id+" oauth",JSON.stringify(res.result));
