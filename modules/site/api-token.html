@@ -152,14 +152,14 @@
             }
             //-------------------------------------------------------------------------------------------------------
             $vm.get_google_firebase_token=function(callback){
-                var t=sessionStorage.getItem("wzd_google_firebase oauth");
+                var t=sessionStorage.getItem("wapp_google_firebase oauth");
                 if(t==null){
                     alert("You haven't login!");
                     return "";
                 }
                 t=JSON.parse(t);
                 
-                var ttt=sessionStorage.getItem("wzd_google_firebase oauth expire");
+                var ttt=sessionStorage.getItem("wapp_google_firebase oauth expire");
                 var dt=new Date(ttt).getTime()-new Date().getTime();
                 if(dt<0){
                     alert('Expired');

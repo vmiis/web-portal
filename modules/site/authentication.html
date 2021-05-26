@@ -428,31 +428,22 @@
                 login_display_all();
             })
             //--------------------------------------------------------
-                        
             var http_request=function(){
-                /*
                 $vm.get_google_firebase_token( function(t){
                     if(t!=''){
-
+                        var p={}
+                        p.url="https://firestore.googleapis.com/v1/projects/flirbase/databases/(default)/documents/Clients";
+                        p.headers={'Authorization':'Bearer ' + t},
+                        p.type="GET",
+                        p.contentType="application/json",
+                        p.error=function(jqXHR,error, errorThrown){ console.log(jqXHR.status); console.log(error) },
+                        p.success=function(c,textStatus, request){
+                            console.log(c);
+                        },
+                        console.log(p);
+                        $.ajax(p);
                     }
-
                 })
-                */
-                var p={}
-                p.url="https://firestore.googleapis.com/v1/projects/flirbase/databases/(default)/documents/Clients";
-                var t="ya29.a0AfH6SMBsgUhIBISh9T6k4yZeCF2ugBh7CPtlat5FFjiAT1-_wOSyOyA5IZ0A_RpRv9_rDG1a01Z2RoeR8fRK_lBd1iRqWWvepzegmCmsf6eaZ4PcbFPlvsTFXumz09D_RH7iCVESFcg8pGQzO1Eq6hEyt7n-";
-                p.headers={'Authorization':'Bearer ' + t},
-                p.type="GET",
-                p.contentType="application/json",
-                //p.charset="utf-8",
-                //p.dataType="json",
-                
-                p.error=function(jqXHR,error, errorThrown){ console.log(jqXHR.status); console.log(error) },
-                p.success=function(c,textStatus, request){
-                    console.log(c);
-                },
-                console.log(p);
-                $.ajax(p);
             }
             //------------------------------------
             $('#test__ID').on('click',function(){
