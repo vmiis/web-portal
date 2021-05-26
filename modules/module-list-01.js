@@ -272,6 +272,9 @@
         
         "youtube-data":{  url:$H+"/api/youtube/data.html",  api:"wapp",Table:"youtube", form_module: 'youtube-form', router:1  },
         "youtube-form":{  url:$H+"/api/youtube/form.html",  api:"wapp",Table:"youtube" },
+
+        "firebase-data":{  url:$H+"/api/firebase/data.html",  api:"wapp",Table:"firebase", form_module: 'firebase-form', router:1  },
+        "firebase-form":{  url:$H+"/api/firebase/form.html",  api:"wapp",Table:"firebase" },
         
         "piano":{  url:$H+"/piano/piano.html"},
     }

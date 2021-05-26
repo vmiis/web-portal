@@ -1,0 +1,35 @@
+<div id=D__ID>
+    <!--
+    <div style='padding:3px 10px'>
+        <span style='color:black'>Path:</span> <input style='width: calc(100% - 220px)' type=text id=path__ID></input> <button type=button class="btn btn-secondary" id=go__ID>Send</button> <a target=_blank href=https://docs.microsoft.com/en-us/powerapps/developer/data-platform/webapi/query-data-web-api ><u>Web API</u> </a>
+    </div>
+-->
+    <section>
+        VmInclude:__COMPONENT__/g/grid.01.html
+    </section>
+    
+    <script>
+        function F__ID(){
+            //-------------------------------------
+            //VmInclude:__COMPONENT__/g/grid.01.js
+            //-------------------------------------
+            var fields='ID|UID,Name';
+            m.fields="_Form,_Query,"+fields+",Submit_date,Submitted_by,_Delete";
+            //-------------------------------------
+            m.cell_render=function(records,I,field,td){
+                switch(field){
+                    case '_Query':
+                        td.html("<u style='cursor:pointer'>Query</u>");
+                        td.find('u').on('click',function(){
+                            $vm.firebase_query(records[I].UID);
+                        })
+                        break;
+                }
+            }
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+    </style>
+</div>
