@@ -27,7 +27,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.58,0.02]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.59,0.02]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -140,8 +140,7 @@
                     I++;
                     if(I==N) $vm.install();
                 }
-                for(var i=0;i<N;i++){
-                    var url=module_list_array[i];
+                var get_modules=function(url){
                     var ver=localStorage.getItem($vm.hosting_path+url+"ver");
                     var txt=localStorage.getItem($vm.hosting_path+url+"txt");
                     if(ver!=$vm.ver[0] || txt==null || $vm.localhost==true){
@@ -158,6 +157,10 @@
                         $('head').append('<scr'+'ipt>'+txt+'</scr'+'ipt>');
                         end();
                     }
+                }
+                for(var i=0;i<N;i++){
+                    var url=module_list_array[i];
+                    get_modules(url);
                 }
                 /*
                 var url="/modules/module-list.js";
