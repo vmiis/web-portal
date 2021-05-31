@@ -20,13 +20,20 @@
         mlist_02_002_data:{url:$H+"/adverse-event/data.html",api:"wapp",Table:"adverse-event-spardac",form_module:"mlist_02_002_form",router:1,description:"adverse event data"},
         mlist_02_002_form:{url:$H+"/adverse-event/form.html",api:"wapp",Table:"adverse-event-spardac",router:1,description:"adverse event form"},
      
-        mlist_02_003_data:{url:$H+"/anthropometry-age-sex/data.html",api:"wapp",Table:"anthropometry-age-sex-spardac",form_module:"mlist_02_003_form",router:1,description:"adverse event data"},
-        mlist_02_003_form:{url:$H+"/anthropometry-age-sex/form.html",api:"wapp",Table:"anthropometry-age-sex-spardac",router:1,description:"adverse event form"},
+        mlist_02_003_data:{url:$H+"/anthropometry-age-sex/data.html",api:"wapp",Table:"anthropometry-age-sex-spardac",form_module:"mlist_02_003_form",router:1},
+        mlist_02_003_form:{url:$H+"/anthropometry-age-sex/form.html",api:"wapp",Table:"anthropometry-age-sex-spardac",router:1},
         
-        mlist_02_004_data:{url:$H+"/basic-psychological-need-satisfaction-scale/data.html",api:"wapp",Table:"bpns-spardac",form_module:"mlist_02_004_form",router:1,description:"adverse event data"},
-        mlist_02_004_form:{url:$H+"/basic-psychological-need-satisfaction-scale/form.html",api:"wapp",Table:"bpns-spardac",router:1,description:"adverse event form"},
+        mlist_02_004_data:{url:$H+"/basic-psychological-need-satisfaction-scale/data.html",api:"wapp",Table:"bpns-spardac",form_module:"mlist_02_004_form",router:1},
+        mlist_02_004_form:{url:$H+"/basic-psychological-need-satisfaction-scale/form.html",api:"wapp",Table:"bpns-spardac",router:1},
         
+        mlist_02_005_data:{url:$H+"/brief-illness-perception-questionnaire/data.html",api:"wapp",Table:"brief-illness-perception-questionnaire-spardac",form_module:"mlist_02_005_form",router:1},
+        mlist_02_005_form:{url:$H+"/brief-illness-perception-questionnaire/form.html",api:"wapp",Table:"brief-illness-perception-questionnaire-spardac",router:1},
 
+        mlist_02_006_data:{url:$H+"/brief-sexual-function-inventory/data.html",api:"wapp",Table:"breif-sexual-function-inventory-spardac",form_module:"mlist_02_006_form",router:1},
+        mlist_02_006_form:{url:$H+"/brief-sexual-function-inventory/form.html",api:"wapp",Table:"breif-sexual-function-inventory-spardac",router:1},
+        
+        mlist_02_007_data:{url:$H+"/concomitant-medication/data.html",api:"wapp",Table:"concom-medication-spardac",form_module:"mlist_02_007_form",router:1},
+        mlist_02_007_form:{url:$H+"/concomitant-medication/form.html",api:"wapp",Table:"concom-medication-spardac",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
