@@ -1,0 +1,35 @@
+<div id=D__ID>
+    <div style='width:60%;margin-left:auto;margin-right:auto'>
+        <label id=title__ID></label>
+        <br>
+        <img id=img__ID style='width:100%;height:auto'></img>
+        <br>
+        <div style='text-align: left;'>
+            <span id=discription__ID></span>
+        </div>
+    </div>
+    <script>
+        function F__ID(){
+            var m=$vm.module_list['__MODULE__'];
+            $('#D__ID').on('load',function(){
+                var data="";
+                if(m.input!=undefined) data=m.input.data; 
+                if(data!=""){
+                    //old_src=src; 
+                    $("#title__ID").text(data.Name);
+                    $("#title__ID").attr('style',data.Name_Style);
+                    $("#img__ID").attr("src",data.Src);
+                    $("#discription__ID").text(data.Description);
+                    $("#discription__ID").attr('style',data.Description_Style);
+                }
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            padding:0;
+            background-color: #fff;
+        }
+    </style>
+</div>

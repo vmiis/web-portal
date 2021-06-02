@@ -27,7 +27,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.60,0.02]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.61,0.02]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -45,6 +45,7 @@
                 api_token: {url:$vm.hosting_path+"/modules/system/api-token.html"},
                 api_query: {url:$vm.hosting_path+"/modules/system/api-query.html"},
                 youtube: {url:$vm.hosting_path+"/modules/system/youtube.html"},
+                image: {url:$vm.hosting_path+"/modules/system/image.html"},
             }
             //---------------------------------------------
             $vm.first_module='home';

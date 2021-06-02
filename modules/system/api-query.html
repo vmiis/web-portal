@@ -124,6 +124,16 @@
                 })
             }
             //-------------------------------------------------------------------------------------------------------
+            $vm.image_query=function(UID){
+                $vm.request({api:'wapp',cmd:"find",table:"image",query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        $vm.show_module('image',{data:records[0].Data})
+                    }
+                    else alert('No image was found.')
+                })
+            }
+            //-------------------------------------------------------------------------------------------------------
         }
     </script>   
 </div>

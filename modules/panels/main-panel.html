@@ -167,6 +167,12 @@
             <div>
                 <li><a href='?/api_youtube_1'>Data Sharing and Management</a></li>
                 <li><a href='?/api_youtube_2'>Neural Network</a></li>
+                <li><a href='?/api_youtube_3'>Free Style Jazz</a></li>
+            </div>
+            
+            <span class=LT__ID>Cooking</span>
+            <div>
+                <li><a href='?/api_image_1'>Crispy pork slices</a></li>
             </div>
             
             <span class=LT__ID>Active Research Projects</span>
@@ -215,6 +221,7 @@
                 <li><a href='?/wapp-query-data'>Wappsystem data services</a></li>
                 <li><a href='?/woolcock-dynamics-365-query-data'>Woolcock dynamics 365</a></li>
                 <li><a href='?/youtube-data'>Youtube</a></li>
+                <li><a href='?/image-data'>Image</a></li>
                 <li><a href='?/firebase-data'>Firebase</a></li>
             </div>
         </ul>
@@ -285,6 +292,7 @@
                             case "wappsystem":  wappsystem_query(parseInt(aa[2]));  break;
                             case "piano":       $vm.show_module('piano',{sheet:aa[2]});  break;
                             case "youtube":     $vm.youtube_query(parseInt(aa[2]));       break;
+                            case "image":       $vm.image_query(parseInt(aa[2]));       break;
                         }
                     }
                 }
