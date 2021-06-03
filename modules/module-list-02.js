@@ -34,6 +34,15 @@
         
         mlist_02_007_data:{url:$H+"/concomitant-medication/data.html",api:"wapp",Table:"concom-medication-spardac",form_module:"mlist_02_007_form",router:1},
         mlist_02_007_form:{url:$H+"/concomitant-medication/form.html",api:"wapp",Table:"concom-medication-spardac",router:1},
+        
+        mlist_02_008_data:{url:$H+"/depression-anxiety-stress-scale/data.html",api:"wapp",Table:"dass-spardac",form_module:"mlist_02_008_form",router:1},
+        mlist_02_008_form:{url:$H+"/depression-anxiety-stress-scale/form.html",api:"wapp",Table:"dass-spardac",router:1},
+        
+        mlist_02_009_data:{url:$H+"/digital-symbol-substitution/data.html",api:"wapp",Table:"dsst-spardac",form_module:"mlist_02_009_form",router:1},
+        mlist_02_009_form:{url:$H+"/digital-symbol-substitution/form.html",api:"wapp",Table:"dsst-spardac",router:1},
+        
+        mlist_02_010_data:{url:$H+"/dysfunctional-beliefs-and-attitudes-about-sleep/data.html",api:"wapp",Table:"dbas-16-spardac",form_module:"mlist_02_010_form",router:1},
+        mlist_02_010_form:{url:$H+"/dysfunctional-beliefs-and-attitudes-about-sleep/form.html",api:"wapp",Table:"dbas-16-spardac",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

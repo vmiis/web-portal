@@ -86,10 +86,12 @@
                                 else c=c[bb[k]];
                             }
                             if(c==null) c="";
-                            if(tp[j]=='DATE') c=c.substr(0,10);
-                            if(tp[j]=='TIME') c=c.substr(11,5);
-                            if(tp[j]=='DOLLAR') c="$"+c;
-                            if(tp[j]=='LINK') c="<a target=_blank href="+c+">"+c+"</a>";
+                            var type=tp[j].split(' ')[0];
+                            if(type=='DATE') c=c.substr(0,10);
+                            if(type=='TIME') c=c.substr(11,5);
+                            if(type=='DOLLAR') c="$"+c;
+                            if(type=='LINK') c="<a target=_blank href="+c+">"+c+"</a>";
+                            if(type=='IMAGE') c="<img src="+encodeURI(c)+" style='width:"+tp[j].split(' ')[1]+"px;height:auto'></img>";
                             /*
                             if(tp[j].substr(0,4)=="LEN_"){
                                 var len=tp[j].split('_').pop();
