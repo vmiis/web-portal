@@ -280,6 +280,20 @@
         "firebase-form":{  url:$H+"/api/firebase/form.html",  api:"wapp",Table:"firebase" },
         
         "piano":{  url:$H+"/piano/piano.html"},
+        
+        "notes-data":{  url:$H+"/notes/data.html",  api:"wapp",Table:"notes-vm", form_module: 'notes-form', router:1  },
+        "notes-form":{  url:$H+"/notes/form.html",  api:"wapp",Table:"notes-vm" },
+
+        //"vmiis-calendar-week":              {url:"$H/m/calendar-week.html",Table:"vmiis-event-calendar-record","booking":"vmiis-event-calendar-record","booking2":"vmiis-event-calendar-record-2",lookup:"vmiis-event-calendar-record-category"},
+        "vmiis-calendar-month":             {url:$H+"/calendar/calendar-month.html",api:"wapp",Table:"vmiis-event-calendar-record","booking":"vmiis-event-calendar-record",lookup:"vmiis-event-calendar-record-category"},
+        //"vmiis-calendar-day":               {url:"$H/m/calendar-day.html",Table:"vmiis-event-calendar-record","booking":"vmiis-event-calendar-record",lookup:"vmiis-event-calendar-record-category"},
+        "vmiis-event-calendar-record":      {url:$H+"/calendar/booking-form.html",api:"wapp",Table:"vmiis-event-calendar-record",lookup:"vmiis-event-calendar-record-category"},
+        "vmiis-event-calendar-record-2":    {url:$H+"/calendar/booking-form.2.html",api:"wapp",Table:"vmiis-event-calendar-record",lookup:"vmiis-event-calendar-record-category"},
+        //"m3":       {url:"$H/m/booking-data.html",Table:"vmiis-event-calendar-record",form_module:"m2"},
+        //"m4":       {url:"$H/m/list-data.html",Table:"vmiis-event-calendar-record-category",form_module:"m5"},
+        //"m5":       {url:"$H/m/list-form.html",Table:"vmiis-event-calendar-record-category"},
+
+
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
