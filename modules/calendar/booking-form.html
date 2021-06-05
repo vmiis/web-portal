@@ -55,9 +55,9 @@
 			m.hour_start=7;
 			m.hour_end=18;
     		//-------------------------------------
-			$vm.request({cmd:'find',table:m.lookup},function(res){
+			$vm.request({api:m.api,cmd:'find',table:m.lookup},function(res){
 				var txt="";
-				for(i in res.result){
+				for(var i=0;i<res.result.length;i++){
 					var v=res.result[i].Data.Name;
 					txt+="<option>"+v+"</option>";
 				}
