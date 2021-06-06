@@ -9,8 +9,12 @@
             var m=$vm.module_list['__MODULE__'];
             $('#D__ID').on('load',function(){
                 var src="";
-                if(m.input!=undefined) src=m.input.src; 
+                if(m.input!=undefined) src=m.input.src+"&enablejsapi=1"; 
                 if(src!="" && src!=old_src){old_src=src; $("#iframe__ID").attr("src",src);}
+            })
+
+            $('#D__ID').on('hide',function(){
+                $('#iframe__ID')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
             })
         }
     </script>
