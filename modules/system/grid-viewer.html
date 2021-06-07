@@ -92,6 +92,11 @@
                             if(type=='DOLLAR') c="$"+c;
                             if(type=='LINK') c="<a target=_blank href="+c+">"+c+"</a>";
                             if(type=='IMAGE') c="<img src="+encodeURI(c)+" style='width:"+tp[j].split(' ')[1]+"px;height:auto'></img>";
+                            if(type=='ON'){
+                                var s="";
+                                if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
+                                c=s;
+                            }
                             /*
                             if(tp[j].substr(0,4)=="LEN_"){
                                 var len=tp[j].split('_').pop();

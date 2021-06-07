@@ -293,6 +293,13 @@
         //"m4":       {url:"$H/m/list-data.html",Table:"vmiis-event-calendar-record-category",form_module:"m5"},
         //"m5":       {url:"$H/m/list-form.html",Table:"vmiis-event-calendar-record-category"},
 
+        "major":            {url:$H+"/piano/major.html", router:1},
+        "major-pentatonic": {url:$H+"/piano/major-pentatonic.html", router:1},
+        "major-blues":      {url:$H+"/piano/major-blues.html", router:1},
+        "major-bebop":      {url:$H+"/piano/major-bebop.html", router:1},
+        "minor-natural":    {url:$H+"/piano/minor-natural.html", router:1},
+        "minor-melodic":    {url:$H+"/piano/minor-melodic.html", router:1},
+        "minor-harmonic":   {url:$H+"/piano/minor-harmonic.html", router:1},
 
     }
     set_prefix(prefix,modules);
