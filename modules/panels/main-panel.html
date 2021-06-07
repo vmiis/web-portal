@@ -2,8 +2,8 @@
     <div style='padding:10px 20px 0 50px;'>
         <table>
             <tr>
-                <td><input id=items__ID  class=form-control style='width:230px;height:32px;display:inline-block' placeholder="search item..." /> </td>
-                <td><input id=groups__ID class=form-control style='width:230px;height:32px;;display:inline-block' placeholder="search group..." /> </td>
+                <td><input id=items__ID  class=form-control style='width:230px;height:32px;display:inline-block' placeholder="search item..." /> 
+                <input id=groups__ID class=form-control style='width:230px;height:32px;;display:inline-block' placeholder="search group..." /> </td>
             </tr>
         </table>
         <hr style='margin:8px 0'>
@@ -166,7 +166,7 @@
             </div>
             <!---------------------------------------------------------------------------------------->
             <div>
-                <span class=LT__ID style='break-before:column;display:block;'>CMS</span>
+                <span class='LT__ID break__ID'>CMS</span>
                 <li><a href='?/api_sqlserver_8'>Sleep study report done but not sent</a></li>
                 <li><a href='?/api_sqlserver_6'>Average scoring and reporting days in 2021</a></li>
                 <li><a href='?/api_sqlserver_7'>Average scoring and reporting days in 2020</a></li>
@@ -341,7 +341,7 @@
             
             <!---------------------------------------------------------------------------------------->
             <div>
-                <span class=LT__ID style='break-before:column;display:block;'>Piano Notes Sheet</span>
+                <span class='LT__ID break__ID'>Piano Notes Sheet</span>
                 <li><a href='?/api_piano_1'>An die ferne Geliebte</a></li>
                 <li><a href='?/api_piano_2'>Sonatina Op.36</a></li>
             </div>
@@ -650,10 +650,18 @@
         #D__ID input::placeholder {
             color: #ccc;
             padding-left:6px;
+        }
+        .break__ID{
+            break-before:column;
+            display:block;
         }        
         @media screen and (max-width:768px){
+            .break__ID{
+                break-before:unset;
+            }        
             .panel__ID{
                 padding:20px;
+                column-count: 1;
             }
         }
         .LT__ID{
