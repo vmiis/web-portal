@@ -516,6 +516,15 @@
             //--------------------------------------------------------
             $('#items__ID').on('keyup',function(){   filter();            })
             $('#groups__ID').on('keyup',function(){  filter();            })
+            $('#groups__ID').on('focusin',function(){
+                if($('#groups__ID').val()==''){
+                    $('#panel__ID li').hide();
+                    $('#panel__ID span').show();
+                }
+            })
+            $('#groups__ID').on('focusout',function(){
+                filter();
+            })
             //--------------------------------------------------------
             var filter=function(){
                 $('#panel__ID li').show();
@@ -540,11 +549,13 @@
                         }
                     }
                 })
+                /*
                 if($('#groups__ID').val()==' '){
                     $('#panel__ID li').hide();
                     $('#panel__ID span').show();
                     return;
                 }
+                */
                 var words=$('#groups__ID').val().split(' ');
                 $('#panel__ID span').each(function(){
                     var $group=$(this);
@@ -676,8 +687,6 @@
         #bp__ID:hover{
             color:red;
         }
-
-
     </style>
 </div>
 
