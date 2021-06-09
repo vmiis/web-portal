@@ -36,6 +36,7 @@
         -->
     </div>    
     <!--<div style='padding:1px 0 5px 10px;background-color: #e5e9ec;font-size:13px;' id=nav__ID></div>-->
+    <div id=g_nav> </div>
     <script>
         function F__ID(){
             $('#signout__ID').hide();
@@ -173,8 +174,8 @@
                     if(i==L-1 || L==1) txt+=title;
                     else txt+="<u nm="+nm+" style='cursor:pointer'>"+title+"</u>";
                 }
-                $('#nav__ID').html(txt);
-                $('#nav__ID u').on('click',function(){
+                $('#g_nav').html(txt);
+                $('#g_nav u').on('click',function(){
                     var nm=$(this).attr("nm");
                     var K=$vm.page_stack.length-1;
                     var N=0;
@@ -217,6 +218,12 @@
     <style>
         #D__ID{
             /*background-color: lightslategray;*/
+        }
+        #g_nav{
+            height:25px;
+            padding:1px 0 5px 10px;
+            background-color: #e5e9ec;
+            font-size:13px;
         }
         #top_right_corner__ID{
             display:block;

@@ -1,0 +1,55 @@
+<div id=D__ID>
+    <div>
+        <div>
+            <div id=toolbar__ID>
+                <button id=submit__ID  type=button class='btn btn-secondary' title='Submit'>Submit</button>
+            </div>
+            <div id=table__ID>
+                <table id=grid__ID></table>
+            </div>
+        </div>
+            <div id="json_editor__ID"></div>
+    </div>
+    <script>
+        function F__ID(){
+            const container = document.getElementById("json_editor__ID")
+            const options = {
+                "mainMenuBar":false,
+                "navigationBar":false
+            }
+            const editor = new JSONEditor(container, options)
+            /*            
+            var renderJson=function(input) {
+                var options = {
+                    collapsed: true,
+                    rootCollapsable: false,
+                };
+                $('#json_renderer__ID').jsonViewer(input, options);
+            }
+            */
+            var m=$vm.module_list['__MODULE__'];
+            $('#D__ID').on('load',function(){
+                if(m.input.json_data!=undefined){
+                    editor.set(m.input.json_data)
+                }
+                //else if(m.input.record.Data!=undefined){
+                //    editor.set(m.input.record.Data)
+                //}
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            color:#fff;
+            background-color:#fff;
+            padding:0px;
+        }
+        #toolbar__ID{
+            background-color:#ccc;
+            padding:5px 10px;
+            margin-bottom:0px;
+            overflow:hidden
+        }
+    </style>
+</div>

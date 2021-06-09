@@ -300,6 +300,8 @@
         "minor-natural":    {url:$H+"/piano/minor-natural.html", router:1},
         "minor-melodic":    {url:$H+"/piano/minor-melodic.html", router:1},
         "minor-harmonic":   {url:$H+"/piano/minor-harmonic.html", router:1},
+        "data":   {url:$H+"/system/data.html", router:1},
+        "json-editor":   {url:$H+"/system/json-editor.html", router:1},
 
     }
     set_prefix(prefix,modules);
