@@ -13,7 +13,7 @@
     var prefix='';
     var $H=$vm.hosting_path+"/modules";
     var modules={
-        "data-panel":{url:$vm.hosting_path+"/modules/panels/main-panel.html",description:"main panel",router:1},
+        "data-panel":{url:$vm.hosting_path+"/modules/panels/main-panel.html",title:"Portal",description:"main panel",router:1},
         "app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
         "lab-order-panel":{url:$vm.hosting_path+"/modules/panels/lab-order-panel.html",description:"lab order panel",router:1},
@@ -283,6 +283,9 @@
         
         "notes-data":{  url:$H+"/notes/data.html",  api:"wapp",Table:"notes-vm", form_module: 'notes-form', router:1  },
         "notes-form":{  url:$H+"/notes/form.html",  api:"wapp",Table:"notes-vm" },
+        
+        "wapp-table-data":{  url:$H+"/api/wappsystem-table/data.html",  api:"wapp",Table:"wappsystem-table", form_module: 'wapp-table-form', router:1  },
+        "wapp-table-form":{  url:$H+"/api/wappsystem-table/form.html",  api:"wapp",Table:"wappsystem-table" },
 
         //"vmiis-calendar-week":              {url:"$H/m/calendar-week.html",Table:"vmiis-event-calendar-record","booking":"vmiis-event-calendar-record","booking2":"vmiis-event-calendar-record-2",lookup:"vmiis-event-calendar-record-category"},
         "vmiis-calendar-month":             {url:$H+"/calendar/calendar-month.html",api:"wapp",Table:"vmiis-event-calendar-record","booking":"vmiis-event-calendar-record",lookup:"vmiis-event-calendar-record-category"},

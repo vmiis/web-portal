@@ -3,7 +3,7 @@
         <div id=toolbar__ID class="navbar navbar-default">
                 <div id=row_1__ID>
                         <button id=info__ID type=button class='btn btn-secondary' title='Add new' style='display:none'><i class="fa fa-info"></i></button>
-                        <button id=new__ID  type=button class='btn btn-secondary' title='Add new'><i class="fa fa-plus"></i></button>
+                        <!--<button id=new__ID  type=button class='btn btn-secondary' title='Add new'><i class="fa fa-plus"></i></button>-->
                         <input id=keyword__ID type="text" placeholder="keyword" class="form-control">
                         <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'><i class="fa fa-search" ></i></button>
                 </div>
@@ -29,6 +29,23 @@
             //-------------------------------------------------
             var m=$vm.module_list['__MODULE__'];
             //-------------------------------------------------
+            var table="";
+            var columns;
+            $('#D__ID').on('load',function(){
+                table=m.input.Data.Table;
+                columns=m.input.Data.Columns;
+                m.set_req(); m.request_data();
+            })
+            //-------------------------------------------------
+            $('#D__ID').on('show',function(){
+                if(m.nav!=undefined) m.nav();
+                if($vm.refresh==1){
+                    $vm.refresh=0; 
+                    m.set_req(); 
+                    m.request_data();
+                }
+            });
+            //--------------------------------------------------------
             m.set_req=function(){
                 m.limit=parseInt($('#page_size__ID').val());
                 m.skip=m.limit*parseInt($('#I__ID').text());
@@ -41,25 +58,19 @@
                         }
                     }
                 ]
-                m.req={api:"wapp",cmd:"aggregate",table:"cleverlights-recruitment-record",pipeline:pipeline}
+                m.req={api:"wapp",cmd:"aggregate",table:table,pipeline:pipeline}
             }
             //-------------------------------------------------
-            var columns="MAP|Data.MAP\nISI|Data.ISI\nPSQI|Data.PSQI\nScreening_Number|Data.Screening_Number\nfirst_name|Data.first_name\n";
-            columns+="last_name|Data.last_name\nemail|Data.email\nphone|Data.phone\nCreated on|Submit_date|DATE\n";
             m.request_data=function(){
                 $vm.request(m.req,function(res){
-                    console.log(res.result)
-
+//console.log(res.result)
                     var N=res.result[0].count[0].value;
                     m.max_I=Math.ceil(N/m.limit)-1;
                     var n2=m.skip+m.limit; if(n2>N) n2=N;
                     var a=(m.skip+1).toString()+"~"+(n2).toString()+" of ";
                     $("#A__ID").text(a);
                     $("#B__ID").text(N)
-
                     var rows=res.result[0].rows;
-
-
                     headers=[];
                     ps=[];                
                     tp=[];
@@ -152,7 +163,7 @@
                     $('#grid__ID').html(txt);
                     $('#grid__ID').find('i').on('click',function(){
                         i=$(this).attr('i');
-                        $vm.show_module('json-editor',{json_data:rows[i].Data})
+                        $vm.show_module('json-editor',{record:rows[i]})
                     });
             });
             }
@@ -162,7 +173,7 @@
             $("#p__ID").on('click',function(){  var I=$("#I__ID").text();I--; if(I<0) I=0; $("#I__ID").text(I); m.set_req(); m.request_data();})
             $("#n__ID").on('click',function(){  var I=$("#I__ID").text();I++; if(I>m.max_I) I=m.max_I; $("#I__ID").text(I); m.set_req(); m.request_data();})
             //-------------------------------------
-            m.set_req(); m.request_data();
+            //m.set_req(); m.request_data();
         }
     </script>
     <style>

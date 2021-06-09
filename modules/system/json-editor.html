@@ -18,23 +18,40 @@
                 "navigationBar":false
             }
             const editor = new JSONEditor(container, options)
-            /*            
-            var renderJson=function(input) {
-                var options = {
-                    collapsed: true,
-                    rootCollapsable: false,
-                };
-                $('#json_renderer__ID').jsonViewer(input, options);
-            }
-            */
             var m=$vm.module_list['__MODULE__'];
+            var record="";
             $('#D__ID').on('load',function(){
-                if(m.input.json_data!=undefined){
-                    editor.set(m.input.json_data)
+                record="";
+                if(m.input.record!=undefined){
+                    record=m.input.record
+                    editor.set(record.Data);
                 }
-                //else if(m.input.record.Data!=undefined){
-                //    editor.set(m.input.record.Data)
-                //}
+            })
+            $('#submit__ID').on('click',function(){
+                if(record!=""){
+                    var rid=record._id;
+                    //alert(rid);
+                    var data=editor.get();
+                    //console.log(data);
+                    if(rid!=undefined){
+                        $vm.request({api:"wapp",cmd:"update",id:rid,table:record.Table,data:data,index:{},file:{},options:{}},function(res){
+                            //-----------------------------
+                            if(res.status=="lk"){
+                                $vm.alert("This record is locked.");
+                                return;
+                            }
+                            //-----------------------------
+                            if(res.status=="np"){
+                                alert("No permission to update this record.");
+                                return;
+                            }
+                            //-----------------------------
+                            $vm.refresh=1;
+                            m.change_status++;
+                            if(rid!=undefined) window.history.go(-1);
+                        });
+                    }
+                }
             })
         }
     </script>

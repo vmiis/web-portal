@@ -1,0 +1,65 @@
+<div id=D__ID>
+    <section>
+        VmInclude:__COMPONENT__/g/grid.01.html
+    </section>
+    
+    <script>
+        function F__ID(){
+            //-------------------------------------
+            //VmInclude:__COMPONENT__/g/grid.01.js
+            //-------------------------------------
+            var fields='ID|UID,Name';
+            m.fields="_Form,_Query,"+fields+",Submit_date,Submitted_by,_Delete";
+            //-------------------------------------
+            m.cell_render=function(records,I,field,td){
+                switch(field){
+                    case '_Query':
+                        td.html("<u style='cursor:pointer'>Query</u>");
+                        td.find('u').on('click',function(){
+                            //var name=records[I].Data.Name;
+                            //var table=records[I].Data.Table;
+                            //var columns=records[I].Data.Columns;
+                            $vm.show_module('data',{Data:records[I].Data})
+                            /*
+                            var pipeline;
+                            try{
+                                pipeline=JSON.parse(query);
+                            }
+                            catch(e){
+                                alert(e);
+                                return;
+                            }
+                            //var pipeline=[{ $group : {_id:"$I2", count:{$sum:1}}}];
+                            var req={api:"wapp",cmd:cmd,table:table,pipeline:pipeline}
+                            if(cmd=="find"  || cmd=="count"){
+                                req={api:"wapp",cmd:cmd,table:table,query:pipeline}
+                            }
+                            $vm.request(req,function(res){
+                                console.log(res.result)
+                                var v=res;
+                                if(res.status=="np") res.status="No permissions.";
+                                if(res.status=="err"){
+                                    $vm.show_module('jsonv',{json_data:v.result})
+                                }
+                                else if(array!=""){
+                                    var type=columns.indexOf('|');
+                                    if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                                    else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                                }
+                                else{
+                                    $vm.show_module('jsonv',{json_data:v})
+                                }
+                            });
+                            */
+                            //--------------------------------------------------------
+                        })
+                        break;
+                }
+            }
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+    </style>
+</div>
