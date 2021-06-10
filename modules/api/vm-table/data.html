@@ -1,0 +1,30 @@
+<div id=D__ID>
+    <section>
+        VmInclude:__COMPONENT__/g/grid.01.html
+    </section>
+    
+    <script>
+        function F__ID(){
+            //-------------------------------------
+            //VmInclude:__COMPONENT__/g/grid.01.js
+            //-------------------------------------
+            var fields='ID|UID,Name';
+            m.fields="_Form,_Query,"+fields+",Submit_date,Submitted_by,_Delete";
+            //-------------------------------------
+            m.cell_render=function(records,I,field,td){
+                switch(field){
+                    case '_Query':
+                        td.html("<u style='cursor:pointer'>Query</u>");
+                        td.find('u').on('click',function(){
+                            $vm.show_module('data',{Data:records[I].Data})
+                        })
+                        break;
+                }
+            }
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+    </style>
+</div>

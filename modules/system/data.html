@@ -3,7 +3,7 @@
         <div id=toolbar__ID class="navbar navbar-default">
                 <div id=row_1__ID>
                         <button id=info__ID type=button class='btn btn-secondary' title='Add new' style='display:none'><i class="fa fa-info"></i></button>
-                        <!--<button id=new__ID  type=button class='btn btn-secondary' title='Add new'><i class="fa fa-plus"></i></button>-->
+                        <button id=new__ID  type=button class='btn btn-secondary' title='Add new'><i class="fa fa-plus"></i></button>
                         <input id=keyword__ID type="text" placeholder="keyword" class="form-control">
                         <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'><i class="fa fa-search" ></i></button>
                 </div>
@@ -16,7 +16,7 @@
                         <button id=n__ID type=button class="btn btn-secondary" title="Next page"><i class="fa fa-arrow-right"></i></button>
                 </div>
                 <div id=import_export_section__ID class="d-none d-sm-block">
-<!--                        <button id=export__ID type=button class="btn btn-secondary" title=Export><i class="fa fa-download" ></i></button>  -->
+                        <button id=export__ID type=button class="btn btn-secondary" title=Export><i class="fa fa-download" ></i></button> 
                 </div>
                 <span id=elapsed__ID style='float:right'></span>
         </div>
@@ -24,16 +24,32 @@
             <table id=grid__ID></table>
         </div>
     </div>
+    VmInclude:__COMPONENT__/m/modal.01.html
     <script>
         function F__ID(){
             //-------------------------------------------------
             var m=$vm.module_list['__MODULE__'];
             //-------------------------------------------------
             var table="";
-            var columns;
+            var columns="";
+            var query="";
+            var pipelines="";
             $('#D__ID').on('load',function(){
+                if(m.input.Data==undefined) return;
                 table=m.input.Data.Table;
+                query=m.input.Data.Query;
                 columns=m.input.Data.Columns;
+                pipelines="";
+                if(query!=undefined && query!=""){
+                    try{
+                        pipelines=JSON.parse(query);
+                    }
+                    catch(e){
+                        alert(e);
+                        return;
+                    }
+                }
+
                 m.set_req(); m.request_data();
             })
             //-------------------------------------------------
@@ -49,7 +65,7 @@
             m.set_req=function(){
                 m.limit=parseInt($('#page_size__ID').val());
                 m.skip=m.limit*parseInt($('#I__ID').text());
-                var pipeline=
+                var pipeline0=
                 [
                     {
                         $facet: {
@@ -58,12 +74,36 @@
                         }
                     }
                 ]
+                var pipeline=[];
+                if(pipelines!=""){
+                    for(var i=0;i<pipelines.length;i++){
+                        pipeline.push(pipelines[i]);
+                    }
+                    for(var i=0;i<pipeline0.length;i++){
+                        pipeline.push(pipeline0[i]);
+                    }
+                }
+                else pipeline=pipeline0;
+                var keyword=$('#keyword__ID').val();
+                if( keyword!=""){
+                    pipeline.push(
+                        {
+                            $match:{
+                                $text: { $search: keyword }
+                            }
+                        }
+                    )
+                }
                 m.req={api:"wapp",cmd:"aggregate",table:table,pipeline:pipeline}
             }
             //-------------------------------------------------
             m.request_data=function(){
                 $vm.request(m.req,function(res){
-//console.log(res.result)
+                    if(res.status=="np"){
+                        alert("No permissions!");
+                        $('#table__ID').html('');
+                        return;
+                    }
                     var N=res.result[0].count[0].value;
                     m.max_I=Math.ceil(N/m.limit)-1;
                     var n2=m.skip+m.limit; if(n2>N) n2=N;
@@ -75,105 +115,133 @@
                     ps=[];                
                     tp=[];
                     uid=[];                
-                    records=[];                
-                    try{
-                        var aa=columns.split('\n');
-                        for(var i=0; i<aa.length;i++){
-                            var bb=aa[i].split('|');
-                            if(bb[0].length>1){
-                                var nm=bb[0];
-                                var pp=bb[1];
-                                headers.push(nm);
-                                ps.push(pp.replace('\r',''));
-                                if(bb.length==2){
-                                    tp.push('');
-                                    uid.push('');
-                                }
-                                else if(bb.length==3){
-                                    tp.push(bb[2].replace('\r',''));
-                                    uid.push('');
-                                }
-                                else if(bb.length==4) {
-                                    tp.push(bb[2].replace('\r','')); 
-                                    uid.push(bb[3].replace('\r','')); 
-                                }     
-                                else{
-                                    tp.push('');
-                                    uid.push('');
-                                }
+                    records=[];
+
+                    var options=columns.replace(/\r/g,'\n').replace(/\n\n/g,'\n').replace(/\n/g,',').split(',');
+                    // header and records
+                    for(var i=0;i<rows.length;i++){
+                        var record={};
+                        for(var field in rows[i].Data){
+                            if(headers.indexOf(field)==-1){
+                                headers.push(field);     
                             }
+                            record[field]=rows[i].Data[field];
+                            if(record[field]==null || record[field]==undefined) record[field]="";
                         }
-                        for(var i=0;i<rows.length;i++){
-                            var record={};
-                            for(var j=0;j<headers.length;j++){
-                                var bb=ps[j].split('.');
-                                if(ps[j].indexOf('@')!=-1) bb=[ps[j]];  //ignore '.', bb contains only one element
-                                var c=rows[i];
-                                for(var k=0;k<bb.length;k++){
-                                    if(c==undefined || c==null) break;
-                                    if(bb[k]=='[0]') c=c[0];
-                                    else c=c[bb[k]];
-                                }
-                                if(c==null) c="";
-                                var type=tp[j].split(' ')[0];
-                                if(type=='DATE') c=c.substr(0,10);
-                                if(type=='TIME') c=c.substr(11,5);
-                                if(type=='DOLLAR') c="$"+c;
-                                if(type=='LINK') c="<a target=_blank href="+c+">"+c+"</a>";
-                                if(type=='IMAGE') c="<img src="+encodeURI(c)+" style='width:"+tp[j].split(' ')[1]+"px;height:auto'></img>";
-                                if(type=='ON'){
-                                    var s="";
-                                    if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
-                                    c=s;
-                                }
-                                record[headers[j]]=c;
-                            }
-                            records.push(record);
-                        }
+                        records.push(record);
                     }
-                    catch(e){
-                        alert(e);
-                        return;
-                    }
+                    // header ----------
                     var txt="<tr><th></th><th></th>";
                     var N=headers.length;
-                    for(var i=0;i<N;i++){
-                        txt+="<th>"+headers[i]+"</th>";
-                    }
-                    txt+="</tr>"
-                    for(var i=0;i<records.length;i++){
-                        txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+"></i></td>"
-                        for(var j=0;j<N;j++){
-                                if(tp[j]=='DOLLAR') txt+="<td style='text-align:right'>"+records[i][headers[j]]+"</td>";
-                                else if(tp[j]=='WRAP') txt+="<td style='white-space: break-spaces'>"+records[i][headers[j]]+"</td>";
-                                else if(tp[j]=='MQ') txt+="<td><u style='cursor:pointer' uid="+uid[j]+" mq_id="+records[i][headers[j]]+">"+headers[j]+"</u></td>";
-                                else if(tp[j].substr(0,4)=="LEN_"){
-                                    var len=tp[j].split('_').pop();
-                                    len=parseInt(len);
-                                    var c=records[i][headers[j]].substr(0,len)+"...";
-                                    txt+="<td>"+c+"</td>";
-                                }
-                                else if(tp[j]=='webUrl'){
-                                    txt+="<td><a target=_black style='text-decoration: underline;color:black' href='"+rows[i]['webUrl']+"'>"+records[i][headers[j]]+"</a></td>";
-                                }
-                                else txt+="<td>"+records[i][headers[j]]+"</td>";
+                    for(var j=0;j<N;j++){
+                        var h=headers[j];
+                        var remove="";
+                        for(var k=0;k<options.length;k++){
+                            var oo=options[k].split('|');
+                            if(oo[0]==h && oo.length>1){
+                                h=oo[1];
+                                if(oo.length>2 && oo[2]=="REMOVE") remove=1;
+                                break;
+                            }
                         }
-                        txt+="</tr>"
+                        if(remove=="") txt+="<th>"+h+"</th>";
                     }
+                    txt+="<th>Submit Date</th><th>Submitted By</th><th></th></tr>"
+                    // records ----------
+                    for(var i=0;i<records.length;i++){
+                        txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+" style='cursor:pointer' title='Edit'></i></td>";
+                        for(var j=0;j<N;j++){
+                            var h=headers[j];
+                            var remove="";
+                            var c=rows[i].Data[h];
+                            var td="<td>"+c+"</td>";
+                            for(var k=0;k<options.length;k++){
+                                var oo=options[k].split('|');
+                                if(oo[0]==h && oo.length>2){
+                                    switch(oo[2]){
+                                        case 'DOLLAR': c="$"+c;         td="<td style='text-align:right'>"+c+"</td>"; break;
+                                        case 'DATE': c=c.substr(0,10);  td="<td>"+c+"</td>"; break;
+                                        case 'TIME': c=c.substr(11,5);  td="<td>"+c+"</td>"; break;
+                                        case 'ON': 
+                                            var s=""; if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
+                                            c=s;
+                                            break;
+                                        case 'REMOVE': remove=1; break; 
+                                    }
+                                    break;
+                                }
+                            }
+                            if(remove=="") txt+=td;
+                        }
+                        txt+="<td>"+rows[i].Submit_date.substr(0,10)+"</td><td>"+rows[i].Submitted_by+"</td>"
+                        txt+="<td><i class='fa fa-trash-o' i="+i+" style='padding: 0 3px;cursor:pointer' title='Delete'></i></td></tr>";
+                    }
+                    // -----------------
                     $('#grid__ID').html(txt);
                     $('#grid__ID').find('i').on('click',function(){
-                        i=$(this).attr('i');
-                        $vm.show_module('json-editor',{record:rows[i]})
+                        var i=$(this).attr('i');
+                        var title=$(this).attr('title');
+                        if(title=='Edit') $vm.show_module('json-editor',{record:rows[i]})
+                        if(title=='Delete'){
+                            if(confirm("Are you sure to delete?\n")){
+                                var rid=rows[i]._id;
+                                m.delete(rid);
+                            }
+                        }
                     });
-            });
+                });
             }
             //-------------------------------------------------
-            //-------------------------------------------------
+            $('#keyword__ID').on('keypress',function(e){
+                if(e.keyCode === 13){
+                    e.preventDefault();
+                    m.set_req(); m.request_data(); 
+                }
+            })
             $('#query__ID').on('click',function(){    m.set_req(); m.request_data(); })
             $("#p__ID").on('click',function(){  var I=$("#I__ID").text();I--; if(I<0) I=0; $("#I__ID").text(I); m.set_req(); m.request_data();})
             $("#n__ID").on('click',function(){  var I=$("#I__ID").text();I++; if(I>m.max_I) I=m.max_I; $("#I__ID").text(I); m.set_req(); m.request_data();})
             //-------------------------------------
-            //m.set_req(); m.request_data();
+            m.delete=function(rid){
+                $vm.request({api:"wapp",cmd:"delete",id:rid,table:table},function(res){
+                    //-----------------------------
+                    if(res.status=="lk"){
+                        $vm.alert("This record is locked.");
+                        return;
+                    }
+                    //-----------------------------
+                    if(res.status=="np"){
+                        alert("No permission to delete this record.");
+                        return;
+                    }
+                    //-----------------------------
+                    m.request_data();
+                });
+            };
+            //-------------------------------
+            $('#new__ID').on('click', function(){
+                $vm.show_module('json-editor',{table:table})
+            })
+            //-------------------------------
+            $('#export__ID').on('click',function(){   m.export_records(); })
+            m.export_records=function(){
+                var q={};
+                if(pipelines!="") q=pipelines[0]["$match"];
+                var req={api:"wapp",cmd:"export",table:table,query:q}
+                open_model__ID();
+                $vm.request(req,function(N,i,txt){
+                    console.log(i+"/"+N);
+                    $('#msg__ID').text((100*i/N).toFixed(0)+"%");
+                    if(i==-1){
+                        var len=txt.length;
+                        var n_txt="["+txt.substring(5,len-9)+"]";
+                        var o=JSON.parse(n_txt);
+                        $vm.download_csv(table+".csv",o);
+                        close_model__ID();
+                    }
+                });
+            }
+            //---------------------------------------------
         }
     </script>
     <style>
