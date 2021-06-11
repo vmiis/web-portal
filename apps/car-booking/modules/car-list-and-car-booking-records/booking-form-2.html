@@ -54,9 +54,9 @@
             VmInclude:__COMPONENT__/f/form.01.js
     		//-------------------------------------
 			var set_dropdown_list=function(){
-				$vm.request({cmd:'find',table:m.lookup},function(res){
+				$vm.request({api:m.api,cmd:'find',table:m.lookup},function(res){
 					var txt="";
-					for(i in res.result){
+					for(var i=0; i<res.result.length;i++){
 						var v=res.result[i].Data.Name;
 						txt+="<option>"+v+"</option>";
 					}
@@ -104,7 +104,7 @@
 				var rid=undefined; if(m.input!=undefined && m.input.record!=undefined) rid=m.input.record._id;
 				var ok=0;
 				jQuery.ajaxSetup({async:false});				
-            	$vm.request({cmd:"find",table:m.Table,query:{"$or" :[{I1:{"$gt":t1,"$lt":t2}},{I2:{"$gt":t1,"$lt":t2}}]},options:{}},function(res){
+            	$vm.request({api:m.api,cmd:"find",table:m.Table,query:{"I3": {$eq: data.Item},"$or" :[{I1:{"$gte":t1,"$lte":t2}},{I2:{"$gte":t1,"$lte":t2}}]},options:{}},function(res){
 					console.log(res);
 					if(res.result.length==0) ok=1;
 					else if(res.result.length==1){

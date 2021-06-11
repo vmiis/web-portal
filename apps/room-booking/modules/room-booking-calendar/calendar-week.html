@@ -15,9 +15,9 @@
             $('#item_list__ID').show();
             var dropdown_list=0;
             var set_dropdown_list=function(){
-                $vm.request({cmd:'find',table:m.lookup},function(res){
+                $vm.request({api:m.api,cmd:'find',table:m.lookup},function(res){
                     var txt="";
-                    for(i in res.result){
+                    for(var i=0; i<res.result.length;i++){
                         var v=res.result[i].Data.Name;
                         txt+="<option>"+v+"</option>";
                     }
@@ -35,7 +35,7 @@
                 var dt2=$vm.date_add_days(m.last_day,1).getTime();
                 var item=$('#item_list__ID').val();
                 if(item==undefined) return;
-                $vm.request({cmd:"find",table:m.Table,query:{I3:item,I1:{"$gte":dt1,"$lt":dt2}},sort:{I1:1,I2:1},options:{}},function(res){
+                $vm.request({api:m.api,cmd:"find",table:m.Table,query:{I3:item,I1:{"$gte":dt1,"$lt":dt2}},sort:{I1:1,I2:1},options:{}},function(res){
                     if(res.permission==false){
                         alert("No permission to get booking information.");
                         return;
