@@ -29,7 +29,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.71,0.02]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.72,0.03]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -137,7 +137,10 @@
                 "/modules/module-list-01.js",
                 "/modules/module-list-02.js",
                 "/modules/module-list-car-booking.js",
-                "/modules/module-list-room-booking.js"
+                "/modules/module-list-room-booking.js",
+                "/modules/module-list-equipment-booking.js",
+                "/modules/module-list-bookkeeping.js",
+                "/modules/module-list-invoice.js"
             ]
             //---------------------------------------------
             $vm.get_module_list=function(){

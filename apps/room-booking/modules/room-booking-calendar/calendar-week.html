@@ -68,6 +68,7 @@
                 var h=new Date(record.I1).getHours(); 
                 var q=new Date(record.I1).getMinutes()/15+1;
                 var d=$vm.date_yyyymmdd_parse(date).getDay();
+console.log(d)                
                 var $div=m.get_cell_div(h,q,d);
                 var t1=$vm.pad(new Date(record.I1).getHours(),2)+":"+$vm.pad(new Date(record.I1).getMinutes(),2);
                 var t2=$vm.pad(new Date(record.I2).getHours(),2)+":"+$vm.pad(new Date(record.I2).getMinutes(),2);
