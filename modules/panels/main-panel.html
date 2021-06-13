@@ -2,8 +2,10 @@
     <div style='padding:10px 20px 0 50px;'>
         <table>
             <tr>
-                <td><input id=items__ID  autocomplete="off" class=form-control style='width:230px;height:32px;display:inline-block' placeholder="search item..." /> 
-                <input id=groups__ID autocomplete="off" class=form-control style='width:230px;height:32px;;display:inline-block' placeholder="search group..." /> </td>
+                <td>
+                    <input id=groups__ID autocomplete="off" class=form-control style='width:230px;height:32px;;display:inline-block' placeholder="search group..." />
+                    <input id=items__ID  autocomplete="off" class=form-control style='width:230px;height:32px;display:inline-block' placeholder="search item..." /> 
+                </td>
             </tr>
         </table>
         <hr style='margin:8px 0'>
@@ -535,6 +537,7 @@
                 <span class=LT__ID>Data collection forms</span>
                 <li><a target=_blank href='apps/build-and-test-web-data-collection-form/index.html'>Build and test web data collection form</a></li>
                 <li><a target=_blank href='apps/create-a-simple-web-data-collection-module/index.html'>Create a simple web data collection module</a></li>
+            </div>
             <div>
                 <span class=LT__ID>Contents search</span>
                 <li><a target=_blank href='apps/full-text-indexing-and-search/index.html'>Full text indexing and search</a></li>
@@ -572,17 +575,27 @@
                 <li><a target=_blank href='apps/arpeggios/index.html'>Arpeggios</a></li>
                 <li><a target=_blank href='apps/chords/index.html'>Chords</a></li>
             </div>
+            <div>
+                <span class=LT__ID>Sub Portals</span>
+                <li><a href='?/wappsystem-panel'>Wappsystem</a></li>
+                <li><a href='?/vmautomation-panel'>VM Automation</a></li>
+            </div>
         </ul>
     </div>
     <script>
         function F__ID(){
             //--------------------------------------------------------
             $('#items__ID').on('keyup',function(){   filter();            })
+            $('#groups__ID').on('dblclick',function(){ 
+                $('#groups__ID').val('');
+                filter();
+            })
             $('#groups__ID').on('keyup',function(){  
                 filter();
                 localStorage.setItem('g_vm_portal_panel_group',$('#groups__ID').val());
 
             })
+            
             $('#groups__ID').on('focusin',function(){
                 if($('#groups__ID').val()==''){
                     $('#panel__ID li').hide();
@@ -590,15 +603,15 @@
                 }
             })
             $('#groups__ID').on('focusout',function(){
-                filter();
+                setTimeout(function(){
+                    filter();
+                },200);
             })
             //--------------------------------------------------------
             var filter=function(){
                 $('#panel__ID span').show();
                 $('#panel__ID li').show();
                 $('#panel__ID div').show();
-                //if($('#items__ID').val().length==0) {  $('#panel__ID span').show();        }
-                //else                                {  $('#panel__ID span').hide();        }
                 
                 var words=$('#items__ID').val().split(' ');
                 $('#panel__ID li').each(function(){
@@ -634,6 +647,14 @@
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
             //--------------------------------------------------------
+            $("#panel__ID span").on('click',function(){
+                var txt=$(this).text();
+                console.log(txt);
+                $('#groups__ID').val(txt);
+                localStorage.setItem('g_vm_portal_panel_group',txt);
+                filter();
+            })
+            //--------------------------------------------------------
             $('#panel__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
@@ -650,7 +671,7 @@
                             case "mongodb":     mongodb_query(parseInt(aa[2]));     break;
                             case "sqlserver":   sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    coreplus_query(parseInt(aa[2]));    break;
-                            case "wappsystem":  wappsystem_query(parseInt(aa[2]));  break;
+                            case "wappsystem":  $vm.wappsystem_query(parseInt(aa[2]));  break;
                             case "piano":       $vm.show_module('piano',{sheet:aa[2]}); break;
                             case "youtube":     $vm.youtube_query(parseInt(aa[2]));     break;
                             case "image":       $vm.image_query(parseInt(aa[2]));       break;
@@ -666,7 +687,6 @@
 			//VmInclude:__CURRENT_PATH__main-panel-mongodb.js
 			//VmInclude:__CURRENT_PATH__main-panel-sqlserver.js
 			//VmInclude:__CURRENT_PATH__main-panel-coreplus.js
-			//VmInclude:__CURRENT_PATH__main-panel-wappsystem.js
 			//VmInclude:__CURRENT_PATH__main-panel-vm-data.js
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
@@ -747,6 +767,7 @@
         }
         .LT__ID{
             margin-left:-40px;
+            cursor:pointer;
         }
         #panel__ID ul li, #panel__ID ul span{
             break-inside: avoid-column;

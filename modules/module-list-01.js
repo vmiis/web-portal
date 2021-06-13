@@ -305,6 +305,9 @@
         "minor-harmonic":   {url:$H+"/piano/minor-harmonic.html", router:1},
         "data":   {url:$H+"/system/data.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
+        
+        "wappsystem-panel":   {url:$H+"/panels/wappsystem.html", router:1},
+        "vmautomation-panel":   {url:$H+"/panels/vmautomation.html", router:1},
 
     }
     set_prefix(prefix,modules);
