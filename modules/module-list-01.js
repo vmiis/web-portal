@@ -306,8 +306,9 @@
         "data":   {url:$H+"/system/data.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
         
-        "wappsystem-panel":   {url:$H+"/panels/wappsystem.html", router:1},
-        "vmautomation-panel":   {url:$H+"/panels/vmautomation.html", router:1},
+        "wappsystem-panel":   {url:$H+"/panels/wappsystem/panel.html", router:1},
+        "vmautomation-panel":   {url:$H+"/panels/vmautomation/panel.html", router:1},
+        "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},
 
     }
     set_prefix(prefix,modules);

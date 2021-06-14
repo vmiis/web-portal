@@ -1,17 +1,17 @@
 (function(){
     //-------------------------------------------------------------------------------------
-    var p="bookkeeping-wapp-"; //put a unique prefix to avoid conflict with others 
+    var p="bookkeeping-vm-"; //put a unique prefix to avoid conflict with others 
     var H=$vm.hosting_path+"/apps/bookkeeping/modules";
     var m=$vm.module_list;
     var api="wapp";
     
-    var pre_item="predefined-transaction-item-wappsystem";
-    var transaction="transaction-wappsystem";
-    var aggregation="ato-bas-quarter-aggregation-wappsystem";
-    var aggregation_ie="income-expense-month-aggregation-wappsystem";
-    var aggregation_year_ie="income-expense-year-aggregation-wappsystem";
-    var aggregation_item="item-month-aggregation-wappsystem";
-    var aggregation_tax="ato-tax-return-yearly-aggregation-wappsystem";
+    var pre_item="predefined-transaction-item-vmautomation";
+    var transaction="transaction-vmautomation";
+    var aggregation="ato-bas-quarter-aggregation-vmautomation";
+    var aggregation_ie="income-expense-month-aggregation-vmautomation";
+    var aggregation_year_ie="income-expense-year-aggregation-vmautomation";
+    var aggregation_item="item-month-aggregation-vmautomation";
+    var aggregation_tax="ato-tax-return-yearly-aggregation-vmautomation";
 
     
     m[p+"panel"]=                                    {url:H+"/panels/panel.html",prefix:p, router:1};
@@ -42,3 +42,26 @@
     //-------------------------------------------------------------------------------------
 })();
 
+
+(function(){
+    //-------------------------------------------------------------------------------------
+    var p="invoice-vm-"; //put a unique prefix to avoid conflict with others 
+    var H=$vm.hosting_path+"/apps/invoice/modules";
+    var m=$vm.module_list;
+    var api="wapp";
+    
+    var invoice_client_table="client-vm";
+    var invoice_record_table="invoice-vm";
+    var invoice_print_module="invoice-print-vm";
+
+    m[p+"panel"]           ={url:H+"/panels/panel.html", prefix:p, router:1};
+    m[p+"diagram"]         ={url:H+"/diagram/diagram.html",router:1};
+    
+    m[p+"client-data"]=                    {url:H+"/client/data.html",      api:api, Table:invoice_client_table, form_module:p+'client-form',  router:1};
+    m[p+"client-form"]=                    {url:H+"/client/form.html",      api:api, Table:invoice_client_table, router:1};
+    m[p+"invoice-data"]=                   {url:H+"/invoice/data.html",     api:api, Table:invoice_record_table, form_module:p+'invoice-form', print_module:p+invoice_print_module,router:1};
+    m[p+"invoice-form"]=                   {url:H+"/invoice/form.html",     api:api, Table:invoice_record_table, client_table:invoice_client_table,  router:1};
+    
+    m[p+"invoice-print-vm"]=             {url:H+"/invoice/form.print_and_pdf.vm.html"};
+    //-------------------------------------------------------------------------------------
+})();

@@ -1,0 +1,46 @@
+<section>
+    <section>
+        <div id=toolbar__ID class="navbar navbar-default" style='background-color: #ccc;'>
+            <button id=local_file__ID type=button class="btn btn-primary">File</button><span id=title__ID></span>
+            <input id=local_f__ID type=file style='display:none' />
+        </div>
+        <div id=table__ID>
+            <table id=grid__ID></table>
+        </div>
+    </section>
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------
+        var sheet="Sheet1";
+        //-------------------------------
+        $('#local_file__ID').on('click',function(){   
+            $('#local_f__ID').val('');
+            $('#local_f__ID').trigger('click');
+        })
+        //-------------------------------
+        var handleFileSelect=function(e){
+            var files = e.target.files;
+            var reader = new FileReader();
+            reader.onload = (function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, { type: 'binary' });
+            workbook.SheetNames.forEach(function(sheetName) {
+                    if(sheetName==sheet){
+                        var jdata=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+                        var txt=$vm.json_to_table(jdata);
+                        $('#grid__ID').html(txt);
+                    }
+                })
+            });
+            reader.readAsBinaryString(files[0]);
+        }
+        //-------------------------------
+        document.getElementById('local_f__ID').addEventListener('change', handleFileSelect,false);
+        //-------------------------------
+
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>
