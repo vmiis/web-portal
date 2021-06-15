@@ -121,7 +121,7 @@
                 }
                 txt+="</tr>"
                 for(var i=0;i<records.length;i++){
-                    txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+"></i></td>"
+                    txt+="<tr><td>"+(i+1)+"</td><td><i style='cursor:pointer' class='fa fa-pencil-square-o' i="+i+"></i></td>"
                     for(var j=0;j<N;j++){
                             if(tp[j]=='DOLLAR') txt+="<td style='text-align:right'>"+records[i][headers[j]]+"</td>";
                             else if(tp[j]=='WRAP') txt+="<td style='white-space: break-spaces'>"+records[i][headers[j]]+"</td>";

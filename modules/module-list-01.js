@@ -17,37 +17,7 @@
         "app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
         "lab-order-panel":{url:$vm.hosting_path+"/modules/panels/lab-order-panel.html",description:"lab order panel",router:1},
-        "ad-user":{url:$vm.hosting_path+"/modules/it/ad-user.html",description:"AD User",router:1},
-        "crm-volunteer-data":{url:$vm.hosting_path+"/modules/it/crm-volunteer-data.html",description:"crm-volunteer",form_module:"crm-form",router:1},
-        "crm-project-data":{url:$vm.hosting_path+"/modules/it/crm-project-data.html",description:"crm-project",form_module:"crm-form",router:1},
-        "crm-study-data":{url:$vm.hosting_path+"/modules/it/crm-study-data.html",description:"crm-study",form_module:"crm-form",router:1},
-        "crm-form":             {url:$vm.hosting_path+"/modules/it/crm-form.html",description:"crm-form"},
         "temperature-reports":  {url:$vm.hosting_path+"/modules/it/temperature-reports.html",description:"Temperature reports"},
-        "printers":{url:$vm.hosting_path+"/modules/operations/printers.html",description:"printers",router:1},
-        "referrers":{
-            url:$vm.hosting_path+"/modules/coreplus/referrers/data.html",
-            Table:"referrer",
-            form_module:"jsonv",
-            description:"Referrers"
-        },
-        "referrals":{
-            url:$vm.hosting_path+"/modules/coreplus/referrals/data.html",
-            Table:"referral",
-            form_module:"jsonv",
-            description:"Referrals",
-        },
-        "clinics":{
-            url:$vm.hosting_path+"/modules/coreplus/clinics/data.html",
-            Table:"clinic",
-            form_module:"jsonv",
-            description:"Clinics"
-        },
-        "patients":{
-            url:$vm.hosting_path+"/modules/coreplus/patients/data.html",
-            Table:"patient",
-            form_module:"jsonv",
-            description:"Patients"
-        },
         "coreplus-datatable-relationships":{
             url:$H+"/diagram/coreplus-datatable-relationships.html",
             router:1
