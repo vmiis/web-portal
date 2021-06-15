@@ -1,0 +1,63 @@
+<div id=D__ID>
+	<div id=page1__ID>
+		<div class="container-fluid" style='max-width:850px'>
+			<div style='_color:#fff'>
+				<span style='font-size:28px;font-weight: bold;'>Zhiming Zhou</span> 
+				<br>
+				<span id=vm-logo-label-B>
+					IT, Mathematics and Piano Enthusiast
+				</span>
+			</div>
+			<br>
+			<br>
+			<br>
+
+			<div class="panel__ID">
+				<h5>Sharing ideas with friends</h5>
+				<hr style='border-top:1px solid #f05f40; margin:12px 0'></hr>
+					• Setup a personal static website using GitHub Pages and Cloudflare free services<br>
+					• Build a web portal by connecting front end interface to database or third party data services.<br>
+					• Philosophy of mathematics and Investment.<br>
+					• Playing piano.<br>
+					<!--• Customised solutions for business automation.-->
+					<br><br>
+					<br><span style='font-size:80%;_color:#eee'>Contact email: zzm.vmiis@gmail.com</span>
+					<br><br>
+		
+				<br><br>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#D__ID').on('load',function(){
+			$('#page1__ID').css('height',$vm.min_height+"px");
+		})
+	</script>
+	<style>
+		#D__ID{
+			height:100%;
+			background:#fff;
+	        overflow:auto;
+			animation: vm_module_fadein 1.0s;/*, D__ID 3s;*/
+		}
+		#page1__ID{
+			display: flex;
+			align-items: center;
+		}
+		.panel__ID{
+			/*color:#fff;*/
+			/*background: rgba(0, 0, 0, 0);*/
+			border-radius: 25px;
+			padding:10px;
+		}
+		@keyframes D__ID {
+			from {padding-top: 300px;}
+			to {padding-top: 0px;}
+		}
+	    @media screen and (max-width: 992px) {
+	        #D__ID{
+	            animation: vm_module_fadein 1.0s;
+	        }
+	    }
+	</style>
+</div>

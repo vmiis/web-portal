@@ -183,6 +183,186 @@
                     else alert('No report.')
                 })
             }
+            $vm.coreplus_query=function(UID){
+                $vm.request({cmd:"find",table:"coreplus-api",query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        var uid=records[0].UID;
+                        var name=records[0].Data.Name;
+                        var columns=records[0].Data.Columns;
+                        var array=records[0].Data.Array;
+                        var input="";
+                        var path=records[0].Data.Path;
+                        if(path.indexOf('[INPUT]')!=-1){
+                            input=prompt("Input", "");
+                            input=input.replace(/ /g,'%20');
+                            if(input==null) return;
+                        }
+                        var today="";
+                        if(path.indexOf('[TODAY]')!=-1){
+                            today=new Date().toISOString().substr(0,10);
+                        }
+                        $vm.request({cmd:'coreplus-api',input:input,today:today,uid},function(res){
+                        //$vm.request({cmd:'coreplus-api',uid:uid},function(res){
+                            if(res.status=="err"){
+                                $vm.show_module('jsonv',{json_data:res.result})
+                                return;
+                            }
+                            var data="";
+                            try{
+                                var data=JSON.parse(res.result);
+                                console.log(data);
+                            }
+                            catch(e){
+                                alert(e);
+                                return;
+                            }
+                            if(array!=""){
+                                var type=columns.indexOf('|');
+                                if(type!=-1) $vm.show_module('gridv',{name:name,json_data:data,array:array,columns:columns})
+                                else $vm.show_module('arrayv',{name:name,json_data:data,array:array,columns:columns})
+                            }
+                            else{
+                                $vm.show_module('jsonv',{json_data:data})
+                            }
+                        });
+                        //--------------------------------------------------------
+                    }
+                    else alert('No report.')
+                })
+            }
+            $vm.mailchimp_query=function(UID){
+                var t=sessionStorage.getItem("mailchimp oauth");
+                if(t==null){
+                    alert("You haven't login!");
+                    return "";
+                }
+                t=JSON.parse(t);
+                var access_token=t.access_token;
+                $vm.request({api:'wapp',cmd:"find",table:"mailchimp-api",query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        var host='us3.api.mailchimp.com';
+                        var name=records[0].Data.Name;
+                        var path=records[0].Data.Path;
+                        if(path.indexOf('[INPUT]')!=-1){
+                            var p=prompt("Input", "");
+                            if(p==null) return;
+                            path=path.replace('[INPUT]',p);
+                        }      
+                        var array=records[0].Data.Array;
+                        var columns=records[0].Data.Columns;
+                        path=path.replace(/ /g,'%20');
+                        path=path.replace(/\n/g,'').replace(/\r/g,'');
+                        
+                        $vm.request({api:'wapp',cmd:'mailchimp-api',access_token:access_token,host:host,path:"/3.0"+path},function(res){
+                            var v={};
+                            try{
+                                v=JSON.parse(res.result);
+                            }
+                            catch(e){
+                                $vm.show_module('jsonv',{json_data:{err:v}});
+                                return;
+                            }
+                            if(array!=""){
+                                var type=columns.indexOf('|');
+                                if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                                else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                            }
+                            else{
+                                $vm.show_module('jsonv',{json_data:v})
+                            }
+                        })
+                    }
+                    else alert('No report.')
+                })
+            }
+            $vm.mongodb_query=function(UID){
+                $vm.request({cmd:"find",table:"mongodb-api",query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        var name=records[0].Data.Name;
+                        var table=records[0].Data.Table;
+                        var cmd=records[0].Data.Command;
+                        var query=records[0].Data.Query;
+                        var array=records[0].Data.Array;
+                        var columns=records[0].Data.Columns;
+                        
+                        if(query.indexOf('[INPUT]')!=-1){
+                            var p=prompt("Input", "");
+                            if(p==null) return;
+                            p=p.replace(/\"/g,'\\\"');
+                            query=query.replace('[INPUT]',p);
+                        }      
+                        var pipeline;
+                        try{
+                            pipeline=JSON.parse(query);
+                        }
+                        catch(e){
+                            alert(e);
+                            return;
+                        }
+                        var req={cmd:cmd,table:table,pipeline:pipeline}
+                        $vm.request(req,function(res){
+                            console.log(res.result)
+                            var v=res;
+                            if(res.status=="err"){
+                                $vm.show_module('jsonv',{json_data:v.result})
+                            }
+                            else if(array!=""){
+                                var type=columns.indexOf('|');
+                                if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                                else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                            }
+                            else{
+                                $vm.show_module('jsonv',{json_data:v})
+                            }
+                        });
+                    }
+                    else alert('No report.')
+                })
+            }
+            $vm.sqlserver_query=function(UID){
+                $vm.request({cmd:"find",table:"cms-api",query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        var uid=records[0].UID;
+                        var name=records[0].Data.Name;
+                        var query=records[0].Data.Query;
+                        var array='result';
+                        var columns=records[0].Data.Columns;
+                        if(query.indexOf('[INPUT]')!=-1){
+                            var p=prompt("Input", "");
+                            if(p==null) return;
+                            query=query.replace('[INPUT]',p);
+                        }      
+                        var req={cmd:'find',options:{sql:1,uid:uid}}
+                        $vm.request(req,function(res){
+                            var v=res;
+                            if(res.status=="err"){
+                                $vm.show_module('jsonv',{json_data:v.result})
+                            }
+                            else if(array!=""){
+                                var type=columns.indexOf('|');
+                                if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                                else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                            }
+                        });
+                        //--------------------------------------------------------
+                    }
+                    else alert('No report.')
+                })
+            }
+            $vm.vm_data_query=function(api,table,UID){
+                $vm.request({api:api,cmd:"find",table:table,query:{UID:UID},options:{}},function(res){
+                    var records=res.result;
+                    if(records!=undefined && records.length==1){
+                        $vm.show_module('data',{Data:records[0].Data})
+                    }
+                    else alert('The table was not found.')
+                })
+            }
+        
         }
     </script>   
 </div>

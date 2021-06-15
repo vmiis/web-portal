@@ -29,7 +29,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.74,0.03]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.75,0.03]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -38,6 +38,7 @@
                 header: {url:$vm.hosting_path+"/modules/site/header.html",description:"logo, menu, login/logout etc"},
                 footer: {url:$vm.hosting_path+"/modules/site/footer.html",description:"copyright info, links etc"},
                 home:   {url:$vm.hosting_path+"/modules/site/home.html",router:1,title:'Home',description:"Modular distributed microservices web application."},
+                about:  {url:$vm.hosting_path+"/modules/site/about.html",router:1,title:'About',description:"Modular distributed microservices web application."},
                 
                 jsonv:      {url:$vm.hosting_path+"/modules/system/json-viewer.html",description:"Show json data"},
                 gridv:      {url:$vm.hosting_path+"/modules/system/grid-viewer.html",description:"Show json data in grid"},
