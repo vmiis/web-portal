@@ -1,0 +1,151 @@
+<div id=D__ID>
+    <div class=panel__ID>
+        <h3>Local Sleey Study</h3>
+    </div>
+    <div id=panel__ID class=panel__ID>
+        <ul style="list-style-type:decimal;">
+            <div>
+                <span class=LT__ID>Participant</span>
+                <li><a href='?/wapp_local-sleep-participant'>Participants</a></li>
+            </div>
+            <div>
+                <span class=LT__ID>Screening Visit</span>
+                <li><a href='?/wapp_local-sleep-s-date'>Visit Date</a></li>
+                <li><a href='?/wapp_local-sleep-s-consent'>Digital consent form</a></li>
+                
+            </div>
+            <!---------------------------------------------------------------------------------------->
+            <div>
+            </div>
+            <!---------------------------------------------------------------------------------------->
+            <!--
+            <div>
+                <span class='LT__ID break__ID'>Piano Notes Sheet</span>
+                <li><a href='?/api_piano_1'>An die ferne Geliebte</a></li>
+                <li><a href='?/api_piano_2'>Sonatina Op.36</a></li>
+            </div>
+            -->
+    </ul>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var prefix=$vm.module_list["__MODULE__"].prefix;
+            if(prefix==undefined) prefix="";
+            //--------------------------------------------------------
+            $('#panel__ID a').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var module_name=$(this).attr('href').replace('?\/','');
+                if(module_name.substring(0,4)=='http') window.open(module_name);
+                else if(module_name.substring(0,5)=='wapp_'){
+                    var table=module_name.substring(5);
+                    $vm.wapp_table(table);
+                }
+                else if(module_name!="") $vm.show_module(module_name,{}); 
+            })
+            //--------------------------------------------------------
+            $('#D__ID').on('load',function(){
+            })
+            //--------------------------------------------------------
+            $vm.wapp_table=function(table){
+                var data={Table:table,Columns:""};
+                $vm.show_module('data',{Data:data})
+                /*
+                $vm.request({api:"wapp",cmd:"find",table:table},function(res){
+                    var records=res.result;
+                    console.log(records)
+                    
+                    if(records!=undefined && records.length==1){
+                        $vm.show_module('data',{Data:records[0].Data})
+                    }
+                    else alert('The table was not found.')
+                    
+                })
+                */
+            }
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        .panel__ID{
+            padding:20px 50px 10px 50px;
+            font-size:14px;
+    		max-width: 100%;
+    		column-count: 3;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+        }
+        .panel__ID div{
+            break-inside: avoid-column;
+        }
+	    .panel__ID a{
+		    /*margin:3px 10px;*/
+            /*white-space: nowrap;*/
+	    }
+	    .panel__ID span{
+			color:#283f55;
+			font-weight: bold;
+            font-weight: 600;
+			/*margin:3px 10px;*/
+            /*white-space: nowrap;*/
+	    }
+
+        .panel__ID li{
+            /*text-decoration: none;*/
+        }
+        a {
+            text-decoration: none;
+        }
+        a:link {
+            color:#555;
+        }
+        a:visited {
+            color:#555;
+        }
+        a:hover {
+            color:red;
+        }
+        a:active {
+            color:#555;
+        }
+        #D__ID input::placeholder {
+            color: #ccc;
+            padding-left:6px;
+        }
+        .break__ID{
+            break-before:column;
+            display:block;
+        }        
+        @media screen and (max-width:768px){
+            .break__ID{
+                break-before:unset;
+            }        
+            .panel__ID{
+                padding:20px;
+                column-count: 1;
+            }
+        }
+        .LT__ID{
+            margin-left:-40px;
+            cursor:pointer;
+        }
+        #panel__ID ul li, #panel__ID ul span{
+            break-inside: avoid-column;
+        }
+        #bp__ID{
+            color:#117a8b;
+        }
+        #bp__ID:hover{
+            color:red;
+        }
+    </style>
+</div>
+

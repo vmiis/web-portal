@@ -424,6 +424,7 @@
                 <li><a href='?/wappsystem-panel'>Wappsystem</a></li>
                 <li><a href='?/vmautomation-panel'>VM Automation</a></li>
                 <li><a href='?/administrator-panel'>Administrator</a></li>
+                <li><a href='?/local-sleep-panel'>Local Sleep Study</a></li>
                 <!--<li><a href='?/local_excel_file'>Test</a></li>-->
             </div>
             <div>
@@ -534,12 +535,6 @@
                 //else if(module_name!=""){ console.log(module_name); $vm.show_module(module_name,{}); }
             })
             //--------------------------------------------------------
-			//Vm Include:__CURRENT_PATH__main-panel-mailchimp.js
-			//Vm Include:__CURRENT_PATH__main-panel-mongodb.js
-			//Vm Include:__CURRENT_PATH__main-panel-sqlserver.js
-			//Vm Include:__CURRENT_PATH__main-panel-coreplus.js
-			//Vm Include:__CURRENT_PATH__main-panel-vm-data.js
-            //--------------------------------------------------------
             $('#D__ID').on('load',function(){
                 var group=localStorage.getItem('g_vm_portal_panel_group');
                 if(group!=null){
@@ -547,7 +542,7 @@
                     filter();
                 }
             })
-            
+            //--------------------------------------------------------
         }
     </script>
     <style>
