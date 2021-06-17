@@ -31,15 +31,22 @@
             var m=$vm.module_list['__MODULE__'];
             //-------------------------------------------------
             var table="";
-            var columns="";
             var query="";
+            var headers_txt="";
+            var options_txt=""
+            //var headers=[]
+            //var options=[]
+            //var columns="";
             var pipelines="";
             $('#D__ID').on('load',function(){
-                table="";columns="";query="";
+                //table="";columns="";query="";
+                table="";query="";headers="";options=""
                 if(m.input.Data==undefined) return;
                 table=m.input.Data.Table;
                 if(m.input.Data.Query!=undefined) query=m.input.Data.Query;
-                if(m.input.Data.Columns!=undefined) columns=m.input.Data.Columns;
+                if(m.input.Data.Headers!=undefined) headers_txt=m.input.Data.Headers;
+                if(m.input.Data.Options!=undefined) options_txt=m.input.Data.Options;
+                //if(m.input.Data.Columns!=undefined) columns=m.input.Data.Columns;
                 pipelines="";
                 if(query!=undefined && query!=""){
                     try{
@@ -104,19 +111,113 @@
                         $('#table__ID').html('');
                         return;
                     }
+                    //-------------------------------
                     var N=res.result[0].count[0].value;
                     m.max_I=Math.ceil(N/m.limit)-1;
                     var n2=m.skip+m.limit; if(n2>N) n2=N;
                     var a=(m.skip+1).toString()+"~"+(n2).toString()+" of ";
                     $("#A__ID").text(a);
                     $("#B__ID").text(N)
+                    //-------------------------------
                     var rows=res.result[0].rows;
-                    headers=[];
-                    ps=[];                
-                    tp=[];
-                    uid=[];                
-                    records=[];
+                    var headers_nm=[];
+                    var headers_db=[];
+                    var option1={};
+                    var option2={};
+                    var option3={};
+                    var records=[];
+                    //Header
+                    if(headers_txt!=''){
+                        var ss=headers_txt.split(',');
+                        for(var i=0;i<ss.length;i++){
+                            var cc=ss[i].split('|');
+                            headers_db[i]=cc[0];
+                            if(cc.length>1) headers_nm[i]=cc[1]; else headers_nm[i]=cc[0];
+                        }
+                    }
+                    else{
+                        for(var i=0;i<rows.length;i++){
+                            for(var field in rows[i].Data){
+                                if(headers_db.indexOf(field)==-1){
+                                    headers_db.push(field);     
+                                    headers_nm.push(field);     
+                                }
+                            }
+                        }
+                    }
+                    //Options
+                    if(options_txt!=''){
+                        var ss=options_txt.split(',');
+                        for(var i=0;i<ss.length;i++){
+                            var cc=ss[i].split('|');
+                            var db=cc[0];
+                            option1[db]=cc[0];
+                            if(cc.length>1) option1[db]=cc[1]; else option2[db]="";
+                            if(cc.length>2) option2[db]=cc[2]; else option2[db]="";
+                            if(cc.length>3) option3[db]=cc[3]; else option3[db]="";
+                        }
+                    }
+                    //Records
+                    for(var i=0;i<rows.length;i++){
+                        var record={};
+                        for(var field in rows[i].Data){
+                            record[field]=rows[i].Data[field];
+                            if(record[field]==null || record[field]==undefined) record[field]="";
+                        }
+                        records.push(record);
+                    }
 
+                    // header ----------
+                    var txt="<tr><th></th><th></th>";
+                    var N=headers_db.length;
+                    for(var j=0;j<N;j++){
+                        var db=headers_db[j];
+                        var nm=headers_nm[j];
+                        var op1=option1[db];
+                        if(op1!="REMOVE") txt+="<th>"+nm+"</th>";
+                    }
+                    txt+="<th>Submit Date</th><th>Submitted By</th><th></th></tr>"
+
+                    // records ----------
+                    for(var i=0;i<records.length;i++){
+                        txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+" style='cursor:pointer' title='Edit'></i></td>";
+                        for(var j=0;j<N;j++){
+                            var db=headers_db[j];
+                            var op1=option1[db];
+                            var c=rows[i].Data[db];
+                            if(db=='UID') c=rows[i].UID;
+                            var td="<td>"+c+"</td>";
+                            switch(op1){
+                                case 'DOLLAR': c="$"+c;         td="<td style='text-align:right'>"+c+"</td>"; break;
+                                case 'DATE': c=c.substr(0,10);  td="<td>"+c+"</td>"; break;
+                                case 'TIME': c=c.substr(11,5);  td="<td>"+c+"</td>"; break;
+                                case 'ON': 
+                                    var s=""; if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
+                                    c=s;
+                                    break;
+                            }
+                            if(op1!="REMOVE") txt+=td;
+                        }
+                        txt+="<td>"+rows[i].Submit_date.substr(0,10)+"</td><td>"+rows[i].Submitted_by+"</td>"
+                        txt+="<td><i class='fa fa-trash-o' i="+i+" style='padding: 0 3px;cursor:pointer' title='Delete'></i></td></tr>";
+                    }
+                    // -----------------
+                    $('#grid__ID').html(txt);
+                    $('#grid__ID').find('i').on('click',function(){
+                        var i=$(this).attr('i');
+                        var title=$(this).attr('title');
+                        if(title=='Edit') $vm.show_module('json-editor',{record:rows[i]})
+                        if(title=='Delete'){
+                            if(confirm("Are you sure to delete?\n")){
+                                var rid=rows[i]._id;
+                                m.delete(rid);
+                            }
+                        }
+                    });
+
+
+
+                    /*
                     var options=columns.replace(/\r/g,'\n').replace(/\n\n/g,'\n').replace(/\n/g,',').split(',');
                     // header and records
                     for(var i=0;i<rows.length;i++){
@@ -177,18 +278,7 @@
                         txt+="<td><i class='fa fa-trash-o' i="+i+" style='padding: 0 3px;cursor:pointer' title='Delete'></i></td></tr>";
                     }
                     // -----------------
-                    $('#grid__ID').html(txt);
-                    $('#grid__ID').find('i').on('click',function(){
-                        var i=$(this).attr('i');
-                        var title=$(this).attr('title');
-                        if(title=='Edit') $vm.show_module('json-editor',{record:rows[i]})
-                        if(title=='Delete'){
-                            if(confirm("Are you sure to delete?\n")){
-                                var rid=rows[i]._id;
-                                m.delete(rid);
-                            }
-                        }
-                    });
+                    */
                 });
             }
             //-------------------------------------------------

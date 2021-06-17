@@ -1,5 +1,6 @@
 (function(){
     //-------------------------------------------------------------------------------------
+    /*
     var p="bookkeeping-vm-"; //put a unique prefix to avoid conflict with others 
     var H=$vm.hosting_path+"/apps/bookkeeping/modules";
     var m=$vm.module_list;
@@ -40,5 +41,5 @@
     m[p+"tax-return-yearly-aggregation-form"]=       {url:H+"/aggregations/ato-tax-return-yearly-aggregation-form.html",    api:api, Table:aggregation_tax,router:1};
     m[p+"tax-return-yearly-aggregation-chart"]=      {url:H+"/aggregations/ato-tax-return-yearly-aggregation-chart.html",   api:api, Table:aggregation_tax,router:1};
     //-------------------------------------------------------------------------------------
+    */
 })();
-

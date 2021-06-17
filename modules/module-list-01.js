@@ -13,7 +13,7 @@
     var prefix='';
     var $H=$vm.hosting_path+"/modules";
     var modules={
-        "data-panel":{url:$vm.hosting_path+"/modules/panels/main-panel.html",title:"Portal",description:"main panel",router:1},
+        "data-panel":{url:$vm.hosting_path+"/modules/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
         "app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
         "lab-order-panel":{url:$vm.hosting_path+"/modules/panels/lab-order-panel.html",description:"lab order panel",router:1},
@@ -274,6 +274,7 @@
         "minor-melodic":    {url:$H+"/piano/minor-melodic.html", router:1},
         "minor-harmonic":   {url:$H+"/piano/minor-harmonic.html", router:1},
         "data":   {url:$H+"/system/data.html", router:1},
+        "vm-grid":       {url:$H+"/system/vm-grid.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
         
         "wappsystem-panel":     {url:$H+"/panels/wappsystem/panel.html", router:1},
@@ -281,6 +282,7 @@
         "woolcock-panel":       {url:$H+"/panels/woolcock/panel.html", router:1},
         "administrator-panel":  {url:$H+"/panels/administrator/panel.html", router:1},
         "local-sleep-panel":    {url:$H+"/panels/local-sleep-study/panel.html", router:1},
+        "my-panel":             {url:$H+"/panels/my/panel.html", router:1},
         
         
         "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},

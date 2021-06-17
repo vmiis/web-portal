@@ -1,38 +1,15 @@
 <div id=D__ID>
     <div class=panel__ID>
-        <h3>Local Sleey Study</h3>
     </div>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
-                <span class=LT__ID>Participant</span>
-                <li><a href='?/wapp_local-sleep-participant'>Participants</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Screening Visit</span>
-                <li><a href='?/wapp_local-sleep-s-date'>Visit Date</a></li>
-                <li><a href='?/wapp_local-sleep-s-consent'>Digital consent form</a></li>
-                <li><a href='?/wapp_local-sleep-s-anthropometry'>Anthropometry</a></li>
-                <li><a href='?/wapp_local-sleep-s-inclusion-exclusion'>Inclusion/Exclusion Criteria</a></li>
-                <li><a href='?/wapp_local-sleep-s-medications'>Concomitant medication</a></li>
-                <li><a href='?/wapp_local-sleep-s-concom-file'>Concomitant medication file upload</a></li>
-                <li><a href='?/wapp_local-sleep-s-medical-history'>Medical history</a></li>
-                <li><a href='?/wapp_local-sleep-s-ess'>Epworth Sleepiness Scale (ESS)</a></li>
-                <li><a href='?/wapp_local-sleep-s-mva'>ASTN Motor Vehicle Accident Questionnaire</a></li>
-                <li><a href='?/wapp_local-sleep-b-ethnicity'>Ethnicity form</a></li>
-                <li><a href='?/wapp_local-sleep-b-lifestyle'>Lifestyle</a></li>
-                <li><a href='?/wapp_local-sleep-b-education'>Education</a></li>
-                <!--
-                <li><a 
-                    href='?/wapp_equipment-setup'
-                    __query='[{"$match":{"UID":2}}]'
-                    __headers='UID|Record ID,equipment_name|equipment_name'
-                    __options='equipment_name|REMOVE'
-                >equipment-setup</a></li>
-                -->
+                <span class=LT__ID>My Private Data</span>
+                <li><a href='?/notes-data'>My notes</a></li>
+                <li><a href='?/vmiis-calendar-month'>My calendar</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
-        </ul>
+    </ul>
     </div>
     <script>
         function F__ID(){
@@ -40,22 +17,41 @@
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
             //--------------------------------------------------------
+            $("#panel__ID span").on('click',function(){
+                var txt=$(this).text();
+                console.log(txt);
+                $('#groups__ID').val(txt);
+                localStorage.setItem('g_vm_portal_panel_group',txt);
+                filter();
+            })
+            //--------------------------------------------------------
             $('#panel__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 var module_name=$(this).attr('href').replace('?\/','');
-                var query=$(this).attr('query');
-                var headers=$(this).attr('headers');
-                var options=$(this).attr('options');
-                if(module_name.substring(0,5)=='wapp_'){
-                    var table=module_name.substring(5);
-                    $vm.wapp_table(table,query,headers,options);
+                if(module_name.substring(0,4)=='http') window.open(module_name);
+                else if(module_name.substring(0,4)=='apps') window.open(module_name);
+                else if(module_name.substring(0,4)=='api_'){
+                    var aa=module_name.split('_');
+                    if(aa.length==3){
+                        switch(aa[1]){
+                            case "quickbooks":  $vm.intuit_query(parseInt(aa[2])); /*quickbooks_query(parseInt(aa[2]));*/break;
+                            case "microsoft":   $vm.microsoft_query(parseInt(aa[2]));break;
+                            case "mongodb":     $vm.mongodb_query(parseInt(aa[2]));     break;
+                            case "sqlserver":   $vm.sqlserver_query(parseInt(aa[2]));   break;
+                            case "coreplus":    $vm.coreplus_query(parseInt(aa[2]));    break;
+                            case "wappsystem":  $vm.wappsystem_query(parseInt(aa[2]));  break;
+                            case "piano":       $vm.show_module('piano',{sheet:aa[2]}); break;
+                            case "youtube":     $vm.youtube_query(parseInt(aa[2]));     break;
+                            case "image":       $vm.image_query(parseInt(aa[2]));       break;
+                            case "vm-data":     $vm.vm_data_query("wapp","wappsystem-table",parseInt(aa[2]));   break;
+                        }
+                    }
                 }
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
-                
             })
             //--------------------------------------------------------
         }

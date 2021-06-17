@@ -362,7 +362,12 @@
                     else alert('The table was not found.')
                 })
             }
-        
+            //--------------------------------------------------------
+            $vm.wapp_table=function(table,query,headers,options){
+                var data={Table:table,Query:query,Headers:headers,Options:options};
+                $vm.show_module('vm-grid',{Data:data})
+            }
+            //--------------------------------------------------------
         }
     </script>   
 </div>
