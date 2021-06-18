@@ -1,0 +1,47 @@
+<div id=D__ID>
+
+    <div id=layout__ID>
+        <div style='padding:50px 0 0 30px'>
+            <div id=menu__ID>
+                <b>2020</b>
+                <ul>
+                    <li><a href='?/blog1'>Blog 1</a></li>
+                    <li><a href='?/blog2'>Blog 2</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id=content__ID></div>     
+    </div>
+    <script>
+    	function F__ID(){
+            //--------------------------------------------------------
+            var prefix=$vm.module_list["__MODULE__"].prefix;
+            if(prefix==undefined) prefix="";
+            //--------------------------------------------------------
+            $('#D__ID').on('load',function(){
+                var a=$('#content__ID').children('div').length; 
+                if(a==0) $vm.show_module(prefix+'blog1',{})
+            })
+            //--------------------------------------------------------
+            $('#D__ID a').on('click',function(e){
+                e.preventDefault();
+                var module_name=$(this).attr('href').replace('?\/','');
+                if(module_name!="") $vm.show_module(prefix+module_name,{})
+            })
+            //--------------------------------------------------------
+            $('#D__ID').css('height',$vm.min_height+"px");
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            height: 100%;
+        }
+        #layout__ID {
+            height: 100%;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            background-color: #fff;
+        }
+    </style>
+</div>

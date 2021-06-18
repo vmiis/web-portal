@@ -283,6 +283,7 @@
         "administrator-panel":  {url:$H+"/panels/administrator/panel.html", router:1},
         "local-sleep-panel":    {url:$H+"/panels/local-sleep-study/panel.html", router:1},
         "my-panel":             {url:$H+"/panels/my/panel.html", router:1},
+        "development":          {url:$H+"/panels/development/panel.html", router:1},
         
         
         "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},

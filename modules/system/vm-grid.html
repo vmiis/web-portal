@@ -30,23 +30,20 @@
             //-------------------------------------------------
             var m=$vm.module_list['__MODULE__'];
             //-------------------------------------------------
+            var api="";
             var table="";
             var query="";
             var headers_txt="";
             var options_txt=""
-            //var headers=[]
-            //var options=[]
-            //var columns="";
             var pipelines="";
             $('#D__ID').on('load',function(){
-                //table="";columns="";query="";
                 table="";query="";headers="";options=""
                 if(m.input.Data==undefined) return;
+                api=m.input.Data.api; if(api==undefined) api="wapp";
                 table=m.input.Data.Table;
                 if(m.input.Data.Query!=undefined) query=m.input.Data.Query;
                 if(m.input.Data.Headers!=undefined) headers_txt=m.input.Data.Headers;
                 if(m.input.Data.Options!=undefined) options_txt=m.input.Data.Options;
-                //if(m.input.Data.Columns!=undefined) columns=m.input.Data.Columns;
                 pipelines="";
                 if(query!=undefined && query!=""){
                     try{
@@ -101,7 +98,17 @@
                         }
                     )
                 }
-                m.req={api:"wapp",cmd:"aggregate",table:table,pipeline:pipeline}
+                m.req={api:api,cmd:"aggregate",table:table,pipeline:pipeline}
+            }
+            //-------------------------------------------------
+            m.set_export=function(){
+                var pipeline=[];
+                if(pipelines!=""){
+                    for(var i=0;i<pipelines.length;i++){
+                        pipeline.push(pipelines[i]);
+                    }
+                }
+                m.req_export={api:api,cmd:"export2",table:table,pipeline:pipeline}
             }
             //-------------------------------------------------
             m.request_data=function(){
@@ -214,71 +221,6 @@
                             }
                         }
                     });
-
-
-
-                    /*
-                    var options=columns.replace(/\r/g,'\n').replace(/\n\n/g,'\n').replace(/\n/g,',').split(',');
-                    // header and records
-                    for(var i=0;i<rows.length;i++){
-                        var record={};
-                        for(var field in rows[i].Data){
-                            if(headers.indexOf(field)==-1){
-                                headers.push(field);     
-                            }
-                            record[field]=rows[i].Data[field];
-                            if(record[field]==null || record[field]==undefined) record[field]="";
-                        }
-                        records.push(record);
-                    }
-                    // header ----------
-                    var txt="<tr><th></th><th></th>";
-                    var N=headers.length;
-                    for(var j=0;j<N;j++){
-                        var h=headers[j];
-                        var remove="";
-                        for(var k=0;k<options.length;k++){
-                            var oo=options[k].split('|');
-                            if(oo[0]==h && oo.length>1){
-                                h=oo[1];
-                                if(oo.length>2 && oo[2]=="REMOVE") remove=1;
-                                break;
-                            }
-                        }
-                        if(remove=="") txt+="<th>"+h+"</th>";
-                    }
-                    txt+="<th>Submit Date</th><th>Submitted By</th><th></th></tr>"
-                    // records ----------
-                    for(var i=0;i<records.length;i++){
-                        txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+" style='cursor:pointer' title='Edit'></i></td>";
-                        for(var j=0;j<N;j++){
-                            var h=headers[j];
-                            var remove="";
-                            var c=rows[i].Data[h];
-                            var td="<td>"+c+"</td>";
-                            for(var k=0;k<options.length;k++){
-                                var oo=options[k].split('|');
-                                if(oo[0]==h && oo.length>2){
-                                    switch(oo[2]){
-                                        case 'DOLLAR': c="$"+c;         td="<td style='text-align:right'>"+c+"</td>"; break;
-                                        case 'DATE': c=c.substr(0,10);  td="<td>"+c+"</td>"; break;
-                                        case 'TIME': c=c.substr(11,5);  td="<td>"+c+"</td>"; break;
-                                        case 'ON': 
-                                            var s=""; if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
-                                            c=s;
-                                            break;
-                                        case 'REMOVE': remove=1; break; 
-                                    }
-                                    break;
-                                }
-                            }
-                            if(remove=="") txt+=td;
-                        }
-                        txt+="<td>"+rows[i].Submit_date.substr(0,10)+"</td><td>"+rows[i].Submitted_by+"</td>"
-                        txt+="<td><i class='fa fa-trash-o' i="+i+" style='padding: 0 3px;cursor:pointer' title='Delete'></i></td></tr>";
-                    }
-                    // -----------------
-                    */
                 });
             }
             //-------------------------------------------------
@@ -293,7 +235,7 @@
             $("#n__ID").on('click',function(){  var I=$("#I__ID").text();I++; if(I>m.max_I) I=m.max_I; $("#I__ID").text(I); m.set_req(); m.request_data();})
             //-------------------------------------
             m.delete=function(rid){
-                $vm.request({api:"wapp",cmd:"delete",id:rid,table:table},function(res){
+                $vm.request({api:api,cmd:"delete",id:rid,table:table},function(res){
                     //-----------------------------
                     if(res.status=="lk"){
                         $vm.alert("This record is locked.");
@@ -313,13 +255,10 @@
                 $vm.show_module('json-editor',{table:table})
             })
             //-------------------------------
-            $('#export__ID').on('click',function(){   m.export_records(); })
+            $('#export__ID').on('click',function(){  m.set_export(); m.export_records(); })
             m.export_records=function(){
-                var q={};
-                if(pipelines!="") q=pipelines[0]["$match"];
-                var req={api:"wapp",cmd:"export",table:table,query:q}
                 open_model__ID();
-                $vm.request(req,function(N,i,txt){
+                $vm.request(m.req_export,function(N,i,txt){
                     console.log(i+"/"+N);
                     $('#msg__ID').text((100*i/N).toFixed(0)+"%");
                     if(i==-1){

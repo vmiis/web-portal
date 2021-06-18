@@ -29,7 +29,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.79,0.03]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.80,0.03]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -145,6 +145,8 @@
                 "/modules/panels/woolcock/module-list.js",
                 "/modules/panels/wappsystem/module-list.js",
                 "/modules/panels/vmautomation/module-list.js",
+                "/modules/blog/module-list.js",
+                "/modules/web-page/module-list.js",
             ]
             //---------------------------------------------
             $vm.get_module_list=function(){
