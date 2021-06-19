@@ -30,6 +30,7 @@
                         ]
                     '
                 >Test 1</a></li>
+                <li><a href='?/wapp_sales-demo-0703' form_module=sales_form>Sales records</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
@@ -49,8 +50,18 @@
                 var options=$(this).attr('options');
                 if(module_name.substring(0,4)=='wzd_'){
                     var table=module_name.substring(4);
-                    //$vm.wapp_table(table,query,headers,options);
                     $vm.vm_table("wzd",table,query,headers,options);
+                }
+                else if(module_name.substring(0,5)=='wapp_'){
+                    var data={
+                        api:'wapp',
+                        table:module_name.substring(5),
+                        query:$(this).attr('query'),
+                        headers:headers=$(this).attr('headers'),
+                        options:$(this).attr('options'),
+                        form_module:$(this).attr('form_module')
+                    };
+                    $vm.show_module('vm-grid',{Data:data})
                 }
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })

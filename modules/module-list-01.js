@@ -287,6 +287,7 @@
         
         
         "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},
+        //"sales_form":  	      {url:$vm.hosting_path+"/apps/templates/084/m/sales-form.html",Table:"sales-demo-0703"},
 
     }
     set_prefix(prefix,modules);

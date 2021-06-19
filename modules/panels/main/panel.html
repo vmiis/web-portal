@@ -13,6 +13,14 @@
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
+                <span class=LT__ID _style='break-before:column;display:block;'>Online Contact Us Data Collection</span>
+                <li><a target=_blank href='apps/web-pages/contact-us-form-1.html'>Contact us form 1</a></li>
+                <li><a target=_blank href='apps/web-pages/contact-us-form-2.html'>Contact us form 2</a></li>
+                <li><a target=_blank href='apps/web-pages/contact-us-form-3.html'>Contact us form 3</a></li>
+                <li><a href='?/wapp_demo-vm-ccontact-us'>Data Management</a></li>
+                <li><a target=_blank href='apps/templates/013/index.html'>App</a></li>
+            </div>
+            <div>
                 <span class=LT__ID _style='break-before:column;display:block;'>Car Booking</span>
                 <li><a href='?/car-booking-diagram'>System diagram</a></li>
                 <li><a href='?/car-booking-panel'>Control Panel</a></li>
@@ -353,6 +361,7 @@
                 <li><a target=_blank href='apps/templates/039/index.html'>Event/Task/Reminder calendar</a></li>
                 <li><a target=_blank href='apps/templates/040/index.html'>Event/Task/Reminder calendar (overlap)</a></li>
             </div>
+            <!--
             <div>
                 <span class=LT__ID>Contact us data collection</span>
                 <li><a target=_blank href='apps/contact-us-1/index.html'>Contact us 1</a></li>
@@ -360,6 +369,7 @@
                 <li><a target=_blank href='apps/contact-us-3/index.html'>Contact us 3</a></li>
                 <li><a target=_blank href='apps/templates/013/index.html'>Contact Us 4</a></li>
             </div>
+            -->
             <div>
                 <span class=LT__ID>Data collection form fields</span>
                 <li><a target=_blank href='apps/templates/030/index.html'>Color</a></li>
@@ -543,6 +553,16 @@
                             case "vm-data":     $vm.vm_data_query("wapp","wappsystem-table",parseInt(aa[2]));   break;
                         }
                     }
+                }
+                else if(module_name.substring(0,5)=='wapp_'){
+                    var data={
+                        api:'wapp',
+                        Table:module_name.substring(5),
+                        Query:$(this).attr('query'),
+                        Headers:headers=$(this).attr('headers'),
+                        Options:$(this).attr('options')
+                    };
+                    $vm.show_module('vm-grid',{Data:data})
                 }
                 else if(module_name!="") $vm.show_module(module_name,{}); 
                 //else if(module_name!=""){ console.log(module_name); $vm.show_module(module_name,{}); }

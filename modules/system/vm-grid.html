@@ -36,14 +36,16 @@
             var headers_txt="";
             var options_txt=""
             var pipelines="";
+            var form_module="";
             $('#D__ID').on('load',function(){
                 table="";query="";headers="";options=""
                 if(m.input.Data==undefined) return;
                 api=m.input.Data.api; if(api==undefined) api="wapp";
-                table=m.input.Data.Table;
-                if(m.input.Data.Query!=undefined) query=m.input.Data.Query;
-                if(m.input.Data.Headers!=undefined) headers_txt=m.input.Data.Headers;
-                if(m.input.Data.Options!=undefined) options_txt=m.input.Data.Options;
+                table=m.input.Data.table;
+                if(m.input.Data.query!=undefined) query=m.input.Data.query;
+                if(m.input.Data.headers!=undefined) headers_txt=m.input.Data.headers;
+                if(m.input.Data.options!=undefined) options_txt=m.input.Data.options;
+                if(m.input.Data.form_module!=undefined) form_module=m.input.Data.form_module;
                 pipelines="";
                 if(query!=undefined && query!=""){
                     try{
@@ -108,7 +110,7 @@
                         pipeline.push(pipelines[i]);
                     }
                 }
-                m.req_export={api:api,cmd:"export2",table:table,pipeline:pipeline}
+                m.req_export={api:api,cmd:"export",table:table,pipeline:pipeline}
             }
             //-------------------------------------------------
             m.request_data=function(){
@@ -192,6 +194,7 @@
                             var db=headers_db[j];
                             var op1=option1[db];
                             var c=rows[i].Data[db];
+                            if(c==undefined) c="";
                             if(db=='UID') c=rows[i].UID;
                             var td="<td>"+c+"</td>";
                             switch(op1){
@@ -213,7 +216,10 @@
                     $('#grid__ID').find('i').on('click',function(){
                         var i=$(this).attr('i');
                         var title=$(this).attr('title');
-                        if(title=='Edit') $vm.show_module('json-editor',{record:rows[i]})
+                        if(title=='Edit'){
+                            if(form_module!='') $vm.show_module(form_module,{record:rows[i]});
+                            else $vm.show_module('json-editor',{record:rows[i]})
+                        }
                         if(title=='Delete'){
                             if(confirm("Are you sure to delete?\n")){
                                 var rid=rows[i]._id;
