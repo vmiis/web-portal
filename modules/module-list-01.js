@@ -275,6 +275,7 @@
         "minor-harmonic":   {url:$H+"/piano/minor-harmonic.html", router:1},
         "data":   {url:$H+"/system/data.html", router:1},
         "vm-grid":       {url:$H+"/system/vm-grid.html", router:1},
+        "vm-query":       {url:$H+"/system/vm-query.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
         
         "wappsystem-panel":     {url:$H+"/panels/wappsystem/panel.html", router:1},

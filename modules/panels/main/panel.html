@@ -557,10 +557,11 @@
                 else if(module_name.substring(0,5)=='wapp_'){
                     var data={
                         api:'wapp',
-                        Table:module_name.substring(5),
-                        Query:$(this).attr('query'),
-                        Headers:headers=$(this).attr('headers'),
-                        Options:$(this).attr('options')
+                        table:module_name.substring(5),
+                        query:$(this).attr('query'),
+                        headers:headers=$(this).attr('headers'),
+                        options:$(this).attr('options'),
+                        form_module:$(this).attr('form_module')
                     };
                     $vm.show_module('vm-grid',{Data:data})
                 }

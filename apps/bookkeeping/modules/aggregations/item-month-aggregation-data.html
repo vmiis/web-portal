@@ -32,7 +32,7 @@
 				var t1=new Date(y,mm-1,1,0,0,0,0).toJSON();
 				var t2=new Date(y,mm,  1,0,0,0,0).toJSON();
 				var query={I1:{"$gte":t1,"$lt":t2}}
-				var req={cmd:"export",table:m.transaction_table,query:query,projection:{"Data.Amount":1,"Data.Name":1}}
+				var req={api:m.api,cmd:"export",table:m.transaction_table,query:query,projection:{"Data.Amount":1,"Data.Name":1}}
 				open_model__ID();
 				$vm.request(req,function(N,i,txt){
 					if(N==0){
@@ -81,7 +81,7 @@
                 var rid=m.records[I]._id;
                 if(rid!=undefined && rid!=null){
                     var cmd="update";
-                    $vm.request({cmd:cmd,id:rid,table:m.Table,data:data,index:index,file:{}},function(res){
+                    $vm.request({api:m.api,cmd:cmd,id:rid,table:m.Table,data:data,index:index,file:{}},function(res){
                         //-----------------------------
                         if(res.status=="lk"){
                             $vm.alert("This record is locked.");

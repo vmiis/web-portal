@@ -171,7 +171,7 @@
 			}
 			//-------------------------------------
 			//auto select predefined item
-			var autocomplete_req={cmd:"find",field:'.I1',table:m.item_table,options:{},skip:0,limit:10}
+			var autocomplete_req={api:m.api,cmd:"find",field:'.I1',table:m.item_table,options:{},skip:0,limit:10}
 			var autocomplete_callback=function(items){ 
 				tax=items.tax;
 				m.cal();

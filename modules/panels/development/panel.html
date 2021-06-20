@@ -5,8 +5,7 @@
         <ul style="list-style-type:decimal;">
             <div>
                 <span class=LT__ID>Development</span>
-                <li><a 
-                    href='?/wzd_patient_1'
+                <li><a href='?/wzd_patient_1'
                     query='
                         [
                             {
@@ -30,7 +29,41 @@
                         ]
                     '
                 >Test 1</a></li>
-                <li><a href='?/wapp_sales-demo-0703' form_module=sales_form>Sales records</a></li>
+                <li><a href='?/wapp_grid_sales-demo-0703'>Sales records</a></li>
+                <li><a href='?/wapp_query_sales-demo-0703'
+                    query='[
+                        {
+                            "$project":{
+                                "_id":1,
+                                "Year": {"$substr":[ "$I2", 0, 4] },
+                                "Month":{"$substr":[ "$I2", 5, 2] },
+                                "Amount":{"$toDouble": "$I3"}
+                            }
+                        },        
+                        {
+                            "$group":{
+                                "_id":{"Year":"$Year","Month":"$Month"},
+                                "Total_Sales": { "$sum": "$Amount"}
+                            }
+                        },
+                        {
+                            "$sort":{
+                                "_id":-1
+                            }  
+                        },
+                        {
+                            "$project":{
+                                "Data.Year":"$_id.Year",
+                                "Data.Month":"$_id.Month",
+                                "Data.Total Sales":"$Total_Sales"
+                            }
+                        }
+                    ]     
+                    '
+                    options='
+                        Total Sales|DOLLAR2
+                    '
+                >Sales monthly aggregation</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
@@ -52,16 +85,26 @@
                     var table=module_name.substring(4);
                     $vm.vm_table("wzd",table,query,headers,options);
                 }
-                else if(module_name.substring(0,5)=='wapp_'){
+                else if(module_name.substring(0,10)=='wapp_grid_'){
                     var data={
                         api:'wapp',
-                        table:module_name.substring(5),
+                        table:module_name.substring(10),
                         query:$(this).attr('query'),
                         headers:headers=$(this).attr('headers'),
                         options:$(this).attr('options'),
                         form_module:$(this).attr('form_module')
                     };
                     $vm.show_module('vm-grid',{Data:data})
+                }
+                else if(module_name.substring(0,11)=='wapp_query_'){
+                    var data={
+                        api:'wapp',
+                        table:module_name.substring(11),
+                        query:$(this).attr('query'),
+                        headers:headers=$(this).attr('headers'),
+                        options:$(this).attr('options'),
+                    };
+                    $vm.show_module('vm-query',{Data:data})
                 }
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })
