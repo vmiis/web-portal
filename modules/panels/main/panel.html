@@ -13,6 +13,17 @@
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
+                <span class=LT__ID>Sales Tracking</span>
+                <li><a href='?/grid'   req=sales_records>Records</a></li>
+                <li><a href='?/query'  req=sales_1>Total amount monthly aggregation</a></li>
+                <li><a href='?/pivot'  req=sales_2>Total amount monthly aggregation by item</a></li>
+                <li><a href='?/pivot'  req=sales_3>Total amount monthly aggregation by region</a></li>
+                <li><a href='?/pivot'  req=sales_4>Total amount monthly aggregation by rep</a></li>
+                <li><a href='?/grid'   req=sales_item>Sales item setup</a></li>
+                <li><a href='?/grid'   req=sales_region>Sales region setup</a></li>
+                <li><a href='?/grid'   req=sales_rep>Sales rep setup</a></li>
+            </div>
+            <div>
                 <span class=LT__ID _style='break-before:column;display:block;'>Online Contact Us Data Collection</span>
                 <li><a target=_blank href='apps/web-pages/contact-us-form-1.html'>Contact us form 1</a></li>
                 <li><a target=_blank href='apps/web-pages/contact-us-form-2.html'>Contact us form 2</a></li>
@@ -276,7 +287,7 @@
                 <li><a target=_blank href='apps/templates/010/index.html'>Restaurant menu</a></li>
                 <li><a target=_blank href='apps/templates/034/index.html'>Record notes</a></li>
                 <li><a target=_blank href='apps/templates/014/index.html'>Services</a></li>
-                <li><a target=_blank href='apps/templates/084/index.html'>Sales tracking</a></li>
+                <!--<li><a target=_blank href='apps/templates/084/index.html'>Sales tracking</a></li>-->
                 <li><a target=_blank href='apps/templates/085/index.html'>Side menu</a></li>
                 <li><a target=_blank href='apps/templates/086/index.html'>Success</a></li>
                 <li><a target=_blank href='apps/templates/087/index.html'>Survey</a></li>
@@ -454,6 +465,9 @@
     </div>
     <script>
         function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
             var scrollTop_V=0;
             //--------------------------------------------------------
             $('#items__ID').on('keyup',function(){   filter();            })
@@ -533,6 +547,7 @@
 
                 e.preventDefault();
                 e.stopPropagation();
+                var req=$(this).attr('req');
                 var module_name=$(this).attr('href').replace('?\/','');
                 if(module_name.substring(0,4)=='http') window.open(module_name);
                 else if(module_name.substring(0,4)=='apps') window.open(module_name);
@@ -565,6 +580,10 @@
                     };
                     $vm.show_module('vm-grid',{Data:data})
                 }
+                else if(module_name=='grid')   $vm.show_module('vm-grid',{Data:vm_data[req]});
+                else if(module_name=='query')  $vm.show_module('vm-query',{Data:vm_data[req]});
+                else if(module_name=='pivot')  $vm.show_module('vm-pivot',{Data:vm_data[req]});
+                else if(module_name!="") $vm.show_module(module_name,{}); 
                 else if(module_name!="") $vm.show_module(module_name,{}); 
                 //else if(module_name!=""){ console.log(module_name); $vm.show_module(module_name,{}); }
             })

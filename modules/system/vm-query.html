@@ -39,6 +39,8 @@
                 if(m.input.Data.form_module!=undefined) form_module=m.input.Data.form_module;
                 pipelines="";
                 if(query!=undefined && query!=""){
+                    pipelines=query;
+                    /*
                     try{
                         pipelines=JSON.parse(query);
                     }
@@ -46,6 +48,7 @@
                         alert(e);
                         return;
                     }
+                    */
                 }
                 m.set_req(); m.request_data();
             })

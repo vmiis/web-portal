@@ -9,8 +9,8 @@
     m[p+"crm-study-data"]       ={url:H+"/it/crm-study-data.html",      description:"crm-study",form_module:"crm-form",router:1};
     m[p+"crm-form"]             ={url:H+"/it/crm-form.html",            description:"crm-form"};
     */
-    m[p+"ad-user"]  ={url:H+"/it/ad-user.html",description:"AD User",router:1};
-    m[p+"printers"] ={url:H+"/operations/printers.html",description:"printers",router:1};
+    m[p+"ad-user"]  ={url:H+"/it/ad-user.html",api:"wzd",description:"AD User",router:1};
+    m[p+"printers"] ={url:H+"/operations/printers.html",api:"wzd",description:"printers",router:1};
     m[p+"patients"] ={url:H+"/coreplus/patients/data.html",api:"wzd", Table:"patient", form_module:"jsonv", description:"Patients"};
     m[p+"referrers"]={ url:H+"/coreplus/referrers/data.html",api:"wzd",Table:"referrer",form_module:"jsonv", description:"Referrers"};
     m[p+"referrals"]={ url:H+"/coreplus/referrals/data.html",api:"wzd",Table:"referral",form_module:"jsonv", description:"Referrals"};

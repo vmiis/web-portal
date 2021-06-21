@@ -96,7 +96,7 @@
             //Music sheet
             var url="__CURRENT_PATH__score.musicxml";
             const osmd        =new opensheetmusicdisplay.OpenSheetMusicDisplay(document.getElementById("score__ID"),{autoResize:false});
-            const audioPlayer =new OsmdAudioPlayer();
+            var audioPlayer =new OsmdAudioPlayer();
             //osmd.setOptions({followCursor:true});
             $.get(url,function(scoreXml){
                 osmd.load(scoreXml)

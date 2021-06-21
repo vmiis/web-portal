@@ -3,18 +3,9 @@
         <div id=toolbar__ID class="navbar navbar-default">
                 <div id=row_1__ID>
                         <button id=info__ID type=button class='btn btn-secondary' title='Add new' style='display:none'><i class="fa fa-info"></i></button>
-                        <button id=new__ID  type=button class='btn btn-secondary' title='Add new'><i class="fa fa-plus"></i></button>
-                        <input id=keyword__ID type="text" placeholder="keyword" class="form-control">
-                        <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'><i class="fa fa-search" ></i></button>
+                        <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'>Query</button>
                 </div>
                 <span id=title__ID class='d-none d-md-block'></span>
-                <div>
-                        Page Size:
-                        <select id=page_size__ID class="form-control" style='margin-right:20px;display:inline-block;width:auto;'><option>30</option><option>50</option><option>100</option><option>200</option></select>
-                        <span id=I__ID style="display:none">0</span><span id=A__ID></span> <span id=B__ID></span>
-                        <button id=p__ID type=button class="btn btn-secondary" title="Previous page"><i class="fa fa-arrow-left"></i></button>
-                        <button id=n__ID type=button class="btn btn-secondary" title="Next page"><i class="fa fa-arrow-right"></i></button>
-                </div>
                 <div id=import_export_section__ID class="d-none d-sm-block">
                         <button id=export__ID type=button class="btn btn-secondary" title=Export><i class="fa fa-download" ></i></button> 
                 </div>
@@ -24,12 +15,12 @@
             <table id=grid__ID></table>
         </div>
     </div>
-    VmInclude:__COMPONENT__/m/modal.01.html
     <script>
         function F__ID(){
             //-------------------------------------------------
             var m=$vm.module_list['__MODULE__'];
             //-------------------------------------------------
+            var export_records=[]
             var api="";
             var table="";
             var query="";
@@ -37,6 +28,7 @@
             var options_txt=""
             var pipelines="";
             var form_module="";
+            var pivot="";
             $('#D__ID').on('load',function(){
                 table="";query="";headers="";options=""
                 if(m.input.Data==undefined) return;
@@ -46,6 +38,7 @@
                 if(m.input.Data.headers!=undefined) headers_txt=m.input.Data.headers;
                 if(m.input.Data.options!=undefined) options_txt=m.input.Data.options;
                 if(m.input.Data.form_module!=undefined) form_module=m.input.Data.form_module;
+                if(m.input.Data.pivot!=undefined) pivot=m.input.Data.pivot;
                 pipelines="";
                 if(query!=undefined && query!=""){
                     pipelines=query;
@@ -72,72 +65,42 @@
             });
             //--------------------------------------------------------
             m.set_req=function(){
-                m.limit=parseInt($('#page_size__ID').val());
-                m.skip=m.limit*parseInt($('#I__ID').text());
-                var pipeline0=
-                [
-                    {
-                        $facet: {
-                            count: [{ $count: "value" }],
-                            rows: [{ $sort: { _id: -1 } }, { $skip: m.skip }, { $limit: m.limit }]
-                        }
-                    }
-                ]
                 var pipeline=[];
                 if(pipelines!=""){
                     for(var i=0;i<pipelines.length;i++){
                         pipeline.push(pipelines[i]);
                     }
-                    for(var i=0;i<pipeline0.length;i++){
-                        pipeline.push(pipeline0[i]);
-                    }
                 }
-                else pipeline=pipeline0;
-                var keyword=$('#keyword__ID').val();
-                if( keyword!=""){
-                    pipeline.push(
-                        {
-                            $match:{
-                                $text: { $search: keyword }
-                            }
-                        }
-                    )
-                }
+                else pipeline=[];
                 m.req={api:api,cmd:"aggregate",table:table,pipeline:pipeline}
             }
             //-------------------------------------------------
-            m.set_export=function(){
-                var pipeline=[];
-                if(pipelines!=""){
-                    for(var i=0;i<pipelines.length;i++){
-                        pipeline.push(pipelines[i]);
-                    }
-                }
-                m.req_export={api:api,cmd:"export",table:table,pipeline:pipeline}
-            }
-            //-------------------------------------------------
             m.request_data=function(){
+                var mt1=new Date().getTime();
                 $vm.request(m.req,function(res){
+                    var mt2=new Date().getTime();
+                    var tt_all=mt2-mt1;
+                    var tt_server=parseInt(res.sys.elapsed_time);
+                    if(tt_all<tt_server) tt_all=tt_server;
+                    var tb="<span style='color:red'>&#9679;</span> ";     if(res.tb==1 || res.tb=='on') tb="<span style='color:#0bbe0b'>&#9679;</span> ";
+                    $("#elapsed__ID").html(tb+(JSON.stringify(res.result).length/1000).toFixed(1)+"kb/"+tt_all.toString()+"ms/"+tt_server+'ms');
                     if(res.status=="np"){
                         alert("No permissions!");
                         $('#table__ID').html('');
                         return;
                     }
                     //-------------------------------
-                    var N=res.result[0].count[0].value;
-                    m.max_I=Math.ceil(N/m.limit)-1;
-                    var n2=m.skip+m.limit; if(n2>N) n2=N;
-                    var a=(m.skip+1).toString()+"~"+(n2).toString()+" of ";
-                    $("#A__ID").text(a);
-                    $("#B__ID").text(N)
-                    //-------------------------------
-                    var rows=res.result[0].rows;
+                    var rows=res.result;
                     var headers_nm=[];
                     var headers_db=[];
                     var option1={};
                     var option2={};
                     var option3={};
                     var records=[];
+                    var pivot_ids=[];
+                    var pivot_headers=[];
+                    var pivot_records=[];
+                    export_records=[];
                     //Header
                     if(headers_txt!=''){
                         var ss=headers_txt.split(',');
@@ -149,6 +112,7 @@
                     }
                     else{
                         for(var i=0;i<rows.length;i++){
+                            //export_records.push(rows[i].Data);
                             for(var field in rows[i].Data){
                                 if(headers_db.indexOf(field)==-1){
                                     headers_db.push(field);     
@@ -162,11 +126,7 @@
                         var ss=options_txt.split(',');
                         for(var i=0;i<ss.length;i++){
                             var cc=ss[i].split('|');
-                            var db=cc[0].trim();
-                            option1[db]="";
-                            if(cc.length>1) option1[db]=cc[1]; else option2[db]="";
-                            if(cc.length>2) option2[db]=cc[2]; else option2[db]="";
-                            if(cc.length>3) option3[db]=cc[3]; else option3[db]="";
+                            if(cc.length>1) option1[cc[0].trim()]=cc[1].trim(); 
                         }
                     }
                     //Records
@@ -179,41 +139,78 @@
                         records.push(record);
                     }
 
-                    // header ----------
-                    var txt="<tr><th></th><th></th>";
-                    var N=headers_db.length;
-                    for(var j=0;j<N;j++){
-                        var db=headers_db[j];
-                        var nm=headers_nm[j];
-                        var op1=option1[db];
-                        if(op1!="REMOVE") txt+="<th>"+nm+"</th>";
-                    }
-                    txt+="<th>Submit Date</th><th>Submitted By</th><th></th></tr>"
-
-                    // records ----------
-                    for(var i=0;i<records.length;i++){
-                        txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+" style='cursor:pointer' title='Edit'></i></td>";
-                        for(var j=0;j<N;j++){
-                            var db=headers_db[j];
-                            var op1=option1[db];
-                            var c=rows[i].Data[db];
-                            if(c==undefined) c="";
-                            if(db=='UID') c=rows[i].UID;
-                            var td="<td>"+c+"</td>";
-                            switch(op1){
-                                case 'DOLLAR': c="$"+c;         td="<td style='text-align:right'>"+c+"</td>"; break;
-                                case 'DATE': c=c.substr(0,10);  td="<td>"+c+"</td>"; break;
-                                case 'TIME': c=c.substr(11,5);  td="<td>"+c+"</td>"; break;
-                                case 'ON': 
-                                    var s=""; if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
-                                    c=s;
-                                    break;
-                            }
-                            if(op1!="REMOVE") txt+=td;
+                    //Pivot
+                    var nA=pivot.split('|')[0];
+                    var nB=pivot.split('|')[1];
+                    for(var i=0;i<headers_nm.length;i++){
+                        if(headers_nm[i]!=nA && headers_nm[i]!=nB){
+                            pivot_headers.push(headers_nm[i]);
                         }
-                        txt+="<td>"+rows[i].Submit_date.substr(0,10)+"</td><td>"+rows[i].Submitted_by+"</td>"
-                        txt+="<td><i class='fa fa-trash-o' i="+i+" style='padding: 0 3px;cursor:pointer' title='Delete'></i></td></tr>";
                     }
+                    var id_Len=pivot_headers.length;
+                    for(var i=0;i<records.length;i++){
+                        var h="";
+                        var one_record={};
+                        var n,v;
+                        for(var j=0;j<headers_nm.length;j++){
+                            if(headers_nm[j]==nA) n=records[i][nA];
+                            if(headers_nm[j]==nB) v=records[i][nB];
+                            if(headers_nm[j]!=nA && headers_nm[j]!=nB){
+                                one_record[ headers_nm[j] ]= records[i][headers_nm[j]];
+                                if(h!="") h+="|";
+                                h+=records[i][headers_nm[j]];
+                            }
+                        }
+                        if(h!="" && pivot_ids.indexOf(h)==-1){
+                            pivot_ids.push(h);
+                            pivot_records.push(one_record);
+                        }
+                        if(h!=""){
+                            var ii=pivot_ids.indexOf(h);
+                            pivot_records[ii][n]=v;
+                            if(pivot_headers.indexOf(n)==-1) pivot_headers.push(n);
+                        }
+                    }
+                    /*
+                    console.log(pivot_ids);
+                    console.log(pivot_headers);
+                    console.log(pivot_records);
+                    */
+
+                    // header ----------
+                    var txt="<tr><th></th>";
+                    var N=pivot_headers.length;
+                    for(var j=0;j<N;j++){
+                        var nm=pivot_headers[j];
+                        txt+="<th>"+nm+"</th>";
+                    }
+                    // pivot records ----------
+                    for(var i=0;i<pivot_records.length;i++){
+                        var rd={};
+                        txt+="<tr><td>"+(i+1)+"</td>";
+                        for(var j=0;j<N;j++){
+                            var pp=pivot_headers[j];
+                            var c=pivot_records[i][pp];
+                            if(c==undefined) c="";
+                            rd[pp]=c;
+                            var td="<td>"+c+"</td>";
+                            if(j>=id_Len){
+                                if(option1['value']=='DOLLAR2'){
+                                    if(c!=""){
+                                        try{
+                                            c="$"+parseFloat(c).toFixed(2); 
+                                        }
+                                        catch(e){}
+                                        td="<td style='padding-left:10px;text-align:right'>$"+c+"</td>";
+                                    }
+                                }
+                            }
+                            txt+=td;
+                        }
+                        export_records.push(rd);
+                    }
+                    $('#grid__ID').html(txt);
+                    return;
                     // -----------------
                     $('#grid__ID').html(txt);
                     $('#grid__ID').find('i').on('click',function(){
@@ -233,15 +230,7 @@
                 });
             }
             //-------------------------------------------------
-            $('#keyword__ID').on('keypress',function(e){
-                if(e.keyCode === 13){
-                    e.preventDefault();
-                    m.set_req(); m.request_data(); 
-                }
-            })
             $('#query__ID').on('click',function(){    m.set_req(); m.request_data(); })
-            $("#p__ID").on('click',function(){  var I=$("#I__ID").text();I--; if(I<0) I=0; $("#I__ID").text(I); m.set_req(); m.request_data();})
-            $("#n__ID").on('click',function(){  var I=$("#I__ID").text();I++; if(I>m.max_I) I=m.max_I; $("#I__ID").text(I); m.set_req(); m.request_data();})
             //-------------------------------------
             m.delete=function(rid){
                 $vm.request({api:api,cmd:"delete",id:rid,table:table},function(res){
@@ -261,24 +250,12 @@
             };
             //-------------------------------
             $('#new__ID').on('click', function(){
-                if(form_module!='') $vm.show_module(form_module,{});
-                else $vm.show_module('json-editor',{table:table})
+                $vm.show_module('json-editor',{table:table})
             })
             //-------------------------------
-            $('#export__ID').on('click',function(){  m.set_export(); m.export_records(); })
+            $('#export__ID').on('click',function(){  m.export_records(); })
             m.export_records=function(){
-                open_model__ID();
-                $vm.request(m.req_export,function(N,i,txt){
-                    console.log(i+"/"+N);
-                    $('#msg__ID').text((100*i/N).toFixed(0)+"%");
-                    if(i==-1){
-                        var len=txt.length;
-                        var n_txt="["+txt.substring(5,len-9)+"]";
-                        var o=JSON.parse(n_txt);
-                        $vm.download_csv(table+".csv",o);
-                        close_model__ID();
-                    }
-                });
+                $vm.download_csv(table+".csv",export_records);
             }
             //---------------------------------------------
         }

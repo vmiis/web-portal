@@ -5,71 +5,20 @@
         <ul style="list-style-type:decimal;">
             <div>
                 <span class=LT__ID>Development</span>
-                <li><a href='?/wzd_patient_1'
-                    query='
-                        [
-                            {
-                                "$project" : { 
-                                    "UID": 1, 
-                                    "Data.streetAddress":"$Data.addressResidential.streetAddress",
-                                    "Data.postcode":"$Data.addressResidential.postcode",
-                                    "Data.suburb":"$Data.addressResidential.suburb",
-                                    "Data.state":"$Data.addressResidential.state",
-                                    "Data.country":"$Data.addressResidential.country",
-                                    "Data.firstName":1, 
-                                    "Data.lastName":1, 
-                                    "Data.email": 1,
-                                    "Data.phoneNumberHome":1,
-                                    "Data.phoneNumberWork":1,
-                                    "Data.phoneNumberMobile":1,
-                                    "Submit_date":1,
-                                    "Submitted_by":1 
-                                } 
-                            }
-                        ]
-                    '
-                >Test 1</a></li>
-                <li><a href='?/wapp_grid_sales-demo-0703'>Sales records</a></li>
-                <li><a href='?/wapp_query_sales-demo-0703'
-                    query='[
-                        {
-                            "$project":{
-                                "_id":1,
-                                "Year": {"$substr":[ "$I2", 0, 4] },
-                                "Month":{"$substr":[ "$I2", 5, 2] },
-                                "Amount":{"$toDouble": "$I3"}
-                            }
-                        },        
-                        {
-                            "$group":{
-                                "_id":{"Year":"$Year","Month":"$Month"},
-                                "Total_Sales": { "$sum": "$Amount"}
-                            }
-                        },
-                        {
-                            "$sort":{
-                                "_id":-1
-                            }  
-                        },
-                        {
-                            "$project":{
-                                "Data.Year":"$_id.Year",
-                                "Data.Month":"$_id.Month",
-                                "Data.Total Sales":"$Total_Sales"
-                            }
-                        }
-                    ]     
-                    '
-                    options='
-                        Total Sales|DOLLAR2
-                    '
-                >Sales monthly aggregation</a></li>
+                <li><a href='?/grid'   req=wzd_patient_1>Patients for Jeremy</a></li>
+                <li><a href='?/grid'   req=sales_records>Sales - Records</a></li>
+                <li><a href='?/query'  req=sales_1>Sales - Total amount monthly aggregation</a></li>
+                <li><a href='?/pivot'  req=sales_2>Sales - Total amount monthly aggregation by item</a></li>
+                <li><a href='?/pivot'  req=sales_3>Sales - Total amount monthly aggregation by region</a></li>
+                <li><a href='?/pivot'  req=sales_4>Sales - Total amount monthly aggregation by rep</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
     </div>
     <script>
         function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
             //--------------------------------------------------------
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
@@ -78,39 +27,14 @@
                 e.preventDefault();
                 e.stopPropagation();
                 var module_name=$(this).attr('href').replace('?\/','');
-                var query=$(this).attr('query');
-                var headers=$(this).attr('headers');
-                var options=$(this).attr('options');
-                if(module_name.substring(0,4)=='wzd_'){
-                    var table=module_name.substring(4);
-                    $vm.vm_table("wzd",table,query,headers,options);
-                }
-                else if(module_name.substring(0,10)=='wapp_grid_'){
-                    var data={
-                        api:'wapp',
-                        table:module_name.substring(10),
-                        query:$(this).attr('query'),
-                        headers:headers=$(this).attr('headers'),
-                        options:$(this).attr('options'),
-                        form_module:$(this).attr('form_module')
-                    };
-                    $vm.show_module('vm-grid',{Data:data})
-                }
-                else if(module_name.substring(0,11)=='wapp_query_'){
-                    var data={
-                        api:'wapp',
-                        table:module_name.substring(11),
-                        query:$(this).attr('query'),
-                        headers:headers=$(this).attr('headers'),
-                        options:$(this).attr('options'),
-                    };
-                    $vm.show_module('vm-query',{Data:data})
-                }
+                var req=$(this).attr('req');
+                     if(module_name=='grid')   $vm.show_module('vm-grid',{Data:vm_data[req]});
+                else if(module_name=='query')  $vm.show_module('vm-query',{Data:vm_data[req]});
+                else if(module_name=='pivot')  $vm.show_module('vm-pivot',{Data:vm_data[req]});
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
-                
             })
             //--------------------------------------------------------
         }

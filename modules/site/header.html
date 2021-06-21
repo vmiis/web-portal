@@ -13,30 +13,18 @@
                 <ul>
                     <li><a href="?/home"><i class="fa fa-home"></i> Home</a></li>
                     <li><a href="?/data-panel"><i class="fas fa-table"></i> Portal</a></li>
-                    <!--<li><a href="?/app-panel"><i class="fas fa-table"></i> Apps</a></li>-->
                     <li><a href="?/diagram"><i class="fas fa-project-diagram"></i> Diagram</a></li>
-                    <!--<li><a w=1 href="https://www.vmiis.com"><i class="fa fa-info"></i> About</a></li>-->
                     <li><a href="?/about"><i class="fa fa-info"></i> About</a></li>
                     <li><a href="?/signin" id=_signin__ID ><i class="fa fa-user"></i> Authentication</a></li>
-                    <!--<li><a href="" id=signout__ID ><i class="fa fa-user"></i> Sign out</a></li>-->
                 </ul>
             </div>
         </div>    
         <div id=right__ID style='margin-right: 10px'>
             <div id=menu_right__ID>
-                <!--<a href="sys_editor" id=edit__ID >Content Edit</a>-->
             </div>
             <label id=m_icon__ID for="hamburger__ID" style='color:#fff;font-size:28px;'><i class="fa fa-bars"></i></label>
         </div>   
-        <!-- 
-        <div top-right-corner id=top_right_corner__ID class='d-none d-xl-block'>
-            <div>
-                <span id=username__ID></span>
-            </div>
-        </div>
-        -->
     </div>    
-    <!--<div style='padding:1px 0 5px 10px;background-color: #e5e9ec;font-size:13px;' id=nav__ID></div>-->
     <div id=g_nav> </div>
     <script>
         function F__ID(){
@@ -111,55 +99,10 @@
                     ui.item.value='';
                 }
             })
-            //--------------------------------------
-            //$('#signin__ID').on('click',function(){
-            //    $vm.m365_signin();  
-            //})
-            //------------------------------------
-            $('#signout__ID').on('click',function(){
-                $vm.clear_token();
-                $vm.user_name="";
-                //$vm.m365_signout();  
-                //$vm.show_user();
-                //https://login.microsoftonline.com/common/oauth2/v2.0/logout              
-                location.reload();
-            })
-            //------------------------------------
-            $vm.show_user=function(){
-                if($vm.user_name==undefined || $vm.user_name=='guest'){
-                    $('#username__ID').text('');
-                    $('#signin__ID').show();
-                    $('#signout__ID').hide();
-                }
-                else{
-                    $('#username__ID').text('Welcome '+ $vm.displayname);
-                    $('#signin__ID').hide();
-                    $('#signout__ID').show();
-                }
-            }
-            //------------------------------------
-            $vm.exchange_microsoft_token=function(){
-                if($vm.microsoft_token!=undefined){
-                    $vm.request({cmd:'exchange-microsoft-token',token:$vm.microsoft_token},function(res){
-                        if(res.status=='ok'){
-                            $vm.user_name=res.result.user_name;
-                            $vm.displayname=res.result.displayname;
-                            $vm.set_token(res.result.token,res.result.username);
-                            $vm.show_user();
-                            var t=JSON.parse(res.result.token.split('|')[0]);
-                            $vm.groups=t.groups;
-                        }
-                    })
-                }
-            }
-            //------------------------------------
-            $vm.app_after_3rd_signin=function(){
-                $vm.exchange_microsoft_token();
-            }
-            //------------------------------------
+            //---------------------------------------------------------------
             $vm.init(function(){
                 $vm.init_status=1;
-                $vm.show_user();
+                //$vm.show_user();
             })
             //------------------------------------
             $vm.sys_nav_path=function(){
@@ -201,19 +144,6 @@
             xhr.send(null);
             //------------------------------------
             */
-
-
-//------------------------------------
-
-
-
-
-
-
-//-----------------------------------------------------------------
-
-
-
         }
     </script>
     <style>

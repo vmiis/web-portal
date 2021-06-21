@@ -34,7 +34,7 @@
 			}
             //-------------------------------------
             var request=function(i){
-                $vm.request({cmd:'printer',ip:i},function(res){
+                $vm.request({api:m.api,cmd:'printer',ip:i},function(res){
                     if(res.result.p00==undefined) res.result.p00='-';
                     if(res.result.p01==undefined) res.result.p01='-';
                     if(res.result.p02==undefined) res.result.p02='-';
