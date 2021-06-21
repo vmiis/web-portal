@@ -290,7 +290,7 @@
         
         "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},
         "sales-form":  	      {url:$H+"/forms/sales.html",Table:"sales-demo-0703"},
-
+        "Course_Registration_Form":  {url:$H+"/forms/jotform/Course_Registration_Form.html",api:"wapp",Table:"Course_Registration_Form_demo"},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

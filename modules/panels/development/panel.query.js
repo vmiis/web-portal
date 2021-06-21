@@ -1,5 +1,10 @@
 var vm_data={
     //-------------------------------
+    "Course_Registration_Form":{
+        "api":"wapp",
+        "table":"Course_Registration_Form_demo",
+        "form_module":"Course_Registration_Form"
+    },
     "wzd_patient_1":{
         "api":"wzd",
         "table":"patient_1",

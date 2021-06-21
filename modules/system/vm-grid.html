@@ -124,6 +124,9 @@
                         return;
                     }
                     //-------------------------------
+                    if(res.result[0].count==0){
+                        res.result[0].count.push({value:0})
+                    }
                     var N=res.result[0].count[0].value;
                     m.max_I=Math.ceil(N/m.limit)-1;
                     var n2=m.skip+m.limit; if(n2>N) n2=N;
