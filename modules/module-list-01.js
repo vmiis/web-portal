@@ -277,6 +277,7 @@
         "vm-grid":       {url:$H+"/system/vm-grid.html"},
         "vm-query":       {url:$H+"/system/vm-query.html"},
         "vm-pivot":       {url:$H+"/system/vm-pivot.html"},
+        "vm-table":       {url:$H+"/system/vm-table.html"},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
         
         "wappsystem-panel":     {url:$H+"/panels/wappsystem/panel.html", router:1},
@@ -291,6 +292,9 @@
         "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},
         "sales-form":  	      {url:$H+"/forms/sales.html",Table:"sales-demo-0703"},
         "Course_Registration_Form":  {url:$H+"/forms/jotform/Course_Registration_Form.html",api:"wapp",Table:"Course_Registration_Form_demo"},
+        
+        "excel-to-web-data-collection-form": {url:$H+"/data-collection/excel-to-web-data-collection-form.html", router:1},
+        "data-grid": {url:$H+"/data-collection/data-grid.html", router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

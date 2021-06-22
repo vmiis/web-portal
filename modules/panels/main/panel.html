@@ -13,6 +13,12 @@
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
+                <span class=LT__ID>Data Collection</span>
+                <li><a href='?/excel-to-web-data-collection-form'>Build a web form</a></li>
+                <li><a href='modules/data-collection/employee.html' target=_blank>Collect data</a></li>
+                <li><a href='?/vm-table'>View data</a></li>
+            </div>
+            <div>
                 <span class=LT__ID>Sales Tracking</span>
                 <li><a href='?/grid'   req=sales_records>Records</a></li>
                 <li><a href='?/query'  req=sales_1>Total amount monthly aggregation</a></li>
@@ -583,9 +589,8 @@
                 else if(module_name=='grid')   $vm.show_module('vm-grid',{Data:vm_data[req]});
                 else if(module_name=='query')  $vm.show_module('vm-query',{Data:vm_data[req]});
                 else if(module_name=='pivot')  $vm.show_module('vm-pivot',{Data:vm_data[req]});
+                else if(module_name=="modules/data-collection/employee.html") window.open("modules/data-collection/employee.html"); 
                 else if(module_name!="") $vm.show_module(module_name,{}); 
-                else if(module_name!="") $vm.show_module(module_name,{}); 
-                //else if(module_name!=""){ console.log(module_name); $vm.show_module(module_name,{}); }
             })
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
