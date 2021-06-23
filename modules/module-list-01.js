@@ -293,7 +293,7 @@
         "sales-form":  	      {url:$H+"/forms/sales.html",Table:"sales-demo-0703"},
         "Course_Registration_Form":  {url:$H+"/forms/jotform/Course_Registration_Form.html",api:"wapp",Table:"Course_Registration_Form_demo"},
         
-        "excel-to-web-data-collection-form": {url:$H+"/data-collection/excel-to-web-data-collection-form.html", router:1},
+        "excel-to-web-data-collection-form": {url:$H+"/data-collection/form-generator.html", router:1},
         "data-grid": {url:$H+"/data-collection/data-grid.html", router:1},
     }
     set_prefix(prefix,modules);

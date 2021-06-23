@@ -1,0 +1,247 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div>
+            <b>Web HTML form generator</b>
+            <br>(create html form based on each form field specifications in an excel file)
+        </div>
+        <br>
+        <input type="file" id="input_file__ID" style='display:none' />
+        <ul style="list-style-type:decimal;">
+            <b><span id=name__ID style='font-size: 150%;'></span></b><br><br>
+            <li><a id=file__ID>Select an excel file (read form field specifications from an excel file)</a></li>
+            <li><a id=form__ID>Preview form</a></li>
+            <li><a id=data__ID>Download html</a></li>
+        </ul>
+        <br>
+        <b>Excel samples</b> (download, modify and then go to the step 1 above to see how your form works)<br>
+        <ul>
+            <li><a href=__CURRENT_PATH__excel-samples/employee.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/employee.xlsx style='margin-right:20px'>select</u> Employee</li>
+            <li><a href=__CURRENT_PATH__excel-samples/sample01.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/sample01.xlsx style='margin-right:20px'>select</u> Sample01</li>
+            <li><a href=__CURRENT_PATH__excel-samples/student.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/student.xlsx style='margin-right:20px'>select</u> Student</li>
+            <li><a href=__CURRENT_PATH__excel-samples/tenant.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/tenant.xlsx style='margin-right:20px'>select</u> Tenant</li>
+            <li><a href=__CURRENT_PATH__excel-samples/property.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/property.xlsx style='margin-right:20px'>select</u> Property</li>
+        </ul>
+    </div>
+    <script>
+        function F__ID(){
+            //---------------------------------------------------------
+            var j_excel_field="";
+            var j_excel_form_config="";
+            var db_table="";
+            var form_name="";
+            var form_width="600px";
+            //---------------------------------------------------------
+            $('#file__ID').on('click',function(){
+                $('#input_file__ID').val('');
+                $('#input_file__ID').trigger('click');
+            })
+            //---------------------------------------------------------
+            var html_code=function(excel_field,excel_form_config,callback){
+                if(excel_field=="" ||excel_form_config==""){
+                    alert("Please select an excel specification file first.");
+                    callback("");
+                    return;
+                }
+                $.get('__CURRENT_PATH__/form-generator.template.html',function(txt){
+                    var f_txt=create_form_txt(excel_field,excel_form_config);
+                    txt=txt.replace('___FORM_CONTENTS___',f_txt)
+					txt=txt.replace('___FORM_WIDTH___',form_width);
+                    txt=txt.replace(/___DB_TABLE___/g,db_table);
+                    txt=txt.replace('___FORM_NAME___',form_name);
+                    callback(txt);
+                },'text');
+            }
+            //---------------------------------------------------------
+            $('#form__ID').on('click',function(){
+                html_code(j_excel_field,j_excel_form_config,function(txt){
+                    if(txt!=""){
+                        var newWindow = window.open();
+                        newWindow.document.write(txt);
+                        newWindow.document.close();
+                    }
+                })
+            })
+            //---------------------------------------------------------
+            $('#data__ID').on('click',function(){
+                html_code(j_excel_field,j_excel_form_config,function(txt){
+                    if(txt!=""){
+                        var fn=form_name+'.html';
+                        $vm.download_txt(fn,txt);
+                    }
+                })
+            })
+            //---------------------------------------------------------
+            $('#input_file__ID').on('change',function(e){ 
+                $('#name__ID').text(e.target.files[0].name);
+                read_excel(e);
+            })
+            //---------------------------------------------------------
+            $('#panel__ID u').on('click',function(){
+                var href=$(this).attr('href');
+                read_url(href,function(){
+                    $('#name__ID').text(href.split('/').pop());
+                })
+            })
+            //---------------------------------------------------------
+            var get_json=function(data){
+                var workbook = XLSX.read(data, {type: 'array'});
+                var i=0;
+                workbook.SheetNames.forEach(function(sheetName) {
+                    console.log(sheetName)
+                    if(sheetName=="Form Field")     j_excel_field=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+                    if(sheetName=="Configuration")  j_excel_form_config=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+                    i++;
+                })
+            }
+            //---------------------------------------------------------
+            var read_url=function(url,callback){
+                var oReq = new XMLHttpRequest();
+                oReq.open("GET", url, true);
+                oReq.responseType = "arraybuffer";
+                oReq.onload = function(oEvent) {
+                    var arrayBuffer = oReq.response;
+                    var data = new Uint8Array(arrayBuffer);
+                    get_json(data);
+                    callback();
+                };
+                oReq.send();
+            };            
+            //---------------------------------------------------------
+            var read_excel=function(e){
+                var f = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var data = e.target.result;
+                    data = new Uint8Array(data);
+                    get_json(data);
+                };
+                reader.readAsArrayBuffer(f);
+            }
+            //---------------------------------------------------------
+            var create_form_txt=function(excel_field,excel_form_config){
+                var H="";
+                //--------------------------------------------------------
+                H="";
+                var LL="";
+                for(var i=0;i<excel_form_config.length;i++){
+                    if(excel_form_config[i][0]=='Label on left side'){
+                        LL=excel_form_config[i][1];
+                    }
+                }
+
+                for(var i=1;i<excel_field.length;i++){
+                    var j;
+                    j=excel_field[0].indexOf('Database Field Name'); 	var database_name	=excel_field[i][j];
+                    j=excel_field[0].indexOf('Form Display Name'); 		var display_name	=excel_field[i][j];
+                    j=excel_field[0].indexOf('Field Type'); 			var type			=excel_field[i][j];
+                    j=excel_field[0].indexOf('Option1'); 				var option1			=excel_field[i][j];
+                    j=excel_field[0].indexOf('Required'); 				var required		=excel_field[i][j];
+                    
+                    if(required==undefined) required="";
+
+                    if(display_name==undefined) display_name=database_name;
+                    display_name=display_name.replace(/_/g,' ');
+                    database_name=database_name.replace(/ /g,'_');
+
+                    var c="";
+                    switch(type){
+                        case "Text":  		c="<input type=text  name="+database_name+" "+required+" />"; 	break;
+                        case "Email": 		c="<input type=email  name="+database_name+" "+required+" />";	break;
+                        case "Phone": 		c="<input type=phone  name="+database_name+" "+required+" />";	break;
+                        case "Textarea":	c="<textarea  name="+database_name+" "+required+" /></textarea>";break;
+                        case "Drop Down List":
+                            var c="<select  name="+database_name+" "+required+" />\r\n";
+                            var nv=option1.split(',');
+                            for(var k=0;k<nv.length;k++){
+                                var n=nv[k].split('/')[0];
+                                var v=nv[k].split('/').pop();
+                                c+="\t\t\t<option value="+v+">"+n+"</option>\r\n";
+                            }
+                            c+="\t\t</select>"
+                            break;
+                        case "Horizontal radio button list":
+                            var c="";
+                            var nv=option1.split(',');
+                            for(var k=0;k<nv.length;k++){
+                                var n=nv[k].split('/')[0];
+                                var v=nv[k].split('/').pop();
+                                if(k==0) c+="<label><input type='radio' name="+database_name+" value="+v+" "+required+" >&nbsp&nbsp"+n+"</label>&nbsp&nbsp&nbsp&nbsp";
+                                else c+="<label><input type='radio' name="+database_name+" value="+v+">&nbsp&nbsp"+n+"</label>&nbsp&nbsp&nbsp&nbsp";
+                            }
+                            break;
+                        case "Vertical radio button list":
+                            var c="";
+                            var nv=option1.split(',');
+                            for(var k=0;k<nv.length;k++){
+                                var n=nv[k].split('/')[0];
+                                var v=nv[k].split('/').pop();
+                                if(k==0) c+="<label><input type='radio' name="+database_name+" value="+v+" "+required+" >&nbsp&nbsp"+n+"</label><br>";
+                                else c+="<label><input type='radio' name="+database_name+" value="+v+">&nbsp&nbsp"+n+"</label><br>";
+                            }
+                            break;
+                    }
+                    if(LL!="Yes"){
+                        H+="<div>\r\n";
+                        H+="\t<div w='100|100'>\r\n";
+                        H+="\t\t<span>"+display_name+"</span>\r\n";
+                        H+="\t\t"+c+"</span>\r\n";
+                        H+="\t</div>\r\n";
+                        H+="</div>\r\n";
+                    }
+                    else{
+                        H+="<div>\r\n";
+                        H+="\t<div w='100|30'>\r\n";
+                        H+="\t\t<span>"+display_name+"</span>\r\n";
+                        H+="\t</div>\r\n";
+                        H+="\t<div w='100|70'>\r\n";
+                        H+="\t\t"+c+"</span>\r\n";
+                        H+="\t</div>\r\n";
+                        H+="</div>\r\n";
+                    }
+                    
+                }
+                for(var i=0;i<excel_form_config.length;i++){
+                    if(excel_form_config[i][0]=='Form Title'){
+                        form_name=excel_form_config[i][1];
+                    }
+                    else if(excel_form_config[i][0]=='Form Width'){
+                        form_width=excel_form_config[i][1]+'px';
+                    }
+                    else if(excel_form_config[i][0]=='Database Table Name'){
+                        db_table=excel_form_config[i][1];
+                    }
+                }
+                return H;
+            }
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        #panel__ID{
+            margin:0 auto;
+            max-width:1400px;
+            padding:120px 120px 10px 50px;
+            font-size:14px;
+    		/*max-width: 100%;*/
+            font-size:14px;
+        }
+        #panel__ID a,#panel__ID u {
+            cursor:pointer;
+            text-decoration-line: underline;
+        }
+        #panel__ID a:link {
+            color:#555;
+        }
+        #panel__ID a:visited {
+            color:#555;
+        }
+        #panel__ID a:hover,#panel__ID u:hover {
+            color:red;
+        }
+    </style>
+</div>
