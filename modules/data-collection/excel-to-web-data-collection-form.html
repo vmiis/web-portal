@@ -46,7 +46,7 @@
                     var f_txt=create_page_txt(excel_field,excel_form_config);
                     txt=txt.replace('___FORM_CONTENTS___',f_txt)
 					txt=txt.replace('___FORM_WIDTH___',form_width);
-                    txt=txt.replace('___DB_TABLE___',db_table);
+                    txt=txt.replace(/___DB_TABLE___/g,db_table);
                     txt=txt.replace('___FORM_NAME___',form_name);
                     callback(txt);
                 },'text');
