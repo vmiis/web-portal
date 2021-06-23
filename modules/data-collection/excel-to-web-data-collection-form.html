@@ -3,28 +3,23 @@
         <div>
             <b>Web HTML form generator</b>
             <br>(create html form based on each form field specifications in an excel file)
-            <br>
-            <br>
-            <br>
         </div>
+        <br>
         <input type="file" id="input_file__ID" style='display:none' />
         <ul style="list-style-type:decimal;">
-            <b><span id=name__ID></span></b><br><br>
+            <b><span id=name__ID style='font-size: 150%;'></span></b><br><br>
             <li><a id=file__ID>Select an excel file (read form field specifications from an excel file)</a></li>
             <li><a id=form__ID>Preview form</a></li>
             <li><a id=data__ID>Download html</a></li>
         </ul>
         <br>
-        <br>
-        <br>
-        <br>
+        <b>Excel samples</b> (download, modify and then go to the step 1 above to see how your form works)<br>
         <ul>
-            <b>Excel samples</b> (download, modify and then go to the step 1 above to see how your form works)<br>
-            <li><a href=__CURRENT_PATH__excel-samples/sample01.xlsx>Sample 01</a></li>
-            <li><a href=__CURRENT_PATH__excel-samples/student.xlsx>Student</a></li>
-            <li><a href=__CURRENT_PATH__excel-samples/employee.xlsx>Employee</a></li>
-            <li><a href=__CURRENT_PATH__excel-samples/tenant.xlsx>Tenant</a></li>
-            <li><a href=__CURRENT_PATH__excel-samples/property.xlsx>Property</a></li>
+            <li><a href=__CURRENT_PATH__excel-samples/employee.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/employee.xlsx style='margin-right:20px'>select</u> Employee</li>
+            <li><a href=__CURRENT_PATH__excel-samples/sample01.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/sample01.xlsx style='margin-right:20px'>select</u> Sample01</li>
+            <li><a href=__CURRENT_PATH__excel-samples/student.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/student.xlsx style='margin-right:20px'>select</u> Student</li>
+            <li><a href=__CURRENT_PATH__excel-samples/tenant.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/tenant.xlsx style='margin-right:20px'>select</u> Tenant</li>
+            <li><a href=__CURRENT_PATH__excel-samples/property.xlsx>download</a> <u href=__CURRENT_PATH__excel-samples/property.xlsx style='margin-right:20px'>select</u> Property</li>
         </ul>
     </div>
     <script>
@@ -70,7 +65,7 @@
             $('#data__ID').on('click',function(){
                 html_code(j_excel_field,j_excel_form_config,function(txt){
                     if(txt!=""){
-                        var fn='form.html';
+                        var fn=form_name+'.html';
                         $vm.download_txt(fn,txt);
                     }
                 })
@@ -81,8 +76,36 @@
                 read_excel(e);
             })
             //---------------------------------------------------------
-            //var excel_field=[];
-            //var excel_form_config=[];
+            $('#panel__ID u').on('click',function(){
+                var href=$(this).attr('href');
+                read_url(href,function(){
+                    $('#name__ID').text(href.split('/').pop());
+                })
+            })
+            //---------------------------------------------------------
+            var get_json=function(data){
+                var workbook = XLSX.read(data, {type: 'array'});
+                var i=0;
+                workbook.SheetNames.forEach(function(sheetName) {
+                    console.log(sheetName)
+                    if(sheetName=="Form Field")     j_excel_field=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+                    if(sheetName=="Configuration")  j_excel_form_config=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+                    i++;
+                })
+            }
+            //---------------------------------------------------------
+            var read_url=function(url,callback){
+                var oReq = new XMLHttpRequest();
+                oReq.open("GET", url, true);
+                oReq.responseType = "arraybuffer";
+                oReq.onload = function(oEvent) {
+                    var arrayBuffer = oReq.response;
+                    var data = new Uint8Array(arrayBuffer);
+                    get_json(data);
+                    callback();
+                };
+                oReq.send();
+            };            
             //---------------------------------------------------------
             var read_excel=function(e){
                 var f = e.target.files[0];
@@ -90,6 +113,8 @@
                 reader.onload = function(e) {
                     var data = e.target.result;
                     data = new Uint8Array(data);
+                    get_json(data);
+                    /*
                     var workbook = XLSX.read(data, {type: 'array'});
                     var i=0;
                     workbook.SheetNames.forEach(function(sheetName) {
@@ -98,6 +123,7 @@
                         if(sheetName=="Configuration")  j_excel_form_config=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
                         i++;
                     })
+                    */
                 };
                 reader.readAsArrayBuffer(f);
             }
@@ -191,44 +217,6 @@
                 }
                 return form_contents;
             }
-            $vm.download_txt=function(fn,txt){
-                //-----------------------
-                var bytes = [];
-                    bytes.push(239);
-                    bytes.push(187);
-                    bytes.push(191);
-                for (var i = 0; i < txt.length; i++) {
-                    if(txt.charCodeAt(i)<128) {
-                        bytes.push(txt.charCodeAt(i));
-                    }
-                    else if(txt.charCodeAt(i)<2048) {
-                        bytes.push(( (txt.charCodeAt(i) & 192) >> 6 ) + ((txt.charCodeAt(i) & 1792)>>6 ) +192); //xC0>>6 + x700>>8 +xE0
-                        bytes.push(txt.charCodeAt(i) & 63 + 128); //x3F + x80
-                    }
-                    else if(txt.charCodeAt(i)<65536) {
-                        bytes.push(((txt.charCodeAt(i) & 61440) >>12) + 224 ); //xF00>>12 + xE0
-                        bytes.push(( (txt.charCodeAt(i) & 192) >> 6 ) + ((txt.charCodeAt(i) & 3840)>>6 ) +128); //xC0>>6 + xF00>>8 +x80
-                        bytes.push(txt.charCodeAt(i) & 63 + 128); //x3F + x80
-                    }
-                }
-                var u8 = new Uint8Array(bytes);
-                var blob = new Blob([u8]);
-                //-----------------------
-                if (navigator.appVersion.toString().indexOf('.NET') > 0){
-                    window.navigator.msSaveBlob(blob, fn);
-                }
-                else{
-                    var link = document.createElement("a");
-                    link.setAttribute("href", window.URL.createObjectURL(blob));
-                    link.setAttribute("download", fn);
-                    link.style = "visibility:hidden";
-                    link.download = fn;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
-            }
-            //---------------------------------------------
         }
     </script>
     <style>
@@ -246,11 +234,17 @@
     		/*max-width: 100%;*/
             font-size:14px;
         }
-        #panel__ID a{
+        #panel__ID a,#panel__ID u {
             cursor:pointer;
             text-decoration-line: underline;
         }
-        #panel__ID a:hover {
+        #panel__ID a:link {
+            color:#555;
+        }
+        #panel__ID a:visited {
+            color:#555;
+        }
+        #panel__ID a:hover,#panel__ID u:hover {
             color:red;
         }
     </style>

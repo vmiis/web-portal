@@ -15,8 +15,8 @@
             <div>
                 <span class=LT__ID>Data Collection</span>
                 <li><a href='?/excel-to-web-data-collection-form'>Build a web form</a></li>
-                <li><a href='modules/data-collection/employee.html' target=_blank>Collect data</a></li>
-                <li><a href='?/vm-table'>View data</a></li>
+                <li><a href='modules/data-collection/employee.html' target=_blank>Open a form to collect data to table 'Employee' </a></li>
+                <li><a href='?/vm-table_Employee'>View data in table 'Employee'</a></li>
             </div>
             <div>
                 <span class=LT__ID>Sales Tracking</span>
@@ -586,6 +586,13 @@
                     };
                     $vm.show_module('vm-grid',{Data:data})
                 }
+                else if(module_name.substring(0,9)=='vm-table_'){
+                    var data={
+                        api:'wapp',
+                        table:module_name.substring(9),
+                    };
+                    $vm.show_module('vm-table',{Data:data})
+                }
                 else if(module_name=='grid')   $vm.show_module('vm-grid',{Data:vm_data[req]});
                 else if(module_name=='query')  $vm.show_module('vm-query',{Data:vm_data[req]});
                 else if(module_name=='pivot')  $vm.show_module('vm-pivot',{Data:vm_data[req]});
@@ -644,19 +651,19 @@
         .panel__ID li{
             /*text-decoration: none;*/
         }
-        a {
+        #panel__ID a {
             text-decoration: none;
         }
-        a:link {
+        #panel__ID a:link {
             color:#555;
         }
-        a:visited {
+        #panel__ID a:visited {
             color:#555;
         }
-        a:hover {
+        #panel__ID a:hover {
             color:red;
         }
-        a:active {
+        #panel__ID a:active {
             color:#555;
         }
         #D__ID input::placeholder {

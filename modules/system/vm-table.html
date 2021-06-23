@@ -34,12 +34,20 @@
             var m=$vm.module_list['__MODULE__'];
             //-------------------------------------------------
             var api="wapp";
-            var table;
+            var table="";
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
-                table=localStorage.getItem('g_data-grid_table_name');
+                api="wapp";
+                if(m.input.Data!=undefined){
+                    if(m.input.Data.api!=undefined); api=m.input.Data.api;
+                    if(m.input.Data.table!=undefined); table=m.input.Data.table;
+                }
+                else{
+                    table=localStorage.getItem('g_data-grid_table_name');
+                }
                 if(table!=null){
                     $('#table_name__ID').val(table);
+                    m.set_req(); m.request_data();
                 }
             })
             //--------------------------------------------------------
