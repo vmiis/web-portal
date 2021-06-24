@@ -120,7 +120,7 @@
 			},100);
 			//-------------------------------------
 			$('#staff_link1__ID').on('click',function(){
-				$vm.load_module('m4','',{});
+				$vm.load_module(m.staff_data,'',{});
 			})
 			//-------------------------------------
 			$('#staff_link2__ID').on('click',function(){
@@ -131,7 +131,7 @@
 				}
 				$vm.request({cmd:"find",table:m.lookup,query:{UID:parseInt(uid)}},function(res){
 					if(res.result.length==1){
-						$vm.load_module('m5','',{record:res.result[0]});
+						$vm.load_module(m.staff_form,'',{record:res.result[0]});
 					}
 				});
 			})

@@ -17,7 +17,10 @@
     m[p+"staff-data"]=              {url:H+"/shift-roster/staff.data.html",api:api, Table:'demo-vm-19091702',form_module:p+"staff-form", router:1};
     m[p+"staff-form"]=              {url:H+"/shift-roster/staff.form.html",api:api, Table:'demo-vm-19091702'};
     m[p+"roster-data"]=             {url:H+"/shift-roster/roster.data.html",api:api, Table:'demo-vm-19091701',form_module:p+"roster-form", router:1};
-    m[p+"roster-form"]=             {url:H+"/shift-roster/roster.form.html",api:api, Table:'demo-vm-19091701'};
+    m[p+"roster-form"]=             {url:H+"/shift-roster/roster.form.html",api:api, Table:'demo-vm-19091701',
+                                        lookup:"demo-vm-19091702",staff_data:p+"staff-data",staff_form:p+"staff-form"};
     m[p+"shift-roster-month"]=      {url:H+"/shift-roster/calendar-month.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
+    m[p+"shift-roster-week"]=       {url:H+"/shift-roster/calendar-week.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
+    m[p+"shift-roster-day"]=        {url:H+"/shift-roster/calendar-day.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     //-------------------------------------------------------------------------------------
 })();

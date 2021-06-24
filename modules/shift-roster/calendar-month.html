@@ -11,14 +11,15 @@
         m.total_width=(24*60-m.start_point);
         //--------------------------------------------------------
     	m.on_day_click_fun=function(date){
-			$vm.load_module(m.booking,'',{day:date,goback:1})
+			//$vm.load_module(m.booking,'',{day:date,goback:1})
+			$vm.show_module(m.booking,{day:date,goback:1})
     	}
     	//--------------------------------------------------------
         m.request_and_render=function(){
             var mt1=new Date().getTime();
             var dt1=$vm.date_to_yyyymmdd(m.first_day);
             var dt2=$vm.date_to_yyyymmdd($vm.date_add_days(m.last_day,1));
-            $vm.request({cmd:"find",table:m.Table,query:{I1:{"$gte":dt1,"$le":dt2}},sort:{I1:1,I2:1},options:{}},function(res){
+            $vm.request({cmd:"find",table:m.Table,query:{I1:{"$gte":dt1,"$lt":dt2}},sort:{I1:1,I2:1},options:{}},function(res){
                 if(res.permission==false){
                     alert("No permission to get booking information.");
                     return;
@@ -52,10 +53,11 @@
             var ww=(100*(parseInt(bb[0])*60+parseInt(bb[1]))/m.total_width).toFixed(2)+"%";
             
             var $div=m.get_cell_div(date);
-            var item="<div style='color:"+$vm.whire_or_black_color(color)+";margin-left:"+mm+";width:"+ww+";' class=item__ID  ><div id=item__ID"+id+" style='padding-left:3px; background-color:"+color+";border-radius:3px;box-shadow: 3px 3px 2px #888888;' >"+time+" "+name+"</div></div>"
+            var item="<div style='color:"+$vm.whire_or_black_color(color)+";margin-left:"+mm+";width:"+ww+";' class=item__ID  ><div id=item__ID"+id+" style='padding-left:3px; background-color:"+color+";border-radius:3px;box-shadow: 3px 3px 2px #888888;' >"+name+"</div></div>"
             $div.append(item);
             $('#item__ID'+id).on('click',function(){
-                $vm.load_module(m.booking,'',{record:record});
+                //$vm.load_module(m.booking,'',{record:record});
+                $vm.show_module(m.booking,{record:record});
             });
         }
         //--------------------------------------------------------
