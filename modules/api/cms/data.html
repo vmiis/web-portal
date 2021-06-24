@@ -21,7 +21,7 @@
                             //var query=records[I].Data.Query;
                             var columns=records[I].Data.Columns;
                             var array='result';
-                            var req={cmd:'find',options:{sql:1,uid:uid}}
+                            var req={api:"wzd",cmd:'find',options:{sql:1,uid:uid}}
                             $vm.request(req,function(res){
                                 //console.log(res.result)
                                 var v=res;

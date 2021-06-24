@@ -323,7 +323,7 @@
                 })
             }
             $vm.sqlserver_query=function(UID){
-                $vm.request({cmd:"find",table:"cms-api",query:{UID:UID},options:{}},function(res){
+                $vm.request({api:"wzd",cmd:"find",table:"cms-api",query:{UID:UID},options:{}},function(res){
                     var records=res.result;
                     if(records!=undefined && records.length==1){
                         var uid=records[0].UID;
@@ -336,7 +336,7 @@
                             if(p==null) return;
                             query=query.replace('[INPUT]',p);
                         }      
-                        var req={cmd:'find',options:{sql:1,uid:uid}}
+                        var req={api:"wzd",cmd:'find',options:{sql:1,uid:uid}}
                         $vm.request(req,function(res){
                             var v=res;
                             if(res.status=="err"){

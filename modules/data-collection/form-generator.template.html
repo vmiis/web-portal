@@ -4,12 +4,14 @@
         <title>Web Data Collection Form</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel="icon" href="data:,">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" />
     </head>
     <body>
         <div id=layout1>
             <div id=header>
-                Web data collection form
+                Web data collection form 
+				<div style='float: right; font-size: 15px;	padding-right: 20px;'>
+					<u><a style='color:#fff' target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=___DB_TABLE___' >Database Table: ___DB_TABLE___</a></u>
+				</div>
             </div>
             <div id=layout2>
                 <div id=content>
@@ -83,13 +85,26 @@ ___FORM_CONTENTS___
 						</script>
 					</div>
                 </div>
-                <div id=footer>
-                    Database Table: ___DB_TABLE___</a>
+                <div id=footer>                   
+                    Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
                 </div>
             </div>
         </div>
     </body>
     <style site css>
+		*, *::before, *::after {
+			box-sizing: border-box;
+		}
+		body{
+			margin: 0;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #212529;
+			text-align: left;
+			background-color: #fff;			
+		}
         html,body{
             margin:0;
             padding:0;
@@ -110,19 +125,24 @@ ___FORM_CONTENTS___
             font-size: 28px;
             font-weight: bold;
             padding-top:8px;
+            padding-bottom:8px;
             padding-left:20px;
             color:white;
-            height:60px;
             width:100%;
             background-color:#1d505f;
         }
+		#content{
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr;
+		}
         #footer{
             font-size: 15px;
             font-weight: bold;
             padding-top:3px;
+            padding-bottom:3px;
             padding-left:20px;
             color:white;
-            height:30px;
             width:100%;
             background-color:#1d505f;
         }

@@ -218,8 +218,8 @@
         "microsoft-api-form":{  url:$H+"/api/microsoft/form.html",  Table:"microsoft-api" },
         "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  Table:"mongodb-api", api:"wzd", form_module: 'mongodb-api-form', router:1  },
         "mongodb-api-form":{  url:$H+"/api/mongodb/form.html",  Table:"mongodb-api" },
-        "cms-api-data":{  url:$H+"/api/cms/data.html",  Table:"cms-api", form_module: 'cms-api-form', router:1  },
-        "cms-api-form":{  url:$H+"/api/cms/form.html",  Table:"cms-api" },
+        "cms-api-data":{  url:$H+"/api/cms/data.html",  api:"wzd",Table:"cms-api", form_module: 'cms-api-form', router:1  },
+        "cms-api-form":{  url:$H+"/api/cms/form.html",  api:"wzd",Table:"cms-api" },
         "coreplus-api-data":{  url:$H+"/api/coreplus/data.html",  Table:"coreplus-api", form_module: 'coreplus-api-form', router:1  },
         "coreplus-api-form":{  url:$H+"/api/coreplus/form.html",  Table:"coreplus-api" },
                 
@@ -277,7 +277,7 @@
         "vm-grid":       {url:$H+"/system/vm-grid.html"},
         "vm-query":       {url:$H+"/system/vm-query.html"},
         "vm-pivot":       {url:$H+"/system/vm-pivot.html"},
-        "vm-table":       {url:$H+"/system/vm-table.html"},
+        "vm-table":       {url:$H+"/system/vm-table.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
         
         "wappsystem-panel":     {url:$H+"/panels/wappsystem/panel.html", router:1},

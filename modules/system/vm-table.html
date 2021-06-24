@@ -42,6 +42,9 @@
                     if(m.input.Data.api!=undefined); api=m.input.Data.api;
                     if(m.input.Data.table!=undefined); table=m.input.Data.table;
                 }
+                else if(window.location.toString().indexOf('&table=')!=-1){
+                    table=window.location.toString().split('&table=').pop().split('&')[0];
+                }
                 else{
                     table=localStorage.getItem('g_data-grid_table_name');
                 }
