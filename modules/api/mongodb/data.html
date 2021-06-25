@@ -37,8 +37,8 @@
                                 return;
                             }
                             //var pipeline=[{ $group : {_id:"$I2", count:{$sum:1}}}];
-                            var req={cmd:cmd,table:table,pipeline:pipeline}
-                            if(cmd=='find' || cmd=='count') req={cmd:cmd,table:table,query:pipeline}
+                            var req={api:"wzd",cmd:cmd,table:table,pipeline:pipeline}
+                            if(cmd=='find' || cmd=='count') req={api:"wzd",cmd:cmd,table:table,query:pipeline}
                             $vm.request(req,function(res){
                                 console.log(res.result)
                                 var v=res;

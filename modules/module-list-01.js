@@ -216,12 +216,12 @@
         
         "microsoft-api-data":{  url:$H+"/api/microsoft/data.html",  Table:"microsoft-api", form_module: 'microsoft-api-form', router:1  },
         "microsoft-api-form":{  url:$H+"/api/microsoft/form.html",  Table:"microsoft-api" },
-        "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  Table:"mongodb-api", api:"wzd", form_module: 'mongodb-api-form', router:1  },
-        "mongodb-api-form":{  url:$H+"/api/mongodb/form.html",  Table:"mongodb-api" },
+        "mongodb-api-data":{  url:$H+"/api/mongodb/data.html",  api:"wzd",Table:"mongodb-api", api:"wzd", form_module: 'mongodb-api-form', router:1  },
+        "mongodb-api-form":{  url:$H+"/api/mongodb/form.html",  api:"wzd",Table:"mongodb-api" },
         "cms-api-data":{  url:$H+"/api/cms/data.html",  api:"wzd",Table:"cms-api", form_module: 'cms-api-form', router:1  },
         "cms-api-form":{  url:$H+"/api/cms/form.html",  api:"wzd",Table:"cms-api" },
-        "coreplus-api-data":{  url:$H+"/api/coreplus/data.html",  Table:"coreplus-api", form_module: 'coreplus-api-form', router:1  },
-        "coreplus-api-form":{  url:$H+"/api/coreplus/form.html",  Table:"coreplus-api" },
+        "coreplus-api-data":{  url:$H+"/api/coreplus/data.html",  api:"wzd",Table:"coreplus-api", form_module: 'coreplus-api-form', router:1  },
+        "coreplus-api-form":{  url:$H+"/api/coreplus/form.html",  api:"wzd",Table:"coreplus-api" },
                 
         "microsoft-data":{url:$vm.hosting_path+"/modules/api/woolcock-dynamics-365/microsoft-data.html",form_module:"jsonv"},
         

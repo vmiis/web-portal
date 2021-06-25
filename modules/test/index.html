@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Data Collection Form</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="icon" href="data:,">
+    </head>
+    <body>
+        <div id=layout1>
+            <div id=header>
+                Web data collection form 
+				<div style='float: right; font-size: 15px;	padding-right: 20px;'>
+					<u><a style='color:#fff' target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=Employee' >Database Table: Employee</a></u>
+				</div>
+            </div>
+            <div id=layout2>
+                <div id=content>
+                </div>
+                <div id=footer>                   
+                    Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        var doc=document.getElementById("content");
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {doc.innerHTML = this.responseText;}
+                if (this.status == 404) {doc.innerHTML = "Page not found.";}
+            }
+        }
+        xhttp.open("GET", "form.html", true);
+        xhttp.send();        
+    </script>
+    <style site css>
+		*, *::before, *::after {
+			box-sizing: border-box;
+		}
+		body{
+			margin: 0;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #212529;
+			text-align: left;
+			background-color: #fff;			
+		}
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        #layout1 {
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+        #layout2 {
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            overflow:auto;
+        }
+        #header{
+            font-size: 28px;
+            font-weight: bold;
+            padding-top:8px;
+            padding-bottom:8px;
+            padding-left:20px;
+            color:white;
+            width:100%;
+            background-color:#1d505f;
+        }
+		#content{
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr;
+		}
+        #footer{
+            font-size: 15px;
+            font-weight: bold;
+            padding-top:3px;
+            padding-bottom:3px;
+            padding-left:20px;
+            color:white;
+            width:100%;
+            background-color:#1d505f;
+        }
+    </style>
+</html>
