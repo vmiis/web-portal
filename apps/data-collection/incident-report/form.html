@@ -1,0 +1,131 @@
+<div id=D__ID>
+    <section id=form_container__ID bp=576 style='display:flow-root;'>
+        <div id=header__ID>
+            Incident Report
+        </div>
+		<div style='padding:10px'>
+			This Incident Investigation Form should be used to record all incidents, including near misses, and may also be used to report hazards in the workplace.
+			The form should be completed as soon as possible following the incident. If the person involved cannot complete the form it may be completed on their behalf.			
+			<hr>
+		</div>
+        <form id=F__ID action="https://api.wappsystem.com/Employee" method="post" onsubmit="submit__ID.disabled = true; alert('Thank you for your submission')" >
+			
+            <div>
+                <div w='100|30'>
+                    <span>Employee ID</span>
+                </div>
+                <div w='100|70'>
+                    <input type=text  name=Employee_ID Required /></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>First Name</span>
+                </div>
+                <div w='100|70'>
+                    <input type=text  name=First_Name Yes /></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Last Name</span>
+                </div>
+                <div w='100|70'>
+                    <input type=text  name=Last_Name Yes /></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Gender</span>
+                </div>
+                <div w='100|70'>
+                    <label><input type='radio' name=Gender value=Male  >&nbsp&nbspMale</label>&nbsp&nbsp&nbsp&nbsp<label><input type='radio' name=Gender value=Female>&nbsp&nbspFemale</label>&nbsp&nbsp&nbsp&nbsp<label><input type='radio' name=Gender value=Other>&nbsp&nbspOther</label>&nbsp&nbsp&nbsp&nbsp</span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Email</span>
+                </div>
+                <div w='100|70'>
+                    <input type=email  name=Email  /></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Mobile Phone</span>
+                </div>
+                <div w='100|70'>
+                    <input type=phone  name=Mobile_Phone  /></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Department</span>
+                </div>
+                <div w='100|70'>
+                    <select  name=Department  />
+                        <option value=></option>
+                        <option value=Marketing>Marketing</option>
+                        <option value=HR>HR</option>
+                        <option value=IT>IT</option>
+                        <option value=Finance>Finance</option>
+                        <option value=Production>Production</option>
+                    </select></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Address</span>
+                </div>
+                <div w='100|70'>
+                    <textarea  name=Address  /></textarea></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>State</span>
+                </div>
+                <div w='100|70'>
+                    <select  name=State  />
+                        <option value=></option>
+                        <option value=NSW>NSW</option>
+                        <option value=VIC>VIC</option>
+                        <option value=QLD>QLD</option>
+                        <option value=WA>WA</option>
+                        <option value=SA>SA</option>
+                        <option value=TAS>TAS</option>
+                        <option value=ACT>ACT</option>
+                        <option value=NT>NT</option>
+                    </select></span>
+                </div>
+            </div>
+            <div>
+                <div w='100|30'>
+                    <span>Postcode</span>
+                </div>
+                <div w='100|70'>
+                    <input type=text  name=Postcode  /></span>
+                </div>
+            </div>
+
+            <div>
+                <div w='100|100' class=c_print>
+                    <button id=submit__ID >Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <style>
+        #form_container__ID{
+            max-width:700px;
+        }
+    </style>
+    <script>
+		(function(){
+			console.log(111)
+			var n=function(n){
+				console.log(222)
+				var f=n[0].contentRect.width,k=n[0].target.id,d=document.getElementById(k).getAttribute("bp"),u,s,h,c,l,t,w,a,v,y,p,b,o;if(d!=null)for(u=d.split("|"),s=1e7,u.length>0&&(s=parseInt(u[0])),h=2e7,u.length>1&&(h=parseInt(u[1])),c=3e7,u.length>2&&(c=parseInt(u[2])),l=4e7,u.length>3&&(l=parseInt(u[3])),t=document.getElementById(k).getElementsByTagName("div"),i=0;i<t.length;i++)if(w=t[i].getAttribute("w"),w!=null){t[i].style.float="left";t[i].style["box-sizing"]="border-box";t[i].parentElement.style["border-width"]=0;t[i].parentElement.style["box-sizing"]="border-box";t[i].parentElement.style.display="flow-root";var r=w.split("|"),e=parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("width").replace(".px","")),g=parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("padding-left").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("padding-right").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("border-left-width").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("border-right-width").replace(".px",""));e=e-g;a=576;r.length>0&&(a=e*r[0]/100);v=a;r.length>1&&(v=e*r[1]/100);y=v;r.length>2&&(y=e*r[2]/100);p=y;r.length>3&&(p=e*r[3]/100);b=p;r.length>4&&(b=e*r[4]/100);o=0;f<s&&(o=a);f>=s&&f<h&&(o=v);f>=h&&f<c&&(o=y);f>=c&&f<l&&(o=p);f>=l&&(o=b);t[i].style.width=o+"px"}};new ResizeObserver(n).observe(form_container__ID)})()							
+    </script>
+    <link rel="stylesheet" href="form.css" />
+</div>

@@ -138,6 +138,7 @@
                     j=excel_field[0].indexOf('Required'); 				var required		=excel_field[i][j];
                     
                     if(required==undefined) required="";
+                    if(required=='Yes') required=" required";
 
                     if(display_name==undefined) display_name=database_name;
                     display_name=display_name.replace(/_/g,' ');

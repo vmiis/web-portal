@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Data Collection Form</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="site.css" />
+    </head>
+    <body>
+        <div id=layout1>
+            <div id=header>
+                Web data collection form 
+				<div style='float: right; font-size: 15px;	padding-right: 20px;'>
+					<u><a style='color:#fff' target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=Employee' >Database Table: Employee</a></u>
+				</div>
+            </div>
+            <div id=layout2>
+                <div id=content></div>
+                <div id=footer>                   
+                    Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>var doc=document.getElementById("content");xhttp=new XMLHttpRequest;xhttp.onreadystatechange=function(){this.readyState==4&&(this.status==200&&(doc.innerHTML=this.responseText),this.status==404&&(doc.innerHTML="Page not found."))};xhttp.open("GET","form.html",!0);xhttp.send()</script>
+    <style>
+        body{
+            background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;
+            background-image: url(https://images.unsplash.com/photo-1574021528306-412578dd97d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+        }
+    </style>
+</html>
