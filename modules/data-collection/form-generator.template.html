@@ -4,48 +4,64 @@
         <title>Web Data Collection Form</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="site.css" />
     </head>
     <body>
-        <div id=layout1>
-            <div id=header>
-                Web data collection form 
-				<div style='float: right; font-size: 15px;	padding-right: 20px;'>
-					<u><a style='color:#fff' target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=___DB_TABLE___' >Database Table: ___DB_TABLE___</a></u>
-				</div>
+        <div id=header>
+            <div id=logo>
+                <span id=logo_a>Business</span><br>
+                <span id=logo_b>Data Collection</span>
             </div>
-            <div id=layout2>
-                <div id=content>
-                    <div id=D__ID>
-						<section id=form_container__ID bp=576 style='display:flow-root;'>
-							<div id=header__ID>
-								___FORM_NAME___
-							</div>
-							<form id=F__ID action="https://api.wappsystem.com/___DB_TABLE___" method="post" onsubmit="submit__ID.disabled = true; alert('You have submitted the form')" >
+            <div id=dbtable>
+                <u><a target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=___DB_TABLE___' >Database Table: ___DB_TABLE___</a></u>
+            </div>
+        </div>
+        <div id=layout>
+            <div id=content>
+				<div id=D__ID>
+					<section id=form_container__ID bp=576 style='display:flow-root;'>
+						<div id=header__ID>
+							___FORM_NAME___
+						</div>
+						<form id=F__ID action="https://api.wappsystem.com/___DB_TABLE___" method="post" onsubmit="submit__ID.disabled = true; alert('Thank you for your submission')" >
 ___FORM_CONTENTS___
-								<div>
-									<div w='100|100' class=c_print>
-										<button id=submit__ID >Submit</button>
-									</div>
+							<div>
+								<div w='100|100' class=c_print>
+									<button id=submit__ID >Submit</button>
 								</div>
-							</form>
-    					</section>
-                        <style>
-                            #form_container__ID{
-                                max-width:___FORM_WIDTH___;
-                            }
-                        </style>
-						<script>
-							(function(){var n=function(n){var f=n[0].contentRect.width,k=n[0].target.id,d=document.getElementById(k).getAttribute("bp"),u,s,h,c,l,t,w,a,v,y,p,b,o;if(d!=null)for(u=d.split("|"),s=1e7,u.length>0&&(s=parseInt(u[0])),h=2e7,u.length>1&&(h=parseInt(u[1])),c=3e7,u.length>2&&(c=parseInt(u[2])),l=4e7,u.length>3&&(l=parseInt(u[3])),t=document.getElementById(k).getElementsByTagName("div"),i=0;i<t.length;i++)if(w=t[i].getAttribute("w"),w!=null){t[i].style.float="left";t[i].style["box-sizing"]="border-box";t[i].parentElement.style["border-width"]=0;t[i].parentElement.style["box-sizing"]="border-box";t[i].parentElement.style.display="flow-root";var r=w.split("|"),e=parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("width").replace(".px","")),g=parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("padding-left").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("padding-right").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("border-left-width").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("border-right-width").replace(".px",""));e=e-g;a=576;r.length>0&&(a=e*r[0]/100);v=a;r.length>1&&(v=e*r[1]/100);y=v;r.length>2&&(y=e*r[2]/100);p=y;r.length>3&&(p=e*r[3]/100);b=p;r.length>4&&(b=e*r[4]/100);o=0;f<s&&(o=a);f>=s&&f<h&&(o=v);f>=h&&f<c&&(o=y);f>=c&&f<l&&(o=p);f>=l&&(o=b);t[i].style.width=o+"px"}};new ResizeObserver(n).observe(form_container__ID)})()							
-						</script>
-					</div>
-                </div>
-                <div id=footer>                   
-                    Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
-                </div>
+							</div>
+						</form>
+					</section>
+					<style>
+						#form_container__ID{
+							max-width:___FORM_WIDTH___;
+						}
+					</style>
+					<script>
+						(function(){var n=function(n){var f=n[0].contentRect.width,k=n[0].target.id,d=document.getElementById(k).getAttribute("bp"),u,s,h,c,l,t,w,a,v,y,p,b,o;if(d!=null)for(u=d.split("|"),s=1e7,u.length>0&&(s=parseInt(u[0])),h=2e7,u.length>1&&(h=parseInt(u[1])),c=3e7,u.length>2&&(c=parseInt(u[2])),l=4e7,u.length>3&&(l=parseInt(u[3])),t=document.getElementById(k).getElementsByTagName("div"),i=0;i<t.length;i++)if(w=t[i].getAttribute("w"),w!=null){t[i].style.float="left";t[i].style["box-sizing"]="border-box";t[i].parentElement.style["border-width"]=0;t[i].parentElement.style["box-sizing"]="border-box";t[i].parentElement.style.display="flow-root";var r=w.split("|"),e=parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("width").replace(".px","")),g=parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("padding-left").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("padding-right").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("border-left-width").replace(".px",""))+parseFloat(getComputedStyle(t[i].parentElement,null).getPropertyValue("border-right-width").replace(".px",""));e=e-g;a=576;r.length>0&&(a=e*r[0]/100);v=a;r.length>1&&(v=e*r[1]/100);y=v;r.length>2&&(y=e*r[2]/100);p=y;r.length>3&&(p=e*r[3]/100);b=p;r.length>4&&(b=e*r[4]/100);o=0;f<s&&(o=a);f>=s&&f<h&&(o=v);f>=h&&f<c&&(o=y);f>=c&&f<l&&(o=p);f>=l&&(o=b);t[i].style.width=o+"px"}};new ResizeObserver(n).observe(form_container__ID)})()
+					</script>
+				</div>
+			</div>
+            <div id=footer>
+                Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
             </div>
         </div>
     </body>
-    <style site css>
+    <script>
+        window.onscroll=function(){
+            var y=-window.scrollY/2;
+            var r=-y/100; if(r>0.5) r=0.5;
+            document.getElementById("header").style.background = "rgba(0,0,0,"+r+")"
+        };
+        //-------------------------------------
+    </script>
+    <style>
+        body{
+            background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;
+            background-image: url(https://images.unsplash.com/photo-1469967700385-5b0140e16e33?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+        }
+    </style>
+	<style site>
 		*, *::before, *::after {
 			box-sizing: border-box;
 		}
@@ -57,63 +73,81 @@ ___FORM_CONTENTS___
 			line-height: 1.5;
 			color: #212529;
 			text-align: left;
-			background-color: #fff;			
 		}
-        html,body{
-            margin:0;
-            padding:0;
-            height:100%;
-        }
-        #layout1 {
-            height: 100%;
-            display: grid;
-            grid-template-rows: auto 1fr;
-        }
-        #layout2 {
-            height: 100%;
-            display: grid;
-            grid-template-rows: 1fr auto;
-            overflow:auto;
-        }
-        #header{
-            font-size: 28px;
-            font-weight: bold;
-            padding-top:8px;
-            padding-bottom:8px;
-            padding-left:20px;
-            color:white;
-            width:100%;
-            background-color:#1d505f;
-        }
+		html,body{
+			margin:0;
+			padding:0;
+			height:100%;
+		}
+		#layout {
+			height: 100%;
+			display: grid;
+			grid-template-rows: 1fr auto;
+		}
 		#content{
-            height: 100%;
-            display: grid;
-            grid-template-rows: 1fr;
+			height: 100%;
+			display: grid;
+			grid-template-rows: 1fr;
 		}
-        #footer{
-            font-size: 15px;
-            font-weight: bold;
-            padding-top:3px;
-            padding-bottom:3px;
-            padding-left:20px;
-            color:white;
-            width:100%;
-            background-color:#1d505f;
-        }
-    </style>
-	<style form css>
+		#header{
+			height:100px;
+			position:fixed;
+			top:0;
+			left:0;
+			width:100%;
+			background:rgba(0,0,0,0.0);
+			z-index:10;
+		}
+		#logo{
+			float: left;
+			padding: 36px 30px 0 30px;
+		}
+		#logo_a{
+			font-family: Arial, sans-serif;
+			color: #fff;
+			font-size: 200%;
+			line-height: 10px;
+			display: inline-block;
+		}
+		#logo_b{
+			font-family: Arial, sans-serif;
+			color: #b8e6de;
+			font-size: 119%;
+			line-height: 80%;
+			display: inline-block;
+		}
+		#dbtable{
+			float: right; font-size: 15px;	padding-right: 20px;
+		}
+		#dbtable a{
+			color:#fff;
+		}
+		#content{
+			padding-top:100px;
+		}
+		#footer{
+			font-size: 15px;
+			font-weight: bold;
+			padding-top:3px;
+			padding-bottom:5px;
+			padding-left:20px;
+			color:white;
+			width:100%;
+			background-color:#1d505f;
+			text-align: center;
+		}
+	</style>
+	<style form>
 		#D__ID{
 			height:100%;
 			overflow:auto;
-			animation: vm_module_fadein 1.0s;
-			background-color:#fff;
+			margin-bottom:200px;
 		}
 		#form_container__ID{
 			background-color:#fff;
 			margin-top:20px;
 			margin-left: auto;
 			margin-right: auto;
-
 			font-family: Verdana,sans-serif;
 			font-size: 15px;
 			line-height: 1.5;
@@ -128,7 +162,6 @@ ___FORM_CONTENTS___
 			font-size: 15px;
 			line-height: 1.5;
 		}
-
 		#header__ID{
 			background-color:#727b84;
 			color:#fff;
@@ -141,7 +174,6 @@ ___FORM_CONTENTS___
 			border:1px solid #bbb;
 			border-top-width: 0;
 			padding:6px 15px 20px 15px;
-			margin-bottom:200px;
 		}
 		@media screen and (max-width:768px){
 			#form_container__ID{
@@ -162,7 +194,6 @@ ___FORM_CONTENTS___
 				display: none;
 			}
 		}
-		
 		#F__ID > div,#F__ID section > div{
 			padding:15px 5px;
 		}
@@ -175,6 +206,7 @@ ___FORM_CONTENTS___
 		}
 		#F__ID input[type=text],
 		#F__ID input[type=date],
+		#F__ID input[type=time],
 		#F__ID input[type=phone],
 		#F__ID input[type=email],
 		#F__ID select,

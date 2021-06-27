@@ -7,26 +7,37 @@
         <link rel="stylesheet" href="site.css" />
     </head>
     <body>
-        <div id=layout1>
-            <div id=header>
-                Web data collection form 
-				<div style='float: right; font-size: 15px;	padding-right: 20px;'>
-					<u><a style='color:#fff' target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=Employee' >Database Table: Employee</a></u>
-				</div>
+        <div id=header>
+            <div id=logo>
+                <span id=logo_a>Business</span><br>
+                <span id=logo_b>Data Collection</span>
             </div>
-            <div id=layout2>
-                <div id=content></div>
-                <div id=footer>                   
-                    Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
-                </div>
+            <div id=dbtable>
+                <u><a target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=Employee' >Database Table: Employee</a></u>
+            </div>
+        </div>
+        <div id=layout>
+            <div id=content></div>
+            <div id=footer>
+                Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
             </div>
         </div>
     </body>
-    <script>var doc=document.getElementById("content");xhttp=new XMLHttpRequest;xhttp.onreadystatechange=function(){this.readyState==4&&(this.status==200&&(doc.innerHTML=this.responseText),this.status==404&&(doc.innerHTML="Page not found."))};xhttp.open("GET","form.html",!0);xhttp.send()</script>
+    <script>
+        var doc=document.getElementById("content");xhttp=new XMLHttpRequest;xhttp.onreadystatechange=function(){var t,n,i;if(this.readyState==4){if(this.status==200){doc.innerHTML=this.responseText;t=document.getElementsByTagName("head")[0];n=doc.getElementsByTagName("script");for(i in n)src=document.createElement("script"),src.type="text/javascript",src.text=n[i].text,t.appendChild(src)}this.status==404&&(doc.innerHTML="Page not found.")}};xhttp.open("GET","form.html",!0);xhttp.send()
+    </script>
+    <script>
+        window.onscroll=function(){
+            var y=-window.scrollY/2;
+            var r=-y/100; if(r>0.5) r=0.5;
+            document.getElementById("header").style.background = "rgba(0,0,0,"+r+")"
+        };
+        //-------------------------------------
+    </script>
     <style>
         body{
             background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;
-            background-image: url(https://images.unsplash.com/photo-1574021528306-412578dd97d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+            background-image: url(https://images.unsplash.com/photo-1538121614163-510d42b40f2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80);
         }
     </style>
 </html>

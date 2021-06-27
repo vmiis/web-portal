@@ -20,6 +20,11 @@ html,body{
     display: grid;
     grid-template-rows: 1fr auto;
 }
+#content{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+}
 #header{
     height:100px;
     position:fixed;

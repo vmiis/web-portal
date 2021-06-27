@@ -15,6 +15,7 @@
                 <li><a href='?/excel-to-web-data-collection-form'>Excel -> Web data collection form</a></li>
                 <li><a href='?/data-grid'>Data management</a></li>
                 <li><a href='?/ess-data-spardac'>ESS</a></li>
+                <li><a a target=_blank href='apps/data-collection/incident-report/index.html'>incident-report</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
             <div>
@@ -43,6 +44,7 @@
                      if(module_name=='grid')   $vm.show_module('vm-grid',{Data:vm_data[req]});
                 else if(module_name=='query')  $vm.show_module('vm-query',{Data:vm_data[req]});
                 else if(module_name=='pivot')  $vm.show_module('vm-pivot',{Data:vm_data[req]});
+                else if(module_name.substring(0,4)=='apps') window.open(module_name);
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })
             //--------------------------------------------------------
