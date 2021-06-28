@@ -1,0 +1,48 @@
+<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__COMPONENT__/g/grid.01.js
+        //-------------------------------------
+        var fields="visit_date";
+        m.fields="_Form,Participant|Participant_uid,Time_Point,"+fields+",Submit_date,Submitted_by,_Delete";
+        //-------------------------------------
+        var prefix=""; if(m.prefix!=undefined) prefix=m.prefix;
+        var input_data="";
+        
+        var create_query=function(){
+            m.query={};
+            if(m.input.data!="" && m.input.data!=undefined){
+                input_data=m.input.data;
+                m.query={
+                    "Data.Participant_uid":input_data.participant_record.UID.toString(),
+                    "Data.Time_Point":input_data.tp
+                };
+            }
+        }
+        
+        $('#D__ID').on('load',function(){
+            create_query();
+        })
+        //--------------------------------------------------------
+        $('#D__ID').on('show',function(){
+            create_query();
+        })
+        //--------------------------------------------------------
+        m.new=function(){
+            $vm.show_module(prefix+m.form_module,{goback:1,data:input_data});
+        }
+        //--------------------------------------------------------
+        m.data_process=function(){
+            $('#new__ID').show();
+            if(m.records.length!=0){
+                $('#new__ID').hide();
+            }
+        }
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

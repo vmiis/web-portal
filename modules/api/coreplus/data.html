@@ -31,7 +31,7 @@
                             if(path.indexOf('[TODAY]')!=-1){
                                 today=new Date().toISOString().substr(0,10);
                             }
-                            $vm.request({cmd:'coreplus-api',input:input,today:today,uid},function(res){
+                            $vm.request({api:"wzd",cmd:'coreplus-api',input:input,today:today,uid},function(res){
                                 if(res.status=="err"){
                                     $vm.show_module('jsonv',{json_data:res.result})
                                     return;

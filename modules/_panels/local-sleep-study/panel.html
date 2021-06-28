@@ -1,20 +1,42 @@
 <div id=D__ID>
-    Participant: <span id=participant__ID>xxx</span>
+    <div class=panel__ID>
+        <h3>Local Sleey Study</h3>
+    </div>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
-                <span class=LT__ID>Time Points</span>
-                <li><a href='?/hba-panel-task' tp=BL>BL</a></li>
-                <li><a href='?/hba-panel-task' tp=Visit_1>Visit 1</a></li>
-                <li><a href='?/hba-panel-task' tp=Visit_2>Visit 2</a></li>
+                <span class=LT__ID>Participant</span>
+                <li><a href='?/wapp_local-sleep-participant'>Participants</a></li>
+            </div>
+            <div>
+                <span class=LT__ID>Screening Visit</span>
+                <li><a href='?/wapp_local-sleep-s-date'>Visit Date</a></li>
+                <li><a href='?/wapp_local-sleep-s-consent'>Digital consent form</a></li>
+                <li><a href='?/wapp_local-sleep-s-anthropometry'>Anthropometry</a></li>
+                <li><a href='?/wapp_local-sleep-s-inclusion-exclusion'>Inclusion/Exclusion Criteria</a></li>
+                <li><a href='?/wapp_local-sleep-s-medications'>Concomitant medication</a></li>
+                <li><a href='?/wapp_local-sleep-s-concom-file'>Concomitant medication file upload</a></li>
+                <li><a href='?/wapp_local-sleep-s-medical-history'>Medical history</a></li>
+                <li><a href='?/wapp_local-sleep-s-ess'>Epworth Sleepiness Scale (ESS)</a></li>
+                <li><a href='?/wapp_local-sleep-s-mva'>ASTN Motor Vehicle Accident Questionnaire</a></li>
+                <li><a href='?/wapp_local-sleep-b-ethnicity'>Ethnicity form</a></li>
+                <li><a href='?/wapp_local-sleep-b-lifestyle'>Lifestyle</a></li>
+                <li><a href='?/wapp_local-sleep-b-education'>Education</a></li>
+                <!--
+                <li><a 
+                    href='?/wapp_equipment-setup'
+                    __query='[{"$match":{"UID":2}}]'
+                    __headers='UID|Record ID,equipment_name|equipment_name'
+                    __options='equipment_name|REMOVE'
+                >equipment-setup</a></li>
+                -->
             </div>
             <!---------------------------------------------------------------------------------------->
-    </ul>
+        </ul>
     </div>
     <script>
         function F__ID(){
             //--------------------------------------------------------
-            var m=$vm.module_list['__MODULE__'];
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
             //--------------------------------------------------------
@@ -22,15 +44,18 @@
                 e.preventDefault();
                 e.stopPropagation();
                 var module_name=$(this).attr('href').replace('?\/','');
-                var tp=$(this).attr('tp');
-                if(module_name!="") $vm.show_module(module_name,{participant_record:m.input.record,tp:tp}); 
+                var query=$(this).attr('query');
+                var headers=$(this).attr('headers');
+                var options=$(this).attr('options');
+                if(module_name.substring(0,5)=='wapp_'){
+                    var table=module_name.substring(5);
+                    $vm.wapp_table(table,query,headers,options);
+                }
+                else if(module_name!="") $vm.show_module(module_name,{}); 
             })
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
-                $('#participant__ID').text('');
-                if(m.input.record!=undefined){
-                    $('#participant__ID').text(m.input.record.UID);
-                }
+                
             })
             //--------------------------------------------------------
         }

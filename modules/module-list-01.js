@@ -5,16 +5,17 @@
             if($vm.module_list[prefix+m]!=undefined) console.log(m+" is existed"); 
             else{
                 $vm.module_list[prefix+m]=modules[m];
-                $vm.module_list[prefix+m].prefix=prefix;
+                if(modules[m]==undefined) $vm.module_list[prefix+m].prefix=prefix;
             }
         }
     }
     //-------------------------------------------------------------------------------------
     var prefix='';
     var $H=$vm.hosting_path+"/modules";
+    var H=$vm.hosting_path;
     var modules={
-        "data-panel":{url:$vm.hosting_path+"/modules/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
-        "app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
+        "main-panel":{url:$vm.hosting_path+"/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
+        //"app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
         "lab-order-panel":{url:$vm.hosting_path+"/modules/panels/lab-order-panel.html",description:"lab order panel",router:1},
         "temperature-reports":  {url:$vm.hosting_path+"/modules/it/temperature-reports.html",description:"Temperature reports"},
@@ -208,6 +209,7 @@
         "cms-sleep-study":{
             title:"Sleep study",
             url:$H+"/cms/sleep-study/data.html",
+            api:"wzd",
             Table:"400448",
             form_module:"jsonv",
             description:"Sleep study",
@@ -280,14 +282,6 @@
         "vm-table":       {url:$H+"/system/vm-table.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
         
-        "wappsystem-panel":     {url:$H+"/panels/wappsystem/panel.html", router:1},
-        "vmautomation-panel":   {url:$H+"/panels/vmautomation/panel.html", router:1},
-        "woolcock-panel":       {url:$H+"/panels/woolcock/panel.html", router:1},
-        "administrator-panel":  {url:$H+"/panels/administrator/panel.html", router:1},
-        "local-sleep-panel":    {url:$H+"/panels/local-sleep-study/panel.html", router:1},
-        "my-panel":             {url:$H+"/panels/my/panel.html", router:1},
-        "development":          {url:$H+"/panels/development/panel.html", router:1},
-        "hba":                  {url:$H+"/panels/hba/panel.html", router:1},
         
         
         "local_excel_file":   {url:$H+"/test/local_excel_file.html", router:1},
@@ -296,6 +290,17 @@
         
         "excel-to-web-data-collection-form": {url:$H+"/data-collection/form-generator.html", router:1},
         "data-grid": {url:$H+"/data-collection/data-grid.html", router:1},
+
+
+
+        "wappsystem-panel":     {url:H+"/panels/wappsystem/panel.html", router:1},
+        "vmautomation-panel":   {url:H+"/panels/vmautomation/panel.html", router:1},
+        "woolcock-panel":       {url:H+"/panels/woolcock/panel.html", router:1},
+        "administrator-panel":  {url:H+"/panels/administrator/panel.html", router:1},
+        "local-sleep-panel":    {url:H+"/panels/local-sleep-study/panel.html", router:1},
+        "my-panel":             {url:H+"/panels/my/panel.html", router:1},
+        "development-panel":    {url:H+"/panels/development/panel.html", router:1},
+        "hba-panel":            {url:H+"/panels/hba/panel.html", prefix:"hba-", router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

@@ -1,10 +1,15 @@
 <div id=D__ID>
-    Participant: <span id=participant__ID>xxx</span>
-    <br>Time Point: <span id=tp__ID>xxx</span>
+    <div style='padding-top:10px;padding-left:10px'>
+        Participant ID: <span id=participant_uid__ID></span><br>
+        Participant Initials: <span id=participant_initials__ID></span><br>
+        Time Point: <span id=tp__ID></span>
+    </div>
+    <hr style='margin-top:8px'>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
                 <span class=LT__ID>A</span>
+                <li><a href='?/hba-visit-date-data'>Visit Data</a></li>
                 <li><a href='?/hba-ess-data'>ESS</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
@@ -21,13 +26,20 @@
                 e.preventDefault();
                 e.stopPropagation();
                 var module_name=$(this).attr('href').replace('?\/','');
-                if(module_name!="") $vm.show_module(module_name,{}); 
+                
+                var data={
+                    participant_record:m.input.participant_record,
+                    tp:m.input.tp
+                }
+                if(module_name!="") $vm.show_module(module_name,{data:data}); 
             })
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
-                $('#participant__ID').text('');
+                $('#participant_uid__ID').text('');
+                $('#participant_initials__ID').text('');
                 if(m.input.participant_record!=undefined){
-                    $('#participant__ID').text(m.input.participant_record.UID);
+                    $('#participant_uid__ID').text(m.input.participant_record.UID);
+                    $('#participant_initials__ID').text(m.input.participant_record.Data.initials);
                 }
                 $('#tp__ID').text('');
                 if(m.input.tp!=undefined){
