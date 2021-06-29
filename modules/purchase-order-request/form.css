@@ -25,10 +25,10 @@
 }
 #F_1__ID input[type=text]:focus,#F_1__ID input[type=date]:focus,#F_1__ID input[type=email]:focus,#F_1__ID select:focus,#F_1__ID textarea:focus{
   color: #495057;
-background-color: #fff;
-border-color: #80bdff;
-outline: 0;
-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 #F__ID span{
   margin-top:18px;

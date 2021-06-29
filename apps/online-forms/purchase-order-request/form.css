@@ -41,6 +41,12 @@
     }
 }
 @media print{
+    #_content{
+        height: 100%;
+        width: 100px;
+        display: block;
+    }
+
     #form_container__ID{
         margin:0;
         padding:0;
@@ -48,7 +54,7 @@
         top:0;
         left:0;
         width:100%;
-        max-width: 100%;
+        max-width:100%;
     }
     .c_print {
         display: none;
@@ -58,6 +64,8 @@
 #F__ID > div,#F__ID section > div{
     padding:15px 5px;
 }
+
+/*
 #F__ID > div:hover,#F__ID section > div:hover{
     background-color: #ddd;
 }
@@ -97,6 +105,13 @@
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
+*/
+#F__ID span{
+    margin-top:18px;
+    display:inline-block;
+    font-weight: bold;
+}
+
 .file__ID{
     display: block;
     width: 100%;
@@ -141,3 +156,64 @@
     background-color: #545b62;
     border-color: #4e555b;
 }
+
+
+#F_1__ID > div,#F_1__ID section > div{
+    padding:0px 5px 10px 5px;
+}
+#F_1__ID > div:hover,#F_1__ID section > div:hover{
+    background-color: #ddd;
+}
+#F_1__ID > div div, #F_1__ID > section div div{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+#F_1__ID input[type=text],#F_1__ID input[type=date],#F_1__ID input[type=email],#F_1__ID select,#F__ID textarea{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#F_1__ID input[type=text]:focus,#F_1__ID input[type=date]:focus,#F_1__ID input[type=email]:focus,#F_1__ID select:focus,#F_1__ID textarea:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#grid_item_a__ID{
+    width:100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    border-width: 0;
+}
+#grid_item_a__ID th{
+    font-weight: 300;
+    background-color:#EEE;
+    padding:5px;
+    border: 1px solid #CCC;
+}
+#grid_item_a__ID td{
+    font-weight: 300;
+    background-color:#FFF;
+    padding:3px;
+    border: 1px solid #CCC;
+    vertical-align: top;
+}
+#grid_item_a__ID tr td:first-child{
+    padding-left:16px;
+    padding-right:16px;
+    background-color:#EEE;
+}
+

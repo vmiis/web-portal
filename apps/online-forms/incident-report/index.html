@@ -24,7 +24,7 @@
         </div>
     </body>
     <script>
-        var doc=document.getElementById("content");xhttp=new XMLHttpRequest;xhttp.onreadystatechange=function(){var t,n,i;if(this.readyState==4){if(this.status==200){doc.innerHTML=this.responseText;t=document.getElementsByTagName("head")[0];n=doc.getElementsByTagName("script");for(i in n)src=document.createElement("script"),src.type="text/javascript",src.text=n[i].text,t.appendChild(src)}this.status==404&&(doc.innerHTML="Page not found.")}};xhttp.open("GET","form.html",!0);xhttp.send();window.onscroll=function(){var t=-window.scrollY/2,n=-t/100;n>.5&&(n=.5);document.getElementById("header").style.background="rgba(0,0,0,"+n+")"}
+        var __vm_print__=0;window.onbeforeprint=function(event){__vm_print__=1;};window.onafterprint=function(event){__vm_print__=0;};var doc=document.getElementById("content");xhttp=new XMLHttpRequest;xhttp.onreadystatechange=function(){var r,i,n,t;if(this.readyState==4){if(this.status==200){doc.innerHTML=this.responseText;r=document.getElementsByTagName("head")[0];n=doc.getElementsByTagName("script");for(t in n)i=document.createElement("script"),i.type="text/javascript",n[t].text!=undefined&&(i.text=n[t].text),n[t].src!=undefined&&n[t].src!=""&&(i.src=n[t].src),(n[t].src!=undefined&&n[t].src!=""||n[t].text!=undefined)&&r.appendChild(i)}this.status==404&&(doc.innerHTML="Page not found.")}};xhttp.open("GET","form.html",!0);xhttp.send();window.onscroll=function(){var t=-window.scrollY/2,n=-t/100;n>.5&&(n=.5);document.getElementById("header").style.background="rgba(0,0,0,"+n+")"}
     </script>
     <style>
         body{
