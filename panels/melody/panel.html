@@ -5,10 +5,13 @@
         <ul style="list-style-type:decimal;">
             <!---------------------------------------------------------------------------------------->
             <div>
-                <span class=LT__ID>YouTub</span>
+                <span class=LT__ID>Melody</span>
                 <li><a href='?/youtube' req=s001>A beautiful myth</a></li>
                 <li><a href='?/youtube' req=s002>A good person lives in peace</a></li>
                 <li><a href='?/youtube' req=s003>On the sun island</a></li>
+                <li><a href='?/youtube' v=7mhJFks2n2g>Fly</a></li>
+                <li><a href='?/youtube' v=NPBCbTZWnq0>River Flows in You</a></li>
+                
             </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
@@ -25,8 +28,14 @@
                 e.preventDefault();
                 e.stopPropagation();
                 var module_name=$(this).attr('href').replace('?\/','');
-                var req=$(this).attr('req');
-                     if(module_name=='youtube')   $vm.show_module('youtube',{src: vm_data[req].src});
+                if(module_name=='youtube'){
+                    var v=$(this).attr('v');
+                    if(v!=undefined) $vm.show_module('youtube',{v:v});
+                    else{
+                        var req=$(this).attr('req');
+                        $vm.show_module('youtube',{src: vm_data[req].src});
+                    }
+                }
             })
             //--------------------------------------------------------
         }
