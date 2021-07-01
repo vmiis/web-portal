@@ -1,6 +1,7 @@
 (function(){
     //-------------------------------------------------------------------------------------
     var p=""; //put a unique prefix to avoid conflict with others 
+    var B=$vm.hosting_path;
     var H=$vm.hosting_path+"/modules";
     var m=$vm.module_list;
     var api="wapp";
@@ -22,5 +23,6 @@
     m[p+"shift-roster-month"]=      {url:H+"/shift-roster/calendar-month.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     m[p+"shift-roster-week"]=       {url:H+"/shift-roster/calendar-week.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     m[p+"shift-roster-day"]=        {url:H+"/shift-roster/calendar-day.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
+    m[p+"melody"]=                  {url:B+"/panels/melody/panel.html",router:1};
     //-------------------------------------------------------------------------------------
 })();

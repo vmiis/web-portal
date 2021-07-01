@@ -104,7 +104,7 @@
             </div>
             <div>
                 <div w='100|100' class=c_print>
-                    <button type=button id=submit__ID onclick="vm_submit_form(this)" >Submit</button>
+                    <button type=button id=submit__ID onclick="$vm.submit_form(this)" >Submit</button>
                 </div>
             </div>
         </form>
@@ -118,8 +118,7 @@
         }
     </style>
     <script>
-        var g_vm_url="https://api.wappsystem.com/incident-report";
-        function vm_submit_form(){var i=sessionStorage.getItem("id_token"),r,n,t;if(i==null){alert("Sign in first please.");return}var u=i.split(".")[1],f=u.replace(/-/g,"+").replace(/_/g,"/"),e=decodeURIComponent(atob(f).split("").map(function(n){return"%"+("00"+n.charCodeAt(0).toString(16)).slice(-2)}).join("")),o=JSON.parse(e),s=o.exp;if(Date.now()>=s*1e3){alert("Token expired!. Sign in again please.");return}r=new FormData(F__ID);n="";r.forEach(function(t,i){n!=""&&(n+="&");n+=i+"="+encodeURIComponent(t)});t=new XMLHttpRequest;t.onreadystatechange=function(){this.readyState==4&&this.status==200&&alert(this.responseText);this.readyState==4&&this.status==204&&(document.getElementById("submit__ID").setAttribute("disabled","true"),alert("Thank you for your submission"))};t.open("POST",g_vm_url+"?id_provider=microsoft&id_token="+sessionStorage.getItem("id_token"),!0);t.send(n)}var a=function(n){var r,o,s,h,c,u,p,t,l,a,v,y,w,e;if(typeof __vm_print__=="undefined"||__vm_print__!=1){var f=n[0].contentRect.width,b=n[0].target.id,k=document.getElementById(b).getAttribute("bp");if(k!=null)for(r=k.split("|"),o=1e7,r.length>0&&(o=parseInt(r[0])),s=2e7,r.length>1&&(s=parseInt(r[1])),h=3e7,r.length>2&&(h=parseInt(r[2])),c=4e7,r.length>3&&(c=parseInt(r[3])),u=document.getElementById(b).getElementsByTagName("div"),i=0;i<u.length;i++)p=u[i].getAttribute("w"),p!=null&&(u[i].style.float="left",u[i].style["box-sizing"]="border-box",u[i].parentElement.style["border-width"]=0,u[i].parentElement.style["box-sizing"]="border-box",u[i].parentElement.style.display="flow-root",t=p.split("|"),l=576,t.length>0&&(l=t[0]+"%"),a=l,t.length>1&&(a=t[1]+"%"),v=a,t.length>2&&(v=t[2]+"%"),y=v,t.length>3&&(y=t[3]+"%"),w=y,t.length>4&&(w=t[4]+"%"),e=0,f<o&&(e=l),f>=o&&f<s&&(e=a),f>=s&&f<h&&(e=v),f>=h&&f<c&&(e=y),f>=c&&(e=w),u[i].style.width=e)}};new ResizeObserver(a).observe(form_container__ID)	
+        (function(){var n="https://api.wappsystem.com/incident-report",t=function(n){var r,o,s,h,c,u,p,t,l,a,v,y,w,e;if($vm.__print__!=1){var f=n[0].contentRect.width,b=n[0].target.id,k=document.getElementById(b).getAttribute("bp");if(k!=null)for(r=k.split("|"),o=1e7,r.length>0&&(o=parseInt(r[0])),s=2e7,r.length>1&&(s=parseInt(r[1])),h=3e7,r.length>2&&(h=parseInt(r[2])),c=4e7,r.length>3&&(c=parseInt(r[3])),u=document.getElementById(b).getElementsByTagName("div"),i=0;i<u.length;i++)p=u[i].getAttribute("w"),p!=null&&(u[i].style.float="left",u[i].style["box-sizing"]="border-box",u[i].parentElement.style["border-width"]=0,u[i].parentElement.style["box-sizing"]="border-box",u[i].parentElement.style.display="flow-root",t=p.split("|"),l=576,t.length>0&&(l=t[0]+"%"),a=l,t.length>1&&(a=t[1]+"%"),v=a,t.length>2&&(v=t[2]+"%"),y=v,t.length>3&&(y=t[3]+"%"),w=y,t.length>4&&(w=t[4]+"%"),e=0,f<o&&(e=l),f>=o&&f<s&&(e=a),f>=s&&f<h&&(e=v),f>=h&&f<c&&(e=y),f>=c&&(e=w),u[i].style.width=e)}};new ResizeObserver(t).observe(form_container__ID);$vm.submit_form=function(){}})()
     </script>
     <link rel="stylesheet" href="form.css" />
 </div>
