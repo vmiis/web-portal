@@ -14,7 +14,7 @@
         $('#title__ID').text("IT System Information");
         var sheet="Information System";
         $('#D__ID').on('load',function(){  
-            $vm.get_file("file",1,"file","information-system.xlsx",function(res){
+            $vm.get_file("wzd","file",1,"file","information-system.xlsx",function(res){
                 var workbook = XLSX.read(res.result, {type:"base64"});
                 workbook.SheetNames.forEach(function(sheetName) {
                     if(sheetName==sheet){

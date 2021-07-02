@@ -31,7 +31,7 @@
         }
         m.request_data=function(){
             $('#folder__ID').text("\\\\fs2.shared.sydney.edu.au\\Medicine\\Woolcock\\Woolcock_Archive\\"+m.folder)
-            $vm.request({cmd:'backup-check',folder:m.folder},function(res){
+            $vm.request({api:"wzd",cmd:'backup-check',folder:m.folder},function(res){
                 m.records=res.result;
                 m.records.sort((a, b) => (b.time > a.time) ? 1 : -1)
                 for(var i=0;i<m.records.length;i++){

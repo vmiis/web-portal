@@ -17,57 +17,72 @@
         "main-panel":{url:$vm.hosting_path+"/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
         //"app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
-        "lab-order-panel":{url:$vm.hosting_path+"/modules/panels/lab-order-panel.html",description:"lab order panel",router:1},
-        "temperature-reports":  {url:$vm.hosting_path+"/modules/it/temperature-reports.html",description:"Temperature reports"},
+        "lab-order-panel":{
+            api:"wzd",
+            url:$vm.hosting_path+"/modules/panels/lab-order-panel.html",description:"lab order panel",router:1},
+        "temperature-reports":  {
+            api:"wzd",
+            url:$vm.hosting_path+"/modules/it/temperature-reports.html",description:"Temperature reports"},
         "coreplus-datatable-relationships":{
+            api:"wzd",
             url:$H+"/diagram/coreplus-datatable-relationships.html",
             router:1
         },
         "coreplus-referral-diagram":{
+            api:"wzd",
             url:$H+"/diagram/referral.html",
             router:1
         },
         "test": {
             url:$vm.hosting_path+"/modules/excel/test.html",
+            api:"wzd",
             Table:"file",
             description:"test"
         },
         "thankq-all-transactions": {
+            api:"wzd",
             url:$vm.hosting_path+"/modules/excel/thankq-all-transactions.html",
             Table:"file",
             description:"thankq-all-transactions"
         },
         "thankq-all-people": {
+            api:"wzd",
             url:$vm.hosting_path+"/modules/excel/thankq-all-people.html",
             Table:"file",
             description:"thankq-all-people"
         },
         "thankq-people-fields": {
+            api:"wzd",
             url:$vm.hosting_path+"/modules/excel/thankq-people-to-re-constituent.html",
             Table:"file",
             description:"thankq-all-people-fields"
         },
         "thankq-t-fields": {
+            api:"wzd",
             url:$vm.hosting_path+"/modules/excel/thankq-t-to-gift.html",
             Table:"file",
             description:"thankq-t-fields"
         },
         "database-backup-rt":{
+            api:"wzd",
             title:'CMS and research database backup files',
             url:$H+"/database-backup/data.html",
             folder:"research-tools",
         },
         "database-backup-SleepwareG3_Adult":{
+            api:"wzd",
             title:'CMS and research database backup files',
             url:$H+"/database-backup/data.html",
             folder:"SleepwareG3_Adult",
         },
         "database-backup-SleepwareG3_Paeds":{
+            api:"wzd",
             title:'CMS and research database backup files',
             url:$H+"/database-backup/data.html",
             folder:"SleepwareG3_Paeds",
         },
         "lab-order-data-self":{
+            api:"wzd",
             title:'My communal ordering records',
             url:$H+"/lab-order/order/data.html",
             Table:"communal-ordering",
@@ -86,6 +101,7 @@
             print:"lab-order-print",
         },
         "lab-order-form-self":{
+            api:"wzd",
             title:'Communal ordering form',
             url:$H+"/lab-order/order/form.html",
             Table:"communal-ordering",
@@ -99,6 +115,7 @@
             router:1
         },
         "lab-order-data":{
+            api:"wzd",
             title:'Communal ordering records',
             url:$H+"/lab-order/order/data.html",
             Table:"communal-ordering",
@@ -117,6 +134,7 @@
             print:"lab-order-print",
         },
         "lab-order-form":{
+            api:"wzd",
             title:'Communal ordering form',
             url:$H+"/lab-order/order/form.html",
             Table:"communal-ordering",
@@ -124,6 +142,7 @@
             print:"lab-order-print",
         },
         "lab-order-print-version-template":{
+            api:"wzd",
             url:$H+"/lab-order/order/print-version-template.html",
         },
         /*
@@ -134,12 +153,14 @@
         },
         */
         "lab-order-pdf-form":{
+            api:"wzd",
             title:'Communal ordering pdf form',
             url:$H+"/lab-order/order/form.html",
             Table:"communal-ordering",
             description:"Communal ordering pdf form",
         },
         "lab-order-lab-manager-approval-form":{
+            api:"wzd",
             title:"Communal ordering lab manager approval",
             url:$H+"/lab-order/lab-manager-approval/form.html",
             Table:"communal-ordering-lab-manager-approval",
@@ -147,6 +168,7 @@
             description:"Communal ordering lab manager approval",
         },
         "lab-order-supervisor-approval-form":{
+            api:"wzd",
             title:"Communal ordering supervisor approval",
             url:$H+"/lab-order/supervisor-approval/form.html",
             Table:"communal-ordering-supervisor-approval",
@@ -154,6 +176,7 @@
             description:"Communal ordering supervisor approval",
         },
         "lab-order-financial-approval-form":{
+            api:"wzd",
             title:"Communal ordering financial approval",
             url:$H+"/lab-order/financial-approval/form.html",
             Table:"communal-ordering-financial-approval",
@@ -161,6 +184,7 @@
             description:"Communal ordering financial approval",
         },
         "lab-order-receive-form":{
+            api:"wzd",
             title:"Communal ordering received form",
             url:$H+"/lab-order/receive/form.html",
             Table:"communal-ordering-receive",
@@ -170,6 +194,7 @@
         
 
         "lab-order-diagram":{
+            api:"wzd",
             title:"Communal ordering diagram",
             url:$H+"/lab-order/diagram/diagram.html",
             description:"Communal ordering diagram",
@@ -178,28 +203,33 @@
 
 
         "lab-order-company-data":{
+            api:"wzd",
             title:'Company records',
             url:$H+"/supplier/data.html",
             Table:"communal-ordering-company",
             form_module:"lab-order-company-form", 
         },
         "lab-order-company-form":{
+            api:"wzd",
             title:'Company form',
             url:$H+"/supplier/form.html",
             Table:"communal-ordering-company",
         },
         "lab-order-supervisor-data":{
+            api:"wzd",
             title:'supervisor records',
             url:$H+"/supervisor/data.html",
             Table:"communal-ordering-supervisor",
             form_module:"lab-order-supervisor-form", 
         },
         "lab-order-supervisor-form":{
+            api:"wzd",
             title:'Supervisor form',
             url:$H+"/supervisor/form.html",
             Table:"communal-ordering-supervisor",
         },
         "cms-sleep-study__":{
+            api:"wzd",
             title:"Sleep study",
             url:$H+"/cms/sleep-study/data.html",
             Table:"cms-sleep-study",
@@ -207,6 +237,7 @@
             router:1,
         },
         "cms-sleep-study":{
+            api:"wzd",
             title:"Sleep study",
             url:$H+"/cms/sleep-study/data.html",
             api:"wzd",

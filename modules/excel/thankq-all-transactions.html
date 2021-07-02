@@ -32,7 +32,7 @@
             //-------------------------------
             var load_data=function(){
 				open_model__ID();
-                $vm.get_file("file",2,"file","thankq-all-transactions.xlsx",function(res){
+                $vm.get_file("wzd","file",2,"file","thankq-all-transactions.xlsx",function(res){
                     var workbook = XLSX.read(res.result, {type:"base64"});
                     workbook.SheetNames.forEach(function(sheetName) {
                         if(sheetName==sheet){
