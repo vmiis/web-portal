@@ -6,8 +6,8 @@
         <ul style="list-style-type:decimal;">
             <div>
                 <span class=LT__ID>Mailchimp Marketing</span>
-                <li><a href='?/api_mailchimp_1'>Woolcock campaign list</a></li>
-                <li><a href='?/api_mailchimp_2'>Search audience</a></li>
+                <li><a href='?/api_mailchimp_woolcock-campaign-list'>Woolcock campaign list</a></li>
+                <li><a href='?/api_mailchimp_search-members'>Search audience</a></li>
             </div>
             <div>
                 <span class=LT__ID>Coreplus Offline</span>
@@ -152,6 +152,8 @@
     <script>
         function F__ID(){
             //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
             //--------------------------------------------------------
@@ -175,7 +177,7 @@
                         switch(aa[1]){
                             case "quickbooks":  $vm.intuit_query(parseInt(aa[2])); /*quickbooks_query(parseInt(aa[2]));*/break;
                             case "microsoft":   $vm.microsoft_query(parseInt(aa[2]));break;
-                            case "mailchimp":   $vm.mailchimp_query(parseInt(aa[2]));   break;
+                            case "mailchimp":   $vm.mailchimp_query(/*parseInt(aa[2])*/  vm_data[aa[2]] );   break;
                             case "mongodb":     $vm.wzd_mongodb_query(parseInt(aa[2])); break;
                             case "sqlserver":   $vm.sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    $vm.coreplus_query(parseInt(aa[2]));    break;

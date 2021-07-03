@@ -38,6 +38,7 @@
             var pipelines="";
             var form_module="";
             $('#D__ID').on('load',function(){
+                $('#grid__ID').html('');
                 table="";query="";headers="";options="";form_module="";
                 if(m.input.Data==undefined) return;
                 api=m.input.Data.api; if(api==undefined) api="wapp";

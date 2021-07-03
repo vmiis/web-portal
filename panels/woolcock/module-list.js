@@ -1,6 +1,8 @@
 (function(){
     //-------------------------------------------------------------------------------------
     var p=""; //put a unique prefix to avoid conflict with others 
+    
+    var A=$vm.hosting_path;
     var H=$vm.hosting_path+"/modules";
     var m=$vm.module_list;
     /*
@@ -14,5 +16,5 @@
     m[p+"patients"] ={url:H+"/coreplus/patients/data.html",api:"wzd", Table:"patient", form_module:"jsonv", description:"Patients"};
     m[p+"referrers"]={ url:H+"/coreplus/referrers/data.html",api:"wzd",Table:"referrer",form_module:"jsonv", description:"Referrers"};
     m[p+"referrals"]={ url:H+"/coreplus/referrals/data.html",api:"wzd",Table:"referral",form_module:"jsonv", description:"Referrals"};
-    m[p+"clinics"]  ={ url:H+"/coreplus/clinics/data.html",api:"wzd",Table:"clinic",form_module:"jsonv",description:"Clinics"};
+    m[p+"clinics"]  ={ url:H+"/coreplus/clinics/data.html",api:"wzd",Table:"clinic",form_module:"jsonv",description:"Clinics"};   
 })();

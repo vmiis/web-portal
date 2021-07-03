@@ -1,7 +1,7 @@
 (function(){
     //-------------------------------------------------------------------------------------
     var p=""; //put a unique prefix to avoid conflict with others 
-    var B=$vm.hosting_path;
+    var A=$vm.hosting_path;
     var H=$vm.hosting_path+"/modules";
     var m=$vm.module_list;
     var api="wapp";
@@ -23,6 +23,15 @@
     m[p+"shift-roster-month"]=      {url:H+"/shift-roster/calendar-month.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     m[p+"shift-roster-week"]=       {url:H+"/shift-roster/calendar-week.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     m[p+"shift-roster-day"]=        {url:H+"/shift-roster/calendar-day.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
-    m[p+"melody"]=                  {url:B+"/panels/melody/panel.html",router:1};
+    //-------------------------------------------------------------------------------------
+    m["wappsystem-panel"]=      {url:A+"/panels/wappsystem/panel.html", router:1};
+    m["vmautomation-panel"]=    {url:A+"/panels/vmautomation/panel.html", router:1};
+    m["administrator-panel"]=   {url:A+"/panels/administrator/panel.html", router:1};
+    m["local-sleep-panel"]=     {url:A+"/panels/local-sleep-study/panel.html", router:1};
+    m["my-panel"]=              {url:A+"/panels/my/panel.html", router:1};
+    m["development-panel"]=     {url:A+"/panels/development/panel.html", router:1};
+    m["hba-panel"]=             {url:A+"/panels/hba/panel.html", prefix:"hba-", router:1};
+    m["melody"]=                {url:A+"/panels/melody/panel.html",router:1};
+    m["woolcock-portal"]=       {url:A+"/panels/woolcock/panel.html", router:1};
     //-------------------------------------------------------------------------------------
 })();

@@ -50,27 +50,31 @@
                     }
                     var aa=columns.split('\n');
                     for(var i=0; i<aa.length;i++){
-                        var bb=aa[i].split('|');
-                        if(bb[0].length>1){
-                            var nm=bb[0];
-                            var pp=bb[1];
-                            headers.push(nm);
-                            ps.push(pp.replace('\r',''));
-                            if(bb.length==2){
-                                tp.push('');
-                                uid.push('');
-                            }
-                            else if(bb.length==3){
-                                tp.push(bb[2].replace('\r',''));
-                                uid.push('');
-                            }
-                            else if(bb.length==4) {
-                                tp.push(bb[2].replace('\r','')); 
-                                uid.push(bb[3].replace('\r','')); 
-                            }     
-                            else{
-                                tp.push('');
-                                uid.push('');
+                        aa[i]=aa[i].trim();
+                        if(aa[i]!=""){
+                            var bb=aa[i].split('|');
+                            for(var k=0;k<bb.length;k++) bb[k]=bb[k].trim();
+                            if(bb[0].length>1){
+                                var nm=bb[0];
+                                var pp=bb[1];
+                                headers.push(nm);
+                                ps.push(pp.replace('\r',''));
+                                if(bb.length==2){
+                                    tp.push('');
+                                    uid.push('');
+                                }
+                                else if(bb.length==3){
+                                    tp.push(bb[2].replace('\r',''));
+                                    uid.push('');
+                                }
+                                else if(bb.length==4) {
+                                    tp.push(bb[2].replace('\r','')); 
+                                    uid.push(bb[3].replace('\r','')); 
+                                }     
+                                else{
+                                    tp.push('');
+                                    uid.push('');
+                                }
                             }
                         }
                     }

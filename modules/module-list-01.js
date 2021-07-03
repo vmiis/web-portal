@@ -321,17 +321,6 @@
         
         "excel-to-web-data-collection-form": {url:$H+"/data-collection/form-generator.html", router:1},
         "data-grid": {url:$H+"/data-collection/data-grid.html", router:1},
-
-
-
-        "wappsystem-panel":     {url:H+"/panels/wappsystem/panel.html", router:1},
-        "vmautomation-panel":   {url:H+"/panels/vmautomation/panel.html", router:1},
-        "woolcock-panel":       {url:H+"/panels/woolcock/panel.html", router:1},
-        "administrator-panel":  {url:H+"/panels/administrator/panel.html", router:1},
-        "local-sleep-panel":    {url:H+"/panels/local-sleep-study/panel.html", router:1},
-        "my-panel":             {url:H+"/panels/my/panel.html", router:1},
-        "development-panel":    {url:H+"/panels/development/panel.html", router:1},
-        "hba-panel":            {url:H+"/panels/hba/panel.html", prefix:"hba-", router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

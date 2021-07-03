@@ -22,7 +22,8 @@
                 <li><a href='?/bookkeeping-vm-item-monthly-aggregation-chart'>Item monthly (chart)</a></li>
                 <li><a href='?/bookkeeping-vm-tax-return-yearly-aggregation-data'>Tax return (data)</a></li>
                 <li><a href='?/bookkeeping-vm-tax-return-yearly-aggregation-chart'>Tax return (chart)</a></li>
-                <li><a href='?/api_wappsystem_9'>2018-2021 income/expense</a></li>
+                <!--<li><a href='?/api_wappsystem_9'>2018-2021 income/expense</a></li>-->
+                <li><a href='?/query' req=income_expense>2018-2021 income/expense</a></li>
                 <li><a href='?/bookkeeping-vm-predefined_transaction_item_data'>Predefined transaction item</a></li>
             </div>
             <!---------------------------------------------------------------------------------------->
@@ -45,6 +46,8 @@
     <script>
         function F__ID(){
             //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
             //--------------------------------------------------------
@@ -59,9 +62,14 @@
             $('#panel__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
+                var req=$(this).attr('req');
                 var module_name=$(this).attr('href').replace('?\/','');
                 if(module_name.substring(0,4)=='http') window.open(module_name);
                 else if(module_name.substring(0,4)=='apps') window.open(module_name);
+                else if(module_name=='grid')   $vm.show_module('vm-grid',{Data:vm_data[req]});
+                else if(module_name=='query')  $vm.show_module('vm-query',{Data:vm_data[req]});
+                else if(module_name=='pivot')  $vm.show_module('vm-pivot',{Data:vm_data[req]});
+                /*
                 else if(module_name.substring(0,4)=='api_'){
                     var aa=module_name.split('_');
                     if(aa.length==3){
@@ -71,6 +79,7 @@
                         }
                     }
                 }
+                */
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })
             //--------------------------------------------------------

@@ -53,67 +53,57 @@
                 })
             }
             //-------------------------------------------------------------------------------------------------------
-            $vm.intuit_query=function(UID){
-                $vm.request({api:'wapp',cmd:"find",table:"intuit-api",query:{UID:UID},options:{}},function(res){
-                    var records=res.result;
-                    if(records!=undefined && records.length==1){
-                        var name=records[0].Data.Name;
-                        var array=records[0].Data.Array;
-                        var columns=records[0].Data.Columns;
-                        var path=encodeURI(records[0].Data.Path);
-                        $vm.get_intuit_token(function(realmId,t){
-                            var path2="/v3/company/"+realmId+path;
-                            $vm.request({api:'wapp',cmd:'intuit-api',access_token:t,path:path2},function(res){
-                                var v=JSON.parse(res.result);
-                                if(res.status=="err"){
-                                    $vm.show_module('jsonv',{json_data:v})
-                                }
-                                else if(array!=""){
-                                    var type=columns.indexOf('|');
-                                    if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
-                                    else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
-                                }
-                                else{
-                                    $vm.show_module('jsonv',{json_data:v})
-                                }
-                            })
-                        })
-                    }
-                    else alert('No report.')
+            $vm.intuit_query=function(q){
+                $vm.get_intuit_token(function(realmId,t){
+                    var name=q.name;
+                    var path=encodeURI(q.path);
+                    var array=q.array;
+                    var columns=q.columns;
+                    var path2="/v3/company/"+realmId+path;
+                    $vm.request({api:'wapp',cmd:'intuit-api',access_token:t,path:path2},function(res){
+                        var v=JSON.parse(res.result);
+                        if(res.status=="err"){
+                            $vm.show_module('jsonv',{json_data:v})
+                        }
+                        else if(array!=undefined && array!=""){
+                            var type=columns.indexOf('|');
+                            if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                            else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                        }
+                        else{
+                            $vm.show_module('jsonv',{json_data:v})
+                        }
+                    })
                 })
             }
             //-------------------------------------------------------------------------------------------------------
-            $vm.firebase_query=function(UID){
-                $vm.request({api:'wapp',cmd:"find",table:"firebase",query:{UID:UID},options:{}},function(res){
-                    var records=res.result;
-                    if(records!=undefined && records.length==1){
-                        var name=records[0].Data.Name;
-                        var array=records[0].Data.Array;
-                        var columns=records[0].Data.Columns;
-                        var host=encodeURI(records[0].Data.Host);
-                        var path=encodeURI(records[0].Data.Path);
-                        $vm.get_google_firebase_token(function(t){
-                            $vm.request({api:'wapp',cmd:'firebase-api',access_token:t,host:host,path:path,method:'GET'},function(res){
-                                var v=JSON.parse(res.result);
-                                if(res.status=="err"){
-                                    $vm.show_module('jsonv',{json_data:v})
-                                }
-                                else if(array!=""){
-                                    var type=columns.indexOf('|');
-                                    if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
-                                    else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
-                                }
-                                else{
-                                    $vm.show_module('jsonv',{json_data:v})
-                                }
-                            })
-                        })
-                    }
-                    else alert('No report.')
+            $vm.firebase_query=function(q){
+                $vm.get_google_firebase_token(function(t){
+                    var name=q.name;
+                    var path=encodeURI(q.path);
+                    var host=q.host;
+                    var array=q.array;
+                    var columns=q.columns;
+                    $vm.request({api:'wapp',cmd:'firebase-api',access_token:t,host:host,path:path,method:'GET'},function(res){
+                        var v=JSON.parse(res.result);
+                        if(res.status=="err"){
+                            $vm.show_module('jsonv',{json_data:v})
+                        }
+                        else if(array!=""){
+                            var type=columns.indexOf('|');
+                            if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                            else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                        }
+                        else{
+                            $vm.show_module('jsonv',{json_data:v})
+                        }
+                    })
                 })
             }
             //-------------------------------------------------------------------------------------------------------
-            $vm.youtube_query=function(UID){
+            $vm.youtube_query=function(v){
+                $vm.show_module('youtube',{v:v});
+                /*
                 $vm.request({api:'wapp',cmd:"find",table:"youtube",query:{UID:UID},options:{}},function(res){
                     var records=res.result;
                     if(records!=undefined && records.length==1){
@@ -122,16 +112,17 @@
                     }
                     else alert('No video was found.')
                 })
+                */
             }
             //-------------------------------------------------------------------------------------------------------
-            $vm.image_query=function(UID){
-                $vm.request({api:'wapp',cmd:"find",table:"image",query:{UID:UID},options:{}},function(res){
-                    var records=res.result;
-                    if(records!=undefined && records.length==1){
-                        $vm.show_module('image',{data:records[0].Data})
-                    }
-                    else alert('No image was found.')
-                })
+            $vm.image_query=function(q){
+                //$vm.request({api:'wapp',cmd:"find",table:"image",query:{UID:UID},options:{}},function(res){
+                    //var records=res.result;
+                    //if(records!=undefined && records.length==1){
+                        $vm.show_module('image',{data:q})
+                    //}
+                    //else alert('No image was found.')
+                //})
             }
             //-------------------------------------------------------------------------------------------------------
             $vm.wappsystem_query=function(UID){
@@ -231,7 +222,82 @@
                     else alert('No report.')
                 })
             }
-            $vm.mailchimp_query=function(UID){
+            $vm.blackbaud_query=function(q){
+                var path=q.path;
+                var array=q.array;
+                var columns=q.columns;
+                var t=sessionStorage.getItem("blackbaud oauth");
+                if(t==null){
+                    alert("You haven't sign in to Blackbaud.");
+                    return;
+                }
+                if(path.indexOf('[INPUT]')!=-1){
+                    var p=prompt("Input", "");
+                    if(p==null) return;
+                    path=path.replace('[INPUT]',p);
+                }      
+                t=JSON.parse(t);
+                t=t.access_token;
+                $vm.request({api:'wapp',cmd:'blackbaud-api',access_token:t,path:path},function(res){
+                    var v={};
+                    try{
+                        v=JSON.parse(res.result);
+                    }
+                    catch(e){
+                        $vm.show_module('jsonv',{json_data:{err:v}});
+                        return;
+                    }
+                    if(array!=""){
+                        var type=columns.indexOf('|');
+                        if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                        else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                    }
+                    else{
+                        $vm.show_module('jsonv',{json_data:v})
+                    }
+                })
+            }
+            $vm.mailchimp_query=function(q){
+                var t=sessionStorage.getItem("mailchimp oauth");
+                if(t==null){
+                    alert("You haven't sign in to Mailchimp!");
+                    return "";
+                }
+                t=JSON.parse(t);
+                var access_token=t.access_token;
+                var host='us3.api.mailchimp.com';
+                var name=q.name;
+                var path=q.path;
+                if(path.indexOf('[INPUT]')!=-1){
+                    var p=prompt("Input", "");
+                    if(p==null) return;
+                    path=path.replace('[INPUT]',p);
+                }      
+                var array=q.array;
+                var columns=q.columns;
+                path=path.replace(/ /g,'%20');
+                path=path.replace(/\n/g,'').replace(/\r/g,'');
+                
+                $vm.request({api:'wapp',cmd:'mailchimp-api',access_token:access_token,host:host,path:"/3.0"+path},function(res){
+                    var v={};
+                    try{
+                        v=JSON.parse(res.result);
+                    }
+                    catch(e){
+                        $vm.show_module('jsonv',{json_data:{err:v}});
+                        return;
+                    }
+                    if(array!=""){
+                        var type=columns.indexOf('|');
+                        if(type!=-1) $vm.show_module('gridv',{name:name,json_data:v,array:array,columns:columns})
+                        else $vm.show_module('arrayv',{name:name,json_data:v,array:array,columns:columns})
+                    }
+                    else{
+                        $vm.show_module('jsonv',{json_data:v})
+                    }
+                })
+            }
+            $vm._mailchimp_query=function(UID){
                 var t=sessionStorage.getItem("mailchimp oauth");
                 if(t==null){
                     alert("You haven't login!");

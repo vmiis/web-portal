@@ -10,7 +10,7 @@
             $('#D__ID').on('load',function(){
                 var src="";
                 if(m.input.v!=undefined){
-                    src="https://www.youtube.com/embed/"+m.input.v+"/?autoplay=1&rel=0&enablejsapi=1";
+                    src="https://www.youtube.com/embed/"+m.input.v.replace(/\./g,'_')+"/?autoplay=1&rel=0&enablejsapi=1";
                     if(src!=old_src){old_src=src; $("#iframe__ID").attr("src",src);}
                 }
                 else{
