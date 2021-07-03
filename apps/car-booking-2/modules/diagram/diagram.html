@@ -1,0 +1,66 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div style='padding:20px'>
+            <li><a href='?/list_data'>Car List</a></li>
+            <li><a href='?/booking_data'>Booking Records</a></li>
+            <li><a href='?/month'>Month Calendar</a></li>
+            <li><a href='?/week'>Week Calendar</a></li>
+            <li><a href='?/day'>Day Calendar</a></li>
+            <li><a href='?/booking_form'>Booking Form</a></li>
+
+        </div>
+        <div id=dirgram__ID></div>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix;
+            $('#panel__ID').css('min-height',$vm.min_height);
+            $('#panel__ID a').on('click',function(e){
+                scrollTop_V=$(document).scrollTop();
+                e.preventDefault();
+                e.stopPropagation();
+                var module_name=$(this).attr('href').replace('?\/','');
+                if(module_name.substring(0,4)=='http') window.open(module_name);
+                else if(module_name!="") $vm.show_module(p+module_name,{}); 
+            })
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+        #panel__ID {
+            display:grid;
+            grid-template-columns: auto 1fr;
+        }
+        #dirgram__ID{
+            height:100%;
+            padding:100px;
+            background-color: #fff;
+            background-size: contain, cover;
+            background-repeat: no-repeat; 
+            background-image: url("__CURRENT_PATH__diagram.png");
+        }
+        #panel__ID a {
+            text-decoration: none;
+        }
+        #panel__ID a:link {
+            color:#555;
+        }
+        #panel__ID a:visited {
+            color:#555;
+        }
+        #panel__ID a:hover {
+            color:red;
+        }
+        #panel__ID a:active {
+            color:#555;
+        }
+
+
+    </style>
+</div>
