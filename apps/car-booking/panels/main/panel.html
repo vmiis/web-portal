@@ -1,0 +1,57 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div id=dirgram__ID style='padding:50px' >
+            VmInclude:__CURRENT_PATH__panel.svg
+        </div>
+    </div>
+    <style>
+        #dirgram__ID text[vm="1"]:hover{
+            fill:red;
+            cursor:pointer;
+        }
+    </style>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            //--------------------------------------------------------
+            var modules=[
+                "Car List","list_data",
+                "Booking Records","booking_data",
+                "Booking Form","booking_form",
+                "Monthly Calendar","month",
+                "Weekly Calendar","week",
+                "Daily Calendar","day"
+            ]
+            //--------------------------------------------------------
+            $('#dirgram__ID svg').removeAttr("width");
+            $('#dirgram__ID svg').removeAttr("height");
+            $('#dirgram__ID text').each(function(){
+                var t=$(this).text();
+                if(modules.indexOf(t)!=-1){
+                    $(this).attr("vm",1);
+                    $(this).css("text-decoration","underline");
+                }
+            });
+            //--------------------------------------------------------
+            $('#dirgram__ID text[vm=1]').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var t=$(this).text();
+                var i=modules.indexOf(t)+1;
+                if(i>0){
+                    $vm.show_module(p+modules[i],{}); 
+                }
+            });
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>
