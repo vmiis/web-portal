@@ -13,8 +13,6 @@
     var prefix='';
     var $H=$vm.hosting_path+"/modules";
     var modules={
-        panel:          {url:$H+"/panels/panel.html",router:1},
-        diagram:        {url:$H+"/diagram/diagram.html"},
         booking_data:   {url:$H+"/forms/booking-data.html",  Table:"demo-vm-19091805",  form_module:"booking_form"},
         booking_form:   {url:$H+"/forms/booking-form.html",  Table:"demo-vm-19091805",  lookup:"demo-vm-19091806"},
         booking_form_2: {url:$H+"/forms/booking-form-2.html",Table:"demo-vm-19091805",  lookup:"demo-vm-19091806"},
