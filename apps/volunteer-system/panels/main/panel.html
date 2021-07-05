@@ -1,0 +1,113 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div id=dirgram__ID style='padding:20px 430px' >
+            VmInclude:__CURRENT_PATH__panel.svg
+        </div>
+    </div>
+    <style>
+        #dirgram__ID g[vm="1"]:hover text{
+            fill:red!Important;
+            cursor:pointer;
+        }
+    </style>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            //--------------------------------------------------------
+            var modules=[
+                "Online Registration","https://www.researchvolunteer.org.au/",
+                "Microsoft Power App","https://make.powerapps.com/environments/85507754-c3fd-45e7-b8eb-99d98b288d52/apps",
+                "Volunteers","volunteers",
+                "Projects","projects",
+                "Studies","studies",
+                "Volunteers who registered a study","volunteer_study",
+                "Total number of contacts, projects and studies","total_number"
+            ]
+            //--------------------------------------------------------
+            $('#dirgram__ID svg').removeAttr("content");
+            $('#dirgram__ID svg').removeAttr("width");
+            $('#dirgram__ID svg').removeAttr("height");
+            $('#dirgram__ID g').each(function(){
+                var t=$(this).text();
+                if(modules.indexOf(t)!=-1){
+                    $(this).attr("vm",1);
+                    $(this).attr("pointer-events","all");
+                }
+            });
+            //--------------------------------------------------------
+            $('#dirgram__ID g[vm=1]').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var t=$(this).text();
+                var i=modules.indexOf(t)+1;
+                if(i>0){
+                    if(modules[i].substr(0,4)=="http") window.open(modules[i]);
+                    if(vm_data[modules[i]]!=undefined ){
+                        $vm.microsoft_query(vm_data[modules[i]]);
+                    }
+                    else $vm.show_module(p+modules[i],{}); 
+                }
+            });
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+
+
+            $vm.microsoft_query=function(q,ID1,ID2,ID3){
+                //-------------------------------------
+                        var host=q.host;
+                        var name=q.name;
+                        var path=q.path;
+                        var array=q.array;
+                        var columns=q.columns;
+                        $vm.get_microsoft_token(host,function(t){
+                            if(t!=""){
+                                if(path.indexOf('[INPUT]')!=-1){
+                                    var p=prompt("Input", "");
+                                    if(p==null) return;
+                                    path=path.replace('[INPUT]',p);
+                                }
+                                if(ID1!=undefined) path=path.replace('\[ID1\]',ID1);
+                                if(ID2!=undefined) path=path.replace('\[ID2\]',ID2);
+                                if(ID3!=undefined) path=path.replace('\[ID3\]',ID3);
+                                path=path.replace(/\n/g,'').replace(/\r/g,'');
+                                path=encodeURI(path);
+                                if(path.indexOf("$top=")==-1 && path.indexOf("$count=true")!=-1 ) $vm.show_module('microsoft-data',{name:name,path:path,array:array,columns:columns})
+                                else{
+                                    $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
+                                        var v=res.result;
+                                        if(res.status=="err"){
+                                            $vm.show_module('jsonv',{json_data:v})
+                                        }
+                                        if(array!=""){
+                                            var type=columns.indexOf('|');
+                                            if(type!=-1){
+                                                if(ID1==undefined) $vm.show_module('gridv',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
+                                                else if(ID2==undefined) $vm.show_module('gridv2',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
+                                                else if(ID3==undefined) $vm.show_module('gridv3',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
+                                            }
+                                            else $vm.show_module('arrayv',{name:name,json_data:JSON.parse(v),array:array,columns:columns})
+                                        }
+                                        else{
+                                            $vm.show_module('jsonv',{json_data:JSON.parse(v)})
+                                        }
+                                    })
+                                }
+                            }
+                        });
+            }
+            //-------------------------------------------------------------------------------------------------------
+
+
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>

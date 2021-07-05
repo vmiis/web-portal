@@ -33,5 +33,7 @@
     m["hba-panel"]=             {url:A+"/panels/hba/panel.html", prefix:"hba-", router:1};
     m["melody"]=                {url:A+"/panels/melody/panel.html",router:1};
     m["woolcock-portal"]=       {url:A+"/panels/woolcock/panel.html", router:1};
+
+    m["volunteers-panel"]=       {url:A+"/apps/volunteer-system/panels/main/panel.html", router:1}
     //-------------------------------------------------------------------------------------
 })();

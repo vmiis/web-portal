@@ -1,0 +1,210 @@
+#D__ID{
+    height:100%;
+    overflow:auto;
+    margin-bottom:200px;
+}
+#form_container__ID{
+    background-color:#fff;
+    margin-top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Verdana,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.header__ID{
+    padding: 2.5em 52px;
+    border-bottom: 1px solid #d7d8e1;
+}
+.t1__ID{
+    font-size:2em;
+    font-weight: 600;
+    line-height: 1.45;
+    font-family: Inter, sans-serif;
+    color: #2c3345;
+    word-break: break-word;
+    margin:0;
+}
+.t2__ID{
+    font-size:1em;
+    font-weight: 500;
+    line-height: 1.6;
+    font-family: Inter, sans-serif;
+    color: #57647e;
+    word-break: break-word;
+}
+.t3__ID{
+    display: block;
+    margin-left: 2px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    word-break: break-word;
+    color: #2C3345;
+    font-family: Inter, sans-serif;
+}
+.t4__ID{
+    font-size: .75em;
+    margin-top: 11px;
+    margin-left: 2px;
+    display: block;
+    word-break: break-word;
+}
+.r__ID{
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left: 52px;
+    padding-right: 52px;
+}
+.r__ID div{
+    padding-right:6px;
+}
+
+#F__ID input[type=text],
+#F__ID input[type=email],
+#F__ID input[type=tel],
+#F__ID input[type=time],
+#F__ID input[type=date],
+#F__ID select,
+#F__ID textarea
+{
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid;
+    display: block;
+    padding: 0 .625em;
+    outline: 0;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    border-color: #c3cad8;
+    color: #2c3345;
+    height: 2.5em;
+}
+
+#F__ID input[type=text]:hover, 
+#F__ID input[type=email]:hover,
+#F__ID input[type=tel]:hover,
+#F__ID input[type=time]:hover,
+#F__ID input[type=date]:hover,
+#F__ID select:hover,
+#F__ID textarea:hover
+{
+    border-color: #a9bff9;
+    box-shadow: 0 0 0 2px #c9d8fe;
+}
+
+#F__ID button{
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+#F__ID button:hover {
+    color: #fff;
+    background-color: #545b62;
+    border-color: #4e555b;
+}
+
+@media screen and (max-width:576px){
+    .t3__ID{
+        margin-top:15px;
+    }
+}
+
+@media print{
+    #form_container__ID{
+        margin:0;
+        padding:0;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        max-width: 100%;
+    }
+    .c_print {
+        display: none;
+    }
+}
+
+
+/* checkbox start ----------------------------------------------------------------------------------------*/
+/* The container */
+.c__ID {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    _font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default checkbox */
+.c__ID input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* Create a custom checkbox */
+.c__ID span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 21px;
+    width: 21px;
+    background-color: #eee;
+ }
+  
+/* On mouse-over, add a grey background color */
+.c__ID:hover input ~ span {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.c__ID input:checked ~ span {
+    background-color: #266698;
+}
+  
+/* Show the checkmark when checked */
+.c__ID input:checked ~ span:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.c__ID span:after {
+    content: "";
+    position: absolute;
+    display: none;
+    
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/* checkbox end ---------------------------------------------------------------------------------------------*/
