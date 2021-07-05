@@ -6,15 +6,11 @@
     var m=$vm.module_list;
     var api="wapp";
     m[p+"panel"]           ={url:A+"/panels/main/panel.html", prefix:p, router:1};
-    /*    
-    m[p+"booking_data"]    ={url:H+"/forms/booking-data.html",  api:api, Table:"demo-vm-19091805",  form_module:p+"booking_form", router:1};
-    m[p+"booking_form"]    ={url:H+"/forms/booking-form.html",  api:api, Table:"demo-vm-19091805",  lookup:"demo-vm-19091806"};
-    m[p+"booking_form_2"]  ={url:H+"/forms/booking-form-2.html",api:api, Table:"demo-vm-19091805",  lookup:"demo-vm-19091806"};
-    m[p+"list_data"]       ={url:H+"/forms/list-data.html",     api:api, Table:"demo-vm-19091806",  form_module:p+"list_form"};
-    m[p+"list_form"]       ={url:H+"/forms/list-form.html",     api:api, Table:"demo-vm-19091806"};
-    m[p+"month"]           ={url:H+"/calendar/month.html",      api:api, Table:"demo-vm-19091805","booking":p+"booking_form",lookup:"demo-vm-19091806",router:1};
-    m[p+"week"]            ={url:H+"/calendar/week.html",       api:api, Table:"demo-vm-19091805","booking":p+"booking_form","booking2":p+"booking_form_2",lookup:"demo-vm-19091806",router:1};
-    m[p+"day"]             ={url:H+"/calendar/day.html",        api:api, Table:"demo-vm-19091805","booking":p+"booking_form",lookup:"demo-vm-19091806",router:1};
-    */
+    m[p+"new-starter-data-status"]=  {url:H+"/forms/new-starter.data.status.html",api:api, Table:'new-starter',form_module:p+"new-starter-form",action_module:p+'new-starter-action',action_table:'new-starter-action',notes_module:'new-starter-notes-data',notes_table:'new-starter-notes', router:1};
+    m[p+"new-starter-data"]=         {url:H+"/forms/new-starter.data.html",api:api, Table:'new-starter',form_module:p+"new-starter-form",action_module:p+'new-starter-action',action_table:'new-starter-action',notes_module:'new-starter-notes-data',notes_table:'new-starter-notes', router:1};
+    m[p+"new-starter-form"]=         {url:H+"/forms/new-starter.form.html",api:api, Table:'new-starter'};
+    m[p+"new-starter-action"]=       {url:H+"/forms/new-starter.action.html",api:api, Table:'new-starter-action',parent_table:"new-starter"};
+    m[p+"new-starter-notes-data"]=   {url:H+"/forms/notes.data.html",api:api, Table:'new-starter-notes',form_module:p+"new-starter-notes-form",parent_table:'new-starter'};
+    m[p+"new-starter-notes-form"]=   {url:H+"/forms/notes.form.html",api:api, Table:'new-starter-notes',parent_table:'new-starter'};
     //-------------------------------------------------------------------------------------
 })();

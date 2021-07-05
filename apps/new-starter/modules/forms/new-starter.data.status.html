@@ -19,7 +19,7 @@
                     break;
                 case 'UniKey_Task':
                     var txt="";
-                    if(records[I].Data[field]=='off')  td.html("<span style='color:#aaa'>Not required</span>");
+                    if(records[I].Data[field]=='off')  td.html("");
                     if(records[I].Data[field]=='on'){
                         td.html("<u style='cursor:pointer;color:#c54609'>Required</u>");
                         td.find('u').on('click',function(){
@@ -28,7 +28,7 @@
                     }
                     break;
                 case 'Access_Card':
-                    if(records[I].Data[field]=='off')  td.html("<span style='color:#aaa'>Not required</span>");
+                    if(records[I].Data[field]=='off')  td.html("");
                     if(records[I].Data[field]=='on'){
                         td.html("<u style='cursor:pointer;color:#c54609'>Required</u>");
                         td.find('u').on('click',function(){
@@ -37,7 +37,7 @@
                     }
                     break;
                 case 'Computer':
-                    if(records[I].Data[field]=='off')  td.html("<span style='color:#aaa'>Not required</span>");
+                    if(records[I].Data[field]=='off')  td.html("");
                     if(records[I].Data[field]=='on'){
                         td.html("<u style='cursor:pointer;color:#c54609'>Required</u>");
                         td.find('u').on('click',function(){
