@@ -34,6 +34,7 @@
     m["melody"]=                {url:A+"/panels/melody/panel.html",router:1};
     m["woolcock-portal"]=       {url:A+"/panels/woolcock/panel.html", router:1};
 
-    m["volunteers-panel"]=       {url:A+"/apps/volunteer-system/panels/main/panel.html", router:1}
+    m["volunteers-panel"]=      {url:A+"/apps/volunteer-system/panels/main/panel.html", router:1}
+    m["printer-panel"]=         {url:A+"/apps/printer-status/panels/main/panel.html", router:1}
     //-------------------------------------------------------------------------------------
 })();
