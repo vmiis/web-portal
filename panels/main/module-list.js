@@ -36,5 +36,6 @@
 
     m["volunteers-panel"]=      {url:A+"/apps/volunteer-system/panels/main/panel.html", router:1}
     m["printer-panel"]=         {url:A+"/apps/printer-status/panels/main/panel.html", router:1}
+    m["server-panel"]=         {url:A+"/apps/server-status/panels/main/panel.html", router:1}
     //-------------------------------------------------------------------------------------
 })();

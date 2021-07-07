@@ -154,6 +154,7 @@
                 $vm.init();
                 $vm.load_component('header','header',{});
                 $vm.load_component('footer','footer',{});
+                $vm.install_module('auth','',{},function(name,id){});
                 $vm.install_module('token','',{},function(name,id){});
                 var install_one=function(m,t){
                     setTimeout(function (){ 

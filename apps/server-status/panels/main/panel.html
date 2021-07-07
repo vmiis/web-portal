@@ -1,0 +1,127 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <button id=refresh__ID type=button class="btn btn-secondary"  style='float:left; margin-top:10px;margin-left:20px' >Refresh</button>
+        <div id=dirgram__ID style='padding:50px 300px' >
+            VmInclude:__CURRENT_PATH__panel.svg
+        </div>
+    </div>
+    <style>
+        #dirgram__ID g[vm="1"]:hover text{
+            fill:red!Important;
+            cursor:pointer;
+        }
+    </style>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            //--------------------------------------------------------
+            /*
+            var modules=[
+                "Online Registration","https://www.researchvolunteer.org.au/",
+                "Microsoft Power App","https://make.powerapps.com/environments/85507754-c3fd-45e7-b8eb-99d98b288d52/apps",
+                "Volunteers","volunteers",
+                "Projects","projects",
+                "Studies","studies",
+                "Volunteers who registered a study","volunteer_study",
+                "Total number of contacts, projects and studies","total_number"
+            ]
+            */
+            //--------------------------------------------------------
+            $('#dirgram__ID svg').removeAttr("content");
+            $('#dirgram__ID svg').removeAttr("width");
+            $('#dirgram__ID svg').removeAttr("height");
+            //$('#dirgram__ID svg image').attr("xlink:href","images/printer.png");
+            /*
+            $('#dirgram__ID g').each(function(){
+                var t=$(this).text();
+                if(modules.indexOf(t)!=-1){
+                    $(this).attr("vm",1);
+                    $(this).attr("pointer-events","all");
+                }
+            });
+            */
+            //--------------------------------------------------------
+            $('#dirgram__ID g text').each(function(e){
+                var t=$(this).text();
+                //if(t=="L21B"){
+                if(t.substring(0,2)=="SS"){
+                    $(this).text('');
+                    $(this).attr("pid",t);
+                }
+            })
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+
+            var query=[
+                "172.17.213.1@Domain Controller on level 3",
+                "172.17.213.2@Domain Controller on level 4",
+                "172.17.213.5@VMWare Domain Controller on level 4",
+                "129.78.64.1@Uni DNS server 1",
+                "129.78.64.2@Uni DNS server 2",
+                "172.17.213.6@VMWare Hypervisor 1 (Level 4 Server Room)",
+                "172.17.213.8@VMWare Hypervisor 2 (Level 4 Server Room)",
+                "172.17.213.17@HP MSA 1 (Level 4 Server Room)",
+                "172.17.213.18@HP MSA 2 (Level 4 Server Room)",
+                "172.17.213.219@NetApp NI 1",
+                "172.17.213.220@NetApp NI 2",
+                "172.17.213.13@NetApp Man"                
+            ]
+            var get_info=function(){
+                $vm.request({api:"wzd",cmd:'ping',table:'ping',pipeline:query},function(res){
+                    var records=res.result;
+                    for(var i=0;i<records.length;i++){
+                        var name=records[i].Name;
+                        var s=records[i].Active;
+                        var id="";
+                        switch(name){
+                            case "Uni DNS server 1": id="SS1"; break;
+                            case "Uni DNS server 2": id="SS2"; break;
+                            case "Domain Controller on level 3": id="SS3"; break;
+                            case "Domain Controller on level 4": id="SS4"; break;
+                            case "VMWare Domain Controller on level 4": id="SS5"; break;
+                            case "VMWare Hypervisor 1 (Level 4 Server Room)": id="SS6"; break;
+                            case "VMWare Hypervisor 2 (Level 4 Server Room)": id="SS7"; break;
+                            case "HP MSA 1 (Level 4 Server Room)": id="SS8"; break;
+                            case "HP MSA 2 (Level 4 Server Room)": id="SS9"; break;
+                            case "NetApp NI 1": id="SS10"; break;
+                            case "NetApp NI 2": id="SS11"; break;
+                            case "NetApp Man": id="SS12"; break;
+                        }
+                        if(id!=""){
+                            if(s==true){
+                                $('#dirgram__ID g text[pid='+id+']').html('&#10004;');
+                                $('#dirgram__ID g text[pid='+id+']').attr('fill','green');
+                            }
+                            else{
+                                $('#dirgram__ID g text[pid='+id+']').html('&#10060;');
+                                $('#dirgram__ID g text[pid='+id+']').attr('fill','red');
+                            }
+                        }
+                    }
+                });
+
+            }
+
+            $('#D__ID').on('load',function(){
+                get_info();
+            })
+
+            $('#refresh__ID').on('click',function(){
+                get_info();
+            })
+            //-------------------------------------------------------------------------------------------------------
+
+
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>
