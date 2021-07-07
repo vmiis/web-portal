@@ -1,0 +1,65 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div id=dirgram__ID style='padding:50px 300px' >
+            VmInclude:__CURRENT_PATH__panel.svg
+        </div>
+    </div>
+    <style>
+        #dirgram__ID g[vm="1"]:hover text{
+            fill:red!Important;
+            cursor:pointer;
+        }
+    </style>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            //--------------------------------------------------------
+            var modules=[
+                "CMS","https://rt.woolcock.org.au/cms2/login.aspx",
+                "Monthly average scoring and reporting days in 2021","2021_days",
+                "Projects","projects",
+                "Studies","studies",
+                "Volunteers who registered a study","volunteer_study",
+                "Total number of contacts, projects and studies","total_number"
+            ]
+            //--------------------------------------------------------
+            $('#dirgram__ID svg').removeAttr("content");
+            $('#dirgram__ID svg').removeAttr("width");
+            $('#dirgram__ID svg').removeAttr("height");
+            $('#dirgram__ID g').each(function(){
+                var t=$(this).text();
+                if(modules.indexOf(t)!=-1){
+                    $(this).attr("vm",1);
+                    $(this).attr("pointer-events","all");
+                }
+            });
+            //--------------------------------------------------------
+            $('#dirgram__ID g[vm=1]').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var t=$(this).text();
+                var i=modules.indexOf(t)+1;
+                if(i>0){
+                    if(modules[i].substr(0,4)=="http") window.open(modules[i]);
+                    else if(vm_data[modules[i]]!=undefined ){
+                        $vm.microsoft_query(vm_data[modules[i]]);
+                    }
+                    else $vm.show_module(p+modules[i],{}); 
+                }
+            });
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+            //-------------------------------------------------------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>
