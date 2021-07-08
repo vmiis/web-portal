@@ -46,7 +46,7 @@
                 var i=modules.indexOf(t)+1;
                 if(i>0){
                     if(modules[i].substr(0,4)=="http") window.open(modules[i]);
-                    if(vm_data[modules[i]]!=undefined ){
+                    else if(vm_data[modules[i]]!=undefined ){
                         $vm.microsoft_query(vm_data[modules[i]]);
                     }
                     else $vm.show_module(p+modules[i],{}); 

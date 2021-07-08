@@ -20,11 +20,14 @@
             //--------------------------------------------------------
             var modules=[
                 "CMS","https://rt.woolcock.org.au/cms2/login.aspx",
-                "Monthly average scoring and reporting days in 2021","2021_days",
-                "Projects","projects",
-                "Studies","studies",
-                "Volunteers who registered a study","volunteer_study",
-                "Total number of contacts, projects and studies","total_number"
+                "Monthly average scoring and reporting days in 2021","SQL|6",
+                "Sleep Study","SQL|14",
+                "Patient","SQL|15",
+                "Sleep Staff","SQL|16",
+                "Staff Roster","SQL|17",
+                "Sleep study report done but not sent","SQL|8",
+                "Number of sleep study by year and month","SQL|1",
+                "Number of sleep study by year","SQL|18"
             ]
             //--------------------------------------------------------
             $('#dirgram__ID svg').removeAttr("content");
@@ -42,18 +45,17 @@
                 e.preventDefault();
                 e.stopPropagation();
                 var t=$(this).text();
-                var i=modules.indexOf(t)+1;
+                var i=modules.indexOf(t);
+                var para=modules[i+1]
                 if(i>0){
-                    if(modules[i].substr(0,4)=="http") window.open(modules[i]);
-                    else if(vm_data[modules[i]]!=undefined ){
-                        $vm.microsoft_query(vm_data[modules[i]]);
-                    }
-                    else $vm.show_module(p+modules[i],{}); 
+                    if(para.substr(0,4)=="http") window.open(modules[i]);
+                    else if(para.substr(0,3)=="SQL") $vm.sqlserver_query( parseInt(para.split('|').pop()) );
+                    else $vm.show_module(p+para,{}); 
                 }
             });
             //--------------------------------------------------------
             $('#panel__ID').css('min-height',$vm.min_height);
-            //-------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------
         }
     </script>
     <style>

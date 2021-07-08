@@ -22,14 +22,14 @@
     <body>
         <div id=_g_vm_canvas style='position:absolute;top:-100000px'></div>
         <div id=layout>
-            <div id=header></div>
+            <div id=header style='height:83px'></div>
             <div id=content></div>
             <div id=footer></div>
         </div>
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[1.00,0.05]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[1.01,0.05]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -63,7 +63,7 @@
         <script vm framework code>
             //=================================================
             //VM framework code, do not need to chang the following code in most cases
-            var hearder_height=83;
+            var hearder_height=$('#header').height();
             $vm.min_height=$(window).height()-hearder_height;
             $('#content').css('min-height',$vm.min_height);
             $('#content').css('padding-top',hearder_height);

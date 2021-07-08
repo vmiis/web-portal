@@ -399,9 +399,8 @@
                         var columns=records[0].Data.Columns;
                         var search="";
                         if(query.indexOf('[CONTAINS]')!=-1){
-                            var search=prompt("Keyword for search", "");
+                            var search=prompt("Input", "");
                             if(search==null) search="";
-                            search=search.trim().replace(/ /g,'');
                         }      
                         var req={api:"wzd",cmd:'find',options:{sql:1,uid:uid},search:search}
                         $vm.request(req,function(res){

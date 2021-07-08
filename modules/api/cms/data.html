@@ -17,6 +17,8 @@
                         td.html("<u style='cursor:pointer'>Send</u>");
                         td.find('u').on('click',function(){
                             var uid=records[I].UID;
+                            $vm.sqlserver_query( uid );
+                            /*
                             var name=records[I].Data.Name;
                             //var query=records[I].Data.Query;
                             var columns=records[I].Data.Columns;
@@ -38,6 +40,7 @@
                                 //}
                             });
                             //--------------------------------------------------------
+                            */
                         })
                         break;
                 }
