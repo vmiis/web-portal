@@ -15,8 +15,8 @@
     */
 
     m["microsoft-data"]={url:H+"/system/microsoft-data.html",form_module:"jsonv"};
-    m["arrayv"]={url:H+"/system/array-viewer.html",form_module:"jsonv"};
-    m["jsonv"]={url:H+"/system/json-viewer.html",form_module:"jsonv"};
+    //m["arrayv"]={url:H+"/system/array-viewer.html",form_module:"jsonv"};
+    //m["jsonv"]={url:H+"/system/json-viewer.html",form_module:"jsonv"};
 
     //-------------------------------------------------------------------------------------
 })();

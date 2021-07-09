@@ -49,7 +49,14 @@
                 var para=modules[i+1]
                 if(i>0){
                     if(para.substr(0,4)=="http") window.open(modules[i]);
-                    else if(para.substr(0,3)=="SQL") $vm.sqlserver_query( parseInt(para.split('|').pop()) );
+                    else if(para.substr(0,3)=="SQL") $vm.sqlserver_query( parseInt(para.split('|').pop()),function(){ alert(
+`
+The connection to the proxy server is failed.
+It could be:
+1. the server is not running
+2. your computer is not inside Uni network                        
+`
+                        ); } );
                     else $vm.show_module(p+para,{}); 
                 }
             });

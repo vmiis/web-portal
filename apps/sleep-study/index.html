@@ -43,6 +43,13 @@
                 token:          {url:$vm.hosting_path+"/modules/system/token.html"},
                 query:          {url:$vm.hosting_path+"/modules/system/query.html"},
                 panel:          {url:$vm.hosting_path+"/panels/main/panel.html",router:1},
+
+                jsonv:      {url:$vm.hosting_path+"/modules/system/viewer-json.html"},
+                gridv:      {url:$vm.hosting_path+"/modules/system/viewer-grid.html"},
+                gridv2:     {url:$vm.hosting_path+"/modules/system/viewer-grid.html"},
+                gridv3:     {url:$vm.hosting_path+"/modules/system/viewer-grid.html"},
+                arrayv:     {url:$vm.hosting_path+"/modules/system/viewer-array.html"},
+
             }
             //---------------------------------------------
             $vm.first_module='home';
@@ -158,6 +165,7 @@
                 $vm.load_component('footer','footer',{});
                 $vm.install_module('auth','',{},function(name,id){});
                 $vm.install_module('token','',{},function(name,id){});
+                $vm.install_module('query','',{},function(name,id){});
                 var install_one=function(m,t){
                     setTimeout(function (){ 
                         $.ajaxSetup({cache:true}); 
