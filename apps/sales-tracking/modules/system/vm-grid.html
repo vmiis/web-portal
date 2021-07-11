@@ -1,0 +1,486 @@
+<div id=D__ID>
+    <div>
+        <div id=toolbar__ID class="navbar navbar-default">
+                <div id=row_1__ID>
+                        <button id=info__ID type=button class='btn btn-secondary' title='Add new' style='display:none'><i class="fa fa-info"></i></button>
+                        <button id=new__ID  type=button class='btn btn-secondary' title='Add new'><i class="fa fa-plus"></i></button>
+                        <input id=keyword__ID type="text" placeholder="keyword" class="form-control">
+                        <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'><i class="fa fa-search" ></i></button>
+                </div>
+                <span id=title__ID class='d-none d-md-block'></span>
+                <div>
+                        Page Size:
+                        <select id=page_size__ID class="form-control" style='margin-right:20px;display:inline-block;width:auto;'><option>30</option><option>50</option><option>100</option><option>200</option></select>
+                        <span id=I__ID style="display:none">0</span><span id=A__ID></span> <span id=B__ID></span>
+                        <button id=p__ID type=button class="btn btn-secondary" title="Previous page"><i class="fa fa-arrow-left"></i></button>
+                        <button id=n__ID type=button class="btn btn-secondary" title="Next page"><i class="fa fa-arrow-right"></i></button>
+                </div>
+                <div id=import_export_section__ID class="d-none d-sm-block">
+                        <button id=export__ID type=button class="btn btn-secondary" title=Export><i class="fa fa-download" ></i></button> 
+                </div>
+                <span id=elapsed__ID style='float:right'></span>
+        </div>
+        <div id=table__ID>
+            <table id=grid__ID></table>
+        </div>
+    </div>
+    VmInclude:__COMPONENT__/m/modal.01.html
+    <script>
+        function F__ID(){
+            //-------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            //-------------------------------------------------
+            var api="";
+            var table="";
+            var query="";
+            var headers_txt="";
+            var options_txt=""
+            var pipelines="";
+            var form_module="";
+            $('#D__ID').on('load',function(){
+                $('#grid__ID').html('');
+                table="";query="";headers="";options="";form_module="";
+                if(m.input.Data==undefined) return;
+                api=m.input.Data.api; if(api==undefined) api="wapp";
+                table=m.input.Data.table;
+                if(m.input.Data.query!=undefined) query=m.input.Data.query;
+                if(m.input.Data.headers!=undefined) headers_txt=m.input.Data.headers;
+                if(m.input.Data.options!=undefined) options_txt=m.input.Data.options;
+                if(m.input.Data.form_module!=undefined) form_module=m.input.Data.form_module;
+                pipelines="";
+                if(query!=undefined && query!=""){
+                    pipelines=query;
+                    /*
+                    try{
+                        pipelines=JSON.parse(query);
+                    }
+                    catch(e){
+                        alert(e);
+                        return;
+                    }
+                    */
+                }
+                m.set_req(); m.request_data();
+            })
+            //-------------------------------------------------
+            $('#D__ID').on('show',function(){
+                if(m.nav!=undefined) m.nav();
+                if($vm.refresh==1){
+                    $vm.refresh=0; 
+                    m.set_req(); 
+                    m.request_data();
+                }
+            });
+            //--------------------------------------------------------
+            m.set_req=function(){
+                m.limit=parseInt($('#page_size__ID').val());
+                m.skip=m.limit*parseInt($('#I__ID').text());
+                var pipeline0=
+                [
+                    {
+                        $facet: {
+                            count: [{ $count: "value" }],
+                            rows: [{ $sort: { _id: -1 } }, { $skip: m.skip }, { $limit: m.limit }]
+                        }
+                    }
+                ]
+                var pipeline=[];
+                if(pipelines!=""){
+                    for(var i=0;i<pipelines.length;i++){
+                        pipeline.push(pipelines[i]);
+                    }
+                    for(var i=0;i<pipeline0.length;i++){
+                        pipeline.push(pipeline0[i]);
+                    }
+                }
+                else pipeline=pipeline0;
+                var keyword=$('#keyword__ID').val();
+                if( keyword!=""){
+                    pipeline.push(
+                        {
+                            $match:{
+                                $text: { $search: keyword }
+                            }
+                        }
+                    )
+                }
+                m.req={api:api,cmd:"aggregate",table:table,pipeline:pipeline}
+            }
+            //-------------------------------------------------
+            m.set_export=function(){
+                var pipeline=[];
+                if(pipelines!=""){
+                    for(var i=0;i<pipelines.length;i++){
+                        pipeline.push(pipelines[i]);
+                    }
+                }
+                m.req_export={api:api,cmd:"export",table:table,pipeline:pipeline}
+            }
+            //-------------------------------------------------
+            m.request_data=function(){
+                $vm.request(m.req,function(res){
+                    if(res.status=="np"){
+                        alert("No permissions!");
+                        $('#table__ID').html('');
+                        return;
+                    }
+                    //-------------------------------
+                    if(res.result[0].count==0){
+                        res.result[0].count.push({value:0})
+                    }
+                    var N=res.result[0].count[0].value;
+                    m.max_I=Math.ceil(N/m.limit)-1;
+                    var n2=m.skip+m.limit; if(n2>N) n2=N;
+                    var a=(m.skip+1).toString()+"~"+(n2).toString()+" of ";
+                    $("#A__ID").text(a);
+                    $("#B__ID").text(N)
+                    //-------------------------------
+                    var rows=res.result[0].rows;
+                    var headers_nm=[];
+                    var headers_db=[];
+                    var option1={};
+                    var option2={};
+                    var option3={};
+                    var records=[];
+                    //Header
+                    if(headers_txt!=''){
+                        var ss=headers_txt.split(',');
+                        for(var i=0;i<ss.length;i++){
+                            var cc=ss[i].split('|');
+                            headers_db[i]=cc[0];
+                            if(cc.length>1) headers_nm[i]=cc[1]; else headers_nm[i]=cc[0];
+                        }
+                    }
+                    else{
+                        for(var i=0;i<rows.length;i++){
+                            for(var field in rows[i].Data){
+                                if(headers_db.indexOf(field)==-1){
+                                    headers_db.push(field);     
+                                    headers_nm.push(field);     
+                                }
+                            }
+                        }
+                    }
+                    //Options
+                    if(options_txt!=''){
+                        var ss=options_txt.split(',');
+                        for(var i=0;i<ss.length;i++){
+                            var cc=ss[i].split('|');
+                            var db=cc[0].trim();
+                            option1[db]="";
+                            if(cc.length>1) option1[db]=cc[1]; else option2[db]="";
+                            if(cc.length>2) option2[db]=cc[2]; else option2[db]="";
+                            if(cc.length>3) option3[db]=cc[3]; else option3[db]="";
+                        }
+                    }
+                    //Records
+                    for(var i=0;i<rows.length;i++){
+                        var record={};
+                        for(var field in rows[i].Data){
+                            record[field]=rows[i].Data[field];
+                            if(record[field]==null || record[field]==undefined) record[field]="";
+                        }
+                        records.push(record);
+                    }
+
+                    // header ----------
+                    var txt="<tr><th></th><th></th>";
+                    var N=headers_db.length;
+                    for(var j=0;j<N;j++){
+                        var db=headers_db[j];
+                        var nm=headers_nm[j];
+                        var op1=option1[db];
+                        if(op1!="REMOVE") txt+="<th>"+nm+"</th>";
+                    }
+                    txt+="<th>Submit Date</th><th>Submitted By</th><th></th></tr>"
+
+                    // records ----------
+                    for(var i=0;i<records.length;i++){
+                        txt+="<tr><td>"+(i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+" style='cursor:pointer' title='Edit'></i></td>";
+                        for(var j=0;j<N;j++){
+                            var db=headers_db[j];
+                            var op1=option1[db];
+                            var c=rows[i].Data[db];
+                            if(c==undefined) c="";
+                            if(db=='UID') c=rows[i].UID;
+                            var td="<td>"+c+"</td>";
+                            switch(op1){
+                                case 'DOLLAR': c="$"+c;         td="<td style='text-align:right'>"+c+"</td>"; break;
+                                case 'DATE': c=c.substr(0,10);  td="<td>"+c+"</td>"; break;
+                                case 'TIME': c=c.substr(11,5);  td="<td>"+c+"</td>"; break;
+                                case 'ON': 
+                                    var s=""; if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
+                                    c=s;
+                                    break;
+                            }
+                            if(op1!="REMOVE") txt+=td;
+                        }
+                        txt+="<td>"+rows[i].Submit_date.substr(0,10)+"</td><td>"+rows[i].Submitted_by+"</td>"
+                        txt+="<td><i class='fa fa-trash-o' i="+i+" style='padding: 0 3px;cursor:pointer' title='Delete'></i></td></tr>";
+                    }
+                    // -----------------
+                    $('#grid__ID').html(txt);
+                    $('#grid__ID').find('i').on('click',function(){
+                        var i=$(this).attr('i');
+                        var title=$(this).attr('title');
+                        if(title=='Edit'){
+                            if(form_module!='') $vm.show_module(form_module,{record:rows[i]});
+                            else $vm.show_module('json-editor',{record:rows[i]})
+                        }
+                        if(title=='Delete'){
+                            if(confirm("Are you sure to delete?\n")){
+                                var rid=rows[i]._id;
+                                m.delete(rid);
+                            }
+                        }
+                    });
+                });
+            }
+            //-------------------------------------------------
+            $('#keyword__ID').on('keypress',function(e){
+                if(e.keyCode === 13){
+                    e.preventDefault();
+                    m.set_req(); m.request_data(); 
+                }
+            })
+            $('#query__ID').on('click',function(){    m.set_req(); m.request_data(); })
+            $("#p__ID").on('click',function(){  var I=$("#I__ID").text();I--; if(I<0) I=0; $("#I__ID").text(I); m.set_req(); m.request_data();})
+            $("#n__ID").on('click',function(){  var I=$("#I__ID").text();I++; if(I>m.max_I) I=m.max_I; $("#I__ID").text(I); m.set_req(); m.request_data();})
+            //-------------------------------------
+            m.delete=function(rid){
+                $vm.request({api:api,cmd:"delete",id:rid,table:table},function(res){
+                    //-----------------------------
+                    if(res.status=="lk"){
+                        $vm.alert("This record is locked.");
+                        return;
+                    }
+                    //-----------------------------
+                    if(res.status=="np"){
+                        alert("No permission to delete this record.");
+                        return;
+                    }
+                    //-----------------------------
+                    m.request_data();
+                });
+            };
+            //-------------------------------
+            $('#new__ID').on('click', function(){
+                if(form_module!='') $vm.show_module(form_module,{});
+                else $vm.show_module('json-editor',{table:table})
+            })
+            //-------------------------------
+            $('#export__ID').on('click',function(){  m.set_export(); m.export_records(); })
+            m.export_records=function(){
+                open_model__ID();
+                $vm.request(m.req_export,function(N,i,txt){
+                    console.log(i+"/"+N);
+                    $('#msg__ID').text((100*i/N).toFixed(0)+"%");
+                    if(i==-1){
+                        var len=txt.length;
+                        var n_txt="["+txt.substring(5,len-9)+"]";
+                        var o=JSON.parse(n_txt);
+                        $vm.download_csv(table+".csv",o);
+                        close_model__ID();
+                    }
+                });
+            }
+            //---------------------------------------------
+        }
+    </script>
+    <style>
+        #toolbar__ID{
+            background-color:#ccc;
+            padding:5px 10px;
+            margin-bottom:0px;
+            overflow:hidden
+        }
+        #toolbar__ID *{
+            margin-right:3px;
+        }
+        #keyword__ID{
+            width: 150px; 
+            display:inline-block;
+        }
+        @media screen and (max-width:768px){
+            #toolbar__ID{
+                padding: 3px 0;
+            }
+            #toolbar__ID div{
+                padding-left:3px;
+            }
+            #row_1__ID{
+                padding-bottom: 3px;
+                width:100%;
+            }
+            #keyword__ID{
+                width:auto;
+            }
+        }
+
+        #nav__ID {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size:13px;
+            background-color:#bbb;
+            padding:0px 0 0 10px;
+        }
+        #nav__ID a {
+            color:black;
+            text-decoration-line: underline;
+        }
+        #nav__ID a:hover {
+            color:red;
+        }
+        #D__ID{
+            background-color:#fff;
+            color:#000;
+            font-size:13px;
+            font-family: Helvetica, Arial, sans-serif;
+            height:100%;
+            /*overflow: auto;*/
+            animation: vm_module_fadein 1.0s;
+        }
+        #D__ID table{
+            /*background-color:#fff;*/
+            font-size:13px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        #row_message__ID{
+            z-index:-1;
+            transition: opacity 0.8s;
+            transition-timing-function: ease-in-out;
+            opacity: 0.0;
+
+            position: absolute;
+            left:10px;
+            top:0;
+            /*transition:left 0.8s;*/
+            padding:2px 6px 2px 6px;
+            font-size:10pt;
+            border: 1px solid #aaa;
+            background-color:#fffacd;
+        }
+        .tab__ID{
+            width:30px;
+            display:inline-block;
+        }
+
+        #grid__ID{
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 0;
+            border-width: 0;
+        }
+        #grid__ID th{
+            font-weight: bold;
+            background-color:#EEE;
+            padding:5px;
+            border: 1px solid #CCC;
+        }
+        #grid__ID td{
+            font-weight: 300;
+            background-color:#FFF;
+            padding:3px;
+            border: 1px solid #CCC;
+            vertical-align: top;
+            white-space: pre;
+        }
+        #grid__ID tr td:first-child{
+            padding-left:10px;
+            padding-right:10px;
+            background-color:#EEE;
+        }
+        .file_button{
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 10px 10px;
+            border-color: transparent transparent #888 transparent;
+            cursor:pointer;
+            position:absolute;
+            right:0;
+            bottom:0
+        }
+        .choose_file,.remove_file{
+            cursor: pointer;
+            line-height: 18px;
+        }
+        .file_buttons{
+            padding-left: 10px;
+            float: right;
+            line-height: 10px;
+            color: #888;
+        }
+        .validation_info {
+            position:absolute;
+            right:0;
+            top:0;
+            cursor:pointer;
+
+            width: 12px;
+            height: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            font-style: italic;
+            line-height: 12px;
+            color: #fff;
+            background: red;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+        }
+
+        ul.ui-autocomplete.ui-menu{font-size:12px}
+        .ui-autocomplete li:hover{
+            color:White;
+            background:#75A9A9;
+            font-weight:normal;
+            outline:none;
+        }
+        @media print {
+            #content_container_0{
+                position:absolute;
+                overflow:visible;
+            }
+            html,body{
+                width:100%;
+                height:100%;
+                overflow:visible;
+            }
+            #D__ID{
+                width:100%;
+                height:100px;
+                overflow:visible;
+            }
+            body * {
+                visibility: hidden;
+            }
+            #grid__ID, #grid__ID * {
+                visibility: visible;
+            }
+            .c_print {
+                display: none;
+            }
+            #grid__ID {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .file_buttons{
+                display:none;
+            }
+        }
+        @media screen and (max-width:900px){
+            #elapsed__ID{
+                display:none;
+            }
+            #table__ID{
+                overflow-x:auto;
+                /*white-space: nowrap;*/
+            }
+            #grid__ID tr td:first-child{
+                padding-left:10px;
+                padding-right:10px;
+            }
+        }
+    </style>
+</div>

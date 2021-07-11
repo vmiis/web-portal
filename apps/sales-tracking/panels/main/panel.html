@@ -1,0 +1,71 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div id=dirgram__ID style='padding:60px 350px' >
+            VmInclude:__CURRENT_PATH__panel.svg
+        </div>
+    </div>
+    <style>
+        #dirgram__ID g[vm="1"]:hover{
+            fill:red;
+            cursor:pointer;
+        }
+    </style>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            //--------------------------------------------------------
+            var modules=[
+                "SalesForm","sales-form",
+                "SalesRecords","sales-data",
+                
+                "Items","item-data",
+                "Regions","region-data",
+                "Reps","rep-data",
+                
+                "1. Total sales amount monthly","sales_1",
+                "2. Total sales amount monthly by item","sales_2",
+                "3. Total sales amount monthly by region","sales_3",
+                "4. Total sales amount monthly by rep","sales_4",
+            ]
+            //--------------------------------------------------------
+            $('#dirgram__ID svg').removeAttr("width");
+            $('#dirgram__ID svg').removeAttr("height");
+            $('#dirgram__ID g').each(function(){
+                var t=$(this).text();
+                if(modules.indexOf(t)!=-1){
+                    $(this).attr("vm",1);
+                }
+            });
+            //--------------------------------------------------------
+            $('#dirgram__ID g[vm=1]').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var t=$(this).text();
+                var i=modules.indexOf(t);
+                if(i>=0){
+                    var nm=modules[i+1];
+                    if(vm_data[nm]!=undefined){
+                        switch(vm_data[nm].module){
+                            case "vm-grid": $vm.show_module('vm-grid',{Data:vm_data[nm]}); break; 
+                            case "vm-query": $vm.show_module('vm-query',{Data:vm_data[nm]}); break; 
+                            case "vm-pivot": $vm.show_module('vm-pivot',{Data:vm_data[nm]}); break; 
+                        }
+                    }
+                    else $vm.show_module(p+nm,{}); 
+                }
+            });
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>

@@ -6,12 +6,14 @@
     var m=$vm.module_list;
     var api="wapp";
     
+    /*
     m[p+"new-starter-data"]=         {url:H+"/hr/new-starter.data.html",api:api, Table:'new-starter',form_module:p+"new-starter-form",action_module:p+'new-starter-action',action_table:'new-starter-action',notes_module:'new-starter-notes-data',notes_table:'new-starter-notes', router:1};
     m[p+"new-starter-form"]=         {url:H+"/hr/new-starter.form.html",api:api, Table:'new-starter'};
     m[p+"new-starter-action"]=       {url:H+"/hr/new-starter.action.html",api:api, Table:'new-starter-action',parent_table:"new-starter"};
     m[p+"new-starter-notes-data"]=   {url:H+"/hr/notes.data.html",api:api, Table:'new-starter-notes',form_module:p+"new-starter-notes-form",parent_table:'new-starter'};
     m[p+"new-starter-notes-form"]=   {url:H+"/hr/notes.form.html",api:api, Table:'new-starter-notes',parent_table:'new-starter'};
-    
+    */
+
     m[p+"student-data"]=             {url:H+"/hr/student.data.html",api:api, Table:'vm-demo-student',form_module:p+"student-form", router:1};
     m[p+"student-form"]=             {url:H+"/hr/student.form.html",api:api, Table:'vm-demo-student'};
     /*
