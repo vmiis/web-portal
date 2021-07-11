@@ -14,7 +14,7 @@
     
     m[p+"student-data"]=             {url:H+"/hr/student.data.html",api:api, Table:'vm-demo-student',form_module:p+"student-form", router:1};
     m[p+"student-form"]=             {url:H+"/hr/student.form.html",api:api, Table:'vm-demo-student'};
-    
+    /*
     m[p+"staff-data"]=              {url:H+"/shift-roster/staff.data.html",api:api, Table:'demo-vm-19091702',form_module:p+"staff-form", router:1};
     m[p+"staff-form"]=              {url:H+"/shift-roster/staff.form.html",api:api, Table:'demo-vm-19091702'};
     m[p+"roster-data"]=             {url:H+"/shift-roster/roster.data.html",api:api, Table:'demo-vm-19091701',form_module:p+"roster-form", router:1};
@@ -23,6 +23,7 @@
     m[p+"shift-roster-month"]=      {url:H+"/shift-roster/calendar-month.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     m[p+"shift-roster-week"]=       {url:H+"/shift-roster/calendar-week.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
     m[p+"shift-roster-day"]=        {url:H+"/shift-roster/calendar-day.html",api:api,Table:"demo-vm-19091701", "booking":p+"roster-form"};
+    */
     //-------------------------------------------------------------------------------------
     m["wappsystem-panel"]=      {url:A+"/panels/wappsystem/panel.html", router:1};
     m["vmautomation-panel"]=    {url:A+"/panels/vmautomation/panel.html", router:1};
@@ -38,5 +39,7 @@
     m["printer-panel"]=         {url:A+"/apps/printer-status/panels/main/panel.html", router:1}
     m["server-panel"]=          {url:A+"/apps/server-status/panels/main/panel.html", router:1}
     m["sleep-study-panel"]=     {url:A+"/apps/sleep-study/panels/main/panel.html", router:1}
+    m["shift-roster-panel"]=    {url:A+"/apps/shift-roster/panels/main/panel.html", router:1}
+    m["equipment-booking-panel"]={url:A+"/apps/equipment-booking/panels/main/panel.html", router:1}
     //-------------------------------------------------------------------------------------
 })();

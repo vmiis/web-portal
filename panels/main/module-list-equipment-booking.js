@@ -1,10 +1,11 @@
 (function(){
     //-------------------------------------------------------------------------------------
     var p="equipment-booking-"; //put a unique prefix to avoid conflict with others 
+    var A=$vm.hosting_path+"/apps/equipment-booking";
     var H=$vm.hosting_path+"/apps/equipment-booking/modules";
     var m=$vm.module_list;
     var api="wapp";
-    m[p+"panel"]           ={url:H+"/panels/panel.html", prefix:p, router:1};
+    m[p+"panel"]           ={url:A+"/panels/main/panel.html", prefix:p, router:1};
     m[p+"diagram"]         ={url:H+"/diagram/diagram.html",router:1};
     m[p+"booking_data"]    ={url:H+"/equipment-list-and-equipment-booking-records/booking-data.html",  api:api, Table:"demo-vm-19091811",  form_module:p+"booking_form", router:1};
     m[p+"booking_form"]    ={url:H+"/equipment-list-and-equipment-booking-records/booking-form.html",  api:api, Table:"demo-vm-19091811",  lookup:"demo-vm-19091812"};
