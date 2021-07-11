@@ -20,43 +20,30 @@
         <script>$vm={};</script>
     </head>
     <body>
-        <div id=_g_vm_canvas style='position:absolute;top:-100000px'></div>
         <div id=layout>
-            <div id=header style='height:83px'></div>
+            <div id=header style='height:120px'></div>
             <div id=content></div>
-            <div id=footer></div>
+            <div id=footer style='height:24px'></div>
         </div>
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[1.06,0.05]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.01,0.01]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
             $vm.module_list={
-                index:  {url:$vm.hosting_path+"/index.html",description:"main entry, layout, module list setup"},
-                header: {url:$vm.hosting_path+"/modules/site/header.html",description:"logo, menu, login/logout etc"},
-                footer: {url:$vm.hosting_path+"/modules/site/footer.html",description:"copyright info, links etc"},
-                home:   {url:$vm.hosting_path+"/modules/site/home.html",router:1,title:'Home',description:"Modular distributed microservices web application."},
-                about:  {url:$vm.hosting_path+"/modules/site/about.html",router:1,title:'About',description:"Modular distributed microservices web application."},
-                
-                jsonv:      {url:$vm.hosting_path+"/modules/system/json-viewer.html",description:"Show json data"},
-                gridv:      {url:$vm.hosting_path+"/modules/system/grid-viewer.html",description:"Show json data in grid"},
-                gridv2:     {url:$vm.hosting_path+"/modules/system/grid-viewer.html",description:"Show json data in grid"},
-                gridv3:     {url:$vm.hosting_path+"/modules/system/grid-viewer.html",description:"Show json data in grid"},
-                arrayv:     {url:$vm.hosting_path+"/modules/system/array-viewer.html",description:"Show json data in grid"},
-                signin:     {url:$vm.hosting_path+"/modules/system/authentication.html",description:"Iing In"},
-                api_token:  {url:$vm.hosting_path+"/modules/system/api-token.html"},
-                api_query:  {url:$vm.hosting_path+"/modules/system/api-query.html"},
-                youtube:    {url:$vm.hosting_path+"/modules/system/youtube.html"},
-                image:      {url:$vm.hosting_path+"/modules/system/image.html"},
+                header:         {url:$vm.hosting_path+"/modules/site/header.html"},
+                footer:         {url:$vm.hosting_path+"/modules/site/footer.html"},
+                home:           {url:$vm.hosting_path+"/modules/site/home.html",router:1},
+                auth:           {url:$vm.hosting_path+"/modules/system/auth.html"},
+                token:          {url:$vm.hosting_path+"/modules/system/token.html"},
+                panel:          {url:$vm.hosting_path+"/panels/main/panel.html",router:1},
             }
             //---------------------------------------------
             $vm.first_module='home';
             (function(){ var a=window.location.href.split('?/'); if(a.length==2) $vm.first_module=a[1].split('&')[0].replace(/\//g,'_'); }());
             $vm.ready=function(){
-                $vm.install_module('api_token','',{},function(name,id){});
-                $vm.install_module('api_query','',{},function(name,id){});
             }
             //---------------------------------------------
         </script>    
@@ -64,12 +51,12 @@
             //=================================================
             //VM framework code, do not need to chang the following code in most cases
             var hearder_height=$('#header').height();
-            $vm.min_height=$(window).height()-hearder_height;
+            var footer_height=$('#footer').height();
+            $vm.min_height=$(window).height()-hearder_height-footer_height;
             $('#content').css('min-height',$vm.min_height);
             $('#content').css('padding-top',hearder_height);
             $vm.root_layout_content_slot='content'
             $vm.api_addresses={
-                "wzd":"https://woolcock-zhiming-database.vmiis.com",
                 "wapp":"https://api.wappsystem.com"
             }
             $vm.api_default="wapp";
@@ -78,7 +65,6 @@
                 $vm.localhost=true;
             }
             $vm._id=0;$vm.reload='';$vm.debug_message=true;
-            $vm.module_list.sys_editor={url:$vm.hosting_path+"/modules/site/editor.html"}
             //---------------------------------------------
             $vm.show=function(m_name){
                 var a=window.location.href.split('?/')[0].split('/'); a.pop(); var t=a.pop().replace(/-/g,' ');
@@ -102,22 +88,13 @@
                 text=text.replace(/__HOST__\//g,$vm.hosting_path+'/');
                 text=text.replace(/__VER__/g,$vm.ver[0]);
                 text=text.replace(/__COMPONENT__\//g,'https://vm.vmiis.com/component/');
-                //text=text.replace(/__COMPONENT__\//g,'http://localhost:8000/vmiis/vm/component/');
                 return text;
             }
             //---------------------------------------------
             $vm.boot=function(){
-                if(window.location.toString().indexOf('_i=1')!=-1){
-                    var r=confirm("Click OK will refresh the browser to reinstall all modules.");
-                    if(r){
-                        localStorage.clear();
-                    }
-                }
                 var url=$vm.url("https://vm.vmiis.com/distribution/latest/vm.js");
-                //var url=$vm.url("http://localhost:8000/vmiis/vm/distribution/latest/vm.js");
                 var ver=localStorage.getItem($vm.hosting_path+url+"ver");
                 var txt=localStorage.getItem($vm.hosting_path+url+"txt");
-                //txt=null;
                 if(ver!=$vm.ver[1] || txt==null){
                     $.get(url+'?_='+new Date().getTime(),function(new_txt){
                         localStorage.setItem($vm.hosting_path+url+"txt",new_txt);
@@ -135,24 +112,7 @@
             }
             //---------------------------------------------
             var module_list_array=[
-                "/modules/module-list-01.js",
-                "/modules/module-list-02.js",
                 "/panels/main/module-list.js",
-                "/panels/main/module-list-new-starter.js",
-                "/panels/main/module-list-car-booking.js",
-                "/panels/main/module-list-room-booking.js",
-                "/panels/main/module-list-shift-roster.js",
-                "/panels/main/module-list-equipment-booking.js",
-                "/panels/main/module-list-bookkeeping.js",
-                "/panels/main/module-list-sales-tracking.js",
-                "/panels/main/module-list-invoice-management.js",
-                "/panels/main/module-list-blog.js",
-                "/panels/main/module-list-web-page.js",
-                "/panels/woolcock/module-list.js",
-                "/panels/wappsystem/module-list.js",
-                "/panels/vmautomation/module-list.js",
-                "/panels/development/module-list.js",
-                "/panels/hba/module-list.js",
             ]
             //---------------------------------------------
             $vm.get_module_list=function(){
@@ -191,6 +151,7 @@
                 $vm.init();
                 $vm.load_component('header','header',{});
                 $vm.load_component('footer','footer',{});
+                $vm.install_module('token','',{},function(name,id){});
                 var install_one=function(m,t){
                     setTimeout(function (){ 
                         $.ajaxSetup({cache:true}); 
@@ -255,16 +216,22 @@
                 padding:0;
                 height:100%;
             }
-            #layout{
-                /*overflow-x: auto;*/
+            #_layout {
+                height: 100%;
+                display: grid;
+                grid-template-rows: 1fr auto;
+            }
+            #content{
+                height: 100%;
+                display: grid;
+                grid-template-rows: 1fr;
             }
             #header{
-                height:60px;
                 position:fixed;
                 top:0;
                 left:0;
                 width:100%;
-                background:rgba(0,0,0,0.6);
+                background:rgba(0,0,0,0.0);
                 z-index:10;
             }
             @keyframes vm_module_fadein {
@@ -288,9 +255,7 @@
                 }
             }
             body{background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;}
-            /*.body_background_default{ background-image: url(https://images.unsplash.com/photo-1469967700385-5b0140e16e33?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);}*/
-            /*.body_background_default{ background-image: url(https://images.unsplash.com/photo-1483425571841-9662f86c7154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2010&q=80);}*/
-            .body_background_default{ background-image: url(https://images.unsplash.com/photo-1557887591-0c28fdbd6e79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80);}
+            .body_background_default{ background-image: url(https://images.unsplash.com/photo-1450149632596-3ef25a62011a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1016&q=80);}
         </style>
         <!----------------------------------------------->
     </body>
