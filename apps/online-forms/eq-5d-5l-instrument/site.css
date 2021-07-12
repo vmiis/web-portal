@@ -9,7 +9,7 @@ body{
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-size: cover; background-repeat: repeat-x; background-position: center center; background-attachment: fixed;
+    background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;
 }
 html,body{
     margin:0;
@@ -45,6 +45,7 @@ html,body{
     font-size: 200%;
     line-height: 10px;
     display: inline-block;
+    text-shadow: 2px 2px 2px #000
 }
 #logo_b{
     font-family: Arial, sans-serif;
@@ -52,6 +53,15 @@ html,body{
     font-size: 119%;
     line-height: 80%;
     display: inline-block;
+    text-shadow: 1px 1px 1px #000
+}
+#l1_0{
+    font-family: Arial, sans-serif;
+    color: #b8e6de;
+    font-size: 100%;
+    line-height: 80%;
+    display: inline-block;
+    text-shadow: 1px 1px 1px #000
 }
 #dbtable{
     float: right; font-size: 15px;	padding-right: 20px;
