@@ -1,1 +1,1 @@
-# web-portal
+![alt text](modules/diagram/diagram.png)
