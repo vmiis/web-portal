@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online Forms</title>
+        <meta name="description" content="">
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="site.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/v4-shims.css" />
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+
+    </head>
+    <body>
+        <div id=header>
+            <div id=logo>
+                <span id=logo_a>Business</span><br>
+                <span id=logo_b>Data Collection</span>
+            </div>
+            <div id=dbtable>
+                <u><a target=_blank href='http://localhost:8000/vmiis/web-portal/?/vm-table&table=anthropometry-age-sex-spardac' id=l1_0 >Data Collected</a></u>
+            </div>
+        </div>
+        <div id=layout>
+            <div id=content></div>
+            <div id=footer>
+                Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
+            </div>
+        </div>
+    </body>
+    <script>
+        (function(){typeof $vm=="undefined"&&($vm={});$vm.__print__=0;window.onbeforeprint=function(){$vm.__print__=1};window.onafterprint=function(){$vm.__print__=0};window.onscroll=function(){var t=-window.scrollY/2,n=-t/100;n>.5&&(n=.5);document.getElementById("header").style.background="rgba(0,0,0,"+n+")"}})()
+    </script>
+    <!----------------------------------------------->
+    <script app code>
+        //---------------------------------------------
+        $vm={};$VmAPI={};$vm.ver=[0.17,0.16];
+        $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
+        //---------------------------------------------
+        $vm.module_list={
+            form:{url:$vm.hosting_path+"/form.html",Table:"anthropometry-age-sex-spardac",router:1,description:"data collection form"},
+        }
+        //---------------------------------------------
+        var first_module='form';
+        var a=window.location.href.split('?/'); if(a.length==2) first_module=a[1].split('&')[0];
+        $vm.ready=function(){
+            $vm.load_module(first_module,'content',{})
+        }
+        //---------------------------------------------
+    </script>    
+    <script vm framework code>
+        //=================================================
+        //VM framework code, do not need to chang the following code in most cases
+        $vm.root_layout_content_slot='content'
+        $vm.api_address="https://api.wappsystem.com";
+        $vm._id=0;$vm.reload='';$vm.debug_message=true;
+        //---------------------------------------------
+        $vm.show=function(m_name){
+            var a=window.location.href.split('?/')[0].split('/'); a.pop(); var t=a.pop().replace(/-/g,' ');
+            var title=$vm.module_list[m_name].url.split('/').pop(); document.title=title+" - "+t ;
+            var info=$vm.module_list[m_name].description; if(info==undefined) info="A micro web application";  $("meta[name='description']").attr("content", info);
+            $vm.active_name=m_name;
+        }
+        //---------------------------------------------
+        $vm.url=function(text){
+            text=text.replace(/__HOST__\//g,$vm.hosting_path+'/');
+            text=text.replace(/__VER__/g,$vm.ver[0]);
+            text=text.replace(/__COMPONENT__\//g,'https://vm.vmiis.com/component/');
+            return text;
+        }
+        //---------------------------------------------
+        $vm.boot=function(){
+            var url=$vm.url("https://vm.vmiis.com/distribution/latest/vm.js");
+            var ver=localStorage.getItem($vm.hosting_path+url+"ver");
+            var txt=localStorage.getItem($vm.hosting_path+url+"txt");
+            if(ver!=$vm.ver[1] || txt==null){
+                $.get(url+'?_='+new Date().getTime(),function(new_txt){
+                    localStorage.setItem($vm.hosting_path+url+"txt",new_txt);
+                    localStorage.setItem($vm.hosting_path+url+"ver",$vm.ver[1]);
+                    console.log('loading from url. '+url+' '+ver+'/'+$vm.ver[1]);
+                    $('head').append('<scr'+'ipt>'+new_txt+'</scr'+'ipt>');
+                    $vm.install();
+                },'text');
+            }
+            else{
+                console.log('loading from storage. '+url+' '+ver+'/'+$vm.ver[1]);
+                $('head').append('<scr'+'ipt>'+txt+'</scr'+'ipt>');
+                $vm.install();
+            }
+        }
+        //---------------------------------------------
+        $vm.install=function(){
+            //---------------------------------------------
+            $vm.init();
+            for (m in $vm.module_list) {
+                if(m!="header" && m!="footer" && m!=first_module) $vm.load_module(m,'content',{silence:1})
+            }
+            $vm.ready();
+        }
+        //---------------------------------------------
+        $vm.boot(); //start from here
+        //=================================================
+    </script>
+    <!----------------------------------------------->
+    <style>
+        body{
+            background-image: url(https://images.unsplash.com/photo-1520338801623-6b88fe32bbf2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+        }
+    </style>
+</html>
