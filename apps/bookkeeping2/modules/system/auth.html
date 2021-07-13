@@ -1,0 +1,27 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            window.onmessage=function(e){
+                if(e.data.username!=undefined && e.data.token!=undefined){
+                    $vm.user_name=e.data.username;
+                    $vm.set_token(e.data.token,e.data.username);
+                    var api_name="wapp";
+                    sessionStorage.setItem(api_name+" token",e.data.token);
+                    location.reload(true);
+                }
+            };
+            //------------------------------------
+            $vm.init(function(){
+                $vm.init_status=1;
+                $vm.show_user();
+            })
+            //------------------------------------
+            $vm.auth_signout=function(){
+                sessionStorage.clear();
+                window.location.href=$vm.hosting_path+"/";
+            }
+            //------------------------------------
+        }
+    </script>
+</div>
+

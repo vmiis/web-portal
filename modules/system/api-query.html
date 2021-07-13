@@ -2,7 +2,51 @@
     <script>
         function F__ID(){
             //-------------------------------------------------------------------------------------------------------
-            $vm.microsoft_query=function(UID,ID1,ID2,ID3){
+            $vm.microsoft_query=function(q,ID1,ID2,ID3){
+                //-------------------------------------
+                var host=q.host;
+                var name=q.name;
+                var path=q.path;
+                var array=q.array;
+                var columns=q.columns;
+                $vm.get_microsoft_token(host,function(t){
+                    if(t!=""){
+                        if(path.indexOf('[INPUT]')!=-1){
+                            var p=prompt("Input", "");
+                            if(p==null) return;
+                            path=path.replace('[INPUT]',p);
+                        }
+                        if(ID1!=undefined) path=path.replace('\[ID1\]',ID1);
+                        if(ID2!=undefined) path=path.replace('\[ID2\]',ID2);
+                        if(ID3!=undefined) path=path.replace('\[ID3\]',ID3);
+                        path=path.replace(/\n/g,'').replace(/\r/g,'');
+                        path=encodeURI(path);
+                        if(path.indexOf("$top=")==-1 && path.indexOf("$count=true")!=-1 ) $vm.show_module('microsoft-data',{name:name,path:path,array:array,columns:columns})
+                        else{
+                            $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
+                                var v=res.result;
+                                if(res.status=="err"){
+                                    $vm.show_module('jsonv',{json_data:v})
+                                }
+                                if(array!=""){
+                                    var type=columns.indexOf('|');
+                                    if(type!=-1){
+                                        if(ID1==undefined) $vm.show_module('gridv',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
+                                        else if(ID2==undefined) $vm.show_module('gridv2',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
+                                        else if(ID3==undefined) $vm.show_module('gridv3',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
+                                    }
+                                    else $vm.show_module('arrayv',{name:name,json_data:JSON.parse(v),array:array,columns:columns})
+                                }
+                                else{
+                                    $vm.show_module('jsonv',{json_data:JSON.parse(v)})
+                                }
+                            })
+                        }
+                    }
+                });
+            }
+            //-------------------------------------------------------------------------------------------------------
+            $vm.microsoft_query_old=function(UID,ID1,ID2,ID3){
                 //-------------------------------------
                 $vm.request({api:'wapp',cmd:"find",table:"woolcock-dynamics-365-query",query:{UID:UID},options:{}},function(res){
                     var records=res.result;
