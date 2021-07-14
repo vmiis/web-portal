@@ -29,7 +29,13 @@
             var pipelines="";
             var form_module="";
             $('#D__ID').on('load',function(){
-                table="";query="";headers="";options=""
+                table="";query="";headers="";options="";
+                headers_txt="";
+                options_txt=""
+                pipelines="";
+                form_module="";
+                var name=m.input.Data.name; if(name==undefined) name="";
+                $('#title__ID').text(name);
                 if(m.input.Data==undefined) return;
                 api=m.input.Data.api; if(api==undefined) api="wapp";
                 table=m.input.Data.table;

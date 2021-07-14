@@ -29,7 +29,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[1.09,0.05]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[1.10,0.05]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -70,7 +70,7 @@
             $vm.root_layout_content_slot='content'
             $vm.api_addresses={
                 "wzd":"https://woolcock-zhiming-database.vmiis.com",
-                "wapp":"https://api.wappsystem.com"
+                "wapp":"https://api.wappsystem.com",
             }
             $vm.api_default="wapp";
             $vm.api_address='https://api.wappsystem.com';

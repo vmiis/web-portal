@@ -18,6 +18,11 @@
             var m=$vm.module_list['__MODULE__'];
             var p=m.prefix; if(p==undefined) p="";
             //--------------------------------------------------------
+
+
+            var company=m.company;
+            if(company==undefined) company="";
+
             var modules=[
                 "PredefinedTransactionItems","predefined_transaction_item_data",
                 "TransactionRecords","transaction-data-basic",
@@ -29,7 +34,9 @@
                 "5. Transactions (BAS, year-quarter)","transaction-data-year-quarter-bas",
                 "6. Transactions (Tax return)","transaction-data-tax-return",
                 "7. Transactions (Tax return, year-quarter)","transaction-data-year-quarter-tax-return",
-                "1. 2018-2021 income/expense","income_expense",
+                "1. Income/expense yearly","income_expense",
+                "2. Income/expense monthly","income_expense_monthly",
+                "3. ATO BAS quarterly","BAS",
             ]
             //--------------------------------------------------------
             $('#dirgram__ID svg').removeAttr("width");
@@ -39,6 +46,9 @@
                 if(modules.indexOf(t)!=-1){
                     $(this).attr("vm",1);
                 }
+
+                if(t=="Bookkeeping")
+                if(company!="") $(this).find('text').text(t+" ("+company+")" );
             });
             //--------------------------------------------------------
             $('#dirgram__ID g[vm=1]').on('click',function(e){
