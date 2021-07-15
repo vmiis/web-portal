@@ -1,0 +1,57 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var u=window.location.origin+"/auth.html"
+            $vm.auth_signin=function(){
+                url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+                url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
+                url+='&response_type=code';
+                url+='&redirect_uri='+u;
+                url+='&scope=https://woolcockdev.crm6.dynamics.com/.default offline_access'; 
+                url+='&response_mode=fragment';
+                url+='&state=exchange-microsoft2-token.wapp_woolcock-microsoft-dynamics';
+                url+='&nonce=678910';
+                url+='&prompt=select_account';
+                window.open(url);
+            }
+            //--------------------------------------------------------
+            window.onmessage=function(e){
+                if (e.origin == window.location.origin){
+                    var href=e.data.href;
+                    var code=href.split('code=').pop();
+                    code=code.split('&')[0];
+	                var state=href.split('state=exchange').pop();
+	                state="exchange"+state.split('&')[0];
+	                state=state.split('#')[0];
+                    if(code!=undefined && state!=undefined){
+                        var cmd=state.split('.')[0];
+                        var id=state.split('.').pop();
+                        $vm.request_token(id,cmd,code,u,href,function(id,res){
+                            var r=JSON.parse(sessionStorage.getItem(id+" oauth"));
+                            sessionStorage.setItem(id+" username",r.d.payload.unique_name);
+                            sessionStorage.setItem(id+" displayname",r.d.payload.name);
+                            $vm.user_name=r.d.payload.unique_name;
+                            $vm.displayname=r.d.payload.name;
+                            $vm.show_user();
+                        });
+                    }
+                }
+            }
+            //--------------------------------------------------------
+            $vm.auth_signout=function(){
+                sessionStorage.clear();
+                window.location.href=$vm.hosting_path+"/";
+            }
+            //------------------------------------
+            $vm.init(function(){
+                $vm.init_status=1;
+                var id="wapp_woolcock-microsoft-dynamics";
+                if(sessionStorage.getItem(id+" username")!=null)     $vm.user_name=sessionStorage.getItem(id+" username");
+                if(sessionStorage.getItem(id+" displayname")!=null)  $vm.displayname=sessionStorage.getItem(id+" displayname");
+                $vm.show_user();
+            })
+            //------------------------------------
+        }
+    </script>
+</div>

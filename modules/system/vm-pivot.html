@@ -192,6 +192,7 @@
                             var pp=pivot_headers[j];
                             var c=pivot_records[i][pp];
                             if(c==undefined) c="";
+                            if(c=="0") c="";
                             rd[pp]=c;
                             var td="<td>"+c+"</td>";
                             if(j>=id_Len){
@@ -201,7 +202,7 @@
                                             c="$"+parseFloat(c).toFixed(2); 
                                         }
                                         catch(e){}
-                                        td="<td style='padding-left:10px;text-align:right'>$"+c+"</td>";
+                                        td="<td style='padding-left:10px;text-align:right'>"+c+"</td>";
                                     }
                                 }
                             }

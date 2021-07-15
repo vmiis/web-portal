@@ -1,0 +1,244 @@
+﻿<div id=D__ID>
+	<div id=toolbar__ID class="navbar navbar-default">
+	    	<div>
+                <button id=p__ID type=button class="btn btn-secondary" title="Previous page"><i class="fa fa-arrow-left"></i></button>
+                <button id=n__ID type=button class="btn btn-secondary" title="Next page"><i class="fa fa-arrow-right"></i></button>
+            <span id=name__ID style='margin-right:50px'></span> Total Number of records: <span id=total__ID></span>
+			</div>
+    </div>
+    <div>
+        <table id="grid__ID"></table>
+    </div>
+    <script>
+        function F__ID(){
+            //-------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            //-------------------------------------------------
+            var name,path,array,columns;
+            var headers=[];
+            var ps=[];                
+            var records=[];
+            //-------------------------------------------------
+            $('#export__ID').on('click',function(){
+                if(records!=[]) $vm.download_csv(name+".csv",records);
+            })
+            //-------------------------------------------------
+            var host='woolcock.crm6.dynamics.com';
+            //-------------------------------------
+            var get_token=function(){
+                var t=sessionStorage.getItem("wapp_woolcock-microsoft-dynamics oauth");
+                if(t==null){
+                    alert("You haven't login!");
+                    return "";
+                }
+                t=JSON.parse(t);
+                var access_token=t.a.access_token;
+                var dt=$vm.jwt_decode(access_token);
+                var exp=dt.exp;
+                if(Date.now() >= exp * 1000){
+                    alert("Microsoft access token is expired! Please refresh.");
+                    return "";
+                }
+                return access_token;
+            }
+            //-------------------------------------
+            m.next_link='';
+            m.link='';
+            m.links=[];
+            //-------------------------------------
+            $("#p__ID").off('click').on('click',function(){
+                pageI--; if(pageI<0){ pageI=0; return;}
+                m.links.pop();
+                m.link=m.links.pop();
+                request_data();
+            })
+            //-------------------------------------
+            $("#n__ID").off('click').on('click',function(){
+                pageI++; if(pageI>m.max_I){ pageI=m.max_I; return;}
+                m.link=m.next_link;
+                request_data();
+            })
+            //-------------------------------------
+            var pageI=0;
+            var pagesize=30;
+            //-------------------------------------
+            $('#D__ID').on('load',function(){
+                m.next_link='';
+                m.link='';
+                m.links=[];
+                pageI=0;
+                name=m.input.name;
+                path=m.input.path
+                array=m.input.array
+                columns=m.input.columns
+                if(path.indexOf('[INPUT]')!=-1){
+                    var p=prompt("Input", "");
+                    if(p==null) return;
+                    path=path.replace('[INPUT]',p);
+                }
+                path=path.replace(/ /g,'%20');
+                path=path.replace(/\n/g,'').replace(/\r/g,'');
+                request_data();
+            })
+            //-------------------------------------
+            var request_data=function(){
+                var t=get_token();
+                if(t!=""){
+                    var pt=path;
+                    if(m.link!='') pt=m.link;
+                    $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:pt,pagesize:30},function(res){
+                        if(res.statusCode!=undefined && res.statusCode!=200 ){
+                            alert("statusCode: "+res.statusCode);
+                        }
+                        else if(res.status=="err"){
+                            $vm.show_module('jsonv',{json_data:res.result})
+                        }
+                        else{
+                            render(res.result,array,columns);
+                        }
+                    })
+                }
+            }
+            //-------------------------------------
+            var render=function(c){
+                var json_data=JSON.parse(c);
+                console.log(json_data)                
+                
+                m.next_link=json_data['@odata.nextLink'];
+                m.links.push(m.link);
+                
+                $('#name__ID').text(name);
+                headers=[];
+                ps=[];                
+                records=[];                
+                try{
+                    var rows;
+                    var hh=array.split('.');
+                    if(hh.length==1) rows=json_data[array];
+                    else{
+                        rows=json_data;
+                        for(var h=0;h<hh.length;h++){
+                            rows=rows[hh[h]];
+                        }
+                    }
+                    var aa=columns.split('\n');
+                    for(var i=0; i<aa.length;i++){
+                        aa[i]=aa[i].trim();
+                        if(aa[i]!=""){
+                            var bb=aa[i].split('|');
+                            if(bb[0].length>1){
+                                var nm=bb[0].trim();
+                                var pp=bb[1].trim();
+                                headers.push(nm);
+                                ps.push(pp.replace('\r',''));
+                            }
+                        }
+                    }
+                    for(var i=0;i<rows.length;i++){
+                        var record={};
+                        for(var j=0;j<headers.length;j++){
+                            var bb=ps[j].split('.');
+                            if(ps[j].indexOf('@')!=-1) bb=[ps[j]];
+                            var c=rows[i];
+                            for(var k=0;k<bb.length;k++){
+                                c=c[bb[k]];
+                            }
+                            if(c==null) c="";
+                            //else if(c==true) c="<i style='color:green;padding-left:10px;cursor:pointer' class='fas fa-check'></i>";
+                            //else if(c==false) c="";
+                            record[headers[j]]=c;
+                        }
+                        records.push(record);
+                    }
+                    /*
+                    for(var i=0;i<rows.length;i++){
+                        var record=[];
+                        for(var j=0;j<headers.length;j++){
+                            var bb=ps[j].split('.');
+                            var c=rows[i];
+                            for(var k=0;k<bb.length;k++){
+                                c=c[bb[k]];
+                            }
+                            record.push(c);
+                        }
+                        records.push(record);
+                    }
+                    */
+                    console.log(records)
+                }
+                catch(e){
+                    alert(e);
+                    return;
+                }
+                var txt="<tr><th></th><th></th>";
+                var N=headers.length;
+                for(var i=0;i<N;i++){
+                    txt+="<th>"+headers[i]+"</th>";
+                }
+                txt+="</tr>"
+                for(var i=0;i<records.length;i++){
+                    txt+="<tr><td>"+(pageI*pagesize+i+1)+"</td><td><i class='fa fa-pencil-square-o' i="+i+"></i></td>"
+                    for(var j=0;j<N;j++){
+                        //txt+="<td>"+records[i][j]+"</td>";
+                        txt+="<td>"+records[i][headers[j]]+"</td>";
+                    }
+                    txt+="</tr>"
+                }
+                $('#grid__ID').html(txt);
+                $('#grid__ID').find('i').on('click',function(){
+                    i=$(this).attr('i');
+                    $vm.show_module('jsonv',{json_data:rows[i]})
+                });
+
+                var N=json_data['@odata.count'];
+                $('#total__ID').text(N);
+                m.max_I=Math.ceil(N/pagesize)-1;
+            }
+            //-------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color:#fff;
+        }
+
+        #toolbar__ID{
+            background-color:#ccc;
+            padding:5px 10px;
+            margin-bottom:0px;
+            overflow:hidden
+        }
+        #D__ID table{
+            font-size:13px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        #grid__ID{
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 0;
+            border-width: 0;
+        }
+        #grid__ID th{
+            font-weight: bold;
+            background-color:#EEE;
+            padding:5px;
+            border: 1px solid #CCC;
+        }
+        #grid__ID td{
+            font-weight: 300;
+            background-color:#FFF;
+            padding:3px;
+            border: 1px solid #CCC;
+            vertical-align: top;
+            white-space: pre;
+        }
+        #grid__ID tr td:first-child{
+            padding-left:10px;
+            padding-right:10px;
+            background-color:#EEE;
+        }
+
+
+    </style>
+</div>

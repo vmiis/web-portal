@@ -80,7 +80,14 @@
             }
             //-------------------------------------------------
             m.request_data=function(){
+                var mt1=new Date().getTime();
                 $vm.request(m.req,function(res){
+                    var mt2=new Date().getTime();
+                    var tt_all=mt2-mt1;
+                    var tt_server=parseInt(res.sys.elapsed_time);
+                    if(tt_all<tt_server) tt_all=tt_server;
+                    var tb="<span style='color:red'>&#9679;</span> ";     if(res.tb==1 || res.tb=='on') tb="<span style='color:#0bbe0b'>&#9679;</span> ";
+                    $("#elapsed__ID").html(tb+(JSON.stringify(res.result).length/1000).toFixed(1)+"kb/"+tt_all.toString()+"ms/"+tt_server+'ms');
                     if(res.status=="np"){
                         alert("No permissions!");
                         $('#table__ID').html('');

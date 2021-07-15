@@ -1,0 +1,64 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <ul>
+            <li><a>Tables</a></li>
+            <li><a>contacts</a></li>
+            <li><a>woolcock_projectses</a></li>
+            <li><a>woolcock_studies</a></li>
+            <li><a>woolcock_studentses</a></li>
+            <li><a>woolcock_schools</a></li>
+            <li><a>woolcock_pri_supervisors</a></li>
+            <li><a>adx_entityforms</a></li>
+
+            
+            <li><a>other</a></li>
+        </ul>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            VmInclude:__CURRENT_PATH__panel.query.js
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            //--------------------------------------------------------
+            var modules=[
+                "Tables","tables",
+                "contacts","contacts",
+                "woolcock_projectses","woolcock_projectses",
+                "woolcock_studies","woolcock_studies",
+                "woolcock_studentses","woolcock_studentses",
+                "woolcock_schools","woolcock_schools",
+                "woolcock_pri_supervisors","woolcock_pri_supervisors",
+                "adx_entityforms","adx_entityforms",
+                "other","other"
+            ]
+            //--------------------------------------------------------
+            $('#panel__ID a').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var t=$(this).text();
+                var q=modules.indexOf(t)+1;
+                if(q>0){
+                    var n=modules[q];
+                    $vm.microsoft_query(vm_data[n]);
+                }
+            });
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+        #panel__ID a{
+            cursor:pointer;
+        }
+        #panel__ID a:hover{
+            color:red;
+        }
+    </style>
+</div>

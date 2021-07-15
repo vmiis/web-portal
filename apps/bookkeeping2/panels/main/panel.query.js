@@ -56,7 +56,7 @@ var vm_data={
             },
             {
                 "$project": {
-                    "Data.Financial Year":"$FY",
+                    "Data.Financial Year":"$_id",
                     "Data.Income":"$Income",
                     "Data.Expense":"$Expense",    
                     "Data.P/L":"$P/L"    
@@ -190,5 +190,51 @@ var vm_data={
             }
         ],
         "options":"Income|DOLLAR2,Expense|DOLLAR2"
+    },
+    //-------------------------------
+    "item-amount-pivot":{
+        "module":"vm-pivot",
+        "api":"wapp",
+        "name":"2018-2022 income/expense monthly",
+        "table":"",
+        "pivot":"Name|Amount",
+        "query":
+        [
+            {
+                "$match":{
+                    "I1": { "$gte": "2018-07-01", "$lt":"2021-07-02"}
+                }
+            },
+            {
+                "$project": {
+                    "Years": { $substr: [ "$I1", 0, 4] },
+                    "Month": { $substr: [ "$I1", 5, 2] },
+                    "Data.Name":1,
+                    "I2":1,
+                }
+            },
+            {
+                "$group":{
+                    "_id":{"Year":"$Years","Month":"$Month","Name":"$Data.Name"},
+                    "Amount": { "$sum":"$I2"},
+                }
+            },
+            {
+                "$sort":{
+                    "_id.Year":-1,
+                    "_id.Month":-1,
+                    "_id.Name":1
+                }  
+            },
+            {
+                "$project": {
+                    "Data.Year":"$_id.Year",
+                    "Data.Month":"$_id.Month",
+                    "Data.Name":"$_id.Name",
+                    "Data.Amount":"$Amount",    
+                }
+            }
+        ],
+        "options":"value|DOLLAR2"
     }
 }
