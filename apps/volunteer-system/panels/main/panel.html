@@ -21,11 +21,16 @@
             var modules=[
                 "Online Registration","https://www.researchvolunteer.org.au/",
                 "Microsoft Power App","https://make.powerapps.com/environments/85507754-c3fd-45e7-b8eb-99d98b288d52/apps",
-                "Volunteers","volunteers",
+                "Contacts","contacts",
                 "Projects","projects",
                 "Studies","studies",
-                "Volunteers who registered a study","volunteer_study",
-                "Total number of contacts, projects and studies","total_number"
+                "Students","students",
+                "ProjectLeads","woolcock_projectleads",
+                "PrimarySupervisors","woolcock_pri_supervisors",
+                "How many contacts who subscribed the newsletter?","count_newsletter",
+                "How many contacts who registered a study?","count_reg_study",
+                "How many contacts who like to participateany research study?","count_participate",
+                "List of contacts who registered a study","volunteer_study",
             ]
             //--------------------------------------------------------
             $('#dirgram__ID svg').removeAttr("content");
@@ -37,6 +42,10 @@
                     $(this).attr("vm",1);
                     $(this).attr("pointer-events","all");
                 }
+                else if(t.substr(0,3)=="Num"){
+                    $(this).attr("num",t);
+                    $(this).find('text').text('');
+                }
             });
             //--------------------------------------------------------
             $('#dirgram__ID g[vm=1]').on('click',function(e){
@@ -44,10 +53,16 @@
                 e.stopPropagation();
                 var t=$(this).text();
                 var i=modules.indexOf(t)+1;
+                var q=modules[i];
                 if(i>0){
-                    if(modules[i].substr(0,4)=="http") window.open(modules[i]);
-                    else if(vm_data[modules[i]]!=undefined ){
-                        $vm.microsoft_query(vm_data[modules[i]]);
+                    if(modules[i].substr(0,4)=="http") window.open(q);
+                    else if(vm_data[q]!=undefined ){
+                        if(
+                            q=="count_newsletter" 
+                            || q=="count_reg_study" 
+                            || q=="count_participate"
+                        ) query_c(q);
+                        else $vm.microsoft_query(vm_data[q]);
                     }
                     else $vm.show_module(p+modules[i],{}); 
                 }
@@ -55,6 +70,41 @@
             //--------------------------------------------------------
             $('#panel__ID').css('min-height',$vm.min_height);
             //--------------------------------------------------------
+            var query_c=function(q){
+                $vm.microsoft_query_c(vm_data[q],function(res){
+                    try{
+                        var r=JSON.parse(res.result);
+                        var n=r["@odata.count"];
+                        if(q=="count_newsletter")  $('#dirgram__ID g[num=Num_NEWS]').find('text').text(n);
+                        if(q=="count_reg_study")   $('#dirgram__ID g[num=Num_RS]').find('text').text(n);
+                        if(q=="count_participate")   $('#dirgram__ID g[num=Num_PARTI]').find('text').text(n);
+                    }
+                    catch(e){}
+                })
+            }
+            //--------------------------------------------------------
+            $('#D__ID').on('load',function(){
+                var t=sessionStorage.getItem("wapp_woolcock-microsoft-dynamics oauth");
+                if(t!=null){
+                    $vm.microsoft_query_c(vm_data["total_number_2"],function(res){
+                        console.log(res);
+                        try{
+                            var r=JSON.parse(res.result);
+                            var nums=r.EntityRecordCountCollection.Values;
+                            console.log(nums);
+                            $('#dirgram__ID g[num=Num_C]').find('text').text(nums[0]);
+                            $('#dirgram__ID g[num=Num_P]').find('text').text(nums[1]);
+                            $('#dirgram__ID g[num=Num_S]').find('text').text(nums[2]);
+                            $('#dirgram__ID g[num=Num_ST]').find('text').text(nums[3]);
+                            $('#dirgram__ID g[num=Num_PL]').find('text').text(nums[4]);
+                            $('#dirgram__ID g[num=Num_PS]').find('text').text(nums[5]);
+                        }
+                        catch(e){
+
+                        }
+                    });
+                }
+            })
         }
     </script>
     <style>

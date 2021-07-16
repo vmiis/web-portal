@@ -2,6 +2,24 @@
     <script>
         function F__ID(){
             //-------------------------------------------------------------------------------------------------------
+            $vm.microsoft_query_c=function(q,callback){
+                //-------------------------------------
+                var host=q.host;
+                var name=q.name;
+                var path=q.path;
+                var array=q.array;
+                var columns=q.columns;
+                $vm.get_microsoft_token(host,function(t){
+                    if(t!=""){
+                        path=path.replace(/\n/g,'').replace(/\r/g,'');
+                        path=encodeURI(path);
+                        $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
+                            callback(res);
+                        })
+                    }
+                });
+            }
+            //-------------------------------------------------------------------------------------------------------
             $vm.microsoft_query=function(q,ID1,ID2,ID3){
                 //-------------------------------------
                 var host=q.host;

@@ -1,8 +1,8 @@
 var vm_data={
     //-------------------------------
-    "volunteers":{
+    "contacts":{
         "type":"msd365",
-        "name":"Volunteers",
+        "name":"Contacts",
         "host":"woolcock.crm6.dynamics.com",
         "path":"/api/data/v9.1/contacts?$count=true&$expand=createdby($select=fullname)&$orderby=createdon desc",
         "array":"value",
@@ -49,6 +49,46 @@ var vm_data={
         `
     },
     //-------------------------------
+    "students":{
+        "type":"msd365",
+        "name":"Students",
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/woolcock_studentses?$count=true&$expand=createdby($select=fullname)&$orderby=createdon desc",
+        "array":"value",
+        "columns":`
+            woolcock_name|woolcock_name
+            woolcock_studentlastname|woolcock_studentlastname
+            Created on|createdon
+            Created by|createdby.fullname
+        `
+    },
+    //-------------------------------
+    "woolcock_pri_supervisors":{
+        "type":"msd365",
+        "name":"Primary Supervisors",
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/woolcock_pri_supervisors?$count=true&$expand=createdby($select=fullname)&$orderby=createdon desc",
+        "array":"value",
+        "columns":`
+            woolcock_name|woolcock_name
+            Created on|createdon
+            Created by|createdby.fullname
+        `
+    },
+    //-------------------------------
+    "woolcock_projectleads":{
+        "type":"msd365",
+        "name":"Project Leads",
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/woolcock_projectleadses?$count=true&$expand=createdby($select=fullname)&$orderby=createdon desc",
+        "array":"value",
+        "columns":`
+            woolcock_name|woolcock_name
+            Created on|createdon
+            Created by|createdby.fullname
+        `
+    },
+    //-------------------------------
     "volunteer_study":{
         "type":"msd365",
         "name":"Studies",
@@ -67,6 +107,21 @@ var vm_data={
             Created by|createdby.fullname
         `
     },
+    //------------------------------- _woolcock_volunteerstudyid_value
+    "_volunteer_study":{
+        "type":"msd365",
+        "name":"Studies",
+        "host":"woolcock.crm6.dynamics.com",
+        //"path":"/api/data/v9.1/contacts?$filter=woolcock_registrationtype eq 1&$apply=groupby( (gendercode@OData.Community.Display.V1.FormattedValue), aggregate($count as Count) )",
+        //&$apply=groupby((_woolcock_volunteerstudyid),aggregate($count as Count))
+        "path":"/api/data/v9.1/contacts?$filter=woolcock_registrationtype eq 1 and _woolcock_volunteerstudyid_value ne null&$apply=groupby((_woolcock_volunteerstudyid_value),aggregate($count as Count))",
+        "array":"value",
+        "columns":`
+            Registered Study|_woolcock_volunteerstudyid_value@OData.Community.Display.V1.FormattedValue
+            Count|Count
+        `
+    },
+    //-------------------------------
     "total_number":{
         "type":"msd365",
         "name":"Studies",
@@ -78,6 +133,30 @@ var vm_data={
             Projects
             Studies
         `
-    }
+    },
+    //-------------------------------
+    "total_number_2":{
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact','woolcock_projects','woolcock_study','woolcock_students','woolcock_projectleads','woolcock_pri_supervisor'])",
+    },
+    //-------------------------------   
+    "count_newsletter":{
+        "size":1,
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/contacts?$count=true&$filter=woolcock_newsletter eq true",
+    },
+    //-------------------------------
+    "count_reg_study":{
+        "size":1,
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/contacts?$count=true&$filter=woolcock_registrationtype eq 1",
+    },
+    //-------------------------------
+    "count_participate":{
+        "size":1,
+        "host":"woolcock.crm6.dynamics.com",
+        "path":"/api/data/v9.1/contacts?$count=true&$filter=woolcock_participateinanyresearchstudy eq true",
+    },
+    //-------------------------------
 }
 
