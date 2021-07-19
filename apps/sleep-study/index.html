@@ -24,7 +24,7 @@
     </head>
     <body>
         <div id=layout>
-            <div id=header style='height:120px'></div>
+            <div id=header></div>
             <div id=content></div>
             <div id=footer style='height:24px'></div>
         </div>
@@ -241,6 +241,7 @@
                 grid-template-rows: 1fr;
             }
             #header{
+                height:120px;
                 position:fixed;
                 top:0;
                 left:0;
@@ -253,6 +254,9 @@
                 to {opacity:1;}
             }
             @media screen and (max-width:576px){
+                #header{
+                    height:unset;
+                }
                 #auth{
                     display:none;
                 }
