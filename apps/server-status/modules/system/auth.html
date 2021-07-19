@@ -5,12 +5,12 @@
             var u=window.location.origin+"/auth.html"
             $vm.auth_signin=function(){
                     url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
-                    url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
+                    url+='?client_id=3bcb40c5-fec0-4b3b-ba67-f4d46d577f97'; //woolcock
                     url+='&response_type=code';
                     url+='&redirect_uri='+u;
                     url+='&scope=openid user.read profile'; 
                     url+='&response_mode=fragment';
-                    url+='&state=exchange-microsoft-token.wapp_microsoft';
+                    url+='&state=exchange-microsoft-token.wzd_microsoft';
                     url+='&nonce=678910';
                     url+='&prompt=select_account';
                     window.open(url);
