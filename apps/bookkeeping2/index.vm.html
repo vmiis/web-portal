@@ -21,7 +21,7 @@
     </head>
     <body>
         <div id=layout>
-            <div id=header style='height:120px'></div>
+            <div id=header></div>
             <div id=content></div>
             <div id=footer style='height:24px'></div>
         </div>
@@ -51,6 +51,10 @@
             }
             //---------------------------------------------
         </script>    
+        <style>
+            #header{ height:120px; }
+            @media screen and (max-width:576px){ #header{ height:82px; }}
+        </style>
         <script vm framework code>
             //=================================================
             //VM framework code, do not need to chang the following code in most cases
@@ -219,11 +223,6 @@
                 margin:0;
                 padding:0;
                 height:100%;
-            }
-            #_layout {
-                height: 100%;
-                display: grid;
-                grid-template-rows: 1fr auto;
             }
             #content{
                 height: 100%;

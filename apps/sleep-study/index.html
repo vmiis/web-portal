@@ -58,6 +58,14 @@
             }
             //---------------------------------------------
         </script>    
+        <style>
+            #header{ height:120px; }
+            @media screen and (max-width:576px){ #header{ height:82px; }}
+        </style>
+        <style>
+            #header{ height:120px; }
+            @media screen and (max-width:576px){ #header{ height:82px; }}
+        </style>
         <script vm framework code>
             //=================================================
             //VM framework code, do not need to chang the following code in most cases
@@ -230,18 +238,12 @@
                 padding:0;
                 height:100%;
             }
-            #_layout {
-                height: 100%;
-                display: grid;
-                grid-template-rows: 1fr auto;
-            }
             #content{
                 height: 100%;
                 display: grid;
                 grid-template-rows: 1fr;
             }
             #header{
-                height:120px;
                 position:fixed;
                 top:0;
                 left:0;
@@ -254,9 +256,6 @@
                 to {opacity:1;}
             }
             @media screen and (max-width:576px){
-                #header{
-                    height:unset;
-                }
                 #auth{
                     display:none;
                 }

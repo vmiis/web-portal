@@ -1,0 +1,25 @@
+<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__COMPONENT__/g/grid.01.js
+        m.request_data=function(){}
+        $("#toolbar__ID").hide();
+        //-------------------------------------
+        var fields="First_Name,Last_Name,Email";
+        m.fields=fields;
+        //-------------------------------------
+        m.load=function(){
+            if(m.input!=undefined){
+                m.records=m.input.records;
+                m.render();
+            }
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

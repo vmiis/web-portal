@@ -1,6 +1,6 @@
 <div id=D__ID>
     <div id=panel__ID>
-        <div id=dirgram__ID style='padding:60px 350px' >
+        <div id=dirgram__ID>
             VmInclude:__CURRENT_PATH__panel.svg
         </div>
     </div>
@@ -8,6 +8,15 @@
         #dirgram__ID g[vm="1"]:hover{
             fill:red;
             cursor:pointer;
+        }
+        #dirgram__ID{
+            min-width:1000px;
+            padding:60px 350px;
+        }
+        @media screen and (max-width: 1200px) {
+            #dirgram__ID{
+                padding:10px 10px;
+            }
         }
     </style>
     <script>

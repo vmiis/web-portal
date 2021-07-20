@@ -4,5 +4,6 @@
     var H=$vm.hosting_path+"/modules";
     var m=$vm.module_list;
     var api="wapp";
+    m[p+"contact"]={url:H+"/business/contact.data.html", api:api, router:1};
     //-------------------------------------------------------------------------------------
 })();

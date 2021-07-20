@@ -1,6 +1,7 @@
 <div id=D__ID>
+    <input type=file id=file__ID style='display:none' />
     <div id=panel__ID>
-        <div id=dirgram__ID style='padding:50px 300px' >
+        <div id=dirgram__ID>
             VmInclude:__CURRENT_PATH__panel.svg
         </div>
     </div>
@@ -8,6 +9,15 @@
         #dirgram__ID g[vm="1"]:hover text{
             fill:red!Important;
             cursor:pointer;
+        }
+        #dirgram__ID{
+            min-width:1000px;
+            padding:50px 300px;
+        }
+        @media screen and (max-width: 1200px) {
+            #dirgram__ID{
+                padding:10px 10px;
+            }
         }
     </style>
     <script>
@@ -19,13 +29,11 @@
             var p=m.prefix; if(p==undefined) p="";
             //--------------------------------------------------------
             var modules=[
-                "Online Registration","https://www.researchvolunteer.org.au/",
-                "Microsoft Power App","https://make.powerapps.com/environments/85507754-c3fd-45e7-b8eb-99d98b288d52/apps",
-                "Volunteers","volunteers",
-                "Projects","projects",
-                "Studies","studies",
-                "Volunteers who registered a study","volunteer_study",
-                "Total number of contacts, projects and studies","total_number"
+                "Select a file","-",
+                "Check Data","-",
+                "Send Email","-",
+                "Check Snapforms","",
+                "Check CorePlus","",
             ]
             //--------------------------------------------------------
             $('#dirgram__ID svg').removeAttr("content");
@@ -38,13 +46,40 @@
                     $(this).attr("vm",1);
                     $(this).attr("pointer-events","all");
                 }
+                if(t=="file name"){
+                    $(this).find('text').text('');
+                    $(this).attr("fn",1);
+                }
             });
             //--------------------------------------------------------
-            /*
             $('#dirgram__ID g[vm=1]').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 var t=$(this).text();
+                switch(t){
+                    case "Select a file": 
+                        $('#file__ID').val('');
+                        $("#file__ID").trigger('click');
+                        break;
+                    case "Check Data": 
+                        if(records.length==0) alert("No data")
+                        else $vm.show_module(p+'contact',{records:records}); 
+                        break;
+                    case "Send Email": 
+                        if(records.length==0) alert("No data")
+                        else{
+                            if (confirm('Are you sure you want to send '+records.length+' email(s)? ')){
+                            }
+                        }
+                        break;
+                    case "Check Snapforms": 
+                        window.open('https://snapforms.com.au/')
+                        break;
+                    case "Check CorePlus": 
+                        window.open('https://coreplus.com.au/')
+                        break;
+                }
+                /*
                 var i=modules.indexOf(t)+1;
                 if(i>0){
                     if(modules[i].substr(0,4)=="http") window.open(modules[i]);
@@ -53,8 +88,8 @@
                     }
                     else $vm.show_module(p+modules[i],{}); 
                 }
+                */
             });
-            */
             $('#dirgram__ID g text').each(function(e){
                 var t=$(this).text();
                 //if(t=="L21B"){
@@ -65,200 +100,55 @@
             })
             //--------------------------------------------------------
             $('#panel__ID').css('min-height',$vm.min_height);
-            var get_info=function(){
-                $vm.request({api:"wzd",cmd:'printer',ip:2},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL21B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL21C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL21M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL21Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:6},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL22B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL22C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL22M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL22Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:1},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL23B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL23C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL23M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL23Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:13},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL24B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL24C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL24M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL24Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:11},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL25B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL25C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL25M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL25Y]').text("Y: "+res.result.p06); 
-                });
-                
-                $vm.request({api:"wzd",cmd:'printer',ip:4},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL31B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL31C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL31M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL31Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:10},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL32B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL32C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL32M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL32Y]').text("Y: "+res.result.p06); 
-                });
-                
-                $vm.request({api:"wzd",cmd:'printer',ip:8},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL41B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL41C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL41M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL41Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:9},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL42B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL42C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL42M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL42Y]').text("Y: "+res.result.p06); 
-                });
-                $vm.request({api:"wzd",cmd:'printer',ip:3},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL43B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL43C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL43M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL43Y]').text("Y: "+res.result.p06); 
-                });
 
-                $vm.request({api:"wzd",cmd:'printer',ip:5},function(res){
-                    if(res.status=="np"){
-                        res.result.p03="No permission."
-                        res.result.p04="No permission."
-                        res.result.p05="No permission."
-                        res.result.p06="No permission."
-                    }
-                    $('#dirgram__ID g text[pid=LL61B]').text("B: "+res.result.p03);
-                    $('#dirgram__ID g text[pid=LL61C]').text("C: "+res.result.p04); 
-                    $('#dirgram__ID g text[pid=LL61M]').text("M: "+res.result.p05); 
-                    $('#dirgram__ID g text[pid=LL61Y]').text("Y: "+res.result.p06); 
-                });
-
-            }
 
             $('#D__ID').on('load',function(){
-                get_info();
             })
 
             $('#refresh__ID').on('click',function(){
-                get_info();
             })
-            /*
-            $vm.microsoft_query=function(q,ID1,ID2,ID3){
-                //-------------------------------------
-                        var host=q.host;
-                        var name=q.name;
-                        var path=q.path;
-                        var array=q.array;
-                        var columns=q.columns;
-                        $vm.get_microsoft_token(host,function(t){
-                            if(t!=""){
-                                if(path.indexOf('[INPUT]')!=-1){
-                                    var p=prompt("Input", "");
-                                    if(p==null) return;
-                                    path=path.replace('[INPUT]',p);
-                                }
-                                if(ID1!=undefined) path=path.replace('\[ID1\]',ID1);
-                                if(ID2!=undefined) path=path.replace('\[ID2\]',ID2);
-                                if(ID3!=undefined) path=path.replace('\[ID3\]',ID3);
-                                path=path.replace(/\n/g,'').replace(/\r/g,'');
-                                path=encodeURI(path);
-                                if(path.indexOf("$top=")==-1 && path.indexOf("$count=true")!=-1 ) $vm.show_module('microsoft-data',{name:name,path:path,array:array,columns:columns})
-                                else{
-                                    $vm.request({api:'wapp',cmd:'microsoft-api',access_token:t,host:host,path:path},function(res){
-                                        var v=res.result;
-                                        if(res.status=="err"){
-                                            $vm.show_module('jsonv',{json_data:v})
-                                        }
-                                        if(array!=""){
-                                            var type=columns.indexOf('|');
-                                            if(type!=-1){
-                                                if(ID1==undefined) $vm.show_module('gridv',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
-                                                else if(ID2==undefined) $vm.show_module('gridv2',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
-                                                else if(ID3==undefined) $vm.show_module('gridv3',{name:name,json_data:JSON.parse(v),array:array,columns:columns,ID1:ID1,ID2:ID2,ID3:ID3})
-                                            }
-                                            else $vm.show_module('arrayv',{name:name,json_data:JSON.parse(v),array:array,columns:columns})
-                                        }
-                                        else{
-                                            $vm.show_module('jsonv',{json_data:JSON.parse(v)})
-                                        }
-                                    })
-                                }
-                            }
-                        });
-            }
-            */
             //-------------------------------------------------------------------------------------------------------
-
-
+            $('#file__ID').on('change',function(e){ 
+                //$('#name__ID').text(e.target.files[0].name);
+                read_excel(e);
+                $('#dirgram__ID g[fn=1]').find('text').text(e.target.files[0].name);
+            })
+            //---------------------------------------------------------
+            var records=[];
+            var j_data;
+            //---------------------------------------------------------
+            var read_excel=function(e){
+                var f = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var data = e.target.result;
+                    data = new Uint8Array(data);
+                    get_json(data);
+                    for(var i=1;i<j_data.length;i++){
+                        var d={
+                            "First_Name":j_data[i][0],
+                            "Last_Name":j_data[i][1],
+                            "Email":j_data[i][2]
+                        }
+                        var row={Data:d}
+                        records.push(row);
+                    }
+                };
+                reader.readAsArrayBuffer(f);
+            }
+            //---------------------------------------------------------
+            var get_json=function(data){
+                var workbook = XLSX.read(data, {type: 'array'});
+                var i=0;
+                workbook.SheetNames.forEach(function(sheetName) {
+                    if(i==0){
+                        //console.log(sheetName)
+                        j_data=XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+                        i++;
+                    }
+                })
+            }
+            //---------------------------------------------------------
         }
     </script>
     <style>
