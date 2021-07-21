@@ -52,6 +52,12 @@
                 }
             });
             //--------------------------------------------------------
+            var send_email=function(data){
+                $vm.request({api:"wzd",cmd:"flow",flowid:"snapforms_01",data:data},function(res){
+                    console.log(res)
+                });
+            }
+            //--------------------------------------------------------
             $('#dirgram__ID g[vm=1]').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
@@ -69,6 +75,14 @@
                         if(records.length==0) alert("No data")
                         else{
                             if (confirm('Are you sure you want to send '+records.length+' email(s)? ')){
+                                for(var i=0;i<records.length;i++){
+                                    var data={
+                                        "first_name":records[i].Data.First_Name,
+                                        "url":"https://woolcock.snapforms.com.au/form/pre-sleep-questionnaire?first%20name="+records[i].Data.First_Name+"&surname="+records[i].Data.Last_Name,
+                                        "email":records[i].Data.Email
+                                    }
+                                    send_email(data);
+                                }
                             }
                         }
                         break;
