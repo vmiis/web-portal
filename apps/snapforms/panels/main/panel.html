@@ -78,7 +78,7 @@
                                 for(var i=0;i<records.length;i++){
                                     var data={
                                         "first_name":records[i].Data.First_Name,
-                                        "url":"https://woolcock.snapforms.com.au/form/pre-sleep-questionnaire?first%20name="+records[i].Data.First_Name+"&surname="+records[i].Data.Last_Name,
+                                        "url":"https://woolcock.snapforms.com.au/form/pre-sleep-questionnaire?first%20name="+records[i].Data.First_Name+"&surname="+records[i].Data.Last_Name+"&dob="+records[i].Data.Date_of_Birth,
                                         "email":records[i].Data.Email
                                     }
                                     send_email(data);
@@ -128,6 +128,23 @@
                 $('#dirgram__ID g[fn=1]').find('text').text(e.target.files[0].name);
             })
             //---------------------------------------------------------
+            
+            function ExcelDate(serial) {
+                var utc_days  = Math.floor(serial - 25569);
+                var utc_value = utc_days * 86400;                                        
+                var date_info = new Date(utc_value * 1000);
+                /*
+                var fractional_day = serial - Math.floor(serial) + 0.0000001;
+                var total_seconds = Math.floor(86400 * fractional_day);
+                var seconds = total_seconds % 60; total_seconds -= seconds;
+                var hours = Math.floor(total_seconds / (60 * 60));
+                var minutes = Math.floor(total_seconds / 60) % 60;
+                return new Date(date_info.getFullYear(), date_info.getMonth(), date_info.getDate(), hours, minutes, seconds);
+                */
+                return date_info.getDate()+"/"+(date_info.getMonth()+1)+"/"+date_info.getFullYear();
+            }            
+            
+            
             var records=[];
             var j_data;
             //---------------------------------------------------------
@@ -142,7 +159,8 @@
                         var d={
                             "First_Name":j_data[i][0],
                             "Last_Name":j_data[i][1],
-                            "Email":j_data[i][2]
+                            "Date_of_Birth":ExcelDate(j_data[i][2]),
+                            "Email":j_data[i][3]
                         }
                         var row={Data:d}
                         records.push(row);
