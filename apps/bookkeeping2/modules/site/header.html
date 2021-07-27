@@ -108,19 +108,6 @@
                 }
             })
             //---------------------------------------------------------------
-            $vm.show_user=function(){
-                if($vm.user_name==undefined || $vm.user_name=='guest'){
-                    $('#username__ID').text('');
-                    $('#signin__ID').show();
-                    $('#signout__ID').hide();
-                }
-                else{
-                    $('#username__ID').text('Signed in as '+ $vm.user_name);
-                    $('#signin__ID').hide();
-                    $('#signout__ID').show();
-                }
-            }
-            //------------------------------------
             $vm.sys_nav_path=function(){
                 var L=$vm.page_stack.length;
                 var I=L-5;
@@ -146,6 +133,24 @@
                     for(var j=0;j<N;j++) window.history.go(-1);
                 })
             }
+            //------------------------------------
+            $vm.show_user=function(){
+                if($vm.user_name==undefined || $vm.user_name=='guest'){
+                    $('#username__ID').text('');
+                    $('#signin__ID').show();
+                    $('#signout__ID').hide();
+                }
+                else{
+                    $('#username__ID').text('Signed in as '+ $vm.user_name);
+                    $('#signin__ID').hide();
+                    $('#signout__ID').show();
+                }
+            }
+            //------------------------------------
+            $vm.init(function(){
+                $vm.init_status=1;
+                $vm.show_user();
+            })
             //------------------------------------
         }
     </script>

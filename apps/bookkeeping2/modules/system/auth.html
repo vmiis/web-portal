@@ -11,14 +11,13 @@
                 }
             };
             //------------------------------------
-            $vm.init(function(){
-                $vm.init_status=1;
-                $vm.show_user();
-            })
+            $vm.auth_signin=function(){
+                $vm.signin();
+            }
             //------------------------------------
             $vm.auth_signout=function(){
                 sessionStorage.clear();
-                window.location.href=$vm.hosting_path+"/";
+                window.location.href=window.location.href.split('?/')[0];
             }
             //------------------------------------
         }
