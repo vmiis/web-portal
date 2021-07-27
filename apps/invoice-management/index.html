@@ -28,16 +28,19 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[0.01,0.01]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[0.02,0.01]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
+            //---------------------------------------------
+            $vm.client_table="vm-demo-invoice-client";
+            $vm.invoice_record_table="vm-demo-invoice";
+            $vm.invoice_print_module="invoice-print-demo";
             //---------------------------------------------
             $vm.module_list={
                 header:         {url:$vm.hosting_path+"/modules/site/header.html"},
                 footer:         {url:$vm.hosting_path+"/modules/site/footer.html"},
                 home:           {url:$vm.hosting_path+"/modules/site/home.html",router:1},
                 auth:           {url:$vm.hosting_path+"/modules/system/auth.html"},
-                token:          {url:$vm.hosting_path+"/modules/system/token.html"},
                 panel:          {url:$vm.hosting_path+"/panels/main/panel.html",router:1},
             }
             //---------------------------------------------
@@ -155,7 +158,7 @@
                 $vm.init();
                 $vm.load_component('header','header',{});
                 $vm.load_component('footer','footer',{});
-                $vm.install_module('token','',{},function(name,id){});
+                $vm.install_module('auth','',{},function(name,id){});
                 var install_one=function(m,t){
                     setTimeout(function (){ 
                         $.ajaxSetup({cache:true}); 

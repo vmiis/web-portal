@@ -24,12 +24,14 @@
             //--------------------------------------------------------
             var m=$vm.module_list['__MODULE__'];
             var p=m.prefix; if(p==undefined) p="";
+            var company=m.company;
+            if(company==undefined) company="";
             //--------------------------------------------------------
             var modules=[
-                "Clients","client_data",
-                "InvoiceRecords","invoice_data",
-                "InvoiceForm","invoice_form",
-                "1. Find and print a invoice","invoice_data_p",
+                "Clients",
+                "InvoiceRecords",
+                "InvoiceForm",
+                "1. Find and print a invoice"
             ]
             //--------------------------------------------------------
             $('#dirgram__ID svg').removeAttr("width");
@@ -39,15 +41,19 @@
                 if(modules.indexOf(t)!=-1){
                     $(this).attr("vm",1);
                 }
+                if(t=="Invoice Management")
+                if(company!="") $(this).find('text').text(t+" ("+company+")" );
             });
             //--------------------------------------------------------
             $('#dirgram__ID g[vm=1]').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 var t=$(this).text();
-                var i=modules.indexOf(t)+1;
-                if(i>0){
-                    $vm.show_module(p+modules[i],{}); 
+                switch(t){
+                    case "Clients":                         $vm.show_module(p+"client_data",{});  break;
+                    case "InvoiceRecords":                  $vm.show_module(p+"invoice_data",{});  break;
+                    case "InvoiceForm":                     $vm.show_module(p+"invoice_form",{});  break;
+                    case "1. Find and print a invoice":     $vm.show_module(p+"invoice_data_p",{});  break;
                 }
             });
             //--------------------------------------------------------

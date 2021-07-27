@@ -16,8 +16,8 @@
                 <ul>
                     <li><a href="?/home"><i class="fa fa-home"></i> Home</a></li>
                     <li><a href="?/panel"><i class="fas fa-table"></i> Invoice Management</a></li>
-                    <li><a href="?/auth" id=signin__ID ><i class="fa fa-user"></i> Sign In</a></li>
-                    <li><a href="" id=signout__ID onclick=$vm.signout2() ><i class="fa fa-user"></i> Sign Out</a></li>
+                    <li><a href="" id=signin__ID onclick=$vm.auth_signin() ><i class="fa fa-user"></i> Sign In</a></li>
+                    <li><a href="" id=signout__ID onclick=$vm.auth_signout() ><i class="fa fa-user"></i> Sign out</a></li>
                 </ul>
             </div>
         </div>    
@@ -125,11 +125,6 @@
                     $('#signout__ID').show();
                 }
             }
-            //------------------------------------
-            $vm.init(function(){
-                $vm.init_status=1;
-                $vm.show_user();
-            })
             //------------------------------------
             $vm.sys_nav_path=function(){
                 var L=$vm.page_stack.length;

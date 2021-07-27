@@ -1,190 +1,31 @@
 <div id=D__ID>
-    <div class=h_img__ID>
-        <div class=h_txt__ID>
-            <h4>Authentication</h4>
-            
-        </div>
-    </div>
-    <div id=panel__ID>
-        <div>
-            <span class=label__ID>Sign in </span>
-            <ul>
-                <li><i class="fab fa-microsoft"></i> <a href='wapp_microsoft'>Sign in with Microsoft</a>   </li>
-                <li><i class="fab fa-google"></i>    <a href='wapp_google'>Sign in with Google</a>         </li>
-                <li><i class="fab fa-facebook"></i>  <a href='wapp_facebook'>Sign in with Facebook</a>     </li>
-                <li><i class="fab fa-github"></i>    <a href='wapp_github'>Sign in with GitHub</a>         </li>
-                <!--<li>                                 <a href='wapp_wappsystem'>Sign in with Wappsystem</a> <span id=wapp_wappsystem_email></span>  <a href='wapp_wappsystem_signout' style='display:none'>Sign Out</a> </li>-->
-            </ul>
-        </div>
-    </div>
     <script>
         function F__ID(){
-            var gt="";
-            //--------------------------------------------------------
-            var prefix=$vm.module_list["__MODULE__"].prefix;
-            if(prefix==undefined) prefix="";
-            //--------------------------------------------------------
-            var u=window.location.origin+"/auth.html"
-            //--------------------------------------------------------
-            $('#panel__ID a').on('click',function(e){
-                e.preventDefault();
-                var href=$(this).attr('href');
-                var url="";
-                //--------------------------------------------------------
-                //sign in
-                if(href=="wapp_wappsystem"){
-                    window.open($vm.api_addresses['wapp']+"/signin.html","Sign In","width=600, height=700");
-                }
-                if(href=="wapp_microsoft"){
-                    url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
-                    url+='?client_id=f39f8959-8cd7-4570-8c0f-548306bf899a'; //vmiis
-                    url+='&response_type=code';
-                    url+='&redirect_uri='+u;
-                    url+='&scope=openid user.read profile'; 
-                    url+='&response_mode=fragment';
-                    url+='&state=exchange-microsoft-token.wapp_microsoft';
-                    url+='&nonce=678910';
-                    url+='&prompt=select_account';
-                    window.open(url);
-                }
-                if(href=="wapp_google"){
-                    url='https://accounts.google.com/o/oauth2/v2/auth';
-                    url+='?client_id=485153637765-maqa89r5jm9rusuc1u87sh72lrlpckk3.apps.googleusercontent.com';
-                    url+='&response_type=code';
-                    url+='&redirect_uri='+u;
-                    url+='&scope=profile email';
-                    url+='&state=exchange-google-token.wapp_google';
-                    window.open(url);
-                }
-                if(href=="wapp_facebook"){
-                    url='https://graph.facebook.com/oauth/authorize';
-                    url+='?client_id=596805194160323';
-                    url+='&response_type=code';
-                    url+='&redirect_uri='+u;
-                    url+='&scope=public_profile email';
-                    url+='&state=exchange-facebook-token.wapp_facebook';
-                    window.open(url);
-                }
-                if(href=="wapp_github"){
-                    url='https://github.com/login/oauth/authorize';
-                    url+='?client_id=f739a345a5ed615ab8c0';
-                    url+='&response_type=code';
-                    url+='&redirect_uri='+u;
-                    url+='&scope=user';
-                    url+='&state=exchange-github-token.wapp_github';
-                    window.open(url);
-                }
-                //--------------------------------------------------------
-            })
-            //--------------------------------------------------------
             window.onmessage=function(e){
-                if (e.origin == window.location.origin) {
-                    var state=e.data.cmd;
-                    var code=e.data.code;
-                    var href=e.data.href;
-                    if(code!=undefined && state!=undefined){
-                        var cmd=state.split('.')[0];
-                        var id=state.split('.').pop();
-                        $vm.request_token(id,cmd,code,u,href,function(id,res){
-                            $vm.show_user();
-                        });
-                    }
-                }
-                else if(e.origin==$vm.api_addresses['wapp']){
-                    if(e.data.username!=undefined && e.data.token!=undefined){
-                        sessionStorage.setItem("wapp provider","wappsystem");
-                        sessionStorage.setItem("wapp username",e.data.username);
-                        sessionStorage.setItem("wapp displayname","");
-                        sessionStorage.setItem("wapp group","");
-                        sessionStorage.setItem("wapp token",e.data.token);
-                        sessionStorage.setItem("vm_token",e.data.token);
-                        $vm.user_name=e.data.username;
-                        $vm.displayname=e.data.username;
-                        $vm.show_user();
-                    }
+                if(e.data.username!=undefined && e.data.token!=undefined){
+                    $vm.user_name=e.data.username;
+                    $vm.set_token(e.data.token,e.data.username);
+                    var api_name="wapp";
+                    sessionStorage.setItem(api_name+" token",e.data.token);
+                    location.reload(true);
                 }
             };
-            //--------------------------------------------------------
-            $('#D__ID').on('load',function(){
+            //------------------------------------
+            $vm.init(function(){
+                $vm.init_status=1;
+                $vm.show_user();
             })
-            //--------------------------------------------------------
+            //------------------------------------
+            $vm.auth_signin=function(){
+                $vm.signin();
+            }
+            //------------------------------------
+            $vm.auth_signout=function(){
+                sessionStorage.clear();
+                window.location.href=$vm.hosting_path+"/";
+            }
+            //------------------------------------
         }
     </script>
-    <style>
-        #D__ID{
-            background-color:#fff;
-            height:100%;
-            overflow: auto;
-            animation: vm_module_fadein 1.0s;
-        }
-        #panel__ID{
-            margin:0 auto;
-            max-width:1400px;
-    		padding:10px 0 0 20px;
-            font-size:14px;
-            padding:0px 50px 10px 50px;
-            font-size:14px;
-    		column-count: 2;
-    		column-width: 300px;
-    		column-gap: 30px;
-            font-size:14px;
-    	}
-        #panel__ID a{
-            color:#555;
-        }
-        #panel__ID li a, #panel__ID li span{
-            margin-right:30px;
-        }        
-        #panel__ID a:hover{
-            color:red;
-        }
-        .h_img__ID{
-            margin:0 auto;
-            max-width:1400px;          
-            height:200px;
-            background-size: cover; background-position: top center; 
-            background-image: url(https://images.unsplash.com/photo-1463947628408-f8581a2f4aca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
-            padding-top:60px;
-            margin-top:50px;
-            margin-bottom:50px;
-            border-radius: 5px;
-        }
-        .h_txt__ID{
-            color:#fff;
-            background-color: rgba(50,90,90,0.5) !important;
-            _width: 35%;
-            display:inline-block;
-            margin: 0% 6% 0% 6%!important;
-            padding:20px;
-            border-radius: 10px;
-			text-shadow: 2px 2px 2px #000;
-        }
-        .LT__ID{
-			color:#283f55;
-			font-weight: bold;
-            display:inline-block;
-            margin-top:10px;
-            margin-left:-15px;
-            margin-bottom:10px;
-            border-bottom: 2px solid #479824;
-            font-size: 18px;
-        }
-        #panel__ID div{
-            break-inside: avoid;
-        }
-        .label__ID{
-            font-size: 130%;
-            font-weight: bold;
-            color:#2b3c5a;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-        @media screen and (max-width: 1000px) {
-            .h_img__ID{
-                margin-top:0px;
-                border-radius: 0px;
-            }
-        }
-    </style>
 </div>
 
