@@ -1,0 +1,482 @@
+<div id=D__ID>
+    <section id=form_container__ID bp=576 style='display:flow-root; position:relative'>
+        <div class=header__ID>
+            <h1 class=t1__ID>PRE/POST QUESTIONNAIRE</h1>
+            <div class=t2__ID>for sleep studies at the Woolcock Clinic</div>
+        </div>
+        <form id=F__ID action="https://api.wappsystem.com/pre-post-questionnaire" method="post" onsubmit="submit__ID.disabled = true; alert('Thank you for your submission')" >
+            
+            <hr>
+            <div class=r__ID>
+                <b>TECHNICIAN TO COMPLETE</b>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>Study type</span>
+                </div>
+                <div w='100|100' r=1>
+                    <label><input type=radio  name=Study_type value=Diagnostic  /> Diagnostic</label>
+                    <label><input type=radio  name=Study_type value=CPAP  /> CPAP</label>
+                    <label><input type=radio  name=Study_type value='MAS Positional device'  /> MAS Positional device</label>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>Date of study:</span>
+                    <input type=text  name=Date_of_study  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>Research_study:</span>
+                    <input type=text  name=Research_study  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>Name:</span>
+                    <input type=text  name=Name  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>Date of birth:</span>
+                    <input type=text  name=Date_of_birth  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>ID:</span>
+                    <input type=text  name=ID  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>Room:</span>
+                    <input type=text  name=Room  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>Height (cm):</span>
+                    <input type=text  name=Height  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>Weight (kg):</span>
+                    <input type=text  name=Weight  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>Neck (cm):</span>
+                    <input type=text  name=Neck  />
+                </div>
+                <div w='100|25'>
+                    <span class=t3__ID>BP pm:</span>
+                    <input type=text  name=BP1  />
+                </div>
+                <div w='100|25'>
+                    <span class=t3__ID>BP pm:</span>
+                    <input type=text  name=BP2  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|25'>
+                    <span class=t3__ID>SpO2 pm (%):</span>
+                    <input type=text  name=SpO2_pm  />
+                </div>
+                <div w='100|25'>
+                    <span class=t3__ID>HR pm (bpm):</span>
+                    <input type=text  name=HR_pm  />
+                </div>
+                <div w='100|25'>
+                    <span class=t3__ID>RR pm (breaths/min):</span>
+                    <input type=text  name=RR_pm  />
+                </div>
+                <div w='100|25'>
+                    <span class=t3__ID>Allergy status:</span>
+                    <input type=text  name=Allergy_status  />
+                </div>
+            </div>
+            <hr class=page__ID>
+            <div class=r__ID>
+                <b>EVENING QUESTIONS - PATIENT TO COMPLETE</b>
+            </div>
+            
+
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>Has today been unusual in any respect?</span>
+                    <div r=1>
+                        <label><input type=radio  name=Has_today_been_unusual_in_any_respect value=Yes  /> Yes</label>
+                        <label><input type=radio  name=Has_today_been_unusual_in_any_respect value=No  /> No</label>
+                    </div>
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>If so, how?</span>
+                    <input type=text  name=If_so_how  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>How much sleep did you have last night (hours)?</span>
+                    <input type=text  name=How_much_sleep_did_you_have_last_night  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>Was this amount of sleep enough?</span>
+                    <div r=1>
+                        <label><input type=radio  name=Was_this_amount_of_sleep_enough value=Yes  /> Yes</label>
+                        <label><input type=radio  name=Was_this_amount_of_sleep_enough value=No  /> No</label>
+                    </div>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>Did you nap or doze today?</span>
+                </div>
+                <div w='100|50'>
+                    <div r=1>
+                        <label><input type=radio  name=Did_you_nap_or_doze_today value=Yes  /> Yes</label>
+                        <label><input type=radio  name=Did_you_nap_or_doze_today value=No  /> No</label>
+                    </div>
+                </div>
+                
+            </div>                
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>If yes, at what time did you nap?</span>
+                    <input type=text  name=at_what_time_did_you_nap  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>For how long did you nap?</span>
+                    <input type=text  name=For_how_long_did_you_nap  />
+                </div>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>At what time did you last eat?</span>
+                    <input type=text  name="At what time did you last eat"  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>Was this a snack or a meal?</span>
+                    <input type=text  name="Was this a snack or a meal"  />
+                </div>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|50'>
+                    <span class=t3__ID>What is your normal alcohol consumption?</span>
+                    <input type=text  name="What is your normal alcohol consumption"  />
+                </div>
+                <div w='100|50'>
+                    <span class=t3__ID>standard drinks per</span>
+                    <div r=1>
+                        <label><input type=radio  name='standard drinks per' value=day  /> day</label>
+                        <label><input type=radio  name='standard drinks per' value=week  /> week</label>
+                        <label><input type=radio  name='standard drinks per' value=month  /> month</label>
+                    </div>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>Please indicate how much alcohol you have consumed tonight:</span>
+                    <input type=text  name="how much alcohol you have consumed"  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>How many cups or glasses of these drinks have you consumed today?</span>
+                </div>
+                <div w='100|15'>
+                    <span class=t3__ID>Tea?</span>
+                    <input type=text  name="Tea"  />
+                </div>
+                <div w='100|15'>
+                    <span class=t3__ID>Coffee?</span>
+                    <input type=text  name="Coffee"  />
+                </div>
+                <div w='100|15'>
+                    <span class=t3__ID>Cola?</span>
+                    <input type=text  name="Cola"  />
+                </div>
+                <div w='100|15'>
+                    <span class=t3__ID>Alcohol?</span>
+                    <input type=text  name="Alcohol"  />
+                </div>
+                <div w='100|20'>
+                    <span class=t3__ID>Energy drinks?</span>
+                    <input type=text  name="Energy drinks"  />
+                </div>
+                <div w='100|20'>
+                    <span class=t3__ID>Protein shakes?</span>
+                    <input type=text  name="Protein shakes"  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>Do you have any physical complaints which may affect your sleep tonight?</span>
+                    <div r=1>
+                        <label><input type=radio  name='physical complaints' value=Yes  /> Yes</label>
+                        <label><input type=radio  name='physical complaints' value=No  /> No</label>
+                    </div>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>If yes, please describe</span>
+                    <input type=text  name='physical complaints describe'  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>Have you taken any medications before arriving for your sleep study?</span>
+                    <div r=1>
+                        <label><input type=radio  name='medications' value=Yes  /> Yes</label>
+                        <label><input type=radio  name='medications' value=No  /> No</label>
+                    </div>
+                </div>
+            </div>
+            <hr class=page__ID>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>If yes, list medications</span>
+                    <input type=text  name='medications list'  />
+                </div>
+            </div>
+            
+
+            <div class=r__ID>
+                <b>EPWORTH SLEEPINESS SCALE - PATIENT TO COMPLETE</b>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <p>
+                        How likely are you to doze off or fall asleep in the following situations, in contrast to just feeling tired? 
+                        This refers to your usual way of life in recent times. Even if you haven’t done some of these activities recently, try to work out how they would have affected you.
+                    </p>
+                    <p>
+                        Use the following scale to choose the most appropriate number for each situation:<br>
+                        0 would never doze<br>
+                        1 slight chance of dozing<br>
+                        2 moderate chance of dozing<br>
+                        3 high chance of dozing
+                    </p>
+                </div>
+            </div>
+            
+            <div class=r__ID>
+                <div w='100|80'>
+                    <span class=t3__ID>Situation</span>
+                </div>
+                <div w='100|20'>
+                    <span class=t3__ID>Chance of dozing</span>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|80'>
+                    <span class=t3__ID>Sitting and reading</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="Sitting and reading"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>Watching TV</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="Watching TV"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>Sitting inactive in a public place (eg theatre or a meeting)</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="Sitting inactive"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>As a passenger in a car for an hour without a break</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="passenger in a car"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>Lying down to rest in the afternoon when circumstances permit</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="rest in the afternoon"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>Sitting and talking to someone</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="Sitting and talking to someone"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>Sitting quietly after lunch without alcohol</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="Sitting quietly after lunch without alcohol"  />
+                </div>
+                <div w='100|80'>
+                    <span class=t3__ID>In a car, while stopped for a few minutes in traffic</span>
+                </div>
+                <div w='100|20'>
+                    <input type=text  name="In a car, while stopped for a few minutes in traffic"  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|80'>
+                    <span class=t3__ID>TOTAL</span>
+                </div>
+                <div w='100|20' style='text-align: right;'>
+                    <span class=t3__ID>/24</span>
+                </div>
+            </div>
+
+
+
+            <hr class=page__ID>
+            <div class=r__ID>
+                <b>MORNING QUESTIONS - PATIENT TO COMPLETE</b><br>
+                To be completed AFTER your sleep study
+            </div>
+
+            <div class=r__ID>
+                <div w='100|70'>
+                    <span class=t3__ID>Did you take any medication overnight?</span>
+                </div>
+                <div w='100|30'>
+                    <div r=1 style='text-align: right;'>
+                        <label><input type=radio  name='medications' value=Yes  /> Yes</label>
+                        <label><input type=radio  name='medications' value=No  /> No</label>
+                    </div>
+                </div>
+                <div w='100|75'>
+                    <span class=t3__ID>If yes, at what time?</span>
+                </div>
+                <div w='100|25'>
+                    <input type=text  name='medication overnight time'  />
+                </div>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|75'>
+                    <span class=t3__ID>How long did it take to fall asleep last night after lights were turned out?</span>
+                </div>
+                <div w='100|25'>
+                    <input type=text  name='How long did it take to fall asleep last night after lights were turned out'  />
+                </div>
+            </div>
+            
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>How does this compare with the length of time it usually takes you to fall asleep?</span>
+                </div>
+                <div w='100|100' r=1>
+                    <label><input type=radio  name='compare with the length' value='Much longer'  /> Much longer</label>
+                    <label><input type=radio  name='compare with the length' value='Longer'  /> Longer</label>
+                    <label><input type=radio  name='compare with the length' value='Same as usual'  /> Same as usual</label>
+                    <label><input type=radio  name='compare with the length' value='Shorter'  /> Shorter</label>
+                    <label><input type=radio  name='compare with the length' value='Much shorter'  /> Much shorter</label>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|75'>
+                    <span class=t3__ID>How long do you think you slept for last night?</span>
+                </div>
+                <div w='100|25'>
+                    <input type=text  name='How long do you think you slept for last night'  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|75'>
+                    <span class=t3__ID>How many times do you remember waking last night?</span>
+                </div>
+                <div w='100|25'>
+                    <input type=text  name='How many times do you remember waking last night'  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>How do you feel this morning?</span>
+                </div>
+                <div w='100|100' r=1>
+                    <label><input type=radio  name='feel this morning' value='Very tired and sleepy'  /> Very tired and sleepy</label>
+                    <label><input type=radio  name='feel this morning' value='Awake but not alert (drowsy)'  /> Awake but not alert (drowsy)</label>
+                    <br><label><input type=radio  name='feel this morning' value='Rested'  /> Rested</label>
+                    <label><input type=radio  name='feel this morning' value='Alert and wide awake'  /> Alert and wide awake</label>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|70'>
+                    <span class=t3__ID>Do you have any physical complaints this morning?</span>
+                </div>
+                <div w='100|30'>
+                    <div r=1 style='text-align: right;'>
+                        <label><input type=radio  name='physical complaints this morning' value=Yes  /> Yes</label>
+                        <label><input type=radio  name='physical complaints this morning' value=No  /> No</label>
+                    </div>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>What awakened you this morning?</span>
+                </div>
+                <div w='100|100' r=1>
+                    <label><input type=radio  name='awakened you this morning' value='Noise'  /> Noise</label>
+                    <label><input type=radio  name='awakened you this morning' value='Discomfort'  /> Discomfort</label>
+                    <label><input type=radio  name='awakened you this morning' value='Technician'  /> Technician</label>
+                    <label><input type=radio  name='awakened you this morning' value='Spontaneous'  /> Spontaneous</label>
+                    <label><input type=radio  name='awakened you this morning' value='Other'  /> Other</label>
+                </div>
+                <div w='100|100'>
+                    <span class=t3__ID>If other, Please specify</span>
+                    <input type=text  name='other specify'  />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>In general, how would you describe your sleep last night compared to a normal night’s sleep at home?</span>
+                </div>
+                <div w='100|100' r=1>
+                    <label><input type=radio  name='your sleep last night' value='Much worse'  /> Much worse</label>
+                    <label><input type=radio  name='your sleep last night' value='Discomfort'  /> Worse</label>
+                    <label><input type=radio  name='your sleep last night' value='Technician'  /> Same as usual</label>
+                    <label><input type=radio  name='your sleep last night' value='Spontaneous'  /> Better</label>
+                    <label><input type=radio  name='your sleep last night' value='Other'  /> Much better</label>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|70'>
+                    <span class=t3__ID>This morning I am feeling well and able to make my way home, whether this be by driving, walking, pick-up, public transport or other transport arrangements.</span>
+                </div>
+                <div w='100|30'>
+                    <div r=1 style='text-align: right;'>
+                        <label><input type=radio  name='feeling well and able to make my way home' value=Yes  /> Yes</label>
+                        <label><input type=radio  name='feeling well and able to make my way home' value=No  /> No</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr class=page__ID>
+            <div class=r__ID>
+                <div w='100|100'>
+                    <span class=t3__ID>Comments</span>
+                    <textarea  name=Comments  style='height:200px'></textarea>
+                </div>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|100' class=c_print>
+                    <button id=submit__ID >Submit</button>
+                </div>
+            </div>
+
+            <div style='padding:15px'>&nbsp;</div>
+
+        </form>
+    </section>
+    <style>
+        #form_container__ID{
+            max-width:900px;
+        }
+    </style>
+    <script>
+		(function(){var n=function(n){var r,o,s,h,c,u,p,t,l,a,v,y,w,e;if($vm.__print__!=1){var f=n[0].contentRect.width,b=n[0].target.id,k=document.getElementById(b).getAttribute("bp");if(k!=null)for(r=k.split("|"),o=1e7,r.length>0&&(o=parseInt(r[0])),s=2e7,r.length>1&&(s=parseInt(r[1])),h=3e7,r.length>2&&(h=parseInt(r[2])),c=4e7,r.length>3&&(c=parseInt(r[3])),u=document.getElementById(b).getElementsByTagName("div"),i=0;i<u.length;i++)p=u[i].getAttribute("w"),p!=null&&(u[i].style.float="left",u[i].style["box-sizing"]="border-box",u[i].parentElement.style["border-width"]=0,u[i].parentElement.style["box-sizing"]="border-box",u[i].parentElement.style.display="flow-root",t=p.split("|"),l=576,t.length>0&&(l=t[0]+"%"),a=l,t.length>1&&(a=t[1]+"%"),v=a,t.length>2&&(v=t[2]+"%"),y=v,t.length>3&&(y=t[3]+"%"),w=y,t.length>4&&(w=t[4]+"%"),e=0,f<o&&(e=l),f>=o&&f<s&&(e=a),f>=s&&f<h&&(e=v),f>=h&&f<c&&(e=y),f>=c&&(e=w),u[i].style.width=e)}};new ResizeObserver(n).observe(form_container__ID)})()
+    </script>
+    <link rel="stylesheet" href="form.css" />
+</div>

@@ -189,6 +189,10 @@
                 //})
             }
             //-------------------------------------------------------------------------------------------------------
+            $vm.wikipedia_query=function(q){
+                $vm.show_module('wikipedia',{page:q})
+            }
+            //-------------------------------------------------------------------------------------------------------
             $vm.wappsystem_query=function(UID){
                 $vm.request({api:'wapp',cmd:"find",table:"wappsystem-query",query:{UID:UID},options:{}},function(res){
                     var records=res.result;
