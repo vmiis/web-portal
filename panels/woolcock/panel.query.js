@@ -25,6 +25,55 @@ var vm_data={
             Email|email_address
             Status|status    
         `
+    },
+    //-------------------------------
+    "top-referrer":{
+        "module":"vm-query",
+        "api":"wzd",
+        "name":"Top 100 referrers since 2020-06-08",
+        "table":"referral",
+        "query":[
+            {
+                $match: { 
+                    "Data.referral.startDate" : { $gte : "2020-06-08T00:00:00Z" },
+                    //"Data.referral.referrerLocation.street": { $and: [{$exists: true}, { $ne:"431 Glebe Point Road"}, {$ne: "" }] },
+                    $and:[
+                        {"Data.referral.referrerLocation.street": {$exists: true}},
+                        {"Data.referral.referrerLocation.street": {$ne:"431 Glebe Point Road"}},
+                        {"Data.referral.referrerLocation.street": {$ne:""}}
+                    ],
+    
+                }
+            },
+            {
+                $group : {
+                    _id:{
+                        "First Name": "$Data.referral.referrerLocation.firstName",
+                        "Last Name": "$Data.referral.referrerLocation.lastName",
+                        //"Street": "$Data.referral.referrerLocation.street",
+                        //"Suburb": "$Data.referral.referrerLocation.suburb",
+                        //"Post Code": "$Data.referral.referrerLocation.postCode",
+                        "Address":{$concat:["$Data.referral.referrerLocation.street","\n","$Data.referral.referrerLocation.suburb","  ","$Data.referral.referrerLocation.postCode"]}
+                    
+                    }, 
+                    count:{$sum:1}
+                }
+            },
+            { "$sort" : { "count" : -1 }  },
+            { "$limit": 100 },
+            {
+                "$project": {
+                    "Data.Number of Referrals":"$count",
+                    "Data.First Name":"$_id.First Name",
+                    "Data.Last Name":"$_id.Last Name",
+                    //"Data.Street":"$_id.Street",
+                    //"Data.Suburb":"$_id.Suburb",
+                    //"Data.Post Code":"$_id.Post Code",
+                    "Data.Address":"$_id.Address",
+                }
+            }
+
+        ]
     }
     //-------------------------------
 }

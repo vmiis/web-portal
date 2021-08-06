@@ -411,6 +411,29 @@
                     else alert('No report.')
                 })
             }
+            //-------------------------------------------------------------------------------------------------------
+            /*
+            $vm.wzd_mongodb_query_2=function(query){
+                var req={api:"wzd",cmd:query.cmd,table:query.table,pipeline:query.pipeline}
+                $vm.request(req,function(res){
+                    console.log(res.result)
+                    var v=res;
+                    if(res.status=="err"){
+                        $vm.show_module('jsonv',{json_data:v.result})
+                        return;
+                    }
+                    if(array!=""){
+                        var type=columns.indexOf('|');
+                        if(type!=-1) $vm.show_module('gridv',{name:query.name,json_data:v,array:array,columns:columns})
+                        else $vm.show_module('arrayv',{name:query.name,json_data:v,array:array,columns:columns})
+                    }
+                    else{
+                        $vm.show_module('jsonv',{json_data:v})
+                    }
+                });
+            }
+            */
+            //-------------------------------------------------------------------------------------------------------
             $vm.wzd_mongodb_query=function(UID){
                 $vm.request({api:"wzd",cmd:"find",table:"mongodb-api",query:{UID:UID},options:{}},function(res){
                     var records=res.result;
