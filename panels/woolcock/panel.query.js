@@ -34,13 +34,22 @@ var vm_data={
         "table":"referral",
         "query":[
             {
+                $project: {
+                    Data:1,
+                    fullname: {
+                        $concat: ['$Data.referral.referrerLocation.firstName',' ','$Data.referral.referrerLocation.lastName']
+                    }
+                }
+            },
+            {
                 $match: { 
                     "Data.referral.startDate" : { $gte : "2020-06-08T00:00:00Z" },
                     //"Data.referral.referrerLocation.street": { $and: [{$exists: true}, { $ne:"431 Glebe Point Road"}, {$ne: "" }] },
                     $and:[
                         {"Data.referral.referrerLocation.street": {$exists: true}},
                         {"Data.referral.referrerLocation.street": {$ne:"431 Glebe Point Road"}},
-                        {"Data.referral.referrerLocation.street": {$ne:""}}
+                        {"Data.referral.referrerLocation.street": {$ne:""}},
+                        {"fullname": {$ne:"Simon Lewis"}},
                     ],
     
                 }
