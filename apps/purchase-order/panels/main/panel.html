@@ -1,0 +1,69 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div id=dirgram__ID>
+            VmInclude:__CURRENT_PATH__panel.svg
+        </div>
+    </div>
+    <style>
+        #dirgram__ID g[vm="1"]:hover{
+            fill:red;
+            cursor:pointer;
+        }
+        #dirgram__ID{
+            min-width:1000px;
+            padding:60px 320px;
+        }
+        @media screen and (max-width: 1200px) {
+            #dirgram__ID{
+                padding:10px 10px;
+            }
+        }
+    </style>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var m=$vm.module_list['__MODULE__'];
+            var p=m.prefix; if(p==undefined) p="";
+            var company=m.company;
+            if(company==undefined) company="";
+            //--------------------------------------------------------
+            var modules=[
+                "Clients",
+                "InvoiceRecords",
+                "InvoiceForm",
+                "1. Find and print a invoice"
+            ]
+            //--------------------------------------------------------
+            $('#dirgram__ID svg').removeAttr("width");
+            $('#dirgram__ID svg').removeAttr("height");
+            $('#dirgram__ID g').each(function(){
+                var t=$(this).text();
+                if(modules.indexOf(t)!=-1){
+                    $(this).attr("vm",1);
+                }
+                if(t=="Invoice Management")
+                if(company!="") $(this).find('text').text(t+" ("+company+")" );
+            });
+            //--------------------------------------------------------
+            $('#dirgram__ID g[vm=1]').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var t=$(this).text();
+                switch(t){
+                    case "Clients":                         $vm.show_module(p+"client_data",{});  break;
+                    case "InvoiceRecords":                  $vm.show_module(p+"invoice_data",{});  break;
+                    case "InvoiceForm":                     $vm.show_module(p+"invoice_form",{});  break;
+                    case "1. Find and print a invoice":     $vm.show_module(p+"invoice_data_p",{});  break;
+                }
+            });
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>
