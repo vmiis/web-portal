@@ -1,0 +1,105 @@
+﻿<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        //VmInclude:__COMPONENT__/g/grid.01.js
+        //-------------------------------------
+        var fields="Requestor_Name,Supplier_Name,Total_Amount,Status";
+        m.fields="_Form,_Print,_Request_ID,"+fields+",Submit_date,Submitted_by,_Delete";
+        //-------------------------------------
+        m.cell_render=function(records,I,field,td){
+            switch(field){
+                case '_Request_ID':
+                    td.html(records[I].UID);
+                    break;
+                case '_Print':
+                    td.html("<u style='cursor:pointer'>Print</u>");
+                    td.find('u').on('click',function(){
+                        $vm.show_module("order-form-print-and-pdf",{record:records[I]});
+                    });
+                    break;
+                case '_PDF':
+                    td.html("<u style='cursor:pointer'>PDF</u>");
+                    td.find('u').on('click',function(){
+                        var _m=$vm.module_list['order-form-print-and-pdf-hidden'];
+                        _m.pdf(records[I],function(pdf){
+                            window.open(pdf.output('bloburl'));
+                        })
+                    });
+                    break;
+                case 'Total_Amount':
+                    td.html("$"+parseFloat(records[I].Data[field]).toFixed(2));
+                    td.css('text-align','right')
+                    break;
+                case "_Delete":
+                    if(records[I].Data.Status=='Submit') td.html('');
+                    break;
+                case '_Manager_Approval':
+                    if(records[I].Data.Status=='Submit'){
+                        td.html("<u style='cursor:pointer'>Approving</u>");
+                        td.find('u').on('click',function(){
+                            $vm.show_module(m.manager_approval_module,{UID:records[I].UID,A:records[I].A,goback:1,parent:records[I]})
+                        });
+                    }
+                    break;
+                case '_Finance_Process':
+                    if(records[I].Data.Status=='Submit'){
+                        td.html("<u style='cursor:pointer'>Processing</u>");
+                        td.find('u').on('click',function(){
+                            $vm.show_module(m.finance_process_module,{UID:records[I].UID,A:records[I].A,goback:1,parent:records[I]})
+                        });
+                    }
+                    break;
+                case '_Received':
+                    td.html("<u style='cursor:pointer'>Notes</u>");
+                    td.find('u').on('click',function(){
+                        $vm.show_module(m.receive_module,{self:m.self,UID:records[I].UID,A:records[I].A,goback:1,parent:records[I]})
+                    });
+                    break;
+            }
+        }
+        //-------------------------------------
+        m.load=function(){
+            if(m.self==1){
+                m.options={self:1};
+                $('#import__ID').hide();
+                $('#export__ID').hide();
+            }
+            else{
+                $('#import__ID').show();
+                $('#export__ID').show();
+            }
+        }
+        //-------------------------------------
+        m.before_submit=function(data,index){
+            if(m.input==undefined){
+                index.A=$vm.user_name; 
+            }
+            return true;
+        }
+        //-------------------------------------
+        /*
+        m.data_process=function(){
+            var options={};
+            if(m.self==1) options={self:1};
+            var uid_array=[];
+            for(var i=0;i<m.records.length;i++){
+                uid_array.push(m.records[i].UID)
+            }
+            var query={ I2: { $in: uid_array } }
+            load_manager_approval(query,options);
+            load_finance_process(query,options);
+            load_received(query,options);
+        }
+        //-------------------------------------
+        */
+    }
+</script>
+<style>
+    #nav__ID a{
+        text-decoration-line: underline;
+    }
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

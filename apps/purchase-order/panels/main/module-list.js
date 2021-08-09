@@ -6,18 +6,20 @@
     var m=$vm.module_list;
     var api="wapp";
 
-    var client_table=$vm.client_table;
-    var invoice_record_table=$vm.invoice_record_table;
-    var print_module=$vm.invoice_print_module;
+    var manager_table="purchase_order_manager_demo";
+    var supplier_table="purchase_order_supplier_demo";
+    var purchase_order_table="purchase_order_record_demo";
+    var print_module="purchase-order-print";
 
-    m[p+"panel"]             ={url:A+"/panels/main/panel.html",     prefix:p, router:1};
-    m[p+"client_data"]       ={url:H+"/forms/client-data.html",     api:api, Table:client_table,  form_module:p+"client_form"};
-    m[p+"client_form"]       ={url:H+"/forms/client-form.html",     api:api, Table:client_table};
-    m[p+"invoice_data"]      ={url:H+"/forms/invoice-data.html",    api:api, Table:invoice_record_table, form_module:p+'invoice_form', print_module:p+print_module,router:1};
-    m[p+"invoice_data_p"]    ={url:H+"/forms/invoice-data-p.html",  api:api, Table:invoice_record_table, form_module:p+'invoice_form', print_module:p+print_module,router:1};
-    m[p+"invoice_form"]      ={url:H+"/forms/invoice-form.html",    api:api, Table:invoice_record_table, client_table:client_table,  router:1};
-    m[p+"invoice-print-demo"]={url:H+"/forms/invoice-form.print_and_pdf.demo.html"};
-    m[p+"invoice-print-wapp"]={url:H+"/forms/invoice-form.print_and_pdf.wapp.html"};
-    m[p+"invoice-print-vm"]  ={url:H+"/forms/invoice-form.print_and_pdf.vm.html"};
+    m[p+"panel"]                    ={url:A+"/panels/main/panel.html",                  prefix:p, router:1};
+    m[p+"manager-data"]             ={url:H+"/business/manager/data.html",              api:api, Table:manager_table,  form_module:p+"manager-form"};
+    m[p+"manager-form"]             ={url:H+"/business/manager/form.html",              api:api, Table:manager_table};
+    m[p+"supplier-data"]            ={url:H+"/business/supplier/data.html",             api:api, Table:supplier_table,  form_module:p+"supplier-form"};
+    m[p+"supplier-form"]            ={url:H+"/business/supplier/form.html",             api:api, Table:supplier_table};
+    m[p+"purchase-order-data"]      ={url:H+"/business/purchase-order/data.html",       api:api, Table:purchase_order_table, form_module:p+'purchase-order-form', print_module:p+print_module,router:1};
+    m[p+"purchase-order-form"]      ={url:H+"/business/purchase-order/form.html",       api:api, Table:purchase_order_table, supplier_table:supplier_table,  router:1};
+    
+    m[p+"purchase-order-data-p"]    ={url:H+"/business/purchase-order-data-p.html",     api:api, Table:purchase_order_table, form_module:p+'purchase-order-form', print_module:p+print_module,router:1};
+    m[p+"purchase-order-print"]     ={url:H+"/business/purchase-order-form.print-and-pdf.html"};
 //-------------------------------------------------------------------------------------
 })();

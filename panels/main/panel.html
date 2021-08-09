@@ -41,10 +41,16 @@
                 
             </div>
             <div>
-                <span class="LT__ID break__ID">Mathematics Videos</span>
+                <span class="LT__ID break__ID">Mathematics</span>
+                <li><a href='?/api_wikipedia_Brownian_motion'>Brownian motion</a></li>
+            </div>
+            <div>
+                <span class="LT__ID">Mathematics Videos</span>
                 <li><a href='?/api_youtube_8mve0UoSxTo'>Mathematics is the queen of Sciences</a></li>
                 <li><a href='?/api_youtube_aircAruvnKk'>Neural Network</a></li>
             </div>
+
+            
             <div>
                 <span class=LT__ID>Interesting Videos</span>
                 <li><a href='?/api_youtube_66oNv.DJuPc'>Data Sharing and Management</a></li>
@@ -92,6 +98,11 @@
                 <li><a href='?/api_youtube_xza2sApboc0'>Improvising Beautiful Melodies</a></li>
                 <li><a href='?/api_youtube_yKjXEZgd9CA'>Practice Beautiful Arpeggios</a></li>
                 <li><a href='?/api_youtube_sWSxHBn7uus'>Arpeggio Patterns for Intensity and Mood</a></li>
+                <li><a href='?/api_youtube_6jSLH9CDPPQ'>Canon in D - Pachelbel</a></li>
+                <li><a href='?/api_youtube_4591dCHe_sE'>Beethoven - Moonlight Sonata (Full)</a></li>
+                <li><a href='?/api_youtube_pikGrsmlxbM'>How to play "Canon in D"</a></li>
+                <li><a href='?/api_youtube_YLeyz3pvCSg'>Canon in D - Piano Tutorial</a></li>
+                
             </div>
             <div>
                 <span class=LT__ID>Music</span>
@@ -546,9 +557,9 @@
                             case "coreplus":    $vm.coreplus_query(parseInt(aa[2]));    break;
                             case "wappsystem":  $vm.wappsystem_query(parseInt(aa[2]));  break;
                             case "piano":       $vm.show_module('piano',{sheet:aa[2]}); break;
-                            case "youtube":     $vm.youtube_query(aa[2]);               break;
+                            case "youtube":     $vm.youtube_query( module_name.replace('api_youtube_','') );     break;
                             case "image":       $vm.image_query(vm_data[aa[2]]);        break;
-                            case "wikipedia":   $vm.wikipedia_query(module_name.replace('api_wikipedia','')); break;
+                            case "wikipedia":   $vm.wikipedia_query(module_name.replace('api_wikipedia_',''));   break;
                             //case "vm-data":     $vm.vm_data_query("wapp","wappsystem-table",parseInt(aa[2]));   break;
                         }
                     }

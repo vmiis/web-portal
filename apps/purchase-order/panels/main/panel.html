@@ -28,9 +28,10 @@
             if(company==undefined) company="";
             //--------------------------------------------------------
             var modules=[
-                "Clients",
-                "InvoiceRecords",
-                "InvoiceForm",
+                "Managers",
+                "Suppliers",
+                "PurchaseOrders",
+                "PurchaseOrderForm",
                 "1. Find and print a invoice"
             ]
             //--------------------------------------------------------
@@ -50,9 +51,11 @@
                 e.stopPropagation();
                 var t=$(this).text();
                 switch(t){
-                    case "Clients":                         $vm.show_module(p+"client_data",{});  break;
-                    case "InvoiceRecords":                  $vm.show_module(p+"invoice_data",{});  break;
-                    case "InvoiceForm":                     $vm.show_module(p+"invoice_form",{});  break;
+                    case "Managers":                        $vm.show_module(p+"manager-data",{});  break;
+                    case "Suppliers":                       $vm.show_module(p+"supplier-data",{});  break;
+                    case "PurchaseOrders":                  $vm.show_module(p+"purchase-order-data",{});  break;
+                    case "PurchaseOrderForm":                     $vm.show_module(p+"purchase-order-form",{});  break;
+                    
                     case "1. Find and print a invoice":     $vm.show_module(p+"invoice_data_p",{});  break;
                 }
             });
