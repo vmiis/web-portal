@@ -12,8 +12,9 @@
     <hr style='margin:8px 30px'>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
+            <span class="T__ID break__ID">IT</span>
             <div>
-                <span class=LT__ID>Online Micro Application Examples</span>
+                <span class=LT__ID>Micro Application Examples</span>
                 <li><a href='?/apps/car-booking/index.html'>App <i class="fas fa-external-link-alt"></i></a><a href='?/car-booking-panel'>Car Booking</a></li>
                 <li><a href='?/apps/equipment-booking/index.html'>App <i class="fas fa-external-link-alt"></i></a><a href='?/equipment-booking-panel'>Eqipment Booking</a></li>
                 <li><a href='?/apps/invoice-management/index.html'>App <i class="fas fa-external-link-alt"></i></a><a href='?/invoice-demo-panel'>Invoice Management</a></li>
@@ -41,21 +42,6 @@
                 
             </div>
             <div>
-                <span class="LT__ID break__ID">Mathematics</span>
-                <li><a href='?/api_wikipedia_Brownian_motion'>Brownian motion</a></li>
-            </div>
-            <div>
-                <span class="LT__ID">Mathematics Videos</span>
-                <li><a href='?/api_youtube_8mve0UoSxTo'>Mathematics is the queen of Sciences</a></li>
-                <li><a href='?/api_youtube_aircAruvnKk'>Neural Network</a></li>
-            </div>
-
-            
-            <div>
-                <span class=LT__ID>Interesting Videos</span>
-                <li><a href='?/api_youtube_66oNv.DJuPc'>Data Sharing and Management</a></li>
-            </div>
-            <div>
                 <span class="LT__ID">Clinical Trials Online Data Collection Form Examples</span>
                 <li><a href='?/apps/online-forms/activity-morning-eveningness-questionnaire/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_me-shf-spardac'>Activity morning eveningness questionnaire</a></li>
                 <li><a href='?/apps/online-forms/anthropometry-age-sex/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_anthropometry-age-sex-spardac'>Anthropometry age sex</a></li>
@@ -74,10 +60,35 @@
                 <li><a href='?/apps/online-forms/karolinska-sleepiness-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-KSS'>Karolinska sleepiness scale (KSS)</a></li>
                 <li><a href='?/apps/online-forms/pittsburgh-sleep-quality-index/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-PSQI'>Pittsburgh sleep quality index (PSQI)</a></li>
             </div>
+            <span class="T__ID break__ID">Mathematics and Investment</span>
             <div>
-                <span class='LT__ID break__ID'>Piano Notes Sheet</span>
-                <li><a href='?/api_piano_1'>An die ferne Geliebte</a></li>
-                <li><a href='?/api_piano_2'>Sonatina Op.36</a></li>
+                <span class="LT__ID">Mathematics</span>
+                <li><a href='?/api_wikipedia_Brownian_motion'>Brownian motion</a></li>
+                <li><a href='?/api_wikipedia_Random_walk'>Random walk</a></li>
+            </div>
+            <div>
+                <span class="LT__ID">Mathematics Videos</span>
+                <li><a href='?/api_youtube_8mve0UoSxTo'>Mathematics is the queen of Sciences</a></li>
+                <li><a href='?/api_youtube_aircAruvnKk'>Neural Network</a></li>
+                <li><a href='?/api_youtube_B1v9OeCTlu0'>Basics of Probability: Unions, Intersections, and Complements</a></li>
+                <li><a href='?/api_youtube_OvTEhNL96v0'>Expected Value and Variance of Discrete Random Variables</a></li>
+                
+            </div>
+
+            
+            <div>
+                <span class=LT__ID>Interesting Videos</span>
+                <li><a href='?/api_youtube_66oNv.DJuPc'>Data Sharing and Management</a></li>
+                <li><a href='?/api_youtube_7cjIWMUgPtY'>The Magic Economics of Gambling</a></li>
+
+                
+            </div>
+            <span class="T__ID  break__ID">Music</span>
+            <div>
+                <span class='LT__ID'>Piano Notes Sheet</span>
+                <li><a href='?/api_piano_Canon_in_D'>Canon in D</a></li>
+                <li><a href='?/api_piano2_1'>An die ferne Geliebte</a></li>
+                <li><a href='?/api_piano2_2'>Sonatina Op.36</a></li>
             </div>
             <div>
                 <span class=LT__ID>Piano Scales</span>
@@ -108,8 +119,10 @@
                 <span class=LT__ID>Music</span>
                 <li><a href='?/api_wikipedia_Piano_key_frequencies'>Piano key frequencies</a></li>
             </div>
+
+            <span class='T__ID break__ID'>Private (Login Required)</span>
             <div>
-                <span class='LT__ID break__ID'>Private Micro Applications (Login Required)</span>
+                <span class=LT__ID>Micro Applications</span><br>
                 <li><a href='?/apps/sleep-study/index.html'>App <i class="fas fa-external-link-alt"></i></a><a href='?/sleep-study-panel'>Sleep Study</a></li>
                 <li><a href='?/apps/volunteer-system/index.html'>App <i class="fas fa-external-link-alt"></i></a><a href='?/volunteers-panel'>Volunteers</a></li>
                 <li><a href='?/apps/printer-status/index.html'>App <i class="fas fa-external-link-alt"></i></a><a href='?/printer-panel'>Printer Toner Status</a></li>
@@ -123,6 +136,7 @@
         </ul>
     </div>
     <hr style='margin:8px 30px'>
+    <span class="T__ID" style='margin-left:50px;'>Others</span><br><br>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div>
@@ -493,6 +507,7 @@
                 var words=$('#items__ID').val().split(' ');
                 $('#panel__ID li').each(function(){
                     var $item=$(this);
+                    /*
                     var name=$item.find('a').html().toUpperCase();
                     for(var i=0;i<words.length;i++){
                         var word=words[i].toUpperCase(); 
@@ -502,6 +517,22 @@
                             }
                         }
                     }
+                    */
+                    $item.find('a').each(function(index){
+                        var name=$(this).html().toUpperCase();
+                        //console.log(index+"  "+name);
+                        if(index==0 && name.substr(0,3)=="APP"){}
+                        else{
+                            for(var i=0;i<words.length;i++){
+                                var word=words[i].toUpperCase(); 
+                                if(word!=""){
+                                    if(name.indexOf(word)==-1){
+                                        $item.hide();
+                                    }
+                                }
+                            }
+                        }
+                    })                    
                 })
                 var words=$('#groups__ID').val().split(' ');
                 $('#panel__ID span').each(function(){
@@ -524,7 +555,7 @@
             var prefix=$vm.module_list["__MODULE__"].prefix;
             if(prefix==undefined) prefix="";
             //--------------------------------------------------------
-            $("#panel__ID span").on('click',function(){
+            $("#panel__ID span.LT__ID").on('click',function(){
                 var txt=$(this).text();
                 console.log(txt);
                 $('#groups__ID').val(txt);
@@ -556,10 +587,11 @@
                             case "sqlserver":   $vm.sqlserver_query(parseInt(aa[2]));   break;
                             case "coreplus":    $vm.coreplus_query(parseInt(aa[2]));    break;
                             case "wappsystem":  $vm.wappsystem_query(parseInt(aa[2]));  break;
-                            case "piano":       $vm.show_module('piano',{sheet:aa[2]}); break;
+                            case "piano2":      $vm.show_module('piano2',{sheet:aa[2]}); break;
                             case "youtube":     $vm.youtube_query( module_name.replace('api_youtube_','') );     break;
                             case "image":       $vm.image_query(vm_data[aa[2]]);        break;
                             case "wikipedia":   $vm.wikipedia_query(module_name.replace('api_wikipedia_',''));   break;
+                            case "piano":       $vm.show_module('piano',{sheet:module_name.replace('api_piano_','')}); break;
                             //case "vm-data":     $vm.vm_data_query("wapp","wappsystem-table",parseInt(aa[2]));   break;
                         }
                     }
@@ -679,6 +711,12 @@
                 padding:20px;
                 column-count: 1;
             }
+        }
+        .T__ID{
+            margin-left:-40px;
+            margin-bottom:20px;
+            font-size: 120%;
+            font-weight: bold;
         }
         .LT__ID{
             margin-left:-40px;

@@ -282,7 +282,7 @@
         "firebase-data":{  url:$H+"/api/firebase/data.html",  api:"wapp",Table:"firebase", form_module: 'firebase-form', router:1  },
         "firebase-form":{  url:$H+"/api/firebase/form.html",  api:"wapp",Table:"firebase" },
         
-        "piano":{  url:$H+"/piano/piano.html"},
+        "piano2":{  url:$H+"/piano/piano.html"},
         
         "notes-data":{  url:$H+"/notes/data.html",  api:"wapp",Table:"notes-vm", form_module: 'notes-form', router:1  },
         "notes-form":{  url:$H+"/notes/form.html",  api:"wapp",Table:"notes-vm" },

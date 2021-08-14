@@ -20,6 +20,15 @@
                     $("#title__ID").text(t);
                     $('#content__ID').html(txt);
                     $('#content__ID').find('table.box-More_citations_needed').remove();
+                    $('#content__ID a').each(function(){
+                        var href=$(this).attr("href");
+                        if(href!=undefined){
+                            if(href.indexOf('#')==-1){
+                                $(this).attr("target","_blank");
+                                $(this).attr("href","https://en.wikipedia.org/"+href);
+                            }
+                        }
+                    });
                 });
             })
         }

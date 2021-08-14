@@ -1,0 +1,75 @@
+<div id=D__ID>
+    <div id=page2__ID style='background-color:#fff;padding:20px'>
+        <span style='margin-left:50px;position:fixed;z-index: 999;'>
+            <button id="btn-play__ID" class="btn btn-secondary">Play</button>
+            <button id="btn-pause__ID" class="btn btn-secondary">Pause</button>
+            <button id="btn-continue__ID" class="btn btn-secondary">Continue</button>
+            <button id="btn-stop__ID" class="btn btn-secondary">Stop</button>
+        </span>
+        <div id="score__ID"></div>
+    </div>
+    <script>
+        function F__ID(){
+            //**************************************************
+            var m=$vm.module_list['__MODULE__'];
+            //**************************************************
+            const osmd        =new opensheetmusicdisplay.OpenSheetMusicDisplay(document.getElementById("score__ID"),{autoResize:true});
+            const audioPlayer =new OsmdAudioPlayer();
+            //Music sheet
+            $('#D__ID').on('load',function(){
+                //console.log(m.input["sheet"])
+                var url="data/"+m.input["sheet"]+".musicxml";
+                osmd.setOptions({followCursor:true});
+                $.get(url,function(scoreXml){
+                    osmd.load(scoreXml)
+                    .then(
+                        function(){
+                            osmd.render();
+                            audioPlayer.loadScore(osmd);
+                        }
+                    )
+                },'text');
+            })
+            //----------------------------------------------
+            $("#btn-play__ID").on('click',function(){       audioPlayer.stop(); audioPlayer.play();  });
+            $("#btn-pause__ID").on('click',function(){      audioPlayer.pause(); });
+            $("#btn-continue__ID").on('click',function(){   audioPlayer.play();  });
+            $("#btn-stop__ID").on('click',function(){       audioPlayer.stop();  });
+            //************************************************************
+            $('#page1__ID').css('min-height',$vm.min_height+"px");
+            $('#page2__ID').css('min-height',$vm.min_height+"px");
+            //$('#page3__ID').css('min-height',$vm.min_height+"px");
+            //-----------------------------------
+            $('#D__ID').on('hide',function(){
+                audioPlayer.stop();
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            /*padding:0px;*/
+			height:100%;
+			animation: vm_module_fadein 1.0s;
+        }
+        #steps__ID{
+            display: inline-block;
+            background-color: white;
+            padding: 10px;
+            font-size: 14px;
+        }
+        #_scroll_down__ID {
+            display:inline-block;
+            padding:10px 20px;
+            cursor:pointer;
+            color:#fff;
+            font-size:150%;
+			animation:scroll__ID 8s;
+			-moz-animation:scroll__ID 8s infinite; /* Firefox */
+			-webkit-animation:scroll__ID 8s infinite; /* Safari and Chrome */
+		}  
+        #score__ID{
+            background-position: center; 
+            background-repeat:no-repeat;
+        }
+    </style>
+</div>
