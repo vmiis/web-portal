@@ -66,6 +66,11 @@
             <ul>
                 <span class="T__ID">Mathematics and Investment</span><br><br>
                 <div>
+                    <span class="LT__ID">Investment Status</span>
+                    <li><a href='?/api_gsheet_2PACX-1vRttmcQHV6Fb8bTOjiPeydFJvlB9R0kfxt_73ZUkdSJAGjDKjmXP_VVCJcIUocN0jsshCXZ4b7z6oo1/pubchart?oid=2069004742&amp;format=interactive'>Volatility Index</a></li>
+                    <li><a href='?/api_gsheet_2PACX-1vRnvKmMR84dDmVxEIkojNFWj0PLrhmnjIgEeVwirEGkn3VKJKhkCP2KzvggqFIxRtCICCKgVkC-kYiz/pubchart?oid=1980079829&amp;format=interactive'>Volatility Catch Up</a></li>
+                </div>
+                <div>
                     <span class="LT__ID">Mathematics</span>
                     <li><a href='?/api_wikipedia_Brownian_motion'>Brownian motion</a></li>
                     <li><a href='?/api_wikipedia_Random_walk'>Random walk</a></li>
@@ -93,10 +98,10 @@
                 <span class="T__ID">Music</span><br><br>
                 <div>
                     <span class='LT__ID'>Piano</span>
-                    <li><a href='?/api_piano_Canon_in_D'>Canon in D Sheet</a></li>
-                    <li><a href='?/api_youtube_6jSLH9CDPPQ'>Canon in D Video</a></li>
-                    <li><a href='?/api_piano_Chopin_Nocturne_Op_9_No_1'>Chopin - Nocturne Op.9 No.1 Sheet</a></li>
-                    <li><a href='?/api_youtube_2bvg232HOn8'>Chopin - Nocturne Op.9 No.1 Video</a></li>
+                    <li><a href='?/api_musescore_1188116/scores/828956'>Sheet</a> <a href='?/api_youtube_6jSLH9CDPPQ'>Canon in D</a></li>
+                    <li><a href='?/api_musescore_26089141/scores/5046056'>Sheet</a> <a href='?/api_youtube_7VzMIw--sQQ'>Always With Me</a></li>
+                    <li><a href='?/api_musescore_46295/scores/5587994'>Sheet</a> <a href='?/api_youtube_2bvg232HOn8'>Chopin - Nocturne Op.9 No.1</a></li>
+                    
                 </div>
                 <div>
                     <span class='LT__ID'>Piano Notes Sheet</span>
@@ -692,6 +697,7 @@
             $('#panel__ID a, .grid-container__ID a').on('click',function(e){
                 scrollTop_V=$(document).scrollTop();
                 $('#panel__ID a').removeClass("active__ID");
+                $('.grid-container__ID a').removeClass("active__ID");
                 $(this).addClass("active__ID");
 
                 e.preventDefault();
@@ -718,6 +724,8 @@
                             case "image":       $vm.image_query(vm_data[aa[2]]);        break;
                             case "wikipedia":   $vm.wikipedia_query(module_name.replace('api_wikipedia_',''));   break;
                             case "piano":       $vm.show_module('piano',{sheet:module_name.replace('api_piano_','')}); break;
+                            case "gsheet":      $vm.show_module('gsheet',{src:module_name.replace('api_gsheet_','')}); break;
+                            case "musescore":   $vm.show_module('musescore',{src:module_name.replace('api_musescore_','')}); break;
                             //case "vm-data":     $vm.vm_data_query("wapp","wappsystem-table",parseInt(aa[2]));   break;
                         }
                     }
@@ -797,7 +805,7 @@
         }
         #panel__ID a, .grid-container__ID a {
             text-decoration: none;
-            margin-right:30px;
+            margin-right:20px;
         }
         .panel__ID li i, .grid-container__ID li i{
             color:#ccc;
