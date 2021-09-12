@@ -24,4 +24,5 @@
     m["shift-roster-panel"]=    {url:A+"/apps/shift-roster/panels/main/panel.html", router:1}
     m["equipment-booking-panel"]={url:A+"/apps/equipment-booking/panels/main/panel.html", router:1}
     //-------------------------------------------------------------------------------------
+    m["3d"]={url:H+"/g1/3d.html", router:1}
 })();

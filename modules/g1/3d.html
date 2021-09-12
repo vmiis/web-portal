@@ -1,0 +1,170 @@
+<div id=D__ID>
+    <div id=panel__ID class=panel__ID>
+        <div id="plot__ID"></div>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var prefix=$vm.module_list["__MODULE__"].prefix;
+            if(prefix==undefined) prefix="";
+            $('#plot__ID').css('height',$vm.min_height);
+            //--------------------------------------------------------
+            $('#D__ID').on('load',function(){
+                /*
+                plot = document.getElementById('plot__ID');
+                Plotly.newPlot( plot, [{
+                x: [1, 2, 3, 4, 5],
+                y: [1, 2, 4, 8, 16] }], {
+                margin: { t: 0 } } );
+                */
+
+                /*
+                d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/3d-line1.csv', function(err, rows){
+                    function unpack(rows, key) {
+                        return rows.map(function(row)
+                        { return row[key]; }); 
+                    }
+                    var x = unpack(rows , 'x');
+                    var y = unpack(rows , 'y');
+                    var z = unpack(rows , 'z');
+                    var c = unpack(rows , 'color');
+                    Plotly.newPlot('plot__ID', [{
+                        type: 'scatter3d',
+                        mode: 'lines',
+                        x: x,
+                        y: y,
+                        z: z,
+                        opacity: 1,
+                        line: {
+                            width: 6,
+                            color: c,
+                            reversescale: false
+                        }
+                        }], {
+                        height: 640
+                    });
+                });
+                */
+
+
+
+                /*
+
+
+                var pointCount = 31;
+                var i, r;
+
+                var x = [];
+                var y = [];
+                var z = [];
+                var c = [];
+
+                for(i = 0; i < pointCount; i++) 
+                {
+                r = 10 * Math.cos(i / 10);
+                x.push(r * Math.cos(i));
+                y.push(r * Math.sin(i));
+                z.push(i);
+                //c.push(i)
+                }
+
+                Plotly.newPlot('plot__ID', [{
+                type: 'scatter3d',
+                mode: 'lines+markers',
+                x: x,
+                y: y,
+                z: z,
+                line: {
+                    width: 6,
+                    color: c,
+                    colorscale: "Viridis"},
+                marker: {
+                    size: 3.5,
+                    //color: c,
+                    colorscale: "Greens",
+                    cmin: -20,
+                    cmax: 50
+                }},                  
+                ]);
+
+                */
+                function plot(data){
+                    var x = [];
+                    var y = [];
+                    var z = [];
+                    var c = [];
+                    var rows=data.split('\n');
+                    var I=0;
+                    for(var i=0;i<rows.length;i++){
+                        var cols=rows[i].replace('\r','').split(',');
+                        if(cols.length==3){
+                            c.push(cols[0]);
+                            x.push(cols[0]);
+                            y.push(cols[1]);
+                            z.push(cols[2]);
+                            I++;
+                        }                        
+                    }
+                    Plotly.newPlot('plot__ID', [{
+                        type: 'scatter3d',
+                        //mode: 'lines+markers',
+                        mode: 'markers',
+                        x: x,
+                        y: y,
+                        z: z,
+                        line: {
+                            width: 2,
+                            color: c,
+                            colorscale: "Viridis"
+                        },
+                        marker: {
+                            size: 3.5,
+                            color: c,
+                            colorscale: "Greens",
+                            cmin: -20,
+                            cmax: 50
+                        }},                  
+                    ]);
+                }
+
+                //1-bx93IBsedh0AJAZaqwdRKrr2rDyh487cY39V81aPoQ
+
+                function loadData(plot) {
+                    //var url="https://docs.google.com/spreadsheet/pub?key=1lKRZWkXeaaoPtVd_zHL2xohT7JSyyvEx2qBTgq8uuUk&single=true&gid=0&range=A1:C113&output=csv";
+                    //var url="https://docs.google.com/spreadsheet/pub?key=1-bx93IBsedh0AJAZaqwdRKrr2rDyh487cY39V81aPoQ&single=true&gid=0&range=A1:C23&output=csv";
+
+                    var url="https://docs.google.com/spreadsheets/d/1-bx93IBsedh0AJAZaqwdRKrr2rDyh487cY39V81aPoQ/export?format=csv"
+
+                    xmlhttp=new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if(xmlhttp.readyState == 4 && xmlhttp.status==200){
+                            plot(xmlhttp.responseText);
+                        }
+                    };
+                    xmlhttp.open("GET",url,true);
+                    xmlhttp.send(null);
+                }
+                loadData(plot)
+
+
+
+            })
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        .panel__ID{
+            padding:20px 50px 10px 50px;
+        }
+        #plot__ID{
+            width:100%;
+        }
+    </style>
+</div>
+
