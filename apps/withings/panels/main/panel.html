@@ -1,0 +1,238 @@
+<div id=D__ID>
+    <div id=panel__ID>
+        <div style='padding:10px; border-bottom: 1px solid #aaa;'>
+            <h3>Sleep</h3>
+            <p>
+                Provides the sleep measures for the night of the user, with the details of each phase of their sleep cycle.
+                Note: if startdate and enddate are separated by more than 24h, enddate will be overwritten with 24h past startdate.
+            </p>
+            <table>
+                <tr>
+                    <td>Start Date:</td>   <td><input type="date" id=s__ID /></td> <td>Measures' start date.</td>
+                </tr>
+                <tr>
+                    <td>End Date:</td>   <td><input type="date" id=e__ID /></td> <td>Measures' end date.</td>
+                </tr>
+                <tr>
+                    <td>Data Fields:</td>   <td><input type="text" id=f__ID /></td> <td>List of requested data fields, separated by a comma. 
+                        <br>
+                        hr
+                        > Heart Rate.
+                        
+                        rr
+                        > Respiration Rate.
+                        
+                        snoring
+                        > Total snoring time
+                    </td>
+                </tr>
+            </table>
+            <br><button id=sleep__ID>Query</button>
+        </div>
+        <div style='padding:10px; border-bottom: 1px solid #aaa;'>
+            <h3>Sleep summary</h3>
+            <p>
+                Get the basic information about a night of the user, such as the total time they slept, how long it took them to fall asleep, etc.
+            </p>
+            <table>
+                <tr>
+                    <td>Start Date:</td>   <td><input type="date" id=s2__ID /></td> <td>Start date.</td>
+                </tr>
+                <tr>
+                    <td>End Date:</td>   <td><input type="date" id=e2__ID /></td> <td>End date.</td>
+                </tr>
+                <tr>
+                    <td>Data Fields:</td>   <td><input type="text" id=f2__ID /></td> <td>List of requested data fields, separated by a comma. 
+                        <br>
+                        nb_rem_episodes
+                        > Count of the REM sleep phases.
+                        
+                        sleep_efficiency
+                        > Ratio of the total sleep time over the time spent in bed.
+                        
+                        sleep_latency
+                        > Time spent in bed before falling asleep.
+                        
+                        total_sleep_time
+                        > Total time spent asleep. Sum of light, deep and rem durations.
+                        
+                        total_timeinbed
+                        > Total time spent in bed.
+                        
+                        wakeup_latency
+                        > Time spent in bed after waking up.
+                        
+                        waso
+                        > Time spent awake in bed after falling asleep for the 1st time during the night.
+                        asleepduration
+                        > Duration of sleep when night comes from external source (light, deep and rem sleep durations are null in this case).
+                        
+                        breathing_disturbances_intensity
+                        > Intensity of breathing disturbances
+                        
+                        deepsleepduration
+                        > Duration in state deep sleep (in seconds).
+                        
+                        durationtosleep
+                        > Time to sleep (in seconds). (deprecated)
+                        
+                        durationtowakeup
+                        > Time to wake up (in seconds). (deprecated)
+                        
+                        hr_average
+                        > Average heart rate.
+                        
+                        hr_max
+                        > Maximal heart rate.
+                        
+                        hr_min
+                        > Minimal heart rate.
+                        
+                        lightsleepduration
+                        > Duration in state light sleep (in seconds).
+                        
+                        night_events
+                        > Events list happened during the night
+                        
+                        out_of_bed_count
+                        > Number of times the user got out of bed during the night.
+                        
+                        remsleepduration
+                        > Duration in state REM sleep (in seconds).
+                        
+                        rr_average
+                        > Average respiration rate.
+                        
+                        rr_max
+                        > Maximal respiration rate.
+                        
+                        rr_min
+                        > Minimal respiration rate.
+                        
+                        sleep_score
+                        > Sleep score
+                        
+                        snoring
+                        > Total snoring time
+                        
+                        snoringepisodecount
+                        > Numbers of snoring episodes of at least one minute
+                        
+                        wakeupcount
+                        > Number of times the user woke up while in bed. Does not include the number of times the user got out of bed.
+                        
+                        wakeupduration
+                        > Time spent awake (in seconds).
+
+
+                        </td>
+                </tr>
+            </table>
+            <br><button id=sleep2__ID>Query</button>
+        </div>
+    </div>
+    <style>
+        #dirgram__ID g[vm="1"]:hover text{
+            fill:red!Important;
+            cursor:pointer;
+        }
+    </style>
+    <script>
+        function F__ID(){
+            $('#sleep__ID').on('click',function(e){
+                var s=$('#s__ID').val();
+                var e=$('#e__ID').val();
+                var f=$('#f__ID').val();
+                s=new Date(s).getTime()/1000;
+                e=new Date(e).getTime()/1000;
+                var q={
+                    name:"sleep",
+                    path:"/v2/sleep",
+                    data:"action=get&startdate="+s+"&enddate="+e+"&data_fields="+f
+                }
+                $vm.withings_query(q);
+
+            })
+            $('#sleep2__ID').on('click',function(e){
+                var s=$('#s2__ID').val();
+                var e=$('#e2__ID').val();
+                var f=$('#f2__ID').val();
+                //s=new Date(s).getTime()/1000;
+                //e=new Date(e).getTime()/1000;
+                var q={
+                    name:"sleep",
+                    path:"/v2/sleep",
+                    data:"action=getsummary&startdateymd="+s+"&enddateymd="+e+"&data_fields="+f
+                }
+                $vm.withings_query(q);
+
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+        #dirgram__ID{
+            min-width:1000px;
+            padding:50px 300px;
+        }
+        @media screen and (max-width: 1200px) {
+            #dirgram__ID{
+                padding:10px 10px;
+            }
+        }
+        #D__ID  td{
+            padding: 3px 10px 3px 10px;
+            vertical-align: top;
+        }
+        #D__ID input[type=text],
+        #D__ID input[type=email],
+        #D__ID input[type=tel],
+        #D__ID input[type=time],
+        #D__ID input[type=date],
+        #D__ID select,
+        #D__ID textarea
+        {
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid;
+            padding: 0 .625em;
+            outline: 0;
+            margin: 0;
+            text-align: left;
+            border-color: #c3cad8;
+            color: #2c3345;
+            height: 2.5em;
+        }
+        #D__ID button{
+            display: inline-block;
+            font-weight: 400;
+            color: #212529;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        #D__ID button:hover {
+            color: #fff;
+            background-color: #545b62;
+            border-color: #4e555b;
+        }
+
+
+    </style>
+</div>

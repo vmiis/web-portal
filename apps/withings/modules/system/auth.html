@@ -1,0 +1,55 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var u=window.location.origin+"/auth.html"
+            $vm.auth_signin=function(){
+                    url='https://account.withings.com/oauth2_user/authorize2';
+                    url+='?client_id=498446035047a23435c351e0e4e676c84d0bf424d3741006a88b8cb632abb479'; //vmiis
+                    url+='&response_type=code';
+                    url+='&redirect_uri='+u;
+                    url+='&scope=user.info,user.activity,user.metrics'; 
+                    url+='&response_mode=fragment';
+                    url+='&state=exchange-withings-token.wapp_withings';
+                    url+='&nonce=678910';
+                    url+='&prompt=select_account';
+                    window.open(url);
+            }
+            //--------------------------------------------------------
+            window.onmessage=function(e){
+                if (e.origin == window.location.origin){
+                    var href=e.data.href;
+                    var code=href.split('code=').pop();
+                    code=code.split('&')[0];
+	                var state=href.split('state=exchange').pop();
+	                state="exchange"+state.split('&')[0];
+	                state=state.split('#')[0];
+                    if(code!=undefined && state!=undefined){
+                        var cmd=state.split('.')[0];
+                        var id=state.split('.').pop();
+                        $vm.request_and_set_token(id,cmd,code,u,href,function(id,res){
+                            var api_name=id.split('_')[0];
+                            $vm.user_name=sessionStorage.getItem(api_name+" username");
+                            $vm.displayname=sessionStorage.getItem(api_name+" displayname");
+                            $vm.show_user();
+                        });
+                    }
+                }
+            }
+            //--------------------------------------------------------
+            $vm.auth_signout=function(){
+                sessionStorage.clear();
+                window.location.href=$vm.hosting_path+"/";
+            }
+            //------------------------------------
+            $vm.init(function(){
+                $vm.init_status=1;
+                var id="wapp";
+                if(sessionStorage.getItem(id+" username")!=null)     $vm.user_name=sessionStorage.getItem(id+" username");
+                if(sessionStorage.getItem(id+" displayname")!=null)  $vm.displayname=sessionStorage.getItem(id+" displayname");
+                $vm.show_user();
+            })
+            //------------------------------------
+        }
+    </script>
+</div>

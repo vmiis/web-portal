@@ -1,0 +1,23 @@
+<div id=D__ID>
+    <div id=panel__ID>
+    </div>
+    <script>
+        function F__ID(){
+            $('#D__ID').on("load",function(){
+                alert(1)
+                var q={
+                    name:"sleep",
+                    path:"/v2/sleep",
+                    data:"action=getsummary&startdateymd=2021-09-01&enddateymd=2021-09-02"
+                }
+                $vm.withings_query(q);
+            });
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+    </style>
+</div>
