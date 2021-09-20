@@ -6,7 +6,7 @@
             $("#iframe__ID").attr("height",$vm.min_height+"px");
             var m=$vm.module_list['__MODULE__'];
             $('#D__ID').on('load',function(){
-                var src=""; if(m.input.src!=undefined) src="https://docs.google.com/spreadsheets/d/e/"+m.input.src;
+                var src=""; if(m.input.src!=undefined) src="https://docs.google.com/spreadsheets/d/"+m.input.src;
                 var frame = iframe__ID.cloneNode();
                 frame.src = src;
                 iframe__ID.parentNode.replaceChild(frame, iframe__ID);
