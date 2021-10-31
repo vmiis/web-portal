@@ -179,6 +179,7 @@
                     <li><a href='?/apps/invoice-management/index.vm.html'>Invoice Management (VM)</a></li>
                     <li><a href='?/apps/snapforms/index.html'>Snapforms</a></li>
                     <li><a href='?/app2_send-email-to-patients'>Send Email to Patients</a></li>
+                    <li><a href='?/app2_it-system-diagrams'>IT System Diagrams</a></li>
                     <li><a href='?/apps/withings/index.html'>Withings</a></li>
                 </div>
             </ul>
@@ -733,13 +734,9 @@
                 else if(module_name.substring(0,4)=='apps') window.open(module_name);
                 else if(module_name.substring(0,4)=='app2'){
                     var aa=module_name.split('_');
-                    if(aa[1]=='send-email-to-patients'){
-                        if($vm.localhost==true){
-                            window.open('../wimr-snapforms/');
-                        }
-                        else{
-                            window.open('https://vmiis.github.io/wimr-snapforms');
-                        }
+                    switch(aa[1]){
+                        case 'send-email-to-patients': if($vm.localhost==true) window.open('../wimr-snapforms/'); else window.open('https://vmiis.github.io/wimr-snapforms'); break;
+                        case 'it-system-diagrams':     if($vm.localhost==true) window.open('../wimr-diagrams/');  else window.open('https://vmiis.github.io/wimr-diagrams');  break;
                     }
                 }
                 else if(module_name.substring(0,4)=='api_'){
