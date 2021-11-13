@@ -283,6 +283,7 @@
         "firebase-form":{  url:$H+"/api/firebase/form.html",  api:"wapp",Table:"firebase" },
         
         "piano2":{  url:$H+"/piano/piano.html"},
+        "piano3":{  url:$H+"/piano/piano3.html"},
         
         "notes-data":{  url:$H+"/notes/data.html",  api:"wapp",Table:"notes-vm", form_module: 'notes-form', router:1  },
         "notes-form":{  url:$H+"/notes/form.html",  api:"wapp",Table:"notes-vm" },
