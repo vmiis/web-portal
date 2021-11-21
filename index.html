@@ -21,6 +21,15 @@
         <script>$vm={};</script>
     </head>
     <body>
+
+        <div class="pic-wrapper">
+            <figure class="pic-1"></figure>
+            <figure class="pic-2"></figure>
+            <figure class="pic-3"></figure>
+            <figure class="pic-4"></figure>
+            <figure class="pic-5"></figure>
+            <figure class="pic-6"></figure>
+        </div>
         <div id=_g_vm_canvas style='position:absolute;top:-100000px'></div>
         <div id=layout>
             <div id=header style='height:83px'></div>
@@ -30,7 +39,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[1.56,0.05]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[1.57,0.05]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -84,7 +93,7 @@
             //=================================================
             //VM framework code, do not need to chang the following code in most cases
             var hearder_height=$('#header').height();
-            $vm.min_height=$(window).height()-hearder_height;
+            $vm.min_height=window.innerHeight-hearder_height;
             $('#content').css('min-height',$vm.min_height);
             $('#content').css('padding-top',hearder_height);
             $vm.root_layout_content_slot='content'
@@ -259,16 +268,16 @@
             $vm.boot(); //start from here
             //=================================================
             $(window).on('scroll', function() {
-            if($vm.active_name=='home'){
-                var y=-$(window).scrollTop()/3;
-                $('body').css({ 'background-position-y': y+'px'});
-                var r=-y/100; if(r>0.5) r=0.5;
-                $("#header").css("background","rgba(0,0,0,"+r+")");
-            }
-            //=================================================
-        });
-        //-------------------------------------
-        if('scrollRestoration' in history) {history.scrollRestoration = 'manual';}
+                if($vm.active_name=='home'){
+                    var y=-$(window).scrollTop()/3;
+                    $('body').css({ 'background-position-y': y+'px'});
+                    var r=-y/100; if(r>0.5) r=0.5;
+                    $("#header").css("background","rgba(0,0,0,"+r+")");
+                }
+                //=================================================
+            });
+            //-------------------------------------
+            if('scrollRestoration' in history) {history.scrollRestoration = 'manual';}
         </script>
         <!----------------------------------------------->
         <style main style>
@@ -276,9 +285,6 @@
                 margin:0;
                 padding:0;
                 height:100%;
-            }
-            #layout{
-                /*overflow-x: auto;*/
             }
             #header{
                 height:60px;
@@ -310,9 +316,81 @@
                 }
             }
             body{background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;}
-            /*.body_background_default{ background-image: url(https://images.unsplash.com/photo-1469967700385-5b0140e16e33?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);}*/
             /*.body_background_default{ background-image: url(https://images.unsplash.com/photo-1483425571841-9662f86c7154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2010&q=80);}*/
-            .body_background_default{ background-image: url(https://images.unsplash.com/photo-1557887591-0c28fdbd6e79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80);}
+            .pic-wrapper {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index:-1
+            }
+            figure {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                animation: slideShow 120s linear infinite 0s;
+            }
+            @keyframes slideShow {  
+                0% {
+                    opacity: 0;
+                    transform:scale(1);
+                    -ms-transform:scale(1);
+                }
+                3% {
+                    opacity: 1;
+                }
+                25% {
+                    opacity: 1;
+                }
+                30% {
+                    opacity: 0;
+                    transform:scale(1.1);
+                }
+                100% {
+                    opacity: 0;
+                    transform:scale(1);
+                }
+            }
+
+            
+            .pic-1 {
+                opacity: 1;
+                background: url(https://images.unsplash.com/photo-1542298444-e33c4aa2dbd0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2103&q=80) no-repeat center center;
+                background-size: cover;
+            }
+            .pic-2 {
+                animation-delay: 20s;
+                background: url(https://images.unsplash.com/photo-1605377033918-4aa53706582e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1531&q=80) no-repeat center center;
+                background-size: cover;
+            }
+            .pic-3 {
+                animation-delay: 40s;
+                background: url(https://images.unsplash.com/photo-1557887591-0c28fdbd6e79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80) no-repeat center center;
+                background-size: cover;
+            }
+            .pic-4 {
+                animation-delay: 60s;
+                background: url(https://images.unsplash.com/photo-1483425571841-9662f86c7154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2010&q=80) no-repeat center center;
+                background-size: cover;
+            }
+            .pic-5 {
+                animation-delay: 80s;
+                background: url(https://images.unsplash.com/photo-1469967700385-5b0140e16e33?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80) no-repeat center center;
+                background-size: cover;
+            }
+            .pic-6 {
+                animation-delay: 100s;
+                background: url(https://images.unsplash.com/photo-1483425571841-9662f86c7154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2010&q=80) no-repeat center center;
+                background-size: cover;
+            }
+            
+
+
+            
+
         </style>
         <!----------------------------------------------->
     </body>
