@@ -5,7 +5,7 @@
                 Web Portal
             </a>
         </div>
-        <div id=middle__ID style='margin:auto 0; padding-left:15px;padding-top:15px'>
+        <div id=middle__ID style='margin:auto 0; padding-left:15px;padding-top:1px'>
             <a id=mobile_logo__ID href="home" style='font-weight: bold;font-size:28px;color:#fff;text-decoration: none;'>
             Web Portal</a>
             <input id="hamburger__ID" type="checkbox" style='display:none'>
@@ -16,6 +16,9 @@
                     <!--<li><a href="?/diagram"><i class="fas fa-project-diagram"></i> Diagram</a></li>-->
                     <li><a href="?/about"><i class="fa fa-info"></i> About</a></li>
                     <!--<li><a href="?/signin" id=_signin__ID ><i class="fa fa-user"></i> Authentication</a></li>-->
+
+                    <li><a href="m" id=music_pp><i class="fas fa-music"></i> Play/Pause</a></li>
+                    
                 </ul>
             </div>
         </div>    
@@ -38,6 +41,10 @@
             $('#D__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
+                if($(this).attr('href')=="m"){
+                    $vm.music();
+                    return;
+                }
                 var module_name=$(this).attr('href').replace('?\/','');
                 var w=$(this).attr('w');
                 if(w==1){
@@ -205,8 +212,14 @@
             }
         }
         /*main menu*/
+        #menu__ID{
+            display: inline-block;
+            background: rgba(1,2,3,0.3);
+            border-radius: 3px;
+        }
         #menu__ID ul{
             margin: 0;
+            padding-left: 0;
         }
         #menu__ID li{
             display: inline-block;
