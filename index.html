@@ -36,7 +36,7 @@
             <div id=content></div>
             <div id=footer></div>
         </div>
-        <iframe id=iframe_music style='display:none' frameborder="0" src=https://www.youtube.com/embed/aZvQ66N5lQQ?&enablejsapi=1&autoplay=1 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id=iframe_music style='display:none' src="https://www.youtube.com/embed/aZvQ66N5lQQ?enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
@@ -87,7 +87,7 @@
                 $vm.install_module('api_query','',{},function(name,id){});
             }
             //---------------------------------------------
-            var _play=1;
+            var _play=0;
             $vm.music=function(){ 
                 if(_play==0) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*'); 
                 if(_play==1) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
