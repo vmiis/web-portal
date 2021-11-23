@@ -40,7 +40,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[1.58,0.05]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[1.59,0.05]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -87,11 +87,11 @@
                 $vm.install_module('api_query','',{},function(name,id){});
             }
             //---------------------------------------------
-            var _play=0;
-            $vm.music=function(){ 
-                if(_play==0) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*'); 
-                if(_play==1) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
-                if(_play==0) _play=1; else _play=0;
+            $vm.play=0;
+            $vm.music=function(id){ 
+                if($vm.play==0) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*'); 
+                if($vm.play==1) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+                if($vm.play==0){$vm.play=1;$('#'+id).text("Pause");} else{ $vm.play=0; $('#'+id).text("Play");}
             }
             //---------------------------------------------
         </script>    
