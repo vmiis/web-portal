@@ -100,6 +100,11 @@
                     <li><a href='?/minor-harmonic'>Minor Harmonic</a></li>
                 </div>
                 <div>
+                    <span class=LT__ID>Tools</span>
+                    <li><a href='?/arpeggios'>Arpeggios</a></li>
+                    <li><a href='?/chords'>Chords</a></li>
+                </div>
+                <div>
                     <span class=LT__ID>Piano Videos</span>
                     <li><a href='?/api_youtube_7VzMIw--sQQ'>Always With Me</a></li>
                     
@@ -150,12 +155,15 @@
                 </div>
                 <span class=LT__ID>Micro Applications for WIMR</span><br>
                 <div>
+                    <li><a href='?/app2_active-directory'>Active Directory</a></li>
                     <li><a href='?/app2_wimr-backup-status'>Databases Backup Status Check Up</a></li>
                     <li><a href='?/app2_it-system-diagrams'>IT System Diagrams</a></li>
+                    <li><a href='?/app2_it-system-information'>IT System Information</a></li>
                     <li><a href='?/app2_wimr-mailchimp'>Mailchimp</a></li>
                     <li><a href='?/app2_wimr-dynamics'>Microsoft Dynamics</a></li>
                     <li><a href='?/app2_wimr-flow-activity'>Microsoft Flow Activity</a></li>
                     <li><a href='?/app2_wimr-sharepoint'>Microsoft SharePoint</a></li>
+                    <li><a href='?/app2_printer-toner-status'>Printer Status</a></li>
                     <li><a href='?/app2_send-email-to-patients'>Send Email to Patients</a></li>
                     <li><a href='?/app2_wimr-server-status'>Server Status Check Up</a></li>
                     <li><a href='?/app2_sleep-study'>Sleep Study</a></li>
@@ -303,368 +311,370 @@
         </ul>
     </div>
     -->
-    <hr style='margin:8px 30px'>
-    <span class="T__ID" style='margin-left:50px;'>More IT</span><br><br>
-    <div id=panel__ID class=panel__ID>
-        <ul style="list-style-type:decimal;">
+    <div id=more__ID style='display:none'>
+        <hr style='margin:8px 30px'>
+        <span class="T__ID" style='margin-left:50px;' id=more__ID>More IT</span><br><br>
+        <div id=panel__ID class=panel__ID>
+            <ul style="list-style-type:decimal;">
 
-            <!--
-            <div>
-                <ul>
-                    <div>
-                        <span class="LT__ID">Clinical Trials Online Data Collection Form Examples</span>
-                        <li><a href='?/apps/online-forms/activity-morning-eveningness-questionnaire/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_me-shf-spardac'>Activity morning eveningness questionnaire</a></li>
-                        <li><a href='?/apps/online-forms/anthropometry-age-sex/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_anthropometry-age-sex-spardac'>Anthropometry age sex</a></li>
-                        <li><a href='?/apps/online-forms/basic-psychological-need-satisfaction-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_bpns-spardac'>Basic psychological need satisfaction scale</a></li>
-                        <li><a href='?/apps/online-forms/brief-illness-perception-questionnaire/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_brief-illness-perception-questionnaire-spardac'>Brief Illness Perception Questionnaire</a></li>
-                        <li><a href='?/apps/online-forms/brief-sexual-function-inventory/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_breif-sexual-function-inventory-spardac'>Brief sexual function inventory</a></li>
-                        <li><a href='?/apps/online-forms/concomitant-medication/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_concom-medication-spardac'>Concomitant medication</a></li>
-                        <li><a href='?/apps/online-forms/depression-anxiety-stress-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_dass-spardac'>Depression anxiety stress scale</a></li>
-                        <li><a href='?/apps/online-forms/digital-symbol-substitution/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_dsst-spardac'>Digital symbol substitution</a></li>
-                        <li><a href='?/apps/online-forms/dysfunctional-beliefs-and-attitudes-about-sleep/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_dbas-16-spardac'>Dysfunctional beliefs and attitudes about sleep</a></li>
-                        <li><a href='?/apps/online-forms/epworth-sleepiness-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-ESS'>Epworth sleepiness scale (ESS)</a></li>
-                        <li><a href='?/apps/online-forms/epworth-sleepiness-scale_w/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_ess-spardac'>Epworth sleepiness scale (ESS, Spardac)</a></li>
-                        <li><a href='?/apps/online-forms/eq-5d-5l-instrument/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_eq-5d-spardac'>EQ-5D-5L instrument</a></li>
-                        <li><a href='?/apps/online-forms/ethnicity/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_ethnicity-spardac'>Ethnicity</a></li>
-                        <li><a href='?/apps/online-forms/insomnia-severity-index/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-ISI'>Insomnia severity index (ISI)</a></li>
-                        <li><a href='?/apps/online-forms/karolinska-sleepiness-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-KSS'>Karolinska sleepiness scale (KSS)</a></li>
-                        <li><a href='?/apps/online-forms/pittsburgh-sleep-quality-index/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-PSQI'>Pittsburgh sleep quality index (PSQI)</a></li>
-                    </div>
-                </ul>
-            </div>
-            -->
+                <!--
+                <div>
+                    <ul>
+                        <div>
+                            <span class="LT__ID">Clinical Trials Online Data Collection Form Examples</span>
+                            <li><a href='?/apps/online-forms/activity-morning-eveningness-questionnaire/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_me-shf-spardac'>Activity morning eveningness questionnaire</a></li>
+                            <li><a href='?/apps/online-forms/anthropometry-age-sex/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_anthropometry-age-sex-spardac'>Anthropometry age sex</a></li>
+                            <li><a href='?/apps/online-forms/basic-psychological-need-satisfaction-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_bpns-spardac'>Basic psychological need satisfaction scale</a></li>
+                            <li><a href='?/apps/online-forms/brief-illness-perception-questionnaire/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_brief-illness-perception-questionnaire-spardac'>Brief Illness Perception Questionnaire</a></li>
+                            <li><a href='?/apps/online-forms/brief-sexual-function-inventory/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_breif-sexual-function-inventory-spardac'>Brief sexual function inventory</a></li>
+                            <li><a href='?/apps/online-forms/concomitant-medication/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_concom-medication-spardac'>Concomitant medication</a></li>
+                            <li><a href='?/apps/online-forms/depression-anxiety-stress-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_dass-spardac'>Depression anxiety stress scale</a></li>
+                            <li><a href='?/apps/online-forms/digital-symbol-substitution/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_dsst-spardac'>Digital symbol substitution</a></li>
+                            <li><a href='?/apps/online-forms/dysfunctional-beliefs-and-attitudes-about-sleep/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_dbas-16-spardac'>Dysfunctional beliefs and attitudes about sleep</a></li>
+                            <li><a href='?/apps/online-forms/epworth-sleepiness-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-ESS'>Epworth sleepiness scale (ESS)</a></li>
+                            <li><a href='?/apps/online-forms/epworth-sleepiness-scale_w/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_ess-spardac'>Epworth sleepiness scale (ESS, Spardac)</a></li>
+                            <li><a href='?/apps/online-forms/eq-5d-5l-instrument/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_eq-5d-spardac'>EQ-5D-5L instrument</a></li>
+                            <li><a href='?/apps/online-forms/ethnicity/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_ethnicity-spardac'>Ethnicity</a></li>
+                            <li><a href='?/apps/online-forms/insomnia-severity-index/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-ISI'>Insomnia severity index (ISI)</a></li>
+                            <li><a href='?/apps/online-forms/karolinska-sleepiness-scale/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-KSS'>Karolinska sleepiness scale (KSS)</a></li>
+                            <li><a href='?/apps/online-forms/pittsburgh-sleep-quality-index/index.html'>Form <i class="fas fa-external-link-alt"></i></a><a href='?/vm-table_vm-demo-PSQI'>Pittsburgh sleep quality index (PSQI)</a></li>
+                        </div>
+                    </ul>
+                </div>
+                -->
 
 
 
-            <div>
-                <span class=LT__ID>Templates, Mockups and Tests</span>
-                <li><a target=_blank href='apps/templates/009/index.html'>App 1</a></li>
-                <li><a target=_blank href='apps/2-columns-content-page/index.html'>App 2</a></li>
-                <li><a href='?/blog-b2021'>Blog 2021</a></li>
-                <li><a href='?/blog-b2020'>Blog 2020</a></li>
-                <li><a target=_blank href='apps/blog/index.html'>App</a></li>
-                <li><a href='?/excel-to-web-data-collection-form'>Build a web form</a></li>
-                <li><a target=_blank href='apps/purchase-order-request/index.html'>Purchase order request</a></li>
-                <li><a target=_blank href='apps/clinical-trials/profile-of-mode-states/index.html'>Profile of Mood States</a></li>
-                <li><a target=_blank href='apps/laboratory/index.html'>Lab purchase order</a></li>
-                <li><a target=_blank href='apps/volunteers/index.html'>Volunteers</a></li>
-                <!--<li><a target=_blank href='apps/new-starter/index.html'>New starter</a></li>-->
-                <li><a target=_blank href='apps/a-simple-web-app-for-data-collection/index.html'>A simple web app for data collection</a></li>
-                <li><a target=_blank href='apps/student/index.html'>Student</a></li>
-                <li><a target=_blank href='apps/employee/index.html'>Employee</a></li>
-                <li><a target=_blank href='apps/enquiry/index.html'>Enquiry 1</a></li>
-                <li><a target=_blank href='apps/templates/072/index.html'>Enquiry 2</a></li>
-                <li><a target=_blank href='apps/new-employee/index.html'>New employee 1</a></li>
-                <li><a target=_blank href='apps/templates/055/index.html'>New employee 2</a></li>
-                <li><a target=_blank href='apps/formal-request-for-access-to-information/index.html'>Formal request for access to information</a></li>               
-                <li><a target=_blank href='apps/register-for-research/index.html'>Register for research</a></li>
-                <li><a target=_blank href='apps/property/index.html'>Property</a></li>
-                <li><a target=_blank href='apps/tenant/index.html'>Tenant</a></li>
-                <li><a target=_blank href='apps/tenancy/index.html'>Tenancy</a></li>
-                <li><a target=_blank href='apps/household/index.html'>Household</a></li>
-                <li><a target=_blank href='apps/predefined-transaction-item/index.html'>Predefined transaction item</a></li>
-                <li><a target=_blank href='apps/transaction-records/index.html'>Transaction records</a></li>
-                <!--<li><a target=_blank href='apps/car-list-and-car-booking-records/index.html'>Car list and car booking records</a></li>-->
-                <!--<li><a target=_blank href='apps/car-booking-calendar/index.html'>Car booking calendar</a></li>-->
-                <!--<li><a target=_blank href='apps/room-list-and-room-booking-records/index.html'>Room list and room booking records</a></li>-->
-                <!--<li><a target=_blank href='apps/room-booking-calendar/index.html'>Room booking calendar</a></li>-->
-                <li><a target=_blank href='apps/equipment-list-and-equipment-booking-records/index.html'>Equipment list and room booking records</a></li>
-                <li><a target=_blank href='apps/equipment-booking-calendar/index.html'>Equipment booking calendar</a></li>
-                <li><a target=_blank href='apps/templates/095/index.html'>4-Week Study of AD036 in Obstructive Sleep Apnea</a></li>
-                <li><a target=_blank href='apps/templates/098/index.html?tb=demo'>CANSLEEP screening</a></li>
-                <li><a target=_blank href='apps/templates/099/index.html?tb=demo'>CANSLEEP screening results</a></li>               
-                <li><a target=_blank href='apps/templates/096/index.html?db=dev'>CANSLEEP study</a></li>
-                <li><a target=_blank href='apps/templates/096/oq.html?db=dev'>CANSLEEP online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/101/index.html?tb=demo'>Cleverlights screening</a></li>
-                <li><a target=_blank href='apps/templates/102/index.html?tb=demo'>Cleverlights screening results</a></li>
-                <li><a target=_blank href='apps/templates/100/index2.html'>Cleverlights study</a></li>
-                <li><a target=_blank href='apps/templates/100/online-questionnaire/index2.html'>Cleverlights online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/118/index.html?tb=demo'>ENT Surgery for OSA trial</a></li>
-                <li><a target=_blank href='apps/templates/118/oq.html?tb=demo'>ENT Surgery for OSA trial online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/103/index.html?db=dev'>Flat study</a></li>
-                <li><a target=_blank href='apps/templates/104/online-questionnaire.html?db=dev'>Flat online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/106/index.html?tb=demo'>Local sleep screening</a></li>
-                <li><a target=_blank href='apps/templates/117/index.html?tb=demo'>Local sleep screening results</a></li>
-                <li><a target=_blank href='apps/templates/105/index.html?tb=demo'>Local sleep study</a></li>
-                <li><a target=_blank href='apps/templates/105/online-questionnaire/index.html?tb=demo'>Local sleep online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/115/index.html'>Neurovosa study</a></li>
-                <li><a target=_blank href='apps/templates/115/oq.html'>Neurovosa online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/107/index2.html'>SDM-II</a></li>
-                <li><a target=_blank href='apps/templates/107/online-questionnaire/index2.html'>SDM-II online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/108/index.html'>Sleep-fix</a></li>
-                <li><a target=_blank href='apps/templates/119/management.html?tb=demo'>Sleep-fix GP</a></li>
-                <li><a target=_blank href='apps/templates/119/online-questionnaire.html?tb=demo'>Sleep-fix GP online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/111/index.html'>SPARDAC screening</a></li>
-                <li><a target=_blank href='apps/templates/112/index.html'>SPARDAC screening results</a></li>
-                <li><a target=_blank href='apps/templates/110/index.html'>SPARDAC study</a></li>
-                <li><a target=_blank href='apps/templates/110/oq.html'>SPARDAC online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/113/index.html?tb=demo'>Screening for sleep disorders and cognitive impairment</a></li>
-                <li><a target=_blank href='apps/templates/113/online-questionnaire/index.html?tb=demo'>Screening for sleep disorders and cognitive impairment online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/114/index.html?db=dev'>Windfarm home study 2019</a></li>
-                <li><a target=_blank href='apps/templates/114/oq.html?db=dev'>Windfarm home study 2019 online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/094/index.html'>Word pair association</a></li>
+                <div>
+                    <span class=LT__ID>Templates, Mockups and Tests</span>
+                    <li><a target=_blank href='apps/templates/009/index.html'>App 1</a></li>
+                    <li><a target=_blank href='apps/2-columns-content-page/index.html'>App 2</a></li>
+                    <li><a href='?/blog-b2021'>Blog 2021</a></li>
+                    <li><a href='?/blog-b2020'>Blog 2020</a></li>
+                    <li><a target=_blank href='apps/blog/index.html'>App</a></li>
+                    <li><a href='?/excel-to-web-data-collection-form'>Build a web form</a></li>
+                    <li><a target=_blank href='apps/purchase-order-request/index.html'>Purchase order request</a></li>
+                    <li><a target=_blank href='apps/clinical-trials/profile-of-mode-states/index.html'>Profile of Mood States</a></li>
+                    <li><a target=_blank href='apps/laboratory/index.html'>Lab purchase order</a></li>
+                    <li><a target=_blank href='apps/volunteers/index.html'>Volunteers</a></li>
+                    <!--<li><a target=_blank href='apps/new-starter/index.html'>New starter</a></li>-->
+                    <li><a target=_blank href='apps/a-simple-web-app-for-data-collection/index.html'>A simple web app for data collection</a></li>
+                    <li><a target=_blank href='apps/student/index.html'>Student</a></li>
+                    <li><a target=_blank href='apps/employee/index.html'>Employee</a></li>
+                    <li><a target=_blank href='apps/enquiry/index.html'>Enquiry 1</a></li>
+                    <li><a target=_blank href='apps/templates/072/index.html'>Enquiry 2</a></li>
+                    <li><a target=_blank href='apps/new-employee/index.html'>New employee 1</a></li>
+                    <li><a target=_blank href='apps/templates/055/index.html'>New employee 2</a></li>
+                    <li><a target=_blank href='apps/formal-request-for-access-to-information/index.html'>Formal request for access to information</a></li>               
+                    <li><a target=_blank href='apps/register-for-research/index.html'>Register for research</a></li>
+                    <li><a target=_blank href='apps/property/index.html'>Property</a></li>
+                    <li><a target=_blank href='apps/tenant/index.html'>Tenant</a></li>
+                    <li><a target=_blank href='apps/tenancy/index.html'>Tenancy</a></li>
+                    <li><a target=_blank href='apps/household/index.html'>Household</a></li>
+                    <li><a target=_blank href='apps/predefined-transaction-item/index.html'>Predefined transaction item</a></li>
+                    <li><a target=_blank href='apps/transaction-records/index.html'>Transaction records</a></li>
+                    <!--<li><a target=_blank href='apps/car-list-and-car-booking-records/index.html'>Car list and car booking records</a></li>-->
+                    <!--<li><a target=_blank href='apps/car-booking-calendar/index.html'>Car booking calendar</a></li>-->
+                    <!--<li><a target=_blank href='apps/room-list-and-room-booking-records/index.html'>Room list and room booking records</a></li>-->
+                    <!--<li><a target=_blank href='apps/room-booking-calendar/index.html'>Room booking calendar</a></li>-->
+                    <li><a target=_blank href='apps/equipment-list-and-equipment-booking-records/index.html'>Equipment list and room booking records</a></li>
+                    <li><a target=_blank href='apps/equipment-booking-calendar/index.html'>Equipment booking calendar</a></li>
+                    <li><a target=_blank href='apps/templates/095/index.html'>4-Week Study of AD036 in Obstructive Sleep Apnea</a></li>
+                    <li><a target=_blank href='apps/templates/098/index.html?tb=demo'>CANSLEEP screening</a></li>
+                    <li><a target=_blank href='apps/templates/099/index.html?tb=demo'>CANSLEEP screening results</a></li>               
+                    <li><a target=_blank href='apps/templates/096/index.html?db=dev'>CANSLEEP study</a></li>
+                    <li><a target=_blank href='apps/templates/096/oq.html?db=dev'>CANSLEEP online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/101/index.html?tb=demo'>Cleverlights screening</a></li>
+                    <li><a target=_blank href='apps/templates/102/index.html?tb=demo'>Cleverlights screening results</a></li>
+                    <li><a target=_blank href='apps/templates/100/index2.html'>Cleverlights study</a></li>
+                    <li><a target=_blank href='apps/templates/100/online-questionnaire/index2.html'>Cleverlights online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/118/index.html?tb=demo'>ENT Surgery for OSA trial</a></li>
+                    <li><a target=_blank href='apps/templates/118/oq.html?tb=demo'>ENT Surgery for OSA trial online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/103/index.html?db=dev'>Flat study</a></li>
+                    <li><a target=_blank href='apps/templates/104/online-questionnaire.html?db=dev'>Flat online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/106/index.html?tb=demo'>Local sleep screening</a></li>
+                    <li><a target=_blank href='apps/templates/117/index.html?tb=demo'>Local sleep screening results</a></li>
+                    <li><a target=_blank href='apps/templates/105/index.html?tb=demo'>Local sleep study</a></li>
+                    <li><a target=_blank href='apps/templates/105/online-questionnaire/index.html?tb=demo'>Local sleep online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/115/index.html'>Neurovosa study</a></li>
+                    <li><a target=_blank href='apps/templates/115/oq.html'>Neurovosa online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/107/index2.html'>SDM-II</a></li>
+                    <li><a target=_blank href='apps/templates/107/online-questionnaire/index2.html'>SDM-II online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/108/index.html'>Sleep-fix</a></li>
+                    <li><a target=_blank href='apps/templates/119/management.html?tb=demo'>Sleep-fix GP</a></li>
+                    <li><a target=_blank href='apps/templates/119/online-questionnaire.html?tb=demo'>Sleep-fix GP online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/111/index.html'>SPARDAC screening</a></li>
+                    <li><a target=_blank href='apps/templates/112/index.html'>SPARDAC screening results</a></li>
+                    <li><a target=_blank href='apps/templates/110/index.html'>SPARDAC study</a></li>
+                    <li><a target=_blank href='apps/templates/110/oq.html'>SPARDAC online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/113/index.html?tb=demo'>Screening for sleep disorders and cognitive impairment</a></li>
+                    <li><a target=_blank href='apps/templates/113/online-questionnaire/index.html?tb=demo'>Screening for sleep disorders and cognitive impairment online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/114/index.html?db=dev'>Windfarm home study 2019</a></li>
+                    <li><a target=_blank href='apps/templates/114/oq.html?db=dev'>Windfarm home study 2019 online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/094/index.html'>Word pair association</a></li>
 
-                <li><a target=_blank href='apps/templates/070/index.html'>Bookkeeping for wappsystem</a></li>
-                <li><a target=_blank href='apps/templates/069/index.html'>Bookkeeping for vmautomation</a></li>
-                <li><a target=_blank href='apps/templates/068/index.html'>Body mass index</a></li>
-                <li><a target=_blank href='apps/templates/012/index.html'>First aid officer</a></li>
-                <li><a target=_blank href='apps/templates/074/index.html'>Fitness</a></li>
-                <li><a target=_blank href='apps/templates/076/index.html'>Giving</a></li>
-                <li><a target=_blank href='apps/templates/120/index.html'>Glasgow sleep effort scale</a></li>
-                <li><a target=_blank href='apps/templates/077/index.html'>Hotel</a></li>
-                <li><a target=_blank href='apps/jag/index.html'>Jag</a></li>
-                <li><a target=_blank href='apps/templates/033/index.html'>Lookup field (auto select value from another table)</a></li>
-                <li><a target=_blank href='apps/templates/079/index.html'>Medical practitioner</a></li>
-                <li><a target=_blank href='apps/templates/080/index.html'>Mr. Producer</a></li>
-                <li><a target=_blank href='apps/templates/008/index.html'>Navigation panel</a></li>
-                <li><a target=_blank href='apps/templates/116/index.html'>Parent of infants driving study</a></li>
-                <li><a target=_blank href='apps/templates/116/online-questionnaire/index.html'>Parent of infants driving online questionnaire</a></li>
-                <li><a target=_blank href='apps/templates/082/index.html'>Permission request/approval/process</a></li>
-                <li><a target=_blank href='apps/templates/125/index.html'>Post form data to Wappsystem form data services (https://api.wappsystem.com/tablename)</a></li>
-                <li><a target=_blank href='apps/templates/126/index.html'>Post form data -> Microsoft Flow -> Email</a></li>
-                <li><a target=_blank href='apps/templates/010/index.html'>Restaurant menu</a></li>
-                <li><a target=_blank href='apps/templates/034/index.html'>Record notes</a></li>
-                <li><a target=_blank href='apps/templates/014/index.html'>Services</a></li>
-                <!--<li><a target=_blank href='apps/templates/084/index.html'>Sales tracking</a></li>-->
-                <li><a target=_blank href='apps/templates/085/index.html'>Side menu</a></li>
-                <li><a target=_blank href='apps/templates/086/index.html'>Success</a></li>
-                <li><a target=_blank href='apps/templates/087/index.html'>Survey</a></li>
-                <li><a target=_blank href='apps/templates/123/index.html'>Task Registration</a></li>
-                <li><a target=_blank href='apps/templates/122/task.html'>Task</a></li>
-                <li><a target=_blank href='apps/templates/129/index.html'>Temperature report</a></li>
-                <li><a target=_blank href='apps/templates/089/index.html'>Tom</a></li>
-                <li><a target=_blank href='apps/templates/091/index.html'>Wappsystem</a></li>
-                <li><a target=_blank href='apps/templates/092/index.html'>Woolcock 365 development</a></li>
-                <li><a target=_blank href='apps/templates/093/index.html'>Woolcock template</a></li>
-                <li><a target=_blank href='apps/templates/130/index.html'>Woolcock mockup</a></li>
-                <li><a target=_blank href='apps/templates/056/index.html'>Woolcock forms</a></li>
-                <li><a target=_blank href='apps/templates/049/index.html'>Website template</a></li>
-                <li><a target=_blank href='apps/templates/050/index.html'>Workplace inspection</a></li>
-                <li><a target=_blank href='apps/templates/131/index.html'>Mockup</a></li>
+                    <li><a target=_blank href='apps/templates/070/index.html'>Bookkeeping for wappsystem</a></li>
+                    <li><a target=_blank href='apps/templates/069/index.html'>Bookkeeping for vmautomation</a></li>
+                    <li><a target=_blank href='apps/templates/068/index.html'>Body mass index</a></li>
+                    <li><a target=_blank href='apps/templates/012/index.html'>First aid officer</a></li>
+                    <li><a target=_blank href='apps/templates/074/index.html'>Fitness</a></li>
+                    <li><a target=_blank href='apps/templates/076/index.html'>Giving</a></li>
+                    <li><a target=_blank href='apps/templates/120/index.html'>Glasgow sleep effort scale</a></li>
+                    <li><a target=_blank href='apps/templates/077/index.html'>Hotel</a></li>
+                    <li><a target=_blank href='apps/jag/index.html'>Jag</a></li>
+                    <li><a target=_blank href='apps/templates/033/index.html'>Lookup field (auto select value from another table)</a></li>
+                    <li><a target=_blank href='apps/templates/079/index.html'>Medical practitioner</a></li>
+                    <li><a target=_blank href='apps/templates/080/index.html'>Mr. Producer</a></li>
+                    <li><a target=_blank href='apps/templates/008/index.html'>Navigation panel</a></li>
+                    <li><a target=_blank href='apps/templates/116/index.html'>Parent of infants driving study</a></li>
+                    <li><a target=_blank href='apps/templates/116/online-questionnaire/index.html'>Parent of infants driving online questionnaire</a></li>
+                    <li><a target=_blank href='apps/templates/082/index.html'>Permission request/approval/process</a></li>
+                    <li><a target=_blank href='apps/templates/125/index.html'>Post form data to Wappsystem form data services (https://api.wappsystem.com/tablename)</a></li>
+                    <li><a target=_blank href='apps/templates/126/index.html'>Post form data -> Microsoft Flow -> Email</a></li>
+                    <li><a target=_blank href='apps/templates/010/index.html'>Restaurant menu</a></li>
+                    <li><a target=_blank href='apps/templates/034/index.html'>Record notes</a></li>
+                    <li><a target=_blank href='apps/templates/014/index.html'>Services</a></li>
+                    <!--<li><a target=_blank href='apps/templates/084/index.html'>Sales tracking</a></li>-->
+                    <li><a target=_blank href='apps/templates/085/index.html'>Side menu</a></li>
+                    <li><a target=_blank href='apps/templates/086/index.html'>Success</a></li>
+                    <li><a target=_blank href='apps/templates/087/index.html'>Survey</a></li>
+                    <li><a target=_blank href='apps/templates/123/index.html'>Task Registration</a></li>
+                    <li><a target=_blank href='apps/templates/122/task.html'>Task</a></li>
+                    <li><a target=_blank href='apps/templates/129/index.html'>Temperature report</a></li>
+                    <li><a target=_blank href='apps/templates/089/index.html'>Tom</a></li>
+                    <li><a target=_blank href='apps/templates/091/index.html'>Wappsystem</a></li>
+                    <li><a target=_blank href='apps/templates/092/index.html'>Woolcock 365 development</a></li>
+                    <li><a target=_blank href='apps/templates/093/index.html'>Woolcock template</a></li>
+                    <li><a target=_blank href='apps/templates/130/index.html'>Woolcock mockup</a></li>
+                    <li><a target=_blank href='apps/templates/056/index.html'>Woolcock forms</a></li>
+                    <li><a target=_blank href='apps/templates/049/index.html'>Website template</a></li>
+                    <li><a target=_blank href='apps/templates/050/index.html'>Workplace inspection</a></li>
+                    <li><a target=_blank href='apps/templates/131/index.html'>Mockup</a></li>
 
-            </div>
-            <div>
-                <span class=LT__ID>Web contents</span>
-                <li><a target=_blank href='apps/sleep-research/index.html'>Sleep research</a></li>
-                <li><a target=_blank href='apps/2-columns-content-page/index.html'>2 columns content page 1</a></li>
-                <li><a target=_blank href='apps/templates/009/index.html'>2 columns content page 2</a></li>
-                <li><a target=_blank href='apps/flat-trial/index.html'>Flat trial 1</a></li>
-                <li><a target=_blank href='apps/templates/075/index.html'>Flat trial 2</a></li>
-                <li><a target=_blank href='apps/medical-services/index.html'>Medical services</a></li>
-                <li><a target=_blank href='apps/our-services/index.html'>Our services</a></li>
-                <li><a target=_blank href='apps/our-portfolio/index.html'>Our portfolio</a></li>
-                <li><a target=_blank href='apps/our-trainers/index.html'>Our trainers</a></li>
-                <li><a target=_blank href='apps/first-aid-officer/index.html'>First aid officer</a></li>
-                <li><a target=_blank href='apps/policies-and-forms/index.html'>Policies and forms1 </a></li>                
-                <li><a target=_blank href='apps/templates/081/index.html'>Policies and forms 2</a></li>                
-                <li><a target=_blank href='apps/research-studies/index.html'>Research studies</a></li>
-                <li><a target=_blank href='apps/simple-website-with-static-contents/index.html'>Simple website with static contents</a></li>
-            </div>
-            <!---------------------------------------------------------------------------------------->
-            <div>
-                <span class=LT__ID>Wappsystem Data Services</span>
-                <!--<li><a href='?/api_wappsystem_1'>Total number of Incosact survy response</a></li>
-                <li><a href='?/api_wappsystem_4'>Incosact response by language</a></li>
-                <li><a href='?/api_wappsystem_2'>Wappsystem 2018-2021 income/expense</a></li>
-                <li><a href='?/api_wappsystem_5'>SDEM recruitment</a></li>-->
-                <li><a href='?/vm-table_demo-vm-ccontact-us'>Contact Us</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Web contents</span>
+                    <li><a target=_blank href='apps/sleep-research/index.html'>Sleep research</a></li>
+                    <li><a target=_blank href='apps/2-columns-content-page/index.html'>2 columns content page 1</a></li>
+                    <li><a target=_blank href='apps/templates/009/index.html'>2 columns content page 2</a></li>
+                    <li><a target=_blank href='apps/flat-trial/index.html'>Flat trial 1</a></li>
+                    <li><a target=_blank href='apps/templates/075/index.html'>Flat trial 2</a></li>
+                    <li><a target=_blank href='apps/medical-services/index.html'>Medical services</a></li>
+                    <li><a target=_blank href='apps/our-services/index.html'>Our services</a></li>
+                    <li><a target=_blank href='apps/our-portfolio/index.html'>Our portfolio</a></li>
+                    <li><a target=_blank href='apps/our-trainers/index.html'>Our trainers</a></li>
+                    <li><a target=_blank href='apps/first-aid-officer/index.html'>First aid officer</a></li>
+                    <li><a target=_blank href='apps/policies-and-forms/index.html'>Policies and forms1 </a></li>                
+                    <li><a target=_blank href='apps/templates/081/index.html'>Policies and forms 2</a></li>                
+                    <li><a target=_blank href='apps/research-studies/index.html'>Research studies</a></li>
+                    <li><a target=_blank href='apps/simple-website-with-static-contents/index.html'>Simple website with static contents</a></li>
+                </div>
+                <!---------------------------------------------------------------------------------------->
+                <div>
+                    <span class=LT__ID>Wappsystem Data Services</span>
+                    <!--<li><a href='?/api_wappsystem_1'>Total number of Incosact survy response</a></li>
+                    <li><a href='?/api_wappsystem_4'>Incosact response by language</a></li>
+                    <li><a href='?/api_wappsystem_2'>Wappsystem 2018-2021 income/expense</a></li>
+                    <li><a href='?/api_wappsystem_5'>SDEM recruitment</a></li>-->
+                    <li><a href='?/vm-table_demo-vm-ccontact-us'>Contact Us</a></li>
+                    
+                    <li><a href='?/query' req=incosact_count>Total number of Incosact survy response</a></li>
+                    <li><a href='?/query' req=incosact_lang>Incosact response by language</a></li>
+                    <li><a href='?/vm-table_sdem-recruitment-record'>SDEM recruitment</a></li>
+                    
+                    
+                    <!--
+                    <li><a href='?/thankq-people-fields'>ThankQ People Fields and Raiser's Edge Constituent Fields Mapping</a></li>
+                    <li><a href='?/thankq-t-fields'>ThankQ Transaction Fields and Raiser's Edge Gift Fields Mapping</a></li>
+                    -->
+                </div>
+                <!--
+                <div>
+                    <span class=LT__ID>Clinical Trials Data Collection</span>
+                -->
+                    <!--<li><a href='?/mlist_02_001_form'>Activity morning eveningness questionnaire</a> / <a href='?/mlist_02_001_data'>Data</a></li>-->
+                    <!--<li><a href='?/mlist_02_002_form'>Adverse event</a> / <a href='?/mlist_02_002_data'>Data</a></li>-->
+                    <!--<li><a href='?/mlist_02_003_form'>Anthropometry age sex</a> / <a href='?/mlist_02_003_data'>Data</a></li>-->
+                    <!--<li><a href='?/mlist_02_004_form'>Basic psychological need satisfaction scale</a> / <a href='?/mlist_02_004_data'>Data</a></li>-->
+                    <!--
+                    <li><a href='?/mlist_02_005_form'>Brief Illness Perception Questionnaire</a> / <a href='?/mlist_02_005_data'>Data</a></li>
+                    <li><a href='?/mlist_02_006_form'>Brief sexual function inventory</a> / <a href='?/mlist_02_006_data'>Data</a></li>
+                    <li><a href='?/mlist_02_007_form'>Concomitant medication</a> / <a href='?/mlist_02_007_data'>Data</a></li>
+                    <li><a href='?/mlist_02_008_form'>Depression anxiety stress scale</a> / <a href='?/mlist_02_008_data'>Data</a></li>
+                    <li><a href='?/mlist_02_009_form'>Digital symbol substitution</a> / <a href='?/mlist_02_009_data'>Data</a></li>
+                    <li><a href='?/mlist_02_010_form'>Dysfunctional beliefs and attitudes about sleep</a> / <a href='?/mlist_02_010_data'>Data</a></li>
+                    -->
+                    <!--
+                    <li><a href='?/mlist_02_011_form'>Epworth sleepiness scale (ESS) 1</a> / <a href='?/mlist_02_011_data'>Data</a></li>
+                    <li><a href='?/mlist_02_012_form'>Epworth sleepiness scale (ESS) 2</a> / <a href='?/mlist_02_012_data'>Data</a></li>
+                    <li><a href='?/mlist_02_013_form'>Epworth sleepiness scale (ESS, Wappsystem)</a> / <a href='?/mlist_02_013_data'>Data</a></li>
+                    <li><a href='?/mlist_02_014_form'>EQ-5D-5L instrument</a> / <a href='?/mlist_02_014_data'>Data</a></li>
+                    <li><a href='?/mlist_02_015_form'>Ethnicity</a> / <a href='?/mlist_02_015_data'>Data</a></li>
+                    <li><a href='?/mlist_02_016_form'>Insomnia severity index (ISI)</a> / <a href='?/mlist_02_016_data'>Data</a></li>
+                    <li><a href='?/mlist_02_017_form'>Pittsburgh sleep quality index (PSQI)</a> / <a href='?/mlist_02_017_data'>Data</a></li>
+                    <li><a href='?/mlist_02_018_form'>Karolinska sleepiness scale (KSS)</a> / <a href='?/mlist_02_018_data'>Data</a></li>
+                    -->
+                <!--</div>-->
+                <div>
+                    <span class=LT__ID >Business data reporting</span>
+                    <li><a target=_blank href='apps/tax-return-yearly-aggregation/index.html'>Tax return yearly aggregation</a></li>
+                    <li><a target=_blank href='apps/item-monthly-aggregation/index.html'>Item monthly aggregation</a></li>
+                    <li><a target=_blank href='apps/income-expense-month-aggregation/index.html'>Income and expense monthly aggregation</a></li>
+                    <li><a target=_blank href='apps/ato-bas-quarterly-aggregation/index.html'>ATO BAS quarterly aggregation</a></li>
+                    <li><a target=_blank href='apps/pie-chart/index.html'>Pie chart 1</a></li>
+                    <li><a target=_blank href='apps/templates/037/index.html'>Pie chart 2</a></li>
+                    <li><a target=_blank href='apps/column-chart/index.html'>Column chart 1</a></li>
+                    <li><a target=_blank href='apps/templates/036/index.html'>Column chart 2</a></li>
+                    <li><a target=_blank href='apps/templates/035/index.html'>Bar chart</a></li>
+                    <li><a target=_blank href='apps/templates/090/index.html'>Unemployment</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Bookkeeping</span>
+                    <li><a href='?/bookkeeping-diagram'>System diagram</a></li>
+                    <li><a href='?/bookkeeping-panel'>Control Panel</a></li>
+                </div>
+                <!---------------------------------------------------------------------------------------->
+                <div>
+                    <span class=LT__ID>Local Sleep</span>
+                    <li><a href='?/vm-table_local-sleep-recruitment-record'>Recruitments</a></li>
+                    <li><a href='?/grid' req='grid-data-1'>Recruitments eligible</a></li>
+                    <li><a href='?/grid' req='grid-data-2'>Recruitments not eligible</a></li>
+
+                </div>
+                <div>
+                    <span class=LT__ID>ASTN</span>
+                    <li><a href='?/vm-table_astn-aused-participant'>Aused participant</a></li>
+                    <li><a href='?/vm-table_astn-shq-participant-20002391'>SHQ participant 20002391</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>SleepFix</span>
+                    <li><a href='?/vm-table_sleepfix-gp-survey'>GP Survey</a></li>
+                </div>
+                <!---------------------------------------------------------------------------------------->
+                <div>
+                    <span class=LT__ID>QuickBooks</span>
+                    <li><a href='?/api_quickbooks_get-conpamy-information'>Conpamy information</a></li>
+                    <li><a href='?/api_quickbooks_account-list'>Account list</a></li>
+                    <li><a href='?/api_quickbooks_purchases-on-march'>Purchases on March</a></li>
+                </div>
                 
-                <li><a href='?/query' req=incosact_count>Total number of Incosact survy response</a></li>
-                <li><a href='?/query' req=incosact_lang>Incosact response by language</a></li>
-                <li><a href='?/vm-table_sdem-recruitment-record'>SDEM recruitment</a></li>
+                <div>
+                    <span class=LT__ID>Cooking Menu for Friends</span>
+                    <li><a href='?/api_image_cooking-1'>Crispy pork slices</a></li>
+                </div>
                 
-                
+                <div>
+                    <span class=LT__ID>Calendar based data collection</span>
+                    <li><a target=_blank href='apps/templates/043/index.html'>Participant visit booking</a></li>
+                    <li><a target=_blank href='apps/templates/044/index.html'>Participant visit booking (with participant lookup)</a></li>
+                    <!--
+                    <li><a target=_blank href='apps/templates/041/index.html'>Shift work roster</a></li>
+                    <li><a target=_blank href='apps/templates/042/index.html'>Shift work roster (with staff lookup)</a></li>
+                    -->
+                    <li><a target=_blank href='apps/templates/039/index.html'>Event/Task/Reminder calendar</a></li>
+                    <li><a target=_blank href='apps/templates/040/index.html'>Event/Task/Reminder calendar (overlap)</a></li>
+                </div>
                 <!--
-                <li><a href='?/thankq-people-fields'>ThankQ People Fields and Raiser's Edge Constituent Fields Mapping</a></li>
-                <li><a href='?/thankq-t-fields'>ThankQ Transaction Fields and Raiser's Edge Gift Fields Mapping</a></li>
+                <div>
+                    <span class=LT__ID>Contact us data collection</span>
+                    <li><a target=_blank href='apps/contact-us-1/index.html'>Contact us 1</a></li>
+                    <li><a target=_blank href='apps/contact-us-2/index.html'>Contact us 2</a></li>
+                    <li><a target=_blank href='apps/contact-us-3/index.html'>Contact us 3</a></li>
+                    <li><a target=_blank href='apps/templates/013/index.html'>Contact Us 4</a></li>
+                </div>
                 -->
-            </div>
-            <!--
-            <div>
-                <span class=LT__ID>Clinical Trials Data Collection</span>
-            -->
-                <!--<li><a href='?/mlist_02_001_form'>Activity morning eveningness questionnaire</a> / <a href='?/mlist_02_001_data'>Data</a></li>-->
-                <!--<li><a href='?/mlist_02_002_form'>Adverse event</a> / <a href='?/mlist_02_002_data'>Data</a></li>-->
-                <!--<li><a href='?/mlist_02_003_form'>Anthropometry age sex</a> / <a href='?/mlist_02_003_data'>Data</a></li>-->
-                <!--<li><a href='?/mlist_02_004_form'>Basic psychological need satisfaction scale</a> / <a href='?/mlist_02_004_data'>Data</a></li>-->
-                <!--
-                <li><a href='?/mlist_02_005_form'>Brief Illness Perception Questionnaire</a> / <a href='?/mlist_02_005_data'>Data</a></li>
-                <li><a href='?/mlist_02_006_form'>Brief sexual function inventory</a> / <a href='?/mlist_02_006_data'>Data</a></li>
-                <li><a href='?/mlist_02_007_form'>Concomitant medication</a> / <a href='?/mlist_02_007_data'>Data</a></li>
-                <li><a href='?/mlist_02_008_form'>Depression anxiety stress scale</a> / <a href='?/mlist_02_008_data'>Data</a></li>
-                <li><a href='?/mlist_02_009_form'>Digital symbol substitution</a> / <a href='?/mlist_02_009_data'>Data</a></li>
-                <li><a href='?/mlist_02_010_form'>Dysfunctional beliefs and attitudes about sleep</a> / <a href='?/mlist_02_010_data'>Data</a></li>
-                -->
-                <!--
-                <li><a href='?/mlist_02_011_form'>Epworth sleepiness scale (ESS) 1</a> / <a href='?/mlist_02_011_data'>Data</a></li>
-                <li><a href='?/mlist_02_012_form'>Epworth sleepiness scale (ESS) 2</a> / <a href='?/mlist_02_012_data'>Data</a></li>
-                <li><a href='?/mlist_02_013_form'>Epworth sleepiness scale (ESS, Wappsystem)</a> / <a href='?/mlist_02_013_data'>Data</a></li>
-                <li><a href='?/mlist_02_014_form'>EQ-5D-5L instrument</a> / <a href='?/mlist_02_014_data'>Data</a></li>
-                <li><a href='?/mlist_02_015_form'>Ethnicity</a> / <a href='?/mlist_02_015_data'>Data</a></li>
-                <li><a href='?/mlist_02_016_form'>Insomnia severity index (ISI)</a> / <a href='?/mlist_02_016_data'>Data</a></li>
-                <li><a href='?/mlist_02_017_form'>Pittsburgh sleep quality index (PSQI)</a> / <a href='?/mlist_02_017_data'>Data</a></li>
-                <li><a href='?/mlist_02_018_form'>Karolinska sleepiness scale (KSS)</a> / <a href='?/mlist_02_018_data'>Data</a></li>
-                -->
-            <!--</div>-->
-            <div>
-                <span class=LT__ID >Business data reporting</span>
-                <li><a target=_blank href='apps/tax-return-yearly-aggregation/index.html'>Tax return yearly aggregation</a></li>
-                <li><a target=_blank href='apps/item-monthly-aggregation/index.html'>Item monthly aggregation</a></li>
-                <li><a target=_blank href='apps/income-expense-month-aggregation/index.html'>Income and expense monthly aggregation</a></li>
-                <li><a target=_blank href='apps/ato-bas-quarterly-aggregation/index.html'>ATO BAS quarterly aggregation</a></li>
-                <li><a target=_blank href='apps/pie-chart/index.html'>Pie chart 1</a></li>
-                <li><a target=_blank href='apps/templates/037/index.html'>Pie chart 2</a></li>
-                <li><a target=_blank href='apps/column-chart/index.html'>Column chart 1</a></li>
-                <li><a target=_blank href='apps/templates/036/index.html'>Column chart 2</a></li>
-                <li><a target=_blank href='apps/templates/035/index.html'>Bar chart</a></li>
-                <li><a target=_blank href='apps/templates/090/index.html'>Unemployment</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Bookkeeping</span>
-                <li><a href='?/bookkeeping-diagram'>System diagram</a></li>
-                <li><a href='?/bookkeeping-panel'>Control Panel</a></li>
-            </div>
-            <!---------------------------------------------------------------------------------------->
-            <div>
-                <span class=LT__ID>Local Sleep</span>
-                <li><a href='?/vm-table_local-sleep-recruitment-record'>Recruitments</a></li>
-                <li><a href='?/grid' req='grid-data-1'>Recruitments eligible</a></li>
-                <li><a href='?/grid' req='grid-data-2'>Recruitments not eligible</a></li>
-
-            </div>
-            <div>
-                <span class=LT__ID>ASTN</span>
-                <li><a href='?/vm-table_astn-aused-participant'>Aused participant</a></li>
-                <li><a href='?/vm-table_astn-shq-participant-20002391'>SHQ participant 20002391</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>SleepFix</span>
-                <li><a href='?/vm-table_sleepfix-gp-survey'>GP Survey</a></li>
-            </div>
-            <!---------------------------------------------------------------------------------------->
-            <div>
-                <span class=LT__ID>QuickBooks</span>
-                <li><a href='?/api_quickbooks_get-conpamy-information'>Conpamy information</a></li>
-                <li><a href='?/api_quickbooks_account-list'>Account list</a></li>
-                <li><a href='?/api_quickbooks_purchases-on-march'>Purchases on March</a></li>
-            </div>
-            
-            <div>
-                <span class=LT__ID>Cooking Menu for Friends</span>
-                <li><a href='?/api_image_cooking-1'>Crispy pork slices</a></li>
-            </div>
-            
-            <div>
-                <span class=LT__ID>Calendar based data collection</span>
-                <li><a target=_blank href='apps/templates/043/index.html'>Participant visit booking</a></li>
-                <li><a target=_blank href='apps/templates/044/index.html'>Participant visit booking (with participant lookup)</a></li>
-                <!--
-                <li><a target=_blank href='apps/templates/041/index.html'>Shift work roster</a></li>
-                <li><a target=_blank href='apps/templates/042/index.html'>Shift work roster (with staff lookup)</a></li>
-                -->
-                <li><a target=_blank href='apps/templates/039/index.html'>Event/Task/Reminder calendar</a></li>
-                <li><a target=_blank href='apps/templates/040/index.html'>Event/Task/Reminder calendar (overlap)</a></li>
-            </div>
-            <!--
-            <div>
-                <span class=LT__ID>Contact us data collection</span>
-                <li><a target=_blank href='apps/contact-us-1/index.html'>Contact us 1</a></li>
-                <li><a target=_blank href='apps/contact-us-2/index.html'>Contact us 2</a></li>
-                <li><a target=_blank href='apps/contact-us-3/index.html'>Contact us 3</a></li>
-                <li><a target=_blank href='apps/templates/013/index.html'>Contact Us 4</a></li>
-            </div>
-            -->
-            <div>
-                <span class=LT__ID>Data collection form fields</span>
-                <li><a target=_blank href='apps/templates/030/index.html'>Color</a></li>
-                <li><a target=_blank href='apps/templates/027/index.html'>Date and time</a></li>
-                <li><a target=_blank href='apps/email-and-phone/index.html'>Email and phone 1</a></li>
-                <li><a target=_blank href='apps/templates/029/index.html'>Email and phone 2</a></li>
-                <li><a target=_blank href='apps/templates/031/index.html'>File</a></li>
-                <li><a target=_blank href='apps/templates/011/index.html'>Calculation</a></li>
-                <li><a target=_blank href='apps/templates/028/index.html'>Number and range</a></li>
-                <li><a target=_blank href='apps/templates/032/index.html'>Dropdown list from a database table</a></li>
-                <li><a target=_blank href='apps/templates/015/index.html'>Radio button, checkbox and dropdown list</a></li>
-            </div>
-            <div>
-                <span class=LT__ID >Authentication</span>
-                <li><a target=_blank href='apps/microsoft-azure-authentication/index.html'>Microsoft Azure</a></li>
-                <li><a target=_blank href='apps/google-authentication/index.html'>Google API</a></li>
-                <li><a target=_blank href='apps/facebook-authentication/index.html'>Facebook</a></li>
-                <li><a target=_blank href='apps/ldap-authentication/index.html'>LDAP</a></li>
-                <li><a target=_blank href='apps/wappsystem-authentication/index.html'>Wappsystem database</a></li>
-                <li><a target=_blank href='apps/google-firebase-authentication/index.html'>Google Firebase</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Database connection</span>
-                <li><a target=_blank href='apps/read-write-mongodb-database/index.html'>Read/Write data from/to a MongoDB database</a></li>
-                <li><a target=_blank href='apps/read-write-sqlserver-database/index.html'>Read/Write data from/to a SQL Server database</a></li>
-                <li><a target=_blank href='apps/read-write-google-firebase/index.html'>Read/Write data from/to Google Firebase</a></li>
-                <li><a target=_blank href='apps/read-write-mongodb-atlas/index.html'>Read/Write data from/to MongoDB Atlas</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Data collection forms</span>
-                <li><a target=_blank href='apps/build-and-test-web-data-collection-form/index.html'>Build and test web data collection form</a></li>
-                <li><a target=_blank href='apps/create-a-simple-web-data-collection-module/index.html'>Create a simple web data collection module</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Contents search</span>
-                <li><a target=_blank href='apps/full-text-indexing-and-search/index.html'>Full text indexing and search</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Dynamic background</span>
-                <li><a target=_blank href='apps/bubble-background/index.html'>Bubble</a></li>
-                <li><a target=_blank href='apps/fountains-illumination-background/index.html'>Fountains illumination</a></li>
-                <li><a target=_blank href='apps/nasa-background/index.html'>Nasa</a></li>
-                <li><a target=_blank href='apps/nyan-background/index.html'>Nyan</a></li>
-                <li><a target=_blank href='apps/particle-background/index.html'>Particle</a></li>
-                <li><a target=_blank href='apps/snow-background/index.html'>Snow</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Basic Concepts</span>
-                <li><a target=_blank href='apps/simple-layout/index.html'>Start up with a simple layout, header/content/footer</a></li>
-                <li><a target=_blank href='apps/templates/002/index.html'>Modular structure, move the contents into separate files </a></li>
-                <li><a target=_blank href='apps/templates/003/index.html'>Add menu on header section </a></li>
-                <li><a target=_blank href='apps/templates/004/index.html'>Load modules into the contents section </a></li>
-                <li><a target=_blank href='apps/templates/005/index.html'>Apply CSS to the header and footer </a></li>
-                <li><a target=_blank href='apps/templates/006/index.html'>Add logo and background image </a></li>
-                <li><a target=_blank href='apps/templates/007/index.html'>Recreate home module</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Third party services</span>
-                <li><a target=_blank href='apps/templates/062/index.html'>How to read files from your OneDrive</a></li>
-                <li><a target=_blank href='apps/templates/061/index.html'>How to read files from sharepoint sites</a></li>
-                <li><a target=_blank href='apps/templates/064/index.html'>How to sign in to facebook with FB SDK for javascript</a></li>
-                <li><a target=_blank href='apps/templates/059/index.html'>How to submit form data into a Wappsystem cloud database table</a></li>
-                <li><a target=_blank href='apps/templates/060/index.html'>How to view, edit and delete a record in a Wappsystem database table</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Music</span>
-                <li><a target=_blank href='apps/musicxml-player/index.html'>MusicXML player</a></li>
-                <li><a target=_blank href='apps/arpeggios/index.html'>Arpeggios</a></li>
-                <li><a target=_blank href='apps/chords/index.html'>Chords</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Blackbaud</span>
-                <li><a target=_blank href='?/api_blackbaud_search-constituent'>Search Constituents</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Firebase</span>
-                <li><a target=_blank href='?/api_firebase_f-contacts'>Contacts</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>Private Portals</span>
-                <li><a href='?/woolcock-portal'>Woolcock</a></li>
-                <li><a href='?/wappsystem-panel'>Wappsystem</a></li>
-                <li><a href='?/vmautomation-panel'>VM Automation</a></li>
-                <li><a href='?/administrator-panel'>Administrator</a></li>
-                <li><a href='?/local-sleep-panel'>Local Sleep Study</a></li>
-                <li><a href='?/my-panel'>My notes and calendar</a></li>
-                <li><a href='?/development-panel'>Development</a></li>
-                <li><a href='?/hba-panel'>HBA</a></li>
-                <li><a href='?/melody'>Melody</a></li>
-            </div>
-        </ul>
+                <div>
+                    <span class=LT__ID>Data collection form fields</span>
+                    <li><a target=_blank href='apps/templates/030/index.html'>Color</a></li>
+                    <li><a target=_blank href='apps/templates/027/index.html'>Date and time</a></li>
+                    <li><a target=_blank href='apps/email-and-phone/index.html'>Email and phone 1</a></li>
+                    <li><a target=_blank href='apps/templates/029/index.html'>Email and phone 2</a></li>
+                    <li><a target=_blank href='apps/templates/031/index.html'>File</a></li>
+                    <li><a target=_blank href='apps/templates/011/index.html'>Calculation</a></li>
+                    <li><a target=_blank href='apps/templates/028/index.html'>Number and range</a></li>
+                    <li><a target=_blank href='apps/templates/032/index.html'>Dropdown list from a database table</a></li>
+                    <li><a target=_blank href='apps/templates/015/index.html'>Radio button, checkbox and dropdown list</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID >Authentication</span>
+                    <li><a target=_blank href='apps/microsoft-azure-authentication/index.html'>Microsoft Azure</a></li>
+                    <li><a target=_blank href='apps/google-authentication/index.html'>Google API</a></li>
+                    <li><a target=_blank href='apps/facebook-authentication/index.html'>Facebook</a></li>
+                    <li><a target=_blank href='apps/ldap-authentication/index.html'>LDAP</a></li>
+                    <li><a target=_blank href='apps/wappsystem-authentication/index.html'>Wappsystem database</a></li>
+                    <li><a target=_blank href='apps/google-firebase-authentication/index.html'>Google Firebase</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Database connection</span>
+                    <li><a target=_blank href='apps/read-write-mongodb-database/index.html'>Read/Write data from/to a MongoDB database</a></li>
+                    <li><a target=_blank href='apps/read-write-sqlserver-database/index.html'>Read/Write data from/to a SQL Server database</a></li>
+                    <li><a target=_blank href='apps/read-write-google-firebase/index.html'>Read/Write data from/to Google Firebase</a></li>
+                    <li><a target=_blank href='apps/read-write-mongodb-atlas/index.html'>Read/Write data from/to MongoDB Atlas</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Data collection forms</span>
+                    <li><a target=_blank href='apps/build-and-test-web-data-collection-form/index.html'>Build and test web data collection form</a></li>
+                    <li><a target=_blank href='apps/create-a-simple-web-data-collection-module/index.html'>Create a simple web data collection module</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Contents search</span>
+                    <li><a target=_blank href='apps/full-text-indexing-and-search/index.html'>Full text indexing and search</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Dynamic background</span>
+                    <li><a target=_blank href='apps/bubble-background/index.html'>Bubble</a></li>
+                    <li><a target=_blank href='apps/fountains-illumination-background/index.html'>Fountains illumination</a></li>
+                    <li><a target=_blank href='apps/nasa-background/index.html'>Nasa</a></li>
+                    <li><a target=_blank href='apps/nyan-background/index.html'>Nyan</a></li>
+                    <li><a target=_blank href='apps/particle-background/index.html'>Particle</a></li>
+                    <li><a target=_blank href='apps/snow-background/index.html'>Snow</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Basic Concepts</span>
+                    <li><a target=_blank href='apps/simple-layout/index.html'>Start up with a simple layout, header/content/footer</a></li>
+                    <li><a target=_blank href='apps/templates/002/index.html'>Modular structure, move the contents into separate files </a></li>
+                    <li><a target=_blank href='apps/templates/003/index.html'>Add menu on header section </a></li>
+                    <li><a target=_blank href='apps/templates/004/index.html'>Load modules into the contents section </a></li>
+                    <li><a target=_blank href='apps/templates/005/index.html'>Apply CSS to the header and footer </a></li>
+                    <li><a target=_blank href='apps/templates/006/index.html'>Add logo and background image </a></li>
+                    <li><a target=_blank href='apps/templates/007/index.html'>Recreate home module</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Third party services</span>
+                    <li><a target=_blank href='apps/templates/062/index.html'>How to read files from your OneDrive</a></li>
+                    <li><a target=_blank href='apps/templates/061/index.html'>How to read files from sharepoint sites</a></li>
+                    <li><a target=_blank href='apps/templates/064/index.html'>How to sign in to facebook with FB SDK for javascript</a></li>
+                    <li><a target=_blank href='apps/templates/059/index.html'>How to submit form data into a Wappsystem cloud database table</a></li>
+                    <li><a target=_blank href='apps/templates/060/index.html'>How to view, edit and delete a record in a Wappsystem database table</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Music</span>
+                    <li><a target=_blank href='apps/musicxml-player/index.html'>MusicXML player</a></li>
+                    <li><a target=_blank href='apps/arpeggios/index.html'>Arpeggios</a></li>
+                    <li><a target=_blank href='apps/chords/index.html'>Chords</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Blackbaud</span>
+                    <li><a target=_blank href='?/api_blackbaud_search-constituent'>Search Constituents</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Firebase</span>
+                    <li><a target=_blank href='?/api_firebase_f-contacts'>Contacts</a></li>
+                </div>
+                <div>
+                    <span class=LT__ID>Private Portals</span>
+                    <li><a href='?/woolcock-portal'>Woolcock</a></li>
+                    <li><a href='?/wappsystem-panel'>Wappsystem</a></li>
+                    <li><a href='?/vmautomation-panel'>VM Automation</a></li>
+                    <li><a href='?/administrator-panel'>Administrator</a></li>
+                    <li><a href='?/local-sleep-panel'>Local Sleep Study</a></li>
+                    <li><a href='?/my-panel'>My notes and calendar</a></li>
+                    <li><a href='?/development-panel'>Development</a></li>
+                    <li><a href='?/hba-panel'>HBA</a></li>
+                    <li><a href='?/melody'>Melody</a></li>
+                </div>
+            </ul>
+        </div>
     </div>
     <script>
         function F__ID(){
@@ -786,6 +796,9 @@
                         case 'wimr-dynamics':          if($vm.localhost==true) window.open('../wimr-microsoft-dynamics/'); else window.open('https://vmiis.github.io/wimr-microsoft-dynamics');   break;
                         case 'wimr-sharepoint':        if($vm.localhost==true) window.open('../wimr-microsoft-sharepoint/'); else window.open('https://vmiis.github.io/wimr-microsoft-sharepoint');   break;
                         case 'wimr-mailchimp':         if($vm.localhost==true) window.open('../wimr-mailchimp/'); else window.open('https://vmiis.github.io/wimr-mailchimp');   break;
+                        case 'printer-toner-status':   if($vm.localhost==true) window.open('../wimr-printer-toner-status/'); else window.open('https://vmiis.github.io/wimr-printer-toner-status');   break;
+                        case 'active-directory':       if($vm.localhost==true) window.open('../wimr-active-directory/'); else window.open('https://vmiis.github.io/wimr-active-directory');   break;
+                        case 'it-system-information':  if($vm.localhost==true) window.open('../wimr-it-system-information/'); else window.open('https://vmiis.github.io/wimr-it-system-information');   break;
                     }
                 }
                 else if(module_name.substring(0,4)=='api_'){
@@ -852,6 +865,7 @@
             })
             //--------------------------------------------------------
             $('#D__ID').on('load',function(){
+                if(window.location.href.indexOf("more=1")!=-1) $('#more__ID').show();
                 var group=localStorage.getItem('g_vm_portal_panel_group');
                 if(group!=null){
                     $('#groups__ID').val(group);

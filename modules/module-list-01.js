@@ -308,6 +308,9 @@
         "minor-natural":    {url:$H+"/piano/minor-natural.html", router:1},
         "minor-melodic":    {url:$H+"/piano/minor-melodic.html", router:1},
         "minor-harmonic":   {url:$H+"/piano/minor-harmonic.html", router:1},
+        "arpeggios":        {url:$H+"/piano/arpeggios.html", router:1},
+        "chords":           {url:$H+"/piano/chords.html", router:1},
+        
         "data":   {url:$H+"/system/data.html", router:1},
         "vm-grid":       {url:$H+"/system/vm-grid.html"},
         "vm-query":       {url:$H+"/system/vm-query.html"},
