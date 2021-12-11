@@ -329,8 +329,8 @@
         </div>
     </div>
     <div style='background-color:#fff;'>
-        <div id=sys_comments__ID topic="vmiis-piano-major", style='padding:20px 0 30px 20px; max-width: 800px;'></div>
-        <script>$vm.comments("__ID");</script>
+        <div id=comments__ID style='padding:20px 0 30px 20px; max-width: 800px;'>aaa
+        </div>
     </div>
     <script>
         function F__ID(){
@@ -361,7 +361,157 @@
                     }
                 })
             })
+
+
             //-------------------------------
+            
+            $('#comment_btn__ID').on('click',function(){
+                alert('submit')
+            })
+            var records=[
+                //{Data:{comments:"Hello World 1"},Submit_date: "2021-08-12T00:11:31.325Z", Submitted_by: "Tom",UID:1, I2:0 },
+                //{Data:{comments:"Hello World 2"},Submit_date: "2021-07-12T00:11:31.325Z", Submitted_by: "Jimmy",UID:2, I2:0},
+            ]
+            var records2=[
+                {Data:{comments:"gfkgkfgkfdjkg"},Submit_date: "2021-08-12T00:11:31.325Z", Submitted_by: "Anna",UID:1, I2:2 },
+                {Data:{comments:"lfgflglfkg"},Submit_date: "2021-07-12T00:11:31.325Z", Submitted_by: "David",UID:2, I2:2},
+            ]
+            var comments_render=function(){
+                var render=function(){
+                    var txt="";
+                    txt+="<div id=content__ID contenteditable='true' style='border:1px solid #888;padding:3px'></div>";
+                    
+                    txt+="<div style='text-align: right;'><u id=comment_btn__ID>COMMENT</u></div>";
+
+                    for(var i=0;i<records.length;i++){
+                        var TT=(new Date().getTime())-(new Date(records[i].Submit_date).getTime());
+                        var T1=TT/1000/60;
+                        var T2=TT/1000/60/60;
+                        var T3=TT/1000/60/60/24;
+                        var T=T1; 
+                        var D="minitue"; if(T1>1) D="minitues";
+                        if(T>60) {T=T2; D="hou"; if(T2>1) D="hous";}
+                        if(T>24) {T=T3; D="day"; if(T3>1) D="days";}
+                        txt+="<div style='padding:10px;'>";
+                            //txt+="<div><span><b>"+records[i].Display_name+" "+"</b></span><span style='color:#888'>"+T.toFixed(0)+" "+D+" ago</span> <span style='float:right;color:#888'><u bv_rid="+records[i].UID+" style='cursor:pointer'>View replay</u>&nbsp;&nbsp;&nbsp;<u br_rid="+records[i].UID+" style='cursor:pointer'>Replay</u><span> </div>";
+                            txt+="<div><span><b>"+records[i].Display_name+" "+"</b></span><span style='color:#888'>"+T.toFixed(0)+" "+D+" ago</span></div>";
+                            txt+="<div>"+records[i].Data.comments+"</div>"
+                            txt+="<div style='display:none' r_rid="+records[i].UID+">";
+                                txt+="<div><textarea style='width:100%'></textarea></div>";
+                                txt+="<div style='text-align: right;'><button id=comment_btn__ID>Comment</button></div>";
+                            txt+="</div>";
+                            txt+="<div style='padding-left:30px'>";
+                                txt+="<div v_rid="+records[i].UID+" style='display:none'></div>"
+                            txt+="</div>";
+                        txt+="</div>";
+
+                    }
+                    $('#comments__ID').html(txt);
+                    
+                    $('#comment_btn__ID').on('click',function(){
+                        var c=$('#content__ID').html();
+                        if(c.length==0){
+                            alert('Comments cannot be empty.');
+                            return;
+                        }
+                        c=c.replace(/<div>/g,'@1@1@');
+                        c=c.replace(/<\/div>/g,'@1@2@');
+                        c=c.replace(/<br>/g,'@2@2@');
+                        c=$vm.text(c);
+                        c=c.replace(/@1@1@/g,'<div>');
+                        c=c.replace(/@1@2@/g,'</div>');
+                        c=c.replace(/@2@2@/g,'<br>');
+                        var topic="vmiis-piano-major";
+                        var data={comments:c}
+                        var index={I2:topic,I3:0}
+                        $vm.request({cmd:'insert',table:'comments-vm',data:data,index:index,file:{},options:{}},function(res){
+                            alert('You have made comments.');
+                            comments_render();
+                        });
+                    })
+                    $('#comments__ID').find('u').css("cursor","pointer");
+                    $('#comments__ID u').on('click',function(){
+                        
+                        var rid=$(this).attr('br_rid');
+                        if(rid!=undefined){
+                            var d=$('div[r_rid='+rid+']').css('display');
+                            if(d=='none'){ $('div[r_rid='+rid+']').show(); $(this).text('Hide');}
+                            else{ $('div[r_rid='+rid+']').hide(); $(this).text('Replay');}
+                        }
+                        var rid=$(this).attr('bv_rid');
+                        if(rid!=undefined){
+                            var el=$('div[v_rid='+rid+']');
+                            var d=$('div[v_rid='+rid+']').css('display');
+                            if(d=='none'){ 
+                                replay_render(el);
+                                $('div[v_rid='+rid+']').show(); 
+                                $(this).text('Hide replay');
+                            }
+                            else{ $('div[v_rid='+rid+']').hide(); $(this).text('Show replay');}
+                        }
+                    })
+                }
+                
+                //-------------------------------
+                var replay_render=function(el){
+                    var txt="";
+                    for(var i=0;i<records2.length;i++){
+                        var TT=(new Date().getTime())-(new Date(records[i].Submit_date).getTime());
+                        var T1=TT/1000/60;
+                        var T2=TT/1000/60/60;
+                        var T3=TT/1000/60/60/24;
+                        var T=T1; 
+                        var D="minitue"; if(T1>1) D="minitues";
+                        if(T>60) {T=T2; D="hou"; if(T2>1) D="hous";}
+                        if(T>24) {T=T3; D="day"; if(T3>1) D="days";}
+                        txt+="<div style='padding:10px;'>";
+                            txt+="<div><span><b>"+records2[i].Submitted_by+" "+"</b></span><span style='color:#888'>"+T.toFixed(0)+" "+D+" ago</span> <span style='float:right;color:#888'><u bv_rid="+records[i].UID+" style='cursor:pointer'>View replay</u>&nbsp;&nbsp;&nbsp;<u br_rid="+records[i].UID+" style='cursor:pointer'>Replay</u><span> </div>";
+                            var c=records2[i].Data.comments;
+                            c=c.replace(/<div>/g,'@1@1@');
+                            c=c.replace(/<\/div>/g,'@1@2@');
+                            c=c.replace(/<br>/g,'@2@2@');
+                            c=$vm.text(c);
+                            c=c.replace(/@1@1@/g,'<div>');
+                            c=c.replace(/@1@2@/g,'</div>');
+                            c=c.replace(/@2@2@/g,'<br>');
+                            txt+="<div>"+c+"</div>"
+                            txt+="<div style='display:none' r_rid="+records2[i].UID+">";
+                                txt+="<div><textarea style='width:100%'></textarea></div>";
+                                txt+="<div style='text-align: right;'><button id=comment_btn__ID>Comment</button></div>";
+                            txt+="</div>";
+                            txt+="<div>";
+                                txt+="<div v_rid="+records2[i].UID+" style='display:none'></div>"
+                            txt+="</div>";
+                        txt+="</div>";
+
+                    }
+                    el.html(txt);
+                    el.find('u').on('click',function(){
+                        var rid=$(this).attr('br_rid');
+                        if(rid!=undefined){
+                            var d=$('div[r_rid='+rid+']').css('display');
+                            if(d=='none'){ $('div[r_rid='+rid+']').show(); $(this).text('Hide');}
+                            else{ $('div[r_rid='+rid+']').hide(); $(this).text('Replay');}
+                        }
+                        var rid=$(this).attr('bv_rid');
+                        if(rid!=undefined){
+                            var d=$('div[v_rid='+rid+']').css('display');
+                            if(d=='none'){ 
+                                $('div[v_rid='+rid+']').show(); 
+                                $(this).text('Hide replay');
+                            }
+                            else{ $('div[v_rid='+rid+']').hide(); $(this).text('Show replay');}
+                        }
+                    })
+                    
+                }
+                //-------------------------------
+                $vm.request( {cmd:'find',table:'comments-vm',query:{I2:'vmiis-piano-major',I3:0},options:{},search:''},function(res){
+                    records=res.result;
+                    render();
+                });
+            }
+            comments_render();
         }
     </script>
     <style>

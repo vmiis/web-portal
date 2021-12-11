@@ -20,8 +20,8 @@
                 <span class="T__ID" style='color:#12a18d' >Mathematics and Investment</span><br><br>
                 <div>
                     <span class="LT__ID">Investment Research</span>
-                    <li><a href='?/api_gsheet_1HDjt6osJmVVYDAnD3h81TuudTnzxUYlh8bgHmrsdmvo/edit?rm=minimal&usp=sharing'>Net PL / Volatility (Account 1)</a></li>
-                    <li><a href='?/api_gsheet_1o6vzvZQYXmAZXHh6x0a4k6GHklbuDQov3-QpXEGLiBo/edit?rm=minimal&usp=sharing'>Summary (Account 1)</a></li>
+                    <li><a href='?/api_gsheet_1HDjt6osJmVVYDAnD3h81TuudTnzxUYlh8bgHmrsdmvo/edit?rm=minimal&usp=sharing' topic='vmiis_netpl_vol_account1' >Net PL / Volatility (Account 1)</a></li>
+                    <li><a href='?/api_gsheet_1o6vzvZQYXmAZXHh6x0a4k6GHklbuDQov3-QpXEGLiBo/edit?rm=minimal&usp=sharing' topic='vmiis_summary_account1' >Summary (Account 1)</a></li>
                     <li><a href='?/api_gsheet_1RAndjO9zLfOF4m2v_Rh6a7OdGbq8s5zzxliPjXHnm2Q/edit?rm=minimal&usp=sharing'>Exposure (Account 1)</a></li>
                     <li><a href='?/api_gsheet_1wqbUJDMhL_6hm3olAVTko_UGm58b1OO4qS-pADYA19M/edit?rm=minimal&usp=sharing'>Dot map (Account 1)</a></li>
                     <li><a href='?/api_gsheet_1fcPcLD9m3HD5iASVe5YBmR7nlv9nzJKjJ6IYlV789kw/edit?rm=minimal&usp=sharing'>Lost Distribution (Account 1)</a></li>
@@ -708,6 +708,7 @@
             })
             //--------------------------------------------------------
             var filter=function(){
+                return;
                 $('#panel__ID span, .grid-container__ID span').show();
                 $('#panel__ID li, .grid-container__ID li').show();
                 $('#panel__ID div, .grid-container__ID div').show();
@@ -774,6 +775,8 @@
             })
             //--------------------------------------------------------
             $('#panel__ID a, .grid-container__ID a').on('click',function(e){
+                var topic=$(this).attr('topic');
+                if(topic==undefined) topic="";
                 scrollTop_V=$(document).scrollTop();
                 $('#panel__ID a').removeClass("active__ID");
                 $('.grid-container__ID a').removeClass("active__ID");
@@ -822,7 +825,7 @@
                             case "image":       $vm.image_query(vm_data[aa[2]]);        break;
                             case "wikipedia":   $vm.wikipedia_query(module_name.replace('api_wikipedia_',''));   break;
                             case "piano":       $vm.show_module('piano',{sheet:module_name.replace('api_piano_','')}); break;
-                            case "gsheet":      $vm.show_module('gsheet',{src:module_name.replace('api_gsheet_','')}); break;
+                            case "gsheet":      $vm.show_module('gsheet',{src:module_name.replace('api_gsheet_',''),topic:topic}); break;
                             case "musescore":   $vm.show_module('musescore',{src:module_name.replace('api_musescore_','')}); break;
                             //case "vm-data":     $vm.vm_data_query("wapp","wappsystem-table",parseInt(aa[2]));   break;
                         }

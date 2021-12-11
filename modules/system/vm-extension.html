@@ -1,0 +1,84 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            $vm.comments=function(divID,topic){
+                var topic=$("#sys_comments"+divID).attr('topic');
+                if(topic==undefined) return;
+                var records=[]
+                var render=function(){
+                    var txt="";
+                    txt+="Public comments"
+                    txt+="<div id=sys_content"+divID+" contenteditable='true' style='border:1px solid #888;padding:3px'></div>";
+                    txt+="<div style='text-align: right;'><u id=sys_comment_btn"+divID+">Submit</u></div>";
+                    for(var i=0;i<records.length;i++){
+                        var TT=(new Date().getTime())-(new Date(records[i].Submit_date).getTime());
+                        var T1=TT/1000/60;
+                        var T2=TT/1000/60/60;
+                        var T3=TT/1000/60/60/24;
+                        var T=T1; 
+                        var D="minitue"; if(T1>1) D="minitues";
+                        if(T>60) {T=T2; D="hou"; if(T2>1) D="hous";}
+                        if(T>24) {T=T3; D="day"; if(T3>1) D="days";}
+                        txt+="<div style='padding:10px;'>";
+                            txt+="<div><span><b>"+records[i].Display_name+" "+"</b></span><span style='color:#888'>"+T.toFixed(0)+" "+D+" ago</span></div>";
+                            txt+="<div>"+records[i].Data.comments+"</div>"
+                            txt+="<div style='display:none' r_rid="+records[i].UID+">";
+                                txt+="<div><textarea style='width:100%'></textarea></div>";
+                                txt+="<div style='text-align: right;'><button id=sys_comment_btn"+divID+">Comment</button></div>";
+                            txt+="</div>";
+                            txt+="<div style='padding-left:30px'>";
+                                txt+="<div v_rid="+records[i].UID+" style='display:none'></div>"
+                            txt+="</div>";
+                        txt+="</div>";
+
+                    }
+                    $('#sys_comments'+divID).html(txt);
+                    
+                    $('#sys_comment_btn'+divID).on('click',function(){
+                        var c=$('#sys_content'+divID).html();
+                        if(c.length==0){
+                            alert('Comments cannot be empty.');
+                            return;
+                        }
+                        c=c.replace(/<div>/g,'@1@1@');
+                        c=c.replace(/<\/div>/g,'@1@2@');
+                        c=c.replace(/<br>/g,'@2@2@');
+                        c=$vm.text(c);
+                        c=c.replace(/@1@1@/g,'<div>');
+                        c=c.replace(/@1@2@/g,'</div>');
+                        c=c.replace(/@2@2@/g,'<br>');
+                        var data={comments:c}
+                        var index={I2:topic,I3:0}
+                        $vm.request({cmd:'insert',table:'comments-vm',data:data,index:index,file:{},options:{}},function(res){
+                            render();
+                        });
+                    })
+                    $('#sys_comments'+divID).find('u').css("cursor","pointer");
+                    $('#sys_comments'+divID+' u').on('click',function(){
+                        var rid=$(this).attr('br_rid');
+                        if(rid!=undefined){
+                            var d=$('div[r_rid='+rid+']').css('display');
+                            if(d=='none'){ $('div[r_rid='+rid+']').show(); $(this).text('Hide');}
+                            else{ $('div[r_rid='+rid+']').hide(); $(this).text('Replay');}
+                        }
+                        var rid=$(this).attr('bv_rid');
+                        if(rid!=undefined){
+                            var el=$('div[v_rid='+rid+']');
+                            var d=$('div[v_rid='+rid+']').css('display');
+                            if(d=='none'){ 
+                                replay_render(el);
+                                $('div[v_rid='+rid+']').show(); 
+                                $(this).text('Hide replay');
+                            }
+                            else{ $('div[v_rid='+rid+']').hide(); $(this).text('Show replay');}
+                        }
+                    })
+                }
+                $vm.request( {cmd:'find',table:'comments-vm',query:{I2:topic,I3:0},options:{},search:''},function(res){
+                    records=res.result;
+                    render();
+                });
+            }
+        }
+    </script>   
+</div>
