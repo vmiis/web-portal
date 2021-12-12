@@ -50,7 +50,7 @@
                         var data={comments:c}
                         var index={I2:topic,I3:0}
                         $vm.request({cmd:'insert',table:'comments-vm',data:data,index:index,file:{},options:{}},function(res){
-                            render();
+                            query_and_render();
                         });
                     })
                     $('#sys_comments'+divID).find('u').css("cursor","pointer");
@@ -74,10 +74,13 @@
                         }
                     })
                 }
-                $vm.request( {cmd:'find',table:'comments-vm',query:{I2:topic,I3:0},options:{},search:''},function(res){
-                    records=res.result;
-                    render();
-                });
+                var query_and_render=function(){
+                    $vm.request( {cmd:'find',table:'comments-vm',query:{I2:topic,I3:0},options:{},search:''},function(res){
+                        records=res.result;
+                        render();
+                    });
+                }
+                query_and_render();
             }
         }
     </script>   
