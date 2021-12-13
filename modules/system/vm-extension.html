@@ -20,7 +20,7 @@
                         if(T>60) {T=T2; D="hou"; if(T2>1) D="hous";}
                         if(T>24) {T=T3; D="day"; if(T3>1) D="days";}
                         txt+="<div style='padding:10px;'>";
-                            txt+="<div><span><b>"+records[i].Display_name+" "+"</b></span><span style='color:#888'>"+T.toFixed(0)+" "+D+" ago</span></div>";
+                            txt+="<div><span><b>"+records[i].Submit_name+" "+"</b></span><span style='color:#888'>"+T.toFixed(0)+" "+D+" ago</span></div>";
                             txt+="<div>"+records[i].Data.comments+"</div>"
                             txt+="<div style='display:none' r_rid="+records[i].UID+">";
                                 txt+="<div><textarea style='width:100%'></textarea></div>";
