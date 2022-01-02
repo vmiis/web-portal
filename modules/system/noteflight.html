@@ -1,0 +1,28 @@
+<div id=D__ID>
+    <iframe id=iframe__ID width="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <script>
+        function F__ID(){
+            $('#D__ID').css('min-height',$vm.min_height+"px");
+            $("#iframe__ID").attr("height",$vm.min_height+"px");
+            var old_src="";
+            var m=$vm.module_list['__MODULE__'];
+            $('#D__ID').on('load',function(){
+                var src="https://www.noteflight.com/embed/"+m.input.id+"/?displayMode=paginated";
+                if(old_src!=src){
+                    old_src=src;
+                    iframe__ID.src=src;
+                }
+            })
+            $('#D__ID').on('hide',function(){
+                $('#iframe__ID')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            padding:0;
+            background-color: #fff;
+        }
+    </style>
+</div>

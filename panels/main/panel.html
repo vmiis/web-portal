@@ -81,6 +81,7 @@
                     <li><a href='?/api_piano2_1'>An die ferne Geliebte</a></li>
                     <li><a href='?/api_piano2_2'>Sonatina Op.36</a></li>
                     <!--<li><a href='?/piano-notes&url=http://127.0.0.1:8000/vmiis/music/s/ashanghai-beach.musicxml'>Test</a></li>-->
+                    <li><a href='?/piano-notes&url=sheet-music/on-the-other-side-of-the-river.musicxml' topic='On the other side of the river vm' >On the other side of the river</a></li>
                 </div>
                 <div>
                     <span class='LT__ID'>Piano</span>
@@ -199,7 +200,11 @@
                     <li><a href='?/apps/online-forms/insomnia-severity-index/index.html'>Insomnia severity index (ISI)</a></li>
                     <li><a href='?/apps/online-forms/karolinska-sleepiness-scale/index.html'>Karolinska sleepiness scale (KSS)</a></li>
                     <li><a href='?/apps/online-forms/pittsburgh-sleep-quality-index/index.html'>Pittsburgh sleep quality index (PSQI)</a></li>
-            </div>
+                </div>
+                <div>
+                    <span class="LT__ID">Comments</span>
+                    <li><a href='?/https://www.vmiis.com/?/vm-table&table=comments-vm'>All comments</a></li>
+                </div>
 
 
             </ul>
@@ -865,6 +870,9 @@
                             }
                         }
                         if(pp[0]=="piano-notes"){
+                            input['topic']=topic;
+                        }
+                        else if(pp[0]=="noteflight"){
                             input['topic']=topic;
                         }
                         $vm.show_module(pp[0],input); 

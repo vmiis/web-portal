@@ -317,6 +317,7 @@
         "vm-pivot":       {url:$H+"/system/vm-pivot.html"},
         "vm-table":       {url:$H+"/system/vm-table.html", router:1},
         "json-editor":   {url:$H+"/system/json-editor.html", router:1},
+        "noteflight":   {url:$H+"/system/noteflight.html", router:1},
         
         
         
