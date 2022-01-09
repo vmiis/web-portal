@@ -17,22 +17,30 @@ var vm_data={
                     "FY": {
                         "$cond":[
                             { 
-                                "$and": [ { "$gte": [ "$I1", "2020-07-01" ]}, { "$lt": [ "$I1", "2021-07-01" ]} ] 
+                                "$and": [ { "$gte": [ "$I1", "2021-07-01" ]}, { "$lt": [ "$I1", "2022-07-01" ]} ] 
                             },
-                            "2020-2021",
+                            "2021-2022",
                             {
                                 "$cond": [
                                     { 
-                                        "$and": [ { "$gte": [ "$I1", "2019-07-01" ]}, { "$lt": [ "$I1", "2020-07-01" ]} ] 
+                                        "$and": [ { "$gte": [ "$I1", "2020-07-01" ]}, { "$lt": [ "$I1", "2021-07-01" ]} ] 
                                     },
-                                    "2019-2020",
+                                    "2020-2021",
                                     {
                                         "$cond": [
                                             { 
-                                                "$and": [ { "$gte": [ "$I1", "2018-07-01" ]}, { "$lt": [ "$I1", "2019-07-01" ]} ] 
+                                                "$and": [ { "$gte": [ "$I1", "2019-07-01" ]}, { "$lt": [ "$I1", "2020-07-01" ]} ] 
                                             },
-                                            "2018-2019",
-                                            "Else"
+                                            "2019-2020",
+                                            {
+                                                "$cond": [
+                                                    { 
+                                                        "$and": [ { "$gte": [ "$I1", "2018-07-01" ]}, { "$lt": [ "$I1", "2019-07-01" ]} ] 
+                                                    },
+                                                    "2018-2019",
+                                                    "2017-0000"
+                                                ]
+                                            }
                                         ]
                                     }
                                 ]
@@ -232,6 +240,97 @@ var vm_data={
                     "Data.Month":"$_id.Month",
                     "Data.Name":"$_id.Name",
                     "Data.Amount":"$Amount",    
+                }
+            }
+        ],
+        "options":"value|DOLLAR2"
+    },
+    //-------------------------------
+    "tax-return-pivot":{
+        "module":"vm-pivot",
+        "api":"wapp",
+        "name":"2018-2022 tax return",
+        "table":"",
+        "pivot":"Name|Amount",
+        "query":
+        [
+            {
+                "$match":{"I1": { "$gte": "2018-07-01", "$lt":"2022-07-01"}}
+            },
+            {
+                "$project": {
+                    "I1":1,
+                    "Data.Expense":1,
+                    "Data.All_other_expenses":1,
+                    "Data.Other_sales":1,
+                    "Data.1A_GST":1,
+                    "Data.1B_GST":1,
+                    "Data.Gross_interest":1,
+                    "Data.Super_expenses":1,
+                    "Data.Salary_expenses":1,
+                    
+                    "FY": {
+                        "$cond":[
+                            { 
+                                "$and": [ { "$gte": [ "$I1", "2021-07-01" ]}, { "$lt": [ "$I1", "2022-07-01" ]} ] 
+                            },
+                            "2021-2022",
+                            {
+                                "$cond": [
+                                    { 
+                                        "$and": [ { "$gte": [ "$I1", "2020-07-01" ]}, { "$lt": [ "$I1", "2021-07-01" ]} ] 
+                                    },
+                                    "2020-2021",
+                                    {
+                                        "$cond": [
+                                            { 
+                                                "$and": [ { "$gte": [ "$I1", "2019-07-01" ]}, { "$lt": [ "$I1", "2020-07-01" ]} ] 
+                                            },
+                                            "2019-2020",
+                                            {
+                                                "$cond": [
+                                                    { 
+                                                        "$and": [ { "$gte": [ "$I1", "2018-07-01" ]}, { "$lt": [ "$I1", "2019-07-01" ]} ] 
+                                                    },
+                                                    "2018-2019",
+                                                    "2017-0000"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }    
+            },
+            {
+                "$group":{
+                    "_id":"$FY",
+                    "Other_sales": { "$sum": { "$subtract": [ "$Data.Other_sales","$Data.1A_GST"] }},
+                    "Gross_interest":{ "$sum": "$Data.Gross_interest"},
+                    "Super_expenses":{ "$sum": "$Data.Super_expenses"},
+                    "Salary_expenses":{ "$sum": "$Data.Salary_expenses"},
+                    "All_other_expenses":{"$sum": { "$subtract": [ "$Data.All_other_expenses","$Data.1B_GST"] }},
+                    //{ "$sum": "$Data.All_other_expenses"},
+                    "Expense":{ "$sum": "$Data.Expense"},
+                }
+            },
+            {
+                "$sort":{
+                    "_id":-1
+                }  
+            },
+            {
+                "$project": {
+                    "Data.Financial Year":"$_id",
+                    "Data.Other_Sales":"$Other_sales",
+                    "Data.Gross_interest":"$Gross_interest",
+                    "Data.Total_Income":{ "$add": [ "$Other_sales","$Gross_interest"] },
+                    "Data.Super_expenses":"$Super_expenses",
+                    "Data.Salary_expenses":"$Salary_expenses",
+                    "Data.All_other_expenses":{ "$add": [ "$All_other_expenses","$Salary_expenses"] },
+                    "Data.Total_expenses":"$Expense",
                 }
             }
         ],

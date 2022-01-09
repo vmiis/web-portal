@@ -168,7 +168,7 @@
                         if(h!=""){
                             var ii=pivot_ids.indexOf(h);
                             pivot_records[ii][n]=v;
-                            if(pivot_headers.indexOf(n)==-1) pivot_headers.push(n);
+                            if(n!=undefined && pivot_headers.indexOf(n)==-1) pivot_headers.push(n);
                         }
                     }
                     /*
