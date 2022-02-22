@@ -312,7 +312,6 @@ var vm_data={
                     "Super_expenses":{ "$sum": "$Data.Super_expenses"},
                     "Salary_expenses":{ "$sum": "$Data.Salary_expenses"},
                     "All_other_expenses":{"$sum": { "$subtract": [ "$Data.All_other_expenses","$Data.1B_GST"] }},
-                    //{ "$sum": "$Data.All_other_expenses"},
                     "Expense":{ "$sum": "$Data.Expense"},
                 }
             },
@@ -331,9 +330,17 @@ var vm_data={
                     "Data.Salary_expenses":"$Salary_expenses",
                     "Data.All_other_expenses":{ "$add": [ "$All_other_expenses","$Salary_expenses"] },
                     "Data.Total_expenses":"$Expense",
+                    
+                    "Data.Net_Profit":{ 
+                        "$subtract": [ 
+                            {"$add": ["$Other_sales","$Gross_interest"]},
+                            "$Expense"
+                        ] 
+                    },
                 }
             }
         ],
-        "options":"value|DOLLAR2"
+        "options":"value|DOLLAR2",
+        "id_len":0
     }
 }

@@ -148,6 +148,7 @@
                         }
                     }
                     var id_Len=pivot_headers.length;
+                    if(m.input.Data.id_len!=undefined) id_Len=m.input.Data.id_len;                    
                     for(var i=0;i<records.length;i++){
                         var h="";
                         var one_record={};
@@ -199,7 +200,11 @@
                                 if(option1['value']=='DOLLAR2'){
                                     if(c!=""){
                                         try{
-                                            c="$"+parseFloat(c).toFixed(2); 
+                                            var cv=parseFloat(c);
+                                            c="$"+cv.toFixed(2); 
+                                            if(cv<0){
+                                                c="-$"+Math.abs(cv).toFixed(2);
+                                            }
                                         }
                                         catch(e){}
                                         td="<td style='padding-left:10px;text-align:right'>"+c+"</td>";
