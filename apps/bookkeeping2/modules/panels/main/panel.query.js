@@ -341,6 +341,6 @@ var vm_data={
             }
         ],
         "options":"value|DOLLAR2",
-        "id_len":0
+        "id_len":1
     }
 }
