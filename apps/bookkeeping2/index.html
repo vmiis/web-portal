@@ -65,10 +65,12 @@
             $('#content').css('padding-top',hearder_height);
             $vm.root_layout_content_slot='content'
             $vm.api_addresses={
-                "wapp":"https://api.wappsystem.com"
+                //"wapp":"https://api.wappsystem.com"
+                "wapp":"https://proxy.wappsystem.com"
             }
             $vm.api_default="wapp";
             $vm.api_address='https://api.wappsystem.com';
+            $vm.api_address='https://proxy.wappsystem.com';
             if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){ 
                 $vm.localhost=true;
             }
