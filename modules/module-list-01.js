@@ -14,6 +14,7 @@
     var $H=$vm.hosting_path+"/modules";
     var H=$vm.hosting_path;
     var modules={
+        "chinese": {url:$vm.hosting_path+"/panels/chinese/panel.html", router:1},
         "main-panel":{url:$vm.hosting_path+"/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
         //"app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
@@ -285,6 +286,7 @@
         "piano2":{  url:$H+"/piano/piano.html"},
         "piano3":{  url:$H+"/piano/piano3.html"},
         "piano-notes":{  url:$H+"/system/piano-notes.html"},
+        "piano-notes-c":{  url:$H+"/system/piano-notes-c.html"},
         
         "notes-data":{  url:$H+"/notes/data.html",  api:"wapp",Table:"notes-vm", form_module: 'notes-form', router:1  },
         "notes-form":{  url:$H+"/notes/form.html",  api:"wapp",Table:"notes-vm" },

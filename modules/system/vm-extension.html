@@ -1,15 +1,17 @@
 <div id=D__ID>
     <script>
         function F__ID(){
-            $vm.comments=function(divID,topic){
+            $vm.comments=function(divID,topic,lang){
                 var topic=$("#sys_comments"+divID).attr('topic');
                 if(topic==undefined) return;
                 var records=[]
                 var render=function(){
                     var txt="";
-                    txt+="Public comments"
+                    if(lang==undefined) txt+="Public comments";
+                    else if(lang==1) txt+="评论";
                     txt+="<div id=sys_content"+divID+" contenteditable='true' style='border:1px solid #888;padding:3px'></div>";
-                    txt+="<div style='text-align: right;'><u id=sys_comment_btn"+divID+">Submit</u></div>";
+                    if(lang==undefined) txt+="<div style='text-align: right;'><u id=sys_comment_btn"+divID+">Submit</u></div>";
+                    else if(lang==1) txt+="<div style='text-align: right;'><u id=sys_comment_btn"+divID+">提交</u></div>";
                     for(var i=0;i<records.length;i++){
                         var TT=(new Date().getTime())-(new Date(records[i].Submit_date).getTime());
                         var T1=TT/1000/60;

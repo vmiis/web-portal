@@ -1,0 +1,162 @@
+<div id=D__ID>
+    <!--
+    <div class=panel__ID>
+        <h3>Woolcock</h3>
+    </div>
+    -->
+    <div id=panel__ID class=panel__ID>
+        <ul style="list-style-type:decimal;">
+            <div>
+                <span class=LT__ID>金融交易</span>
+                <li><a href='?/api_gsheet_13DXODOR-VV7eXk6x-P5j6QMzpa4Rax5w_X9eep2nw6o/edit?rm=minimal&usp=sharing' topic='Net PL / Volatility (Account 1) vm' >实时交易研究<br><p style='font-size: 10px;'>(使用谷歌电子表格服务，中国大陆需通过VPN访问）</p></a></li>
+            </div>
+        </ul>
+    </div>
+    <div id=panel__ID class=panel__ID>
+        <ul style="list-style-type:decimal;">
+            <div>
+                <span class=LT__ID>钢琴谱（只有旋律，左手伴奏为即兴）</span>
+                <li><a href='?/piano-notes&url=sheet-music/a-beautiful-myth.musicxml' topic='A Beautiful Myth vm' >美丽的神话</a></li>
+                <li><a href='?/piano-notes&url=sheet-music/seeing-the-mist-again.musicxml' topic='Seeing The Mist Again vm' >又见炊烟</a></li>
+                <li><a href='?/piano-notes&url=sheet-music/lake-baikal.musicxml' topic='Lake Baikal vm' >贝加尔湖畔</a></li>
+                <li><a href='?/piano-notes&url=sheet-music/on-the-other-side-of-the-river.musicxml' topic='On the other side of the river vm' >在水一方</a></li>
+                <li><a href='?/piano-notes&url=sheet-music/my-heart-will-go-on.musicxml' topic='My Heart Will Go On vm' >我心永恒</a></li>
+            </div>
+        </ul>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            var prefix=$vm.module_list["__MODULE__"].prefix;
+            if(prefix==undefined) prefix="";
+            //--------------------------------------------------------
+            $('#panel__ID a').on('click',function(e){
+                var topic=$(this).attr('topic');
+                if(topic==undefined) topic="";
+                scrollTop_V=$(document).scrollTop();
+                $('#panel__ID a').removeClass("active__ID");
+                $('.grid-container__ID a').removeClass("active__ID");
+                $(this).addClass("active__ID");
+                e.preventDefault();
+                e.stopPropagation();
+                var module_name=$(this).attr('href').replace('?\/','');
+                if(module_name.substring(0,4)=='http') window.open(module_name);
+                else if(module_name.substring(0,4)=='apps') window.open(module_name);
+                else if(module_name.substring(0,4)=='api_'){
+                    var aa=module_name.split('_');
+                    if(aa.length>=3){
+                        switch(aa[1]){
+                            case "gsheet":      $vm.show_module('gsheet',{src:module_name.replace('api_gsheet_',''),topic:topic}); break;
+                        }
+                    }
+                }
+                else if(module_name!=""){
+                    var pp=module_name.split('&');
+                    if(pp.length==1) $vm.show_module(module_name,{}); 
+                    else{
+                        var input={}
+                        for(var i=1;i<pp.length;i++){
+                            var nv=pp[i].split('=');
+                            if(nv.length==2){
+                                input[nv[0]]=nv[1];
+                            }
+                        }
+                        if(pp[0]=="piano-notes"){
+                            input['topic']=topic;
+                            input['c']=1;
+                        }
+                        else if(pp[0]=="noteflight"){
+                            input['topic']=topic;
+                        }
+                        $vm.show_module(pp[0]+'-c',input); 
+                    }
+                }
+            })
+            //--------------------------------------------------------
+            $('#D__ID').on('load',function(){
+            })
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        .panel__ID{
+            padding:20px 50px 10px 50px;
+            font-size:14px;
+    		max-width: 100%;
+    		column-count: 3;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+        }
+        .panel__ID div{
+            break-inside: avoid-column;
+        }
+	    .panel__ID a{
+		    /*margin:3px 10px;*/
+            /*white-space: nowrap;*/
+	    }
+	    .panel__ID span{
+			color:#283f55;
+			font-weight: bold;
+            font-weight: 600;
+			/*margin:3px 10px;*/
+            /*white-space: nowrap;*/
+	    }
+
+        .panel__ID li{
+            /*text-decoration: none;*/
+        }
+        a {
+            text-decoration: none;
+        }
+        a:link {
+            color:#555;
+        }
+        a:visited {
+            color:#555;
+        }
+        a:hover {
+            color:red;
+        }
+        a:active {
+            color:#555;
+        }
+        #D__ID input::placeholder {
+            color: #ccc;
+            padding-left:6px;
+        }
+        .break__ID{
+            break-before:column;
+            display:block;
+        }        
+        @media screen and (max-width:768px){
+            .break__ID{
+                break-before:unset;
+            }        
+            .panel__ID{
+                padding:20px;
+                column-count: 1;
+            }
+        }
+        .LT__ID{
+            margin-left:-40px;
+            cursor:pointer;
+        }
+        #panel__ID ul li, #panel__ID ul span{
+            break-inside: avoid-column;
+        }
+        #bp__ID{
+            color:#117a8b;
+        }
+        #bp__ID:hover{
+            color:red;
+        }
+    </style>
+</div>
+

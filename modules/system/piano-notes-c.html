@@ -1,0 +1,65 @@
+<div id=D__ID>
+    <!--<div id=page__ID style='background-color:#fff;padding:20px'>-->
+        <span style='margin-top:20px;margin-left:50px;position:fixed;z-index:1'>
+            <button id="btn-play__ID" class="btn btn-secondary">播放</button>
+            <button id="btn-pause__ID" class="btn btn-secondary">暂停</button>
+            <button id="btn-continue__ID" class="btn btn-secondary">继续</button>
+            <button id="btn-stop__ID" class="btn btn-secondary">停止</button>
+        </span>
+        <div id="score__ID"  style='padding-top:50px;'></div>
+        <div id=sys_comments__ID style='padding:20px 0 30px 20px; max-width: 800px;'></div>
+    <!--</div>-->
+    <script>
+        function F__ID(){
+            //**************************************************
+            var m=$vm.module_list['__MODULE__'];
+            //**************************************************
+            const osmd        =new opensheetmusicdisplay.OpenSheetMusicDisplay(document.getElementById("score__ID"),{autoResize:true});
+            const audioPlayer =new OsmdAudioPlayer();
+            //Music sheet
+            $('#D__ID').on('load',function(){
+                var url=m.input["url"];
+                osmd.setOptions({followCursor:true});
+                $.get(url,function(scoreXml){
+                    osmd.load(scoreXml)
+                    .then(
+                        function(){
+                            osmd.render();
+                            audioPlayer.loadScore(osmd);
+                        }
+                    )
+                },'text');
+
+                $('#sys_comments__ID').html('');
+                if(m.input.topic!=undefined && m.input.topic!=''){
+                    $('#sys_comments__ID').attr('topic',m.input.topic);
+                    $vm.comments("__ID",m.input.topic,1);
+                }
+            })
+            //----------------------------------------------
+            $("#btn-play__ID").on('click',function(){       audioPlayer.stop(); audioPlayer.play();  });
+            $("#btn-pause__ID").on('click',function(){      audioPlayer.pause(); });
+            $("#btn-continue__ID").on('click',function(){   audioPlayer.play();  });
+            $("#btn-stop__ID").on('click',function(){       audioPlayer.stop();  });
+            //************************************************************
+            $('#page__ID').css('min-height',$vm.min_height+"px");
+            //-----------------------------------
+            $('#D__ID').on('hide',function(){
+                audioPlayer.stop();
+            })
+            //-----------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            /*padding:0px;*/
+			height:100%;
+            background-color: white;
+			animation: vm_module_fadein 1.0s;
+        }
+        #score__ID{
+            background-position: center; 
+            background-repeat:no-repeat;
+        }
+    </style>
+</div>
