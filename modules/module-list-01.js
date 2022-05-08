@@ -329,6 +329,8 @@
         
         "excel-to-web-data-collection-form": {url:$H+"/data-collection/form-generator.html", router:1},
         "data-grid": {url:$H+"/data-collection/data-grid.html", router:1},
+        "life": {url:$H+"/thinking/life.html", router:1},
+        "understanding": {url:$H+"/thinking/understanding.html", router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
