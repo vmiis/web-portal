@@ -183,6 +183,7 @@
                     <li><a href='?/app2_wimr-server-status'>Server Status Check Up</a></li>
                     <li><a href='?/app2_sleep-study'>Sleep Study</a></li>
                     <li><a href='?/app2_staff-roster'>Sleep Technician Roster (Concept Mockup)</a></li>
+                    <li><a href='?/app2_wimr-snapforms-link'>Snapforms Link</a></li>
                 </div>
                 <span class=LT__ID>Woolcock Medical Research</span><br>
                 <div>
@@ -814,6 +815,7 @@
                 else if(module_name.substring(0,4)=='app2'){
                     var aa=module_name.split('_');
                     switch(aa[1]){
+                        case 'wimr-snapforms-link':    if($vm.localhost==true) window.open('../wimr-snapforms-link/');   else window.open('https://vmiis.github.io/wimr-snapforms-link');     break;
                         case 'send-email-to-patients': if($vm.localhost==true) window.open('../wimr-snapforms/');   else window.open('https://vmiis.github.io/wimr-snapforms');     break;
                         case 'it-system-diagrams':     if($vm.localhost==true) window.open('../wimr-diagrams/');    else window.open('https://vmiis.github.io/wimr-diagrams');      break;
                         case 'sleep-study':            if($vm.localhost==true) window.open('../wimr-sleep-study/'); else window.open('https://vmiis.github.io/wimr-sleep-study');   break;
