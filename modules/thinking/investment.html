@@ -1,0 +1,60 @@
+<div id=D__ID>
+		<div class="container-fluid page1__ID" style='max-width:870px'>
+			<span style="font-size:120%;font-weight: bold;">我对投资本质的一种理解</span>
+			<hr style='border-top:1px solid #f05f40; margin:12px 0'></hr>
+            我的理解是，投资很大程度上可能是一个数学游戏。
+            <br><br>
+            先假设两个前提。
+            1：市场是波动的。2.波动的变化在一定程度上是随机的。
+            <br><br>
+            在这两个前提下，获利的手段就是低买高卖。比如价格每下降百分之一，我就投资一元买入。上升百分之一，我就卖出获利。
+            
+            <br><br>
+            假设一: 就是如果我有1000元钱，那么我投资获利的概率极有可能大于50%。
+            <br>
+            假设二: 就是如果我只有2元钱，那么市场下降百分之二后，我就无法继续买入。投资获利的概率极有可能远小于50%。
+            
+            <br><br>
+            假设一年后，情况一，获利2元，即千分之二的回报，可继续投资游戏。情况二，输掉2元，破产出局。 
+            
+            <br><br>
+            情况一：投资保守，千分之二的回报太低。
+            <br>
+            情况二：投资激进，投资失败。
+            
+            <br><br>
+            于是我对投资本质的一种理解就是1000元资本下每次买入x元， 1 < x < 500，一年后获利100元 （10% 回报率）
+            
+            <br><br>
+            <b>那么x是多少？</b>
+            
+            <br><br>
+            我没有确定的答案，我只是思考如何接近答案。
+                        
+			<br><br>
+			<div id=sys_comments__ID style='padding:60px 0 30px 0px; _max-width: 800px;'></div>
+		</div>
+	<script>
+        //var m=$vm.module_list['__MODULE__'];
+		$('#D__ID').on('load',function(){
+			$('#sys_comments__ID').html('');
+			$('#sys_comments__ID').attr('topic','life vm');
+            $vm.comments("__ID",'life vm',1);
+		})
+	</script>
+	<style>
+		#D__ID{
+			padding-top: 60px;
+			height:100%;
+			background:#fff;
+	        overflow:auto;
+			animation: vm_module_fadein 1.0s;
+		}
+	    @media screen and (max-width: 992px) {
+	        #D__ID{
+				padding-top: 10px;
+	            animation: vm_module_fadein 1.0s;
+	        }
+	    }
+	</style>
+</div>
