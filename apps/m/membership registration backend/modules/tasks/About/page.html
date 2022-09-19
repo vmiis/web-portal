@@ -1,0 +1,68 @@
+﻿<div id=D__ID>
+	<div>
+		<div style='max-width:1050px; margin:auto;padding-top:50px;font-size:100%'>
+			<div>
+				<h4>What is a micro app</h4>
+				<i>"A Micro-app is a super-specialized application designed to perform one task or use case with the only objective of doing it well."</i>
+				-- From Wikipedia
+				<br>
+				<img style='width:100%;height:auto;' src="__CURRENT_PATH__/microapp.png" />
+			</div>
+			<div>
+				<h4>Cost of cloud servers for running a micro app</h4>
+				<br>
+				<ul>
+					<li>Web Page Server: using GitHub Pages free services. <a target="_blank" href=https://pages.github.com/> More information.</a></li>
+					<li>API server (AWS Micro -- 2 vCPU, 1 GB DAM, 20 GB DISK + comunication): AUD $10/Month plus</li>
+					<li>Database and file server (AWS Micro -- 2 vCPU, 1 GB RAM, 30 GB DISK): AUD $10/Month</li>
+				</ul>
+				Roughly total $25/month<br>
+				Some other cost such as domain, SSL etc may be incurred.
+			</div>
+			<br><br>
+			<div>
+				<h4>Authentication </h4>
+				<div style="margin:2px 2px 2px 20px">
+					We use Microsoft, Google, Facebook or Github authentication services and use a person's email address to identify the login.
+					When a user send a request to the server, the email address will be used as unique id for permissions control.
+				</div>
+			</div>
+			<br><br>
+			<div>
+				<h4>Permissions Control</h4>
+				<div style="margin:2px 2px 2px 20px">
+					We use a configuration file to control the permissions. An exampe is as follow.<br><br>
+<pre style='background-color: #333;color:#fff'>
+{
+    "groups":{
+        "global_admin":["admin@company365.com","supert@company365.com"],
+        "it":["tom@company365.com",expert@gmail.com],
+        "finance":["david@gmail.com"]
+    },
+    "permission_table":{
+        "/finance_read":    {"azure_groups":[], "groups":["finance"], "users":[]   },
+        "student_full":     {"azure_groups":[], "groups":["it"], "users":[]   },
+        "student_read":     {"azure_groups":["all_staff"], "groups":[], "users":["jimmy@gmail.com","anna@gmail.com"]   }
+    }
+}
+</pre>
+					An administrator can use a text editor to edit the configuration file.
+					<br><br> 
+					Notes: 
+					<br>"/finance_read" means reading the files in the folder /finance.
+					<br>"student_read" means reading the data in database table called "student". 
+				</div>
+			</div>
+			<br><br>
+		</div>
+	</div>
+    <script>
+    	function F__ID(){
+    	}
+    </script>
+    <style>
+        #D__ID{
+			background-color: #fff;
+        }
+    </style>
+</div>

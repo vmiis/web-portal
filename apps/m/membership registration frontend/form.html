@@ -1,0 +1,101 @@
+<div id=D__ID>
+    <section id=form_container__ID bp=576 style='display:flow-root;'>
+        <div class=header__ID>
+            <span class=t1__ID>Membership Registration</span><br>
+            <span class=t2__ID>To apply for membership please complete all questions.</span>
+        </div>
+        <form id=F__ID action="https://01.vmiis.com:442/membership" method="post" onsubmit="submit__ID.disabled=true; submit__ID.style.display='none'; alert('Thank you for your submission')" >
+            
+            <div class=r__ID>
+                <div w='100|20'>
+                    <span class=t3__ID >Name</span>
+                </div>
+                <div w='100|40'>
+                    <input type=text  name=First_Name />
+                    <span class=t4__ID>First Name</span>
+                </div>
+                <div w='100|40'>
+                    <input type=text  name=Last_Name />
+                    <span class=t4__ID>Last Name</span>
+                </div>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|20'>
+                    <span class=t3__ID>Address</span>
+                </div>
+                <div w='100|80'>
+                    <input type=text  name=Address />
+                    <span class=t4__ID>Street Address</span>
+                </div>
+            </div>
+            
+            <div class=r__ID>
+                <div w='100|20'>
+                    <span class=t3__ID></span>
+                </div>
+                <div w='100|40'>
+                    <input type=text  name=Suburb  />
+                    <span class=t4__ID>Suburb</span>
+                </div>
+                <div w='100|40'>
+                    <input type=text  name=Postcode  />
+                    <span class=t4__ID>Postcode</span>
+                </div>
+            </div>
+            
+            <div class=r__ID>
+                <div w='100|20'>
+                    <span class=t3__ID></span>
+                </div>
+                <div w='100|40'>
+                    <select name="State">
+                        <option value="">Please Select</option>
+                        <option value="ACT">Australian Capital Territory</option>
+                        <option value="NSW">New South Wales</option>
+                        <option value="NT ">Northern Territory</option>
+                        <option value="QLD">Queensland</option>
+                        <option value="SA ">South Australia</option>
+                        <option value="TAS">Tasmania</option>
+                        <option value="VIC">Victoria</option>
+                        <option value="WA ">Western Australia</option>
+                    </select>
+                    <span class=t4__ID>State</span>
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|20'>
+                    <span class=t3__ID>Email</span>
+                </div>
+                <div w='100|60'>
+                    <input type=email  name=Email />
+                </div>
+            </div>
+            <div class=r__ID>
+                <div w='100|20'>
+                    <span class=t3__ID>Mobile Phone</span>
+                </div>
+                <div w='100|40'>
+                    <input type=tel  name=Mobile_Phone />
+                </div>
+            </div>
+
+            <div class=r__ID>
+                <div w='100|100' class=c_print>
+                    <button id=submit__ID >Submit</button>
+                </div>
+            </div>
+
+            <div style='padding:15px'>&nbsp;</div>
+
+        </form>
+    </section>
+    <style>
+        #form_container__ID{
+            max-width:750px;
+        }
+    </style>
+    <script>
+		(function(){var n=function(n){var r,o,s,h,c,u,p,t,l,a,v,y,w,e;if($vm.__print__!=1){var f=n[0].contentRect.width,b=n[0].target.id,k=document.getElementById(b).getAttribute("bp");if(k!=null)for(r=k.split("|"),o=1e7,r.length>0&&(o=parseInt(r[0])),s=2e7,r.length>1&&(s=parseInt(r[1])),h=3e7,r.length>2&&(h=parseInt(r[2])),c=4e7,r.length>3&&(c=parseInt(r[3])),u=document.getElementById(b).getElementsByTagName("div"),i=0;i<u.length;i++)p=u[i].getAttribute("w"),p!=null&&(u[i].style.float="left",u[i].style["box-sizing"]="border-box",u[i].parentElement.style["border-width"]=0,u[i].parentElement.style["box-sizing"]="border-box",u[i].parentElement.style.display="flow-root",t=p.split("|"),l=576,t.length>0&&(l=t[0]+"%"),a=l,t.length>1&&(a=t[1]+"%"),v=a,t.length>2&&(v=t[2]+"%"),y=v,t.length>3&&(y=t[3]+"%"),w=y,t.length>4&&(w=t[4]+"%"),e=0,f<o&&(e=l),f>=o&&f<s&&(e=a),f>=s&&f<h&&(e=v),f>=h&&f<c&&(e=y),f>=c&&(e=w),u[i].style.width=e)}};new ResizeObserver(n).observe(form_container__ID)})()
+    </script>
+</div>
