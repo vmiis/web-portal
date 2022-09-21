@@ -17,10 +17,13 @@
         <div>
             <ul>
                 <span class='T__ID' style='color:#12a18d' >Micro Applications</span><br><br>
+
+                <div>
+                    <span class=LT__ID>Online Data Collection</span><br>
+                    <li><a href='?/online-forms'>Try it Yourself</a></li>
+                </div>
                 <div>
                     <span class=LT__ID>Templates</span><br>
-                    <li><a href='?/apps/m/membership registration frontend/index.html'>Membership Registration Frontend</a></li>
-                    <li><a href='?/apps/m/membership registration backend/index.html'>Membership Registration Backend</a></li>
                     <li><a href='?/apps/bookkeeping2/index.html'>Bookkeeping</a></li>
                     <li><a href='?/apps/car-booking/index.html'>Car Booking</a></li>
                     <li><a href='?/apps/equipment-booking/index.html'>Eqipment Booking</a></li>
@@ -63,6 +66,7 @@
                 <span class=LT__ID>Woolcock Medical Research</span><br>
                 <div>
                     <li><a href='?/app2_windfarmhome'>Wind Farm Home Study</a></li>
+                    <li><a href='?/app2_flat'>Flat</a></li>
                 </div>
                 <div>
                     <span class="LT__ID">Online Data Collection Examples</span>
@@ -837,6 +841,7 @@
                         case 'it-system-information':  if($vm.localhost==true) window.open('../wimr-it-system-information/'); else window.open('https://vmiis.github.io/wimr-it-system-information');   break;
                         case 'coreplus':               if($vm.localhost==true) window.open('../wimr-coreplus/'); else window.open('https://vmiis.github.io/wimr-coreplus');   break;
                         case 'windfarmhome':           if($vm.localhost==true) window.open('http://localhost:8000/woolcock-imr/windfarm-home-study-2019/'); else window.open('https://windfarm-home-study-2019.rt.org.au');   break;
+                        case 'flat':                   if($vm.localhost==true) window.open('http://localhost:8000/woolcock-imr/flat3/'); else window.open('https://flat.rt.org.au');   break;
                     }
                 }
                 else if(module_name.substring(0,4)=='api_'){

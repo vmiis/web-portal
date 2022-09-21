@@ -1,9 +1,9 @@
 <div id=D__ID>
-    <section id=form_container__ID bp=576 style='display:flow-root;'>
+    <div id=form_container__ID bp=576 style='display:flow-root;max-width:750px;'>
         <div class=header__ID>
             <h1 class=t1__ID>Student Form</h1>
         </div>
-        <form id=F__ID action="https://api.wappsystem.com/vm-demo-student" method="post" onsubmit="submit__ID.disabled = true; submit__ID.style.display='none'; alert('Thank you for your submission')" >
+        <form id=F__ID action="https://01.vmiis.com/demo-student" method="post" onsubmit="submit__ID.disabled = true; submit__ID.style.display='none'; alert('Thank you for your submission')" >
 
             <div class=r__ID>
                 <div w='100|30'>  <span class=t3__ID>Student ID</span>                </div>
@@ -43,17 +43,17 @@
             <div class=r__ID>
                 <div w='100|30'>  <span class=t3__ID>State</span>                    </div>
                 <div w='100|70'>
-                            <select name=State>
-                                <option value=> </option>
-                                <option value=NSW>NSW</option>
-                                <option value=VIC>VIC</option>
-                                <option value=QLD>QLD</option>
-                                <option value=WA>WA</option>
-                                <option value=SA>SA</option>
-                                <option value=TAS>TAS</option>
-                                <option value=ACT>ACT</option>
-                                <option value=NT>NT</option>
-                            </select>
+                    <select name=State>
+                        <option value=> </option>
+                        <option value=NSW>NSW</option>
+                        <option value=VIC>VIC</option>
+                        <option value=QLD>QLD</option>
+                        <option value=WA>WA</option>
+                        <option value=SA>SA</option>
+                        <option value=TAS>TAS</option>
+                        <option value=ACT>ACT</option>
+                        <option value=NT>NT</option>
+                    </select>
                 </div>
             </div>
             <div class=r__ID>
@@ -74,12 +74,7 @@
             <div style='padding:15px'>&nbsp;</div>
 
         </form>
-    </section>
-    <style>
-        #form_container__ID{
-            max-width:750px;
-        }
-    </style>
+    </div>
     <script>
 		(function(){var n=function(n){var r,o,s,h,c,u,p,t,l,a,v,y,w,e;if($vm.__print__!=1){var f=n[0].contentRect.width,b=n[0].target.id,k=document.getElementById(b).getAttribute("bp");if(k!=null)for(r=k.split("|"),o=1e7,r.length>0&&(o=parseInt(r[0])),s=2e7,r.length>1&&(s=parseInt(r[1])),h=3e7,r.length>2&&(h=parseInt(r[2])),c=4e7,r.length>3&&(c=parseInt(r[3])),u=document.getElementById(b).getElementsByTagName("div"),i=0;i<u.length;i++)p=u[i].getAttribute("w"),p!=null&&(u[i].style.float="left",u[i].style["box-sizing"]="border-box",u[i].parentElement.style["border-width"]=0,u[i].parentElement.style["box-sizing"]="border-box",u[i].parentElement.style.display="flow-root",t=p.split("|"),l=576,t.length>0&&(l=t[0]+"%"),a=l,t.length>1&&(a=t[1]+"%"),v=a,t.length>2&&(v=t[2]+"%"),y=v,t.length>3&&(y=t[3]+"%"),w=y,t.length>4&&(w=t[4]+"%"),e=0,f<o&&(e=l),f>=o&&f<s&&(e=a),f>=s&&f<h&&(e=v),f>=h&&f<c&&(e=y),f>=c&&(e=w),u[i].style.width=e)}};new ResizeObserver(n).observe(form_container__ID)})()
     </script>
