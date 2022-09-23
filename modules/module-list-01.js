@@ -332,7 +332,8 @@
         "life": {url:$H+"/thinking/life.html", router:1},
         "understanding": {url:$H+"/thinking/understanding.html", router:1},
         "investment": {url:$H+"/thinking/investment.html", router:1},
-        "online-forms": {url:H+"/panels/online-forms/panel.html", router:1},
+        "Online forms": {url:H+"/panels/online-forms.html", router:1},
+        "Portal": {url:H+"/panels/main.html", router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

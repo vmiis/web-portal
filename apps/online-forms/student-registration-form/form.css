@@ -63,6 +63,8 @@
 #F__ID input[type=text],
 #F__ID input[type=email],
 #F__ID input[type=tel],
+#F__ID input[type=time],
+#F__ID input[type=date],
 #F__ID select,
 #F__ID textarea
 {
@@ -71,6 +73,7 @@
     border: 1px solid;
     display: block;
     padding: 0 .625em;
+    box-sizing: border-box;
     outline: 0;
     margin: 0;
     text-align: left;
@@ -85,6 +88,8 @@
 #F__ID input[type=text]:hover, 
 #F__ID input[type=email]:hover,
 #F__ID input[type=tel]:hover,
+#F__ID input[type=time]:hover,
+#F__ID input[type=date]:hover,
 #F__ID select:hover,
 #F__ID textarea:hover
 {

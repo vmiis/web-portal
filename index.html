@@ -40,7 +40,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[1.87,0.05]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[1.88,0.05]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -48,7 +48,7 @@
                 index:  {url:$vm.hosting_path+"/index.html",description:"main entry, layout, module list setup"},
                 header: {url:$vm.hosting_path+"/modules/site/header.html",description:"logo, menu, login/logout etc"},
                 footer: {url:$vm.hosting_path+"/modules/site/footer.html",description:"copyright info, links etc"},
-                home:   {url:$vm.hosting_path+"/modules/site/home.html",router:1,title:'Home',description:"Modular distributed microservices web application."},
+                Home:   {url:$vm.hosting_path+"/modules/site/home.html",router:1,title:'Home',description:"Modular distributed microservices web application."},
                 about:  {url:$vm.hosting_path+"/modules/site/about.html",router:1,title:'About',description:"Modular distributed microservices web application."},
                 auth:   {url:$vm.hosting_path+"/modules/system/auth.html"},
                 token:  {url:$vm.hosting_path+"/modules/system/token.html"},
@@ -70,7 +70,7 @@
                 musescore:  {url:$vm.hosting_path+"/modules/system/musescore.html"},
             }
             //---------------------------------------------
-            $vm.first_module='home';
+            $vm.first_module='Home';
             $vm.first_module_input={};
             (function(){ 
                 var a=window.location.href.split('?/'); if(a.length==2) $vm.first_module=a[1].split('&')[0].replace(/\//g,'_'); 
@@ -128,7 +128,7 @@
                 
                 if(m_name!=undefined){ $vm.active_id=$vm.module_list[m_name].id; $vm.active_name=m_name; }
                 if($vm.active_id!='') $('#D'+$vm.active_id).css('min-height',$vm.min_height+"px");
-                if(m_name=='home') {$("#header").css("background","rgba(0,0,0,0)"); $('#midi_buttons').show(); $('#g_nav').hide(); }
+                if(m_name=='Home') {$("#header").css("background","rgba(0,0,0,0)"); $('#midi_buttons').show(); $('#g_nav').hide(); }
                 else               {$("#header").css("background","rgba(0,0,0,0.8)");  $('#midi_buttons').hide(); $('#g_nav').show();}
             }
             //---------------------------------------------
@@ -285,7 +285,7 @@
             $vm.boot(); //start from here
             //=================================================
             $(window).on('scroll', function() {
-                if($vm.active_name=='home'){
+                if($vm.active_name=='Home'){
                     var y=-$(window).scrollTop()/3;
                     $('body').css({ 'background-position-y': y+'px'});
                     var r=-y/100; if(r>0.5) r=0.5;

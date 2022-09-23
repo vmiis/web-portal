@@ -73,6 +73,7 @@
     border: 1px solid;
     display: block;
     padding: 0 .625em;
+    box-sizing: border-box;
     outline: 0;
     margin: 0;
     text-align: left;
