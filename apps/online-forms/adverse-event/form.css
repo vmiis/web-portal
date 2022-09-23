@@ -13,7 +13,7 @@
     line-height: 1.5;
 }
 .header__ID{
-    padding: 2.5em 52px;
+    padding: 1.5em 52px;
     border-bottom: 1px solid #d7d8e1;
 }
 .t1__ID{
@@ -51,8 +51,8 @@
     word-break: break-word;
 }
 .r__ID{
-    padding-top:15px;
-    padding-bottom:15px;
+    padding-top:10px;
+    padding-bottom:10px;
     padding-left: 52px;
     padding-right: 52px;
 }
@@ -73,6 +73,7 @@
     border: 1px solid;
     display: block;
     padding: 0 .625em;
+    box-sizing: border-box;
     outline: 0;
     margin: 0;
     text-align: left;
