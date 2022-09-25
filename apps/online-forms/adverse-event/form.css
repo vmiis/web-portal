@@ -56,6 +56,9 @@
     padding-left: 52px;
     padding-right: 52px;
 }
+.r__ID:hover{
+    background-color: #ddd;
+}
 .r__ID div{
     padding-right:6px;
 }

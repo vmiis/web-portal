@@ -332,9 +332,11 @@
         "life": {url:$H+"/thinking/life.html", router:1},
         "understanding": {url:$H+"/thinking/understanding.html", router:1},
         "investment": {url:$H+"/thinking/investment.html", router:1},
-        "Online-forms": {url:H+"/panels/online-forms.html", router:1},
-        "Portal": {url:H+"/panels/main.html", router:1},
+        
+        "Portal": {url:H+"/panels/portal.html", router:1},
+        "Data-collection": {url:H+"/panels/data-collection.html", router:1},
         "WIMR-Apps": {url:H+"/panels/wimr-apps.html", router:1},
+        "Piano-scales": {url:H+"/panels/piano-scales.html", router:1},
         "Others": {url:H+"/panels/others.html", router:1},
     }
     set_prefix(prefix,modules);

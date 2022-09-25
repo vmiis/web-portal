@@ -130,15 +130,15 @@
     }
     //-----------------------------------------------
     m.item_a_add=function(){
-        var new_records;
         var new_row={}
         for(var i=0;i<m.item_a_field_id.length;i++){
             var b=m.item_a_field_id[i];
             if(b!=="ID" && b!=="_Remove"){
                 new_row[b]="";
-            }
+            }        
         }
-        m.item_a_records.splice(0, 0, new_row);
+        var p=m.item_a_records.length;
+        m.item_a_records.splice(p, 0, new_row);
         m.item_a_render(0);
     };
     //-----------------------------------------------
@@ -226,7 +226,7 @@
     item_a_list();
     item_a_render();
     //-----------------------------------
-    var table="vm-demo-purchase-order-request";
+    var table="demo-purchase-order-request";
     $('#F__ID').submit(function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -236,11 +236,10 @@
         var data = {};
         formData.forEach((value, key) => data[key] = value);
         data.items=items;
-        
         var req={"cmd":"insert",table:table,data:data}
         var param={
             type: "POST",
-            url: "https://api.wappsystem.com",
+            url: "https://01.vmiis.com",
             contentType: "application/json",
             charset:"utf-8",
             dataType: "json",

@@ -1,14 +1,14 @@
 <div id=D__ID>
-    <section id=form_container__ID bp=576 style='display:flow-root;'>
-        <div id=header__ID>
-            Incident Report
+    <div id=form_container__ID bp=576 style='display:flow-root;max-width:900px;'>
+        <div class=header__ID>
+            <h1 class=hA__ID>Incident Report</h1>
         </div>
-		<div style='padding:10px;border:1px solid #bbb;'>
-			This Incident Investigation Form should be used to record all incidents, including near misses, and may also be used to report hazards in the workplace.
-			The form should be completed as soon as possible following the incident. If the person involved cannot complete the form it may be completed on their behalf.			
-		</div>
-        <form id=F__ID action="https://api.wappsystem.com/incident-report" method="post" onsubmit="submit__ID.disabled = true; alert('Thank you for your submission')" >
-            <div>
+        <form id=F__ID action="https://01.vmiis.com/demo-incident-report" method="post" onsubmit="submit__ID.disabled = true; submit__ID.style.display='none';  alert('Thank you for your submission')" >
+            <div style='padding:20px 50px;border-bottom:1px solid #ccc;'>
+                This Incident Investigation Form should be used to record all incidents, including near misses, and may also be used to report hazards in the workplace.
+                The form should be completed as soon as possible following the incident. If the person involved cannot complete the form it may be completed on their behalf.			
+            </div>
+            <div class=r__ID>
                 <div w='100|50'>
                     <span>Full Name</span>
                     <input type=text  name=Full_Name Required /></span>
@@ -18,7 +18,7 @@
                     <input type=text  name=Contact_Number Required /></span>
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|50'>
                     <span>Email Address</span>
                     <input type=email  name=Email_Address Required /></span>
@@ -28,7 +28,7 @@
                     <input type=text  name=Manager Required /></span>
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|50'>
                     <span>Department / Group</span>
                     <input type=text  name=Department Required /></span>
@@ -38,7 +38,7 @@
                     <input type=text  name=Name_of_person_reporting  /></span>
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|100'>
                     <span>Role</span><br>
                     <label><input type='radio' name=Role value=Employee  >&nbsp&nbspEmployee</label>&nbsp&nbsp&nbsp&nbsp
@@ -48,7 +48,7 @@
                     <label><input type='radio' name=Role value=Student>&nbsp&nbspStudent</label>&nbsp&nbsp&nbsp&nbsp
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|100'>
                     <span>Nature of incident being reported</span><br>
                     <label><input type='radio' name=Incident value=Incident  >&nbsp&nbspIncident</label>&nbsp&nbsp&nbsp&nbsp
@@ -58,7 +58,7 @@
                     <label><input type='radio' name=Incident value='COVID-19'>&nbsp&nbspCOVID-19 infection or symptoms</label>&nbsp&nbsp&nbsp&nbsp
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|50'>
                     <span>Incident Date</span>
                     <input type=date  name=Incident_Date Required /></span>
@@ -68,13 +68,13 @@
                     <input type=time  name=Incident_Time Required /></span>
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|100'>
                     <span>Location of Incident</span>
                     <input type=text  name=Location_of_Incident Required /></span>
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|100'>
                     <span>Incident type</span><br>
                     <label><input type='radio' name=Incident_Type value=Security  >&nbsp&nbspSecurity</label>&nbsp&nbsp&nbsp&nbsp<br>
@@ -90,30 +90,27 @@
                     <label><input type='text' name=Other_Incident_Type placeholder=Other />
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|100'>
                     <span>Please briefly describe the incident/near miss/hazard</span>
                     <textarea name=describtion Required style='height:120px'></textarea>
                 </div>
             </div>
-            <div>
+            <div class=r__ID>
                 <div w='100|100'>
                     <span>Please describe the steps you took after the incident or near miss</span>
                     <textarea name=steps_after Required style='height:120px'></textarea>
                 </div>
             </div>
-
-            <div>
+            <div class=r__ID>
                 <div w='100|100' class=c_print>
                     <button id=submit__ID >Submit</button>
                 </div>
             </div>
+            <div style="padding:15px">&nbsp;</div>
         </form>
-    </section>
+    </div>
     <style>
-        #form_container__ID{
-            max-width:900px;
-        }
         #F__ID>div>div>span{
             font-weight: bold;
         }
