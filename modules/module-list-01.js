@@ -338,6 +338,8 @@
         "WIMR-Apps": {url:H+"/panels/wimr-apps.html", router:1},
         "Piano-scales": {url:H+"/panels/piano-scales.html", router:1},
         "Others": {url:H+"/panels/others.html", router:1},
+        "Micro-Apps": {url:H+"/panels/micro-apps.html", router:1},
+        
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

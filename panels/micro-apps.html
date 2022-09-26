@@ -4,25 +4,26 @@
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div class="list__ID">
-                <span class=LT__ID>Woolcock Micro Apps</span>
-                <li><a href='?/wimr-active-directory'>Active Directory</a></li>
-                <li><a href='?/wimr-backup-status'>Databases Backup Status Check Up</a></li>
-                <li><a href='?/wimr-coreplus'>CorePlus</a></li>
-                <li><a href='?/wimr-diagrams'>IT System Diagrams</a></li>
-                <li><a href='?/wimr-it-system-information'>IT System Information</a></li>
-                <li><a href='?/wimr-marketing'>Marketing</a></li>
-                <li><a href='?/wimr-mailchimp'>Mailchimp</a></li>
-                <li><a href='?/wimr-microsoft-dynamics'>Microsoft Dynamics</a></li>
-                <li><a href='?/wimr-microsoft-flow-activity'>Microsoft Flow Activity</a></li>
-                <li><a href='?/wimr-microsoft-sharepoint'>Microsoft SharePoint</a></li>
-                <li><a href='?/wimr-printer-toner-status'>Printer Status</a></li>
-                <li><a href='?/wimr-rat'>Rapid Antigen Tests</a></li>
-                <li><a href='?/wimr-snapforms'>Send Email to Patients</a></li>
-                <li><a href='?/wimr-server-status'>Server Status Check Up</a></li>
-                <li><a href='?/wimr-sleep-study'>Sleep Study</a></li>
-                <li><a href='?/wimr-staff-roster'>Sleep Technician Roster (Concept Mockup)</a></li>
-                <li><a href='?/wimr-clinic-registration'>Clinic Registration</a></li>
-        </div>
+                <span class=LT__ID>Micro Applications</span>
+                <li><a href='?/bookkeeping2'>Bookkeeping</a></li>
+                <li><a href='?/car-booking'>Car Booking</a></li>
+                <li><a href='?/equipment-booking'>Eqipment Booking</a></li>
+                <li><a href='?/invoice-management'>Invoice Management</a></li>
+                <li><a href='?/new-starter'>New Starter</a></li>
+                <li><a href='?/room-booking'>Room Booking</a></li>
+                <li><a href='?/sales-tracking'>Sales Tracking</a></li>
+                <li><a href='?/shift-roster'>Shift Roster</a></li>
+                <!--<li><a href='?/sleep-study'>Sleep Study (Z)</a></li>-->
+                <!--<li><a href='?/volunteer-system'>Volunteers</a></li>-->
+                <li><a href='?/printer-status'>Printer Toner Status</a></li>
+                <!--<li><a href='?/server-status'>Server Status</a></li>-->
+                <li><a href='?/bookkeeping2/index.wapp.html'>Bookkeeping (WAPP)</a></li>
+                <li><a href='?/bookkeeping2/index.vm.html'>Bookkeeping (VM)</a></li>
+                <li><a href='?/invoice-management/index.wapp.html'>Invoice Management (WAPP)</a></li>
+                <li><a href='?/invoice-management/index.vm.html'>Invoice Management (VM)</a></li>
+                <!--<li><a href='?/snapforms'>Snapforms</a></li>-->
+                <li><a href='?/withings'>Withings</a></li>
+            </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
     </div>
@@ -34,7 +35,7 @@
                 e.stopPropagation();
                 var href=$(this).attr('href');
                 var module_name=href.replace('?\/','');
-                if($vm.localhost==true) window.open('../'+module_name+'/');   else window.open('https://vmiis.github.io/'+module_name+'/');
+                if($vm.localhost==true) window.open('/vmiis/web-portal/apps/'+module_name+'/');   else window.open('/apps/'+module_name+'/');
             })
             //--------------------------------------------------------
         }
