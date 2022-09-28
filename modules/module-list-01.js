@@ -339,7 +339,7 @@
         "Piano-scales": {url:H+"/panels/piano-scales.html", router:1},
         "Others": {url:H+"/panels/others.html", router:1},
         "Micro-Apps": {url:H+"/panels/micro-apps.html", router:1},
-        
+        "About-Micro-App":{url:$H+"/shared/microapp/page.html",router:1}
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
