@@ -340,7 +340,7 @@
         "Others": {url:H+"/panels/others.html", router:1},
         "Micro-Apps": {url:H+"/panels/micro-apps.html", router:1},
         "About-Micro-App":{url:$H+"/shared/microapp/page.html",router:1},
-        "abcjs":{url:$H+"/abcjs/page.html",router:1},
+        "abcjs":{url:$H+"/abcjs/page.html"},
         "sheet-music":{url:H+"/panels/sheet-music.html",router:1}
 
     }
