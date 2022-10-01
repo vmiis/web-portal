@@ -1,31 +1,27 @@
 <div id=D__ID>
-    <div class=panel__ID>
-    </div>
+    <div style="padding:5px;font-size:11px"><i> <a href="?/About-Micro-App"><u>What is a micro app?</u></a></i></div>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
             <div class="list__ID">
-                <span class=LT__ID>Portal</span>
-                <li><a href='?/Data-collection'>Data collection, try it yourself</a></li>
-                <li><a href='?/WIMR-Apps'>WIMR micro applications</a></li>
-                <li><a href='?/Micro-Apps'>Micro applications</a></li>
-                <li><a href='?/Piano-scales'>Piano scales</a></li>
-                <li><a href='?/sheet-music'>Sheet music</a></li>
-                <!--<li><a href='?/Others'>Others</a></li>-->
-                
-            </div>
+                <span class=LT__ID>Sheet music</span>
+                <li><a href='?/abcjs' nm="five-hundred-miles">Five hundred miles</a></li>
+        </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
     </div>
     <script>
         function F__ID(){
             //--------------------------------------------------------
-            $('#panel__ID a').on('click',function(e){
+            $('#D__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 var href=$(this).attr('href');
-                if(href.substring(0,4)=='http'){ window.open(href); return; }
                 var module_name=href.replace('?\/','');
-                if(module_name!="") $vm.show_module(module_name,{}); 
+                var nm=$(this).attr('nm');
+                var url=$vm.hosting_path+"/modules/abc-notation/"+nm+".html";
+                $.get(url+'?_='+$vm.ver[0],function(txt){
+                    $vm.show_module(module_name,{musicnotes:txt}); 
+                },'text');
             })
             //--------------------------------------------------------
         }
