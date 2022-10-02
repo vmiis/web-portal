@@ -1,3 +1,20 @@
+@media print{
+	#sidebar__ID,#midi__ID,#print__ID{
+		display:none;
+	}
+    #paper__ID{
+		width:100%;
+		margin:0;
+        padding:50px 30px 50px 30px;
+        position: absolute!Important;;
+        top:0;
+        left:0;
+        width:100%;
+        max-width: 100%;
+    }
+}
+
+
 /* Some basic CSS to make the Audio controls in abcjs presentable. */
 .abcjs-inline-audio {
 	height: 26px;

@@ -1,12 +1,34 @@
-<div id="D__ID>">
-    <div id="container__ID" style="max-width:1300px">
+<div id="D__ID">
+    <div id="container__ID" style="max-width:1100px">
         <duv id="midi__ID" style="padding:0px;width:370px;position:fixed"></duv>
         <div id="layout__ID">
-            <div style="padding-right:20px;margin-top:30px;">
+            <div id=sidebar__ID style="padding-right:20px;margin-top:30px;">
+                <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label>
+                <label>
+                    Select instrument:
+                    <select id="instrument__ID">
+                        <option value="0">Acoustic Piano</option>
+                        <option value="4">Electric Piano</option>
+                        <option value="6">Harpsichord</option>
+                        <option value="7">Clavi</option>
+                        <option value="8">Celesta</option>
+                        <option value="23">Tango Accordion</option>
+                        <option value="24">Acoustic Guitar (nylon)</option>
+                        <option value="25">Acoustic Guitar (steel)</option>
+                        <option value="26">Electric Guitar (jazz)</option>
+                        <option value="56">Trumpet</option>
+                        <option value="57">Trombone</option>
+                        <option value="58">Tuba</option>
+                        <option value="59">Muted Trumpet</option>
+                        <option value="60">French Horn</option>
+                    </select>
+                </label>
+                <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
                 <textarea id="abc__ID" style="width:100%;font-size: 80%;overflow:hidden;"></textarea><br>
                 <duv id="warnings__ID"></duv>
             </div>
             <div>
+                <button id=print__ID type="button" onclick="window.print()" style="float:right">Print</button>
                 <div id="paper__ID"></div>
             </div>
         </div>
@@ -14,22 +36,78 @@
     <script>
         function F__ID(m){
             $('#D__ID').on('load',function(){
+                //------------------------------------
                 var notes=m.input.musicnotes;
                 $('#abc__ID').val(notes);
-                var abc_editor = new ABCJS.Editor("abc__ID", { 
-                    canvas_id: "paper__ID", 
-                    warnings_id:"warnings__ID",
-                    synth: {el:"#midi__ID",
-                        options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
+                var steps=0; $('#tran__ID').val(0);
+                var instrument=0; $('#instrument__ID').val(0);
+                var voice1=true; $('#voice1__ID').prop('checked',true);
+                var voice2=true; $('#voice2__ID').prop('checked',true);
+                //------------------------------------
+                var abc_editor="";
+                var create=function(){
+                    //alert(voice1);
+                    if(abc_editor!=""){
+                        abc_editor.synth.synthControl.pause();
+                    }
+                    var voice_off=[];
+                    if(voice1==false) voice_off.push(0);
+                    if(voice2==false) voice_off.push(1);
+                    abc_editor = new ABCJS.Editor("abc__ID", { 
+                        canvas_id: "paper__ID", 
+                        warnings_id:"warnings__ID",
+                        synth: {el:"#midi__ID",
+                            options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
+                                midiTranspose:steps,
+                                program:instrument,
+                                voicesOff:voice_off,
+                                chordsOff:true,
+                                soundFontUrl:"https://paulrosen.github.io/midi-js-soundfonts/abcjs/"
+                                //soundFontUrl:"https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
+                            },
+                            cursorControl:cursorControl
                         },
-                        cursorControl:cursorControl
-                    } 
-                })
+                        abcjsParams: {
+                            visualTranspose: steps,
+                            responsive: "resize",
+                            oneSvgPerLine: true
+                        }                     
+                    })
+                }
+                create();
+                //------------------------------------
                 $('#abc__ID').on('input',function(){
                     this.style.height = "auto";
                     this.style.height = this.scrollHeight + "px";
                 })
                 $('#abc__ID').triggerHandler('input');
+                //------------------------------------
+                $('#tran__ID').on('change',function(){       steps=$('#tran__ID').val(); create(); })
+                $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
+                $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
+                $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
+                
+                /*
+                var redraw=function() {
+
+                        var transposeBy = transposeHalfSteps.value;
+                        var doVisual = transposeVisual.checked ? transposeBy : 0;
+                        var doAudio = transposeAudio.checked ? transposeBy : 0;
+                        // re-render visualObj
+                        visualObj = ABCJS.renderAbc("paper", abc, {
+                            visualTranspose: doVisual
+                        });
+                        if(createSynth && synthControl) {
+                            // re-set tune stored in SynthController
+                            synthControl.setTune(visualObj[0], true, { midiTranspose: doAudio })
+                                .then(function(){
+                                    console.log('Audio successfully loaded.')
+                                }).catch(function(error) {
+                                console.warn('Audio problem: ', error);
+                            });
+                        }
+                }
+                */
             })
             function CursorControl(rootSelector) {
                 var self = this;
@@ -109,6 +187,5 @@
             grid-template-columns: 390px 1fr;
         }
         /*VmInclude:__CURRENT_PATH__/style.css*/
-
     </style>
 </div>
