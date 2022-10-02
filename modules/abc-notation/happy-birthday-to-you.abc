@@ -1,0 +1,19 @@
+X:1
+T:Happy Birthday to You
+C:Arrangement by Zhiming
+M:3/4
+L:1/4
+Q: 1/4=100
+K:C
+V:1
+G/2>G/2 | "C" A G c | "G" B2 G/2>G/2 | "G" A G d |
+V:2 clef=bass
+z|C,E,G,|G,B,D|G,B,D|
+V:1
+"C" c2  G/2>G/2| "C" g e c | "F" B A f/2>f/2 | "C" e c d | 
+V:2 clef=bass
+C,E,G,|C,E,G,|F,A,C|C,E,G,|
+V:1
+"C" c2 z |
+V:2
+C2 z |
