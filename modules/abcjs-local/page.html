@@ -54,15 +54,9 @@
     <script>
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);
+            var ss=1;
             $('#D__ID').on('load',function(){
-
-                var notes="X:1\n\T:Score 2\nC:A\n";
-                    $('#abc__ID').val(notes);
-                    $('#abc__ID').triggerHandler('input');
-
-
                 //------------------------------------
-                //var notes=m.input.musicnotes;
                 var steps=0; $('#tran__ID').val(0);
                 var instrument=0; $('#instrument__ID').val(0);
                 var voice1=true; $('#voice1__ID').prop('checked',true);
@@ -110,16 +104,24 @@
                 $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
                 $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
                 $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
-                $('#container__ID input[name=score').on('change',function(){       
-                    var v=$(this).val();
-                    //var notes=localStorage.getItem("vm-score_1");
-                    //if(notes==undefined){
-                        var notes="X:1\n\T:Score 100\nC:A\n";
-                        //localStorage.setItem("vm-score_1",notes);
-                    //}
-                    $('#abc__ID').val(notes);
+                var notes="X:1\n\T:Score @@@\nC:Your name\nM:4/4\nL:1/8\nQ:1/4=80\nK:C\nV:1\nCDEF|GABc|cBAG|FEDC|";
+                var load_score=function(s){
+                    var txt=localStorage.getItem("vm-score_"+s);
+                    if(txt==undefined){
+                        txt=notes.replace('@@@',s);
+                    }
+                    $('#abc__ID').val(txt);
                     $('#abc__ID').triggerHandler('input');
+                    $('#abc__ID').triggerHandler('keyup');
+                }
+                $('#container__ID input[name=score').on('change',function(){       
+                    ss=$(this).val();
+                    load_score(ss);
                 })
+                $('#abc__ID').on('keyup',function(){
+                    if(ss!=0) localStorage.setItem("vm-score_"+ss,$('#abc__ID').val());
+                })
+                load_score(ss);
             })
             function CursorControl(rootSelector) {
                 var self = this;
