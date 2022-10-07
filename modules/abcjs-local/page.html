@@ -29,6 +29,19 @@
                     </select>
                 </label><br>
                 <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
+                <div>
+                    <label><input type="radio" name=score value="1"> Score 1</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="2"> Score 2</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="3"> Score 3</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="4"> Score 4</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="5"> Score 5</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="6"> Score 6</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="7"> Score 7</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="8"> Score 8</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="9"> Score 9</input></label>&nbsp;&nbsp;
+                    <label><input type="radio" name=score value="10"> Score 10</input></label>
+                </div>
+                
                 <textarea id="abc__ID" style="width:100%;font-size: 80%;overflow:hidden;"></textarea><br>
                 <duv id="warnings__ID"></duv>
             </div>
@@ -42,9 +55,14 @@
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);
             $('#D__ID').on('load',function(){
+
+                var notes="X:1\n\T:Score 2\nC:A\n";
+                    $('#abc__ID').val(notes);
+                    $('#abc__ID').triggerHandler('input');
+
+
                 //------------------------------------
-                var notes=m.input.musicnotes;
-                $('#abc__ID').val(notes);
+                //var notes=m.input.musicnotes;
                 var steps=0; $('#tran__ID').val(0);
                 var instrument=0; $('#instrument__ID').val(0);
                 var voice1=true; $('#voice1__ID').prop('checked',true);
@@ -92,28 +110,16 @@
                 $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
                 $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
                 $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
-                
-                /*
-                var redraw=function() {
-
-                        var transposeBy = transposeHalfSteps.value;
-                        var doVisual = transposeVisual.checked ? transposeBy : 0;
-                        var doAudio = transposeAudio.checked ? transposeBy : 0;
-                        // re-render visualObj
-                        visualObj = ABCJS.renderAbc("paper", abc, {
-                            visualTranspose: doVisual
-                        });
-                        if(createSynth && synthControl) {
-                            // re-set tune stored in SynthController
-                            synthControl.setTune(visualObj[0], true, { midiTranspose: doAudio })
-                                .then(function(){
-                                    console.log('Audio successfully loaded.')
-                                }).catch(function(error) {
-                                console.warn('Audio problem: ', error);
-                            });
-                        }
-                }
-                */
+                $('#container__ID input[name=score').on('change',function(){       
+                    var v=$(this).val();
+                    //var notes=localStorage.getItem("vm-score_1");
+                    //if(notes==undefined){
+                        var notes="X:1\n\T:Score 100\nC:A\n";
+                        //localStorage.setItem("vm-score_1",notes);
+                    //}
+                    $('#abc__ID').val(notes);
+                    $('#abc__ID').triggerHandler('input');
+                })
             })
             function CursorControl(rootSelector) {
                 var self = this;
