@@ -3,15 +3,15 @@ T:Seeing The Mist Again
 C:Arrangement by Zhiming
 M:4/4
 L:1/8
-Q:1/4=80
+Q:1/4=70
 K:C
 V:1
-"C"g2>e2 "Am"aged|"F"c2Ac"G"G4|"F"A2>A2"G"G2cd|"C"e8|
-"C"g2>e2 "Am"aged|"F"c2Ac"G"G4|"F"g2>a2 "G"gede/2d/2|"C"c8|
-"G"d2>c2 "Am"e2d2|"C"c2 "G"deg4|"Am"a2>a2 "Am"e2ga|"C"g8|
-"A"a2>a2 "C"g2ed|"F"zcdf  "C"e2c2| "C"zdec "Am"A2GA|"C"c8|
+"①"g2>e2 "⑥"aged|"④"c2Ac"⑤"G4|"⑥"A2>A2"⑤"G2cd|"⑥"e8|
+"①"g2>e2 "⑥"aged|"④"c2Ac"⑤"G4|"①"g2>a2 "⑤"gede/2d/2|"①"c8|
+"②"d2>c2 "⑥"e2d2|"①"c2de "⑤"g4|"⑥"a2>a2 "①"e2ga|"⑤"g8|
+"⑥"a2>a2 "⑤"g2ed|"②"zcdf  "⑥"e2c2| "①"zdec "⑥"A2GA|"①"c8|
 V:2 clef=bass
-C,G,C2 A,,E,A,2|F,,C,F,2 G,,D,G,2|F,,C,F,2 G,,D,G,2|C,G,CDE2G,2|
-C,G,C2 A,,E,A,2|F,,C,F,2 G,,D,G,2|F,,C,F,2 G,,D,G,2|C,G,CDE4|
- G,,D,G,2  A,,E,A,2|C,G,C2  G,,D,G,2 |A,,E,A,2 A,,E,A,2|C,G,CDE2G,2|
-A,,E,A,2 C,G,C2 |F,,C,F,2  C,G,C2 |C,G,C2  A,,E,A,2 |C,G,CE',C,4|
+C,G,C2 A,,E,A,2|F,,C,F,2 G,,D,G,2|A,,E,A,2 G,,D,G,2|A,,E,A,CE4|
+C,G,C2 A,,E,A,2|F,,C,F,2 G,,D,G,2|C,G,C2 G,,D,G,2|C,G,CEC4|
+ D,A,D2  A,,E,A,2|C,G,C2  G,,D,G,2 |A,,E,A,2 C,G,C2|G,,D,G, D, G,4|
+A,,E,A,2 G,,D,G,2 | D,A,D2  A,,E,A,2 |C,G,C2  A,,E,A,2 |C,G,CE',C4|
