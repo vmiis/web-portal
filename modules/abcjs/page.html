@@ -42,6 +42,7 @@
     <script>
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);
+            var cursor=0;
             $('#D__ID').on('load',function(){
                 //------------------------------------
                 var notes=m.input.musicnotes;
@@ -53,7 +54,7 @@
                 //------------------------------------
                 var abc_editor="";
                 var create=function(){
-                    //alert(voice1);
+                    cursor=0;
                     if(abc_editor!=""){
                         abc_editor.synth.synthControl.pause();
                     }
@@ -77,7 +78,7 @@
                         abcjsParams: {
                             visualTranspose: steps,
                             responsive: "resize",
-                            oneSvgPerLine: true
+                            //oneSvgPerLine: true
                         }                     
                     })
                 }
@@ -86,6 +87,7 @@
                 $('#abc__ID').on('input',function(){
                     this.style.height = "auto";
                     this.style.height = this.scrollHeight + "px";
+                    cursor=0;
                 })
                 $('#abc__ID').triggerHandler('input');
                 //------------------------------------
@@ -93,28 +95,6 @@
                 $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
                 $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
                 $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
-                
-                /*
-                var redraw=function() {
-
-                        var transposeBy = transposeHalfSteps.value;
-                        var doVisual = transposeVisual.checked ? transposeBy : 0;
-                        var doAudio = transposeAudio.checked ? transposeBy : 0;
-                        // re-render visualObj
-                        visualObj = ABCJS.renderAbc("paper", abc, {
-                            visualTranspose: doVisual
-                        });
-                        if(createSynth && synthControl) {
-                            // re-set tune stored in SynthController
-                            synthControl.setTune(visualObj[0], true, { midiTranspose: doAudio })
-                                .then(function(){
-                                    console.log('Audio successfully loaded.')
-                                }).catch(function(error) {
-                                console.warn('Audio problem: ', error);
-                            });
-                        }
-                }
-                */
             })
             function CursorControl(rootSelector) {
                 var self = this;
@@ -127,13 +107,16 @@
                     // This is called when the timer starts so we know the svg has been drawn by now.
                     // Create the cursor and add it to the sheet music's svg.
                     var svg = document.querySelector(self.rootSelector + " svg");
-                    self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                    self.cursor.setAttribute("class", "abcjs-cursor");
-                    self.cursor.setAttributeNS(null, 'x1', 0);
-                    self.cursor.setAttributeNS(null, 'y1', 0);
-                    self.cursor.setAttributeNS(null, 'x2', 0);
-                    self.cursor.setAttributeNS(null, 'y2', 0);
-                    //svg.appendChild(self.cursor);
+                    if(cursor==0){
+                        cursor=1;
+                        self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        self.cursor.setAttribute("class", "abcjs-cursor");
+                        self.cursor.setAttributeNS(null, 'x1', 0);
+                        self.cursor.setAttributeNS(null, 'y1', 0);
+                        self.cursor.setAttributeNS(null, 'x2', 0);
+                        self.cursor.setAttributeNS(null, 'y2', 0);
+                        svg.appendChild(self.cursor);
+                    }
                 };
                 self.removeSelection = function() {
                     // Unselect any previously selected notes.
@@ -155,8 +138,8 @@
                     }
                     // Move the cursor to the location of the current note.
                     if (self.cursor) {
-                        self.cursor.setAttribute("x1", ev.left - 2);
-                        self.cursor.setAttribute("x2", ev.left - 2);
+                        self.cursor.setAttribute("x1", ev.left - 2+6);
+                        self.cursor.setAttribute("x2", ev.left - 2+6);
                         self.cursor.setAttribute("y1", ev.top);
                         self.cursor.setAttribute("y2", ev.top + ev.height);
                         var h1=$('#paper__ID').offset().top+ev.top;
