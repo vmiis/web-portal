@@ -206,5 +206,7 @@
     fill: red
 }
 .abcjs-cursor {
-    stroke: red;
+    stroke: #188b12;
+	stroke-width: 15;
+    opacity: 0.5;
 }        

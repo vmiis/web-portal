@@ -7,26 +7,24 @@ Q:1/4=80
 K:C
 %-------------------------
 V:1
-z2z2z2eg|"6"a6eg|"5"d6eg|"6"ac'2ag2ce|
-"5"d6de|"3"g6de|"6"A6Ac|"2"d3e dBAc|
-"5"G6eg|"6"a6eg|"5"d6eg|"6"ac'2ag2ce|
-"5"d6de|"3"g6de|"6"A6Ac|"5"d3e dBAG|
-"1"c4zc'c'a|"4"c'4 zac'a|"1"g6ge|"4"a3g c2dc/2d/2|
-"1"e4zeed|"6"e4 zc'c'b|"4"a6 ee|"2"d3e c'bae|
-"5"g6eg|"6"a6eg|"5"d6eg|"6"ac'2ag2ce|
-"5"d6de|"3"g6de|"6"A6Ac|"5"d3e dBAG|
-"1"c4de|"3"g6de|"6"A6Ac|"5"d3e dBAG|
-"1"c6z2|
+z6eg|"6"a6eg|"5"d6eg|"6"ac'2ag2ce|"5"d6de|
+"3"g6de|"6"A6Ac|"2"d3e dBAc|"5"G6eg|
+"6"a6eg|"5"d6eg|"6"ac'2ag2ce|"5"d6de|
+"3"g6de|"6"A6Ac|"5"d3e dBAG|"1"c4zc'c'a|
+"4"c'4 zac'a|"1"g6ge|"4"a3g c2dc/2d/2|"1"e4zeed|
+"6"e4 zc'c'b|"4"a6 ee|"2"d3e c'bae|"5"g6eg|
+"6"a6eg|"5"d6eg|"6"ac'2ag2ce|"5"d6de|
+"3"g6de|"6"A6Ac|"5"d3e dBAG|"1"c6de|
+"3"g6de|"6"A6Ac|"5"d3e dBAG|"1"c6z2|
 %-------------------------
 V:2 celf=bass
-z2z2z2z2|A,,E,A,CE4|G,,D,G,B,D4|A,,E,A,CE4|
-G,,D,G,B, D4|E,,B,,E,G,B,4|A,,E,A,CE4|D,,A,,D,^F,A,4|
-G,,D,G,B, D4|A,,E,A,CE4|G,,D,G,B,D4|A,,E,A,CE4|
-G,,D,G,B, D4|E,,B,,E,G,B,4|A,,E,A,CE4|G,,D,G,B, D4|
-C,G,CEG4|F,,C,F,A,C4|C,G,CEG4|F,,C,F,A,C4|
-C,G,CEG4|A,,E,A,CE4|F,,C,F,A,C4|D,,A,,D,^F,A,4|
-G,,D,G,B, D4|A,,E,A,CE4|G,,D,G,B,D4|A,,E,A,CE4|
-G,,D,G,B, D4|E,,B,,E,G,B,4|A,,E,A,CE4|G,,D,G,B, D4|
-C,G,CEG4|E,,B,,E,G,B,4|A,,E,A,CE4|G,,D,G,B, D4|
-C,G,CEG4|
+z8|A,,E,A,CE4|G,,D,G,B,D4|A,,E,A,CE4|G,,D,G,B, D4|
+E,,B,,E,G,B,4|A,,E,A,CE4|D,,A,,D,^F,A,4|G,,D,G,B, D4|
+A,,E,A,CE4|G,,D,G,B,D4|A,,E,A,CE4|G,,D,G,B, D4|
+E,,B,,E,G,B,4|A,,E,A,CE4|G,,D,G,B, D4|C,G,CEG4|
+F,,C,F,A,C4|C,G,CEG4|F,,C,F,A,C4|C,G,CEG4|
+A,,E,A,CE4|F,,C,F,A,C4|D,,A,,D,^F,A,4|G,,D,G,B, D4|
+A,,E,A,CE4|G,,D,G,B,D4|A,,E,A,CE4|G,,D,G,B, D4|
+E,,B,,E,G,B,4|A,,E,A,CE4|G,,D,G,B, D4|C,G,CEG4|
+E,,B,,E,G,B,4|A,,E,A,CE4|G,,D,G,B, D4|C,G,CEG4|
 %-------------------------

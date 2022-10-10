@@ -42,21 +42,31 @@
                     <label><input type="radio" name=score value="10"> Score 10</input></label>
                 </div>
                 
-                <textarea id="abc__ID" style="width:100%;font-size: 90%;overflow:hidden; font-family: monospace;"></textarea><br>
+                <textarea id="abc__ID" style="width:100%;font-size: 90%;font-family: monospace; overflow: auto;"></textarea><br>
                 <duv id="warnings__ID"></duv><br><br>
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf">ABC Quick Reference Card</a>
             </div>
-            <div w='100|60' style="overflow:auto">
-                <button id=print__ID type="button" onclick="window.print()" style="float:right">Print</button>
-                <div id="paper__ID"></div>
+            <div w='100|60'>
+                <div style='width:100%;padding-bottom:15px;display:inline-block'>
+                    <button id=print__ID type="button" style="float:right">Print</button>
+                </div>
+                <div id=paper_w__ID style="width:100%;overflow:auto">
+                    <div id="paper__ID" ></div>
+                </div>
             </div>
         </div>
     </div>
     <script>
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);
+            var cursor=0;
             var ss=1;
             $('#D__ID').on('load',function(){
+                //------------------------------------
+                setTimeout(function(){
+                    $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
+                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10)+"px");
+                },1000);
                 //------------------------------------
                 var steps=0; $('#tran__ID').val(0);
                 var instrument=0; $('#instrument__ID').val(0);
@@ -64,8 +74,10 @@
                 var voice2=true; $('#voice2__ID').prop('checked',true);
                 //------------------------------------
                 var abc_editor="";
-                var create=function(){
-                    //alert(voice1);
+                var create=function(print){
+                    var OS=false;
+                    if(print==1) OS=true;
+                    cursor=0;
                     if(abc_editor!=""){
                         abc_editor.synth.synthControl.pause();
                     }
@@ -89,15 +101,40 @@
                         abcjsParams: {
                             visualTranspose: steps,
                             responsive: "resize",
-                            oneSvgPerLine: true
+                            oneSvgPerLine: OS
+                        },
+                        selectionChangeCallback:function(){
+                            var lastSelection = document.querySelectorAll("#paper__ID" + " .abcjs-note_selected path");
+                            if(lastSelection!=undefined){
+                                if(lastSelection.length!=0){
+                                    var d=$(lastSelection[0]).attr('d');
+                                    if(d!=undefined){
+                                        xx=d.split(' ');
+                                        if(xx.length>2){
+                                            var y=parseFloat(xx[2].replace('c',''));
+                                            var h=$("#paper_w__ID").scrollTop();
+                                            var hh=$('#paper__ID').offset().top+y;
+                                            var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/3;
+                                            var h3=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()*2/3;
+                                            if(hh<h2) $("#paper_w__ID").scrollTop(h+(hh-h2));
+                                            if(hh>h3) $("#paper_w__ID").scrollTop(h+(hh-h3));
+                                        }
+                                    }
+                                }
+                            }
                         }                     
                     })
                 }
                 create();
                 //------------------------------------
+                $('#print__ID').on('click',function(){
+                    create(1); window.print(); create();
+                })
+                //------------------------------------
                 $('#abc__ID').on('input',function(){
-                    this.style.height = "auto";
-                    this.style.height = this.scrollHeight + "px";
+                    //this.style.height = "auto";
+                    //this.style.height = this.scrollHeight + "px";
+                    cursor=0;
                 })
                 $('#abc__ID').triggerHandler('input');
                 //------------------------------------
@@ -135,13 +172,16 @@
                     // This is called when the timer starts so we know the svg has been drawn by now.
                     // Create the cursor and add it to the sheet music's svg.
                     var svg = document.querySelector(self.rootSelector + " svg");
-                    self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                    self.cursor.setAttribute("class", "abcjs-cursor");
-                    self.cursor.setAttributeNS(null, 'x1', 0);
-                    self.cursor.setAttributeNS(null, 'y1', 0);
-                    self.cursor.setAttributeNS(null, 'x2', 0);
-                    self.cursor.setAttributeNS(null, 'y2', 0);
-                    //svg.appendChild(self.cursor);
+                    if(cursor==0){
+                        cursor=1;
+                        self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        self.cursor.setAttribute("class", "abcjs-cursor");
+                        self.cursor.setAttributeNS(null, 'x1', 0);
+                        self.cursor.setAttributeNS(null, 'y1', 0);
+                        self.cursor.setAttributeNS(null, 'x2', 0);
+                        self.cursor.setAttributeNS(null, 'y2', 0);
+                        svg.appendChild(self.cursor);
+                    }
                 };
                 self.removeSelection = function() {
                     // Unselect any previously selected notes.
@@ -167,10 +207,12 @@
                         self.cursor.setAttribute("x2", ev.left - 2);
                         self.cursor.setAttribute("y1", ev.top);
                         self.cursor.setAttribute("y2", ev.top + ev.height);
+                        
                         var h1=$('#paper__ID').offset().top+ev.top;
-                        var h2=$(window).height()/2;
+                        var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/2;
                         var hh=h2-h1;
-                        if(hh<0) $(document).scrollTop(-hh);
+                        var h=$("#paper_w__ID").scrollTop();
+                        if(hh<0) $("#paper_w__ID").scrollTop(h-hh);
                     }
                 };
                 self.onFinished = function() {
