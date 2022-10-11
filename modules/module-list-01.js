@@ -344,6 +344,7 @@
         "abcjs-local":{url:$H+"/abcjs-local/page.html",router:1},
         "sheet-music":{url:H+"/panels/sheet-music.html",router:1},
         "ssl-check":{url:$H+"/ssl-check/page.html",router:1},
+        "domain-check":{url:$H+"/domain-check/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

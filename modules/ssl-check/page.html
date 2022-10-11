@@ -1,14 +1,34 @@
 <div id="D__ID">
-    <div>
-        AAA
+    <div style="padding:50px">
+        <div id="data__ID"></div>
     </div>
     <script>
         function F__ID(m){
+            var hosts="proxy.wappsystem.com,api.wappsystem.com,01.vmiis.com,03.vmiis.com,04.vmiis.com,05.vmiis.com,06.vmiis.com,wimr-snapforms.vmiis.com,www.researchvolunteer.org.au";
+            
             $('#D__ID').on('load',function(){
-                console.log(1)
-                var req={api:'vm01',cmd:'ssl-check',hosts:'api.wappsystem.com,01.vmiis.com'}
+                var req={api:'vm01',cmd:'ssl-check',hosts:hosts}
                 $vm.request(req,function(res){
-                    console.log(res.result);
+
+                    var compare=function( a, b ) {
+                        if ( Date.parse(a.valid_to) < Date.parse(b.valid_to) ){
+                            return -1;
+                        }
+                        if ( Date.parse(a.valid_to) > Date.parse(b.valid_to) ){
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    res.result.sort(compare);
+                    var txt="<table><tr><th>SSL</th><th>Days Left</th><th>Valid From</th><th>Valid To</th></tr>"
+                        for(var i=0;i<res.result.length;i++){
+                            let TotalDays = Math.ceil(
+                                ( (Date.parse(res.result[i].valid_to)-new Date()) ) / (1000 * 3600 * 24)
+                            );
+                            txt+="<tr><td>"+res.result[i].name+"</td><td>"+TotalDays+"</td><td>"+res.result[i].valid_from+"</td><td>"+res.result[i].valid_to+"</td></tr>"
+                        }
+                    txt+"</table>"
+                    $('#data__ID').html(txt);
                 })
             })
         }
@@ -16,6 +36,9 @@
     <style>
         #D__ID{
             background-color: #fff;
+        }
+        #data__ID td, #data__ID th{
+            padding:3px 30px 3px 0px;
         }
     </style>
 </div>
