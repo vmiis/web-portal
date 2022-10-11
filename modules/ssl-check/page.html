@@ -1,0 +1,21 @@
+<div id="D__ID">
+    <div>
+        AAA
+    </div>
+    <script>
+        function F__ID(m){
+            $('#D__ID').on('load',function(){
+                console.log(1)
+                var req={api:'vm01',cmd:'ssl-check',hosts:'api.wappsystem.com,01.vmiis.com'}
+                $vm.request(req,function(res){
+                    console.log(res.result);
+                })
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+    </style>
+</div>
