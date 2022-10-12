@@ -1,0 +1,69 @@
+<div id="D__ID">
+    <div style="padding:50px">
+        <div id="data__ID">
+            <table>
+                <tr><th>Server</th><th>Last Backup</th></tr>
+                <tr><td>Wappsystem MongoDB</td><td><span id="wp__ID"></span></td></tr>
+                <tr><td>Woolcock MongoDB</td><td><span id="wm__ID"></span></td></tr>
+                <tr><td>Woolcock SQL Server (CMS/RT)</td><td><span id="rt__ID"></span></td></tr>
+                <tr><td>Woolcock SQL Server (Adult)</td><td><span id="w1__ID"></span></td></tr>
+                <tr><td>Woolcock SQL Server (Pediatrics)</td><td><span id="w2__ID"></span></td></tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function F__ID(m){
+            //-------------------------------------------------
+            $('#D__ID').on('load',function(){
+                //------------------------------------------
+                var req={api:'wapp',cmd:'backup-last-time'}
+                $('#wp__ID').text('');
+                $vm.request(req,function(res){
+                    var H = Math.ceil( (new Date()-Date.parse(res.result))/(1000*3600) );
+                    $('#wp__ID').html(H +" hours ago"); 
+                })
+                //------------------------------------------
+                var req={api:'wka',cmd:'backup-last-time',folder:"Woolcock_Archive\\VMBackup\\mongodb"}
+                $('#wm__ID').text('');
+                $vm.request(req,function(res){
+                    var H = Math.ceil( (new Date()-Date.parse(res.result))/(1000*3600) );
+                    $('#wm__ID').html(H +" hours ago"); 
+                })
+                //------------------------------------------
+                var req={api:'wka',cmd:'backup-last-time',folder:"Woolcock_Archive\\VMBackup\\research-tools"}
+                $('#rt__ID').text('');
+                $vm.request(req,function(res){
+                    var H = Math.ceil( (new Date()-Date.parse(res.result))/(1000*3600) );
+                    $('#rt__ID').html(H +" hours ago"); 
+                })
+                //------------------------------------------
+                var req={api:'wka',cmd:'backup-last-time',folder:"Woolcock_Archive\\VMBackup\\SleepwareG3_Adult"}
+                $('#w1__ID').text('');
+                $vm.request(req,function(res){
+                    var H = Math.ceil( (new Date()-Date.parse(res.result))/(1000*3600) );
+                    $('#w1__ID').html(H +" hours ago"); 
+                })
+                //------------------------------------------
+                var req={api:'wka',cmd:'backup-last-time',folder:"Woolcock_Archive\\VMBackup\\SleepwareG3_Paeds"}
+                $('#w2__ID').text('');
+                $vm.request(req,function(res){
+                    var H = Math.ceil( (new Date()-Date.parse(res.result))/(1000*3600) );
+                    $('#w2__ID').html(H +" hours ago"); 
+                })
+                //------------------------------------------
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+        #data__ID td, #data__ID th{
+            padding:3px 30px 3px 0px;
+        }
+        #data__ID td span{
+            /*color:green;*/
+            padding-left:18px;
+        }
+    </style>
+</div>

@@ -1,0 +1,61 @@
+<div id="D__ID">
+    <div style="padding:50px">
+        <div id="data__ID">
+            <table>
+                <tr><th>Server</th><th>Status</th></tr>
+                <tr><td>VMIIS MongoDB</td><td><span id="01__ID"></span></td></tr>
+                <tr><td>Wappsystem MongoDB</td><td><span id="02__ID"></span></td></tr>
+                <tr><td>Woolcock MongoDB</td><td><span id="03__ID"></span></td></tr>
+                <tr><td>Woolcock SQL Server</td><td><span id="04__ID"></span></td></tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function F__ID(m){
+            //-------------------------------------------------
+            $('#D__ID').on('load',function(){
+                //------------------------------------------
+                var req={api:'vm01',cmd:'db-check'}
+                $('#01__ID').text('');
+                $vm.request(req,function(res){
+                    if(res.result!=undefined && res.result.length==1 && res.result[0]==1) $('#01__ID').html('&#10003;'); 
+                    console.log(res);
+                })
+                //------------------------------------------
+                var req={api:'wapp',cmd:'db-check'}
+                $('#02__ID').text('');
+                $vm.request(req,function(res){
+                    if(res.result!=undefined && res.result.length==1 && res.result[0]==1) $('#02__ID').html('&#10003;'); 
+                    console.log(res);
+                })
+                //------------------------------------------
+                var req={api:'wka',cmd:'db-check'}
+                $('#03__ID').text('');
+                $vm.request(req,function(res){
+                    if(res.result!=undefined && res.result.length==1 && res.result[0]==1) $('#03__ID').html('&#10003;'); 
+                    console.log(res);
+                })
+                //------------------------------------------
+                var req={api:'wka',cmd:'sql-db-check'}
+                $('#04__ID').text('');
+                $vm.request(req,function(res){
+                    if(res.result!=undefined && res.result.length==1 && res.result[0]==1) $('#04__ID').html('&#10003;'); 
+                    console.log(res);
+                })
+                //------------------------------------------
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+        #data__ID td, #data__ID th{
+            padding:3px 30px 3px 0px;
+        }
+        #data__ID td span{
+            color:green;
+            padding-left:18px;
+        }
+    </style>
+</div>

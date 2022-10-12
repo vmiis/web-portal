@@ -41,7 +41,7 @@
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[2.08,0.06]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[2.09,0.06]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             //---------------------------------------------
@@ -109,8 +109,10 @@
             $vm.root_layout_content_slot='content'
             $vm.api_addresses={
                 "wzd":"https://woolcock-zhiming-database.vmiis.com",
+                "wka":"https://wimr-snapforms.woolcock.org.au",
                 "wapp":"https://api.wappsystem.com",
                 "vm01":"https://01.vmiis.com",
+                "vm01d":"https://01.vmiis.com:442",
             }
             $vm.api_default="wapp";
             $vm.api_address='https://api.wappsystem.com';

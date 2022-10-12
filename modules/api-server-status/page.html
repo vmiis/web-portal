@@ -1,0 +1,66 @@
+<div id="D__ID">
+    <div style="padding:50px">
+        <div id="data__ID">
+            <table>
+                <tr><th>Server</th><th>Status</th></tr>
+                <tr><td>01.vmiis.com</td><td><span id="01__ID"></span></td></tr>
+                <tr><td>03.vmiis.com</td><td><span id="03__ID"></span></td></tr>
+                <tr><td>04.vmiis.com</td><td><span id="04__ID"></span></td></tr>
+                <tr><td>05.vmiis.com</td><td><span id="05__ID"></span></td></tr>
+                <tr><td>06.vmiis.com</td><td><span id="06__ID"></span></td></tr>
+                <tr><td>api.wappsystem.com</td><td><span id="w1__ID"></span></td></tr>
+                <tr><td>proxy.wappsystem.com</td><td><span id="w2__ID"></span></td></tr>
+                <tr><td>wimr-snapforms.woolcock.org.au</td><td><span id="wk__ID"></span></td></tr>
+
+                
+            </table>
+        </div>
+    </div>
+    <script>
+        function F__ID(m){
+            //-------------------------------------------------
+            function httpGetAsync(theUrl, callback){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() { 
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        callback(xmlHttp.responseText);
+                }
+                xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+                xmlHttp.send(null);
+            }
+            //-------------------------------------------------
+            function httpGetAsync2(theUrl, callback){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() { 
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        callback(xmlHttp.responseText);
+                }
+                xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+                xmlHttp.send(null);
+            }
+            //-------------------------------------------------
+            $('#D__ID').on('load',function(){
+                $('#01__ID').text(''); httpGetAsync("https://01.vmiis.com",function(txt){ console.log(txt); $('#01__ID').html('&#10003;'); })
+                $('#03__ID').text(''); httpGetAsync("https://03.vmiis.com",function(txt){ console.log(txt); $('#03__ID').html('&#10003;'); })
+                $('#04__ID').text(''); httpGetAsync("https://04.vmiis.com",function(txt){ console.log(txt); $('#04__ID').html('&#10003;'); })
+                $('#05__ID').text(''); httpGetAsync("https://05.vmiis.com",function(txt){ console.log(txt); $('#05__ID').html('&#10003;'); })
+                $('#06__ID').text(''); httpGetAsync("https://06.vmiis.com",function(txt){ console.log(txt); $('#06__ID').html('&#10003;'); })
+                $('#w1__ID').text(''); httpGetAsync("https://api.wappsystem.com",function(txt){ console.log(txt); $('#w1__ID').html('&#10003;'); })
+                $('#w2__ID').text(''); httpGetAsync("https://proxy.wappsystem.com",function(txt){ console.log(txt); $('#w2__ID').html('&#10003;'); })
+                $('#wk__ID').text(''); httpGetAsync2("https://wimr-snapforms.woolcock.org.au",function(txt){ console.log(txt); $('#wk__ID').html('&#10003;'); })
+            })
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+        #data__ID td, #data__ID th{
+            padding:3px 30px 3px 0px;
+        }
+        #data__ID td span{
+            color:green;
+            padding-left:18px;
+        }
+    </style>
+</div>
