@@ -348,6 +348,7 @@
         "api-server-status":{url:$H+"/api-server-status/page.html",router:1},
         "db-server-status":{url:$H+"/db-server-status/page.html",router:1},
         "db-backup-status":{url:$H+"/db-backup-status/page.html",router:1},
+        "linux-commands":{url:$H+"/linux-commands/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

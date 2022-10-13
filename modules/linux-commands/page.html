@@ -1,0 +1,116 @@
+<div id="D__ID">
+    <div style="padding:50px">
+        <table>
+            <tabel>
+                <tr><th>Command</th><th>Note</th></tr>
+                <tr><td>sudo apt update</td><td></td></tr>
+                <tr><td>sudo apt upgrade</td><td></td></tr>
+                <tr><td>curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -</td><td>choose nodejs v16</td></tr>
+                <tr><td>sudo apt-get install -y nodejs</td><td>install nodejs</td></tr>
+                <tr><td>sudo apt-get install samba</td><td>samba server</td></tr>
+                <tr><td>sudo apt-get install smbclient</td><td>samba client</td></tr>
+                <tr><td>sudo apt install cifs-utils</td><td>cifs-utils (for microsoft window)</td></tr>
+                <tr><td>sudo apt install net-tools</td><td>tools for network check such as: netstat</td></tr>
+                <tr><td>sudo apt install certbot</td><td></td></tr>
+                <tr><td>sudo timedatectl set-timezone Australia/Sydney</td><td>set time zoon</td></tr>
+                <tr><td>sudo npm install pm2 -g</td><td></td></tr>
+                <tr><td>sudo npm install nodemon -g</td><td></td></tr>
+                <tr><td>mkdir servers;mkdir storage;</td><td></td></tr>
+                <tr><td>cd servers</td><td></td></tr>
+                <tr><td>npm install express -save</td><td></td></tr>
+                <tr><td>npm install jsonwebtoken</td><td></td></tr>
+                <tr><td>npm install mongodb</td><td></td></tr>
+                <tr><td>
+                    sudo nano /etc/iptables/rules.v4<br>
+                    -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT<br>
+                    -A INPUT -p tcp -m state --state NEW -m tcp --dport 442 -j ACCEPT<br>
+                    -A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT<br>
+                    -A INPUT -p tcp -m state --state NEW -m tcp --dport 139 -j ACCEPT<br>
+                    -A INPUT -p tcp -m state --state NEW -m tcp --dport 445 -j ACCEPT<br>
+                    -A INPUT -p tcp -m state --state NEW -m tcp --dport 27017 -j ACCEPT<br>
+                    sudo iptables-restore &#9001; /etc/iptables/rules.v4
+                </td><td>config iptable</td></tr>
+                <tr><td>sudo smbpasswd -a ubuntu</td><td> set password for ubuntu</td></tr>
+                <tr><td>sudo nano /etc/samba/smb.conf<br>
+                    [global]<br>
+                    ntlm auth = true<br>
+                    # original<br>
+                    workgroup = WORKGROUP<br>
+                    server string = %h server (Samba, Ubuntu)<br>
+                    log file = /var/log/samba/log.%m<br>
+                    max log size = 1000<br>
+                    logging = file<br>
+                    panic action = /usr/share/samba/panic-action %d<br>
+                    server role = standalone server<br>
+                    obey pam restrictions = yes<br>
+                    unix password sync = yes<br>
+                    passwd program = /usr/bin/passwd %u<br>
+                    passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .<br>
+                    pam password change = yes<br>
+                    map to guest = bad user<br>
+                    usershare allow guests = yes<br>
+                    [servers]<br>
+                    path = /home/ubuntu/servers<br>
+                    valid users = ubuntu<br>
+                    read only = no<br>
+                    /-----------------<br>
+                    [global]<br>
+                    ntlm auth = true<br>
+                    [storage]<br>
+                    path = /home/ubuntu/storage  <br>
+                    valid users = ubuntu <br>
+                    read only = no<br>
+                    [servers]<br>
+                    path = /home/ubuntu/servers  <br>
+                    valid users = ubuntu <br>
+                    read only = no<br>
+                </td><td></td></tr>
+                <tr><td>
+                    sudo nano /etc/fstab<br>
+                    //02.vmiis.com/storage  /home/ubuntu/storage cifs  username=ubuntu,password=xxxxxxx
+                </td><td></td></tr>
+                <tr><td>
+                    sudo nano /etc/mongod.conf<br>
+                    net:<br>
+                        port: 27017<br>
+                        bindIp: 0.0.0.0<br>
+                    security:<br>
+                        authorization: 'enabled'<br>
+
+                </td><td></td></tr>
+                <tr><td>
+                    mongosh<br>
+                    db.createUser(<br>
+                      {<br>
+                        user: "root",<br>
+                        pwd: "xxxxxxxx",<br>
+                        roles: [ { role: "root", db: "admin" } ]<br>
+                      }<br>
+                    )<br>
+                </td><td></td></tr>
+                
+
+
+            </tabel>
+        </table>
+    </div>
+    <script>
+        function F__ID(m){
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+        #D__ID td, #data__ID th{
+            padding:0px 30px 0px 0px;
+        }
+
+        #D__ID table, #D__ID td, #D__ID th {
+            border: 1px solid;
+        }
+        #D__ID table {
+            border-collapse: collapse;
+        }
+    </style>
+</div>

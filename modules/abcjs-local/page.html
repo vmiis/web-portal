@@ -204,8 +204,8 @@
                     }
                     // Move the cursor to the location of the current note.
                     if (self.cursor) {
-                        self.cursor.setAttribute("x1", ev.left - 2);
-                        self.cursor.setAttribute("x2", ev.left - 2);
+                        self.cursor.setAttribute("x1", ev.left - 2+8);
+                        self.cursor.setAttribute("x2", ev.left - 2+8);
                         self.cursor.setAttribute("y1", ev.top);
                         self.cursor.setAttribute("y2", ev.top + ev.height);
                         
