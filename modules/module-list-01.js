@@ -348,7 +348,13 @@
         "api-server-status":{url:$H+"/api-server-status/page.html",router:1},
         "db-server-status":{url:$H+"/db-server-status/page.html",router:1},
         "db-backup-status":{url:$H+"/db-backup-status/page.html",router:1},
-        "linux-commands":{url:$H+"/linux-commands/page.html",router:1},
+        "linux":{url:H+"/panels/linux.html",router:1},
+        "linux-setup":{url:$H+"/linux/setup/page.html",router:1},
+        "linux-iptable":{url:$H+"/linux/iptable/page.html",router:1},
+        "linux-samba":{url:$H+"/linux/samba/page.html",router:1},
+        "linux-nodejs":{url:$H+"/linux/nodejs/page.html",router:1},
+        "linux-certbot":{url:$H+"/linux/certbot/page.html",router:1},
+        "linux-mongodb":{url:$H+"/linux/mongodb/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

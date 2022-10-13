@@ -1,0 +1,24 @@
+<div id="D__ID">
+    <div style="padding:50px">
+<pre style='background-color: #333;color:#fff'>
+    sudo certbot certonly --webroot -w /home/ubuntu/servers/production/www -d 05.vmiis.com
+    
+    sudo cp /etc/letsencrypt/live/05.vmiis.com/fullchain.pem /home/ubuntu/servers/production/ssl/fullchain.pem
+    sudo cp /etc/letsencrypt/live/05.vmiis.com/privkey.pem /home/ubuntu/servers/production/ssl/privkey.pem
+    
+    sudo cp /etc/letsencrypt/live/05.vmiis.com/fullchain.pem /home/ubuntu/servers/development/ssl/fullchain.pem
+    sudo cp /etc/letsencrypt/live/05.vmiis.com/privkey.pem /home/ubuntu/servers/development/ssl/privkey.pem
+    
+</pre>
+
+    </div>
+    <script>
+        function F__ID(m){
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+    </style>
+</div>

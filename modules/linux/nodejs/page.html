@@ -1,0 +1,53 @@
+<div id="D__ID">
+    <div style="padding:50px">
+<pre style='background-color: #333;color:#fff'>
+    # no hangup, the & symbol tells the shell to run the command in the background
+    sudo nohup node /home/ubuntu/servers/development/server.js > /home/ubuntu/servers/development/logs/server.log &
+</pre>
+
+<pre style='background-color: #333;color:#fff'>
+    # tcp listen pid
+    sudo netstat -tlp
+    
+    # a - all sockets
+    sudo netstat -ap | grep "node" | grep "LISTEN"
+</pre>
+
+<pre style='background-color: #333;color:#fff'>
+    # last 10 lines
+    tail -f /home/ubuntu/servers/production/logs/server.log
+</pre>
+
+<pre style='background-color: #333;color:#fff'>
+    # start run cmd at reboot
+    sudo crontab -e
+    @reboot /usr/bin/node /home/ubuntu/servers/production/server.js > /home/ubuntu/servers/production/logs/server.log
+</pre>
+
+<pre style='background-color: #333;color:#fff'>
+    # pm2 reboot
+    sudo pm2 start /home/ubuntu/servers/production/server.js --name pro -o /home/ubuntu/servers/production/logs/server.log
+    sudo pm2 save
+    sudo pm2 startup systemd
+    
+    # PM2 start/stop
+    sudo pm2 start /home/ubuntu/servers/production/server.js --name pro -o /home/ubuntu/servers/production/logs/server.log
+    sudo pm2 stop pro
+    
+    # logrotate
+    pm2 install pm2-logrotate
+    pm2 set pm2-logrotate
+</pre>
+
+
+    </div>
+    <script>
+        function F__ID(m){
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+    </style>
+</div>

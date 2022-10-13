@@ -1,0 +1,46 @@
+<div id="D__ID">
+    <div style="padding:50px">
+<pre style='background-color: #333;color:#fff'>
+    wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+    sudo apt-get install -y mongodb-org
+
+    sudo systemctl start mongod
+    sudo systemctl status mongod
+    sudo systemctl stop mongod
+    sudo systemctl restart mongod
+</pre>   
+<pre style='background-color: #333;color:#fff'>
+    mongosh
+    db.createUser(
+      {
+        user: "root",
+        pwd: "********",
+        roles: [ { role: "root", db: "admin" } ]
+      }
+    )
+</pre>   
+<pre style='background-color: #333;color:#fff'>
+    sudo nano /etc/mongod.conf
+    net:
+      port: 27017
+      bindIp: 0.0.0.0
+    security:
+      authorization: 'enabled'
+        
+</pre>
+<pre style='background-color: #333;color:#fff'>
+    sudo mongodump --db vm --out /home/ubuntu/storage/database/dump/
+</pre>
+
+    </div>
+    <script>
+        function F__ID(m){
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+    </style>
+</div>

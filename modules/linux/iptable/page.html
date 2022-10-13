@@ -1,0 +1,25 @@
+<div id="D__ID">
+    <div style="padding:50px">
+<pre style='background-color: #333;color:#fff'>
+    #config iptable
+    sudo nano /etc/iptables/rules.v4
+    -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+    -A INPUT -p tcp -m state --state NEW -m tcp --dport 442 -j ACCEPT
+    -A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
+    -A INPUT -p tcp -m state --state NEW -m tcp --dport 139 -j ACCEPT
+    -A INPUT -p tcp -m state --state NEW -m tcp --dport 445 -j ACCEPT
+    -A INPUT -p tcp -m state --state NEW -m tcp --dport 27017 -j ACCEPT
+    sudo iptables-restore < /etc/iptables/rules.v4
+    sudo iptables -S # show ip table 
+</pre>
+    </div>
+    <script>
+        function F__ID(m){
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color: #fff;
+        }
+    </style>
+</div>
