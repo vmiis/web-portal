@@ -3,6 +3,7 @@
         <div id="data__ID">
             <table>
                 <tr><th>Server</th><th>Last Backup</th></tr>
+                <tr><td>VMIIS MongoDB</td><td><span id="vm__ID"></span></td></tr>
                 <tr><td>Wappsystem MongoDB</td><td><span id="wp__ID"></span></td></tr>
                 <tr><td>Woolcock MongoDB</td><td><span id="wm__ID"></span></td></tr>
                 <tr><td>Woolcock SQL Server (CMS/RT)</td><td><span id="rt__ID"></span></td></tr>
@@ -15,6 +16,13 @@
         function F__ID(m){
             //-------------------------------------------------
             $('#D__ID').on('load',function(){
+                //------------------------------------------
+                var req={api:'vm01',cmd:'backup-last-time'}
+                $('#vm__ID').text('');
+                $vm.request(req,function(res){
+                    var H = Math.ceil( (new Date()-Date.parse(res.result))/(1000*3600) );
+                    $('#vm__ID').html(H +" hours ago"); 
+                })
                 //------------------------------------------
                 var req={api:'wapp',cmd:'backup-last-time'}
                 $('#wp__ID').text('');
