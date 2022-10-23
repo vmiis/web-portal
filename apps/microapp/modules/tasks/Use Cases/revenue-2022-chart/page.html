@@ -1,0 +1,71 @@
+<section>
+    <section>
+        <div id=toolbar__ID class="navbar navbar-default" style='background-color: #ccc;'>
+            <div>
+                <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'>Query</button>
+                <span id=name__ID style='margin-left:50px; margin-right:50px;font-weight:bold;'></span>
+            </div>
+        </div>
+        <div id=chart_container__ID>
+            <div id=chart_div__ID></div>
+        </div>
+    </section>
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------
+        var name="Revenue grouped by month in 2022"
+        var records=[];
+        //-------------------------------
+        $('#D__ID').on('load',function(){  
+            $('#chart_div__ID').css('height',($vm.min_height-100));
+            query();
+        })
+        //-------------------------------
+        $('#query__ID').on('click',function(){
+            query();
+        })
+        //-------------------------------------------------
+        var query=function(){  
+            
+            $('#grid').html('');
+            $vm.request({cmd:'file-contents',path:'/finance/revenue-2022.csv',encoding:'utf8'},function(res){
+                if(res.result=="403"){
+                    alert("No permissions");
+                    return;
+                }
+                //-------------------------------------------------
+                records=$vm.csv_txt_to_rows_1(res.result);
+                //-------------------------------------------------
+                var ds=[['Month','Amount',{ role: 'annotation'}]]
+                    var v=records;
+                    var N=v.length;
+                    for(var i=0;i<N;i++){
+                        var r=[];
+                        r.push(v[i]['Month']);
+                        r.push(parseFloat(v[i]['Amount']));
+                        r.push(parseFloat(v[i]['Amount']));
+                        ds.push(r);
+                    }
+                    console.log(ds);
+                    var data = google.visualization.arrayToDataTable(ds);
+                    var options = {
+                        title: name,
+                        legend: { position: "none" },
+                        vAxis: { 
+                            viewWindow: {
+                                min:0
+                            }
+                        }
+                    }; 
+                    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div__ID'));
+                    chart.draw(data, options);	
+                //-------------------------------------------------
+            });
+        }
+        //-------------------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

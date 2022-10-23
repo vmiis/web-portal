@@ -1,0 +1,33 @@
+﻿<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+	VmInclude:__CURRENT_PATH__view.html
+</section>
+<script>
+    function F__ID(m){
+        //-------------------------------------
+        /*VmInclude:__COMPONENT__/g/grid.01.js*/
+        //-------------------------------------
+        var txt=$('#fields__ID').text();
+        var ns=txt.split('\n');
+        var fields="";
+        for(var i=0;i<ns.length;i++){
+            var a=ns[i].trim();
+            if(a!=""){
+                if(fields!="") fields+=",";
+                fields+=a;
+            }
+        }
+        //var fields="Student_ID|Student ID,First_Name|First Name,Last_Name|Last Name,State|State,Gender|Gender,Address|Address,Postcode,Email|Email,Mobile_Phone|Mobile Phone";
+        //m.fields="_Form,"+fields+",Submit_date,Submitted_by,_Delete";
+        m.fields=fields;
+        //-------------------------------------
+        if (typeof window['C__ID'] == 'function') {
+            try{eval('C__ID')(m);}
+            catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+        }
+        //-----------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

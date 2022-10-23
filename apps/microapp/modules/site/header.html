@@ -1,0 +1,267 @@
+<div id=D__ID>
+    <div id=layout__ID>
+        <div id=left__ID style='margin:auto 10px'>
+            <a id=desk_logo__ID href="home" style='color:#fff;text-decoration: none;'>
+                <div id=logo>
+                    <span id=logo_a>Business</span><br>
+                    <span id=logo_b>Micro Application</span>
+                </div>
+            </a>
+        </div>
+        <div id=middle__ID style='margin:auto 0; padding-left:15px;padding-top:15px'>
+            <a id=mobile_logo__ID href="Home" style='font-weight: bold;font-size:28px;color:#fff;text-decoration: none;'>
+            Web Portal</a>
+            <input id="hamburger__ID" type="checkbox" style='display:none' />
+            <div id=menu__ID>
+                <a href="?/Home"><i class="fa fa-home"></i> Home</a>
+                <a href="?/Panel"><i class="fas fa-list-ul"></i> Use Cases</a>
+                <span class="dropdown__ID"><a href="?/dropdown"><i class="fa fa-info"></i> About Microapp</a>
+                    <div class="dropdown-content__ID">
+                        <a href="?/What is a Micro-app">What is a Micro-app</a>
+                        <a href="?/Cost of running a Micro-app">Cost of running a Micro-app</a>
+                        <a href="?/Authentication">Authentication</a>
+                        <a href="?/Permissions Control">Permissions Control</a>
+                    </div>
+                </span>
+                <span class="dropdown__ID"><a href="?/dropdown" id=signin__ID><i class="fa fa-user"></i> Sign In</a>
+                    <div class="dropdown-content__ID">
+                        <a onclick=$vm.m_auth_signin()><i class="fab fa-microsoft"></i> Microsoft</a>
+                        <a onclick=$vm.g_auth_signin()><i class="fab fa-google"></i> Google</a>
+                        <a onclick=$vm.f_auth_signin()><i class="fab fa-facebook"></i> Facebook</a>
+                        <a onclick=$vm.h_auth_signin()><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </span>
+                <a href="" id=signout__ID onclick=$vm.auth_signout() ><i class="fa fa-user"></i> Sign Out</a>
+            </div>
+        </div>    
+        <div id=right__ID style='margin-right: 10px'><div id=menu_right__ID></div></div>   
+        <div top-right-corner id=top_right_corner__ID>
+            <span  id=username__ID></span>
+            <label id=m_icon__ID for="hamburger__ID" style='color:#fff;font-size:28px;margin:10px 5px 0 0'><i class="fa fa-bars"></i></label>
+        </div>
+    </div>    
+    <div id=g_nav style='height:25px'> </div>
+    <style>
+    </style>
+    <script>
+        function F__ID(){
+            //------------------------------------
+            $vm.header_ready=1;
+            if($vm.resize_content!=undefined) $vm.resize_content();
+            //--------------------------------------
+            $('#signout__ID').hide();
+            //------------------------------------
+            $('#D__ID a').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var href=$(this).attr('href'); if(href==undefined) return;
+                var module_name=$(this).attr('href').replace('?\/','');
+                var w=$(this).attr('w');if(w==1){window.open(module_name);return;}
+                if(module_name=='dropdown'){
+                    close_all_dropdown();
+                    $(this).next('div').show();
+                    return;
+                    
+                }
+                else if(module_name!="") $vm.show_module(module_name,{})
+                close_all_dropdown();
+                $('#hamburger__ID').prop("checked", false);
+            })
+            //---------------------------------------------------------------
+            $('#hamburger__ID').on('change',function(e){
+                if($(this).prop("checked")==false) close_all_dropdown();
+            })
+            //---------------------------------------------------------------
+            var close_all_dropdown=function(){
+                $('.dropdown-content__ID').each(function(){
+                    if($(this).css('max-height')=='600px') $(this).hide();
+                })
+            }
+            //---------------------------------------------------------------
+            $vm.show_user=function(){
+                if($vm.user_name==undefined || $vm.user_name=='guest'){
+                    $('#username__ID').text('');
+                    $('#signin__ID').show();
+                    $('#signout__ID').hide();
+                }
+                else{
+                    $('#username__ID').text('Signed in as '+ $vm.user_name);
+                    $('#signin__ID').hide();
+                    $('#signout__ID').show();
+                }
+            }
+            //------------------------------------
+            $vm.sys_nav_path=function(){
+                var L=$vm.page_stack.length;
+                var I=L-5;
+                if(I<0) I=0;
+                var txt="";
+                for(var i=I;i<L;i++){
+                    if(txt!="") txt+=" -> ";
+                    var nm=$vm.page_stack[i].m_name;
+                    var title=$vm.module_list[nm].title;
+                    if(title==undefined) title=nm.replace(/_/g,' ').replace(/-/g,' ');
+                    if(i==L-1 || L==1) txt+=title;
+                    else txt+="<u nm='"+nm+"' style='cursor:pointer'>"+title+"</u>";
+                }
+                $('#g_nav').html(txt);
+                $('#g_nav u').on('click',function(){
+                    var nm=$(this).attr("nm");
+                    var K=$vm.page_stack.length-1;
+                    var N=0;
+                    for(var j=K;j>=0;j--){
+                        if(nm==$vm.page_stack[j].m_name) break;
+                        N++;
+                    }
+                    for(var j=0;j<N;j++) window.history.go(-1);
+                })
+            }
+            //------------------------------------
+        }
+    </script>
+    <style>
+        #logo{
+            float: left;
+            padding: 36px 30px 10px 30px;
+        }
+        #logo_a{
+            font-family: Arial, sans-serif;
+            color: #fff;
+            font-size: 200%;
+            line-height: 10px;
+            display: inline-block;
+            font-weight: bold;
+            text-shadow: 2px 2px 2px #000
+        }
+        #logo_b{
+            font-family: Arial, sans-serif;
+            color: #b8e6de;
+            font-size: 117%;
+            line-height: 80%;
+            display: inline-block;
+        }
+        #g_nav{
+            height:25px;
+            padding:1px 0 5px 10px;
+            background-color: #e5e9ec;
+            font-size:13px;
+        }
+        #top_right_corner__ID{
+            display:block;
+            position:fixed;
+            top:3px;
+            right:10px;
+            font-size:11px;
+            line-height:13px;
+            color:#fff;
+            z-index: 99999;
+        }
+        #layout__ID{
+            height:95px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            overflow:visible;
+        }
+        /*right menu*/
+        #menu_right__ID a{
+            font-size: 11px;
+            margin-left:6px;
+            margin-right:0px;
+            margin-bottom:0px;
+            color:#fff
+        }
+        #mobile_logo__ID,#hamburger__ID, #m_icon__ID{
+            display:none;
+        }
+        .dropdown__ID {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content__ID {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content__ID a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            width:100%;
+            cursor:pointer;
+            white-space:nowrap;
+        }        
+        /*main menu*/
+        #menu__ID a{
+            display: inline-block;
+            padding:6px 10px;
+            color:#fff;
+            text-shadow: 2px 2px 2px #000;
+        }
+        #menu__ID a:hover {
+            background-color: #555;
+            color: #29eca6;
+            border-radius:4px;
+            text-decoration: none;
+        }
+        @media screen and (max-width: 768px) {
+            #mobile_logo__ID,#hamburger__ID, #m_icon__ID{
+                display:block;
+            }
+            #layout__ID{
+                height:unset;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                overflow:auto;
+            }
+            #left__ID{
+                display:none;
+            }
+            #hamburger__ID:checked ~ #menu__ID{
+                max-height:300px;
+            }
+            #menu_right__ID{
+                display:none;
+            }
+            #right__ID label{
+                margin:0;
+            }
+            #menu__ID{
+                overflow:hidden;
+                max-height: 0;
+                transition: max-height 0.5s;
+            }
+            #menu__ID li {
+                display: block;
+                padding:0px 0 0 15px;
+            }
+            #menu__ID a {
+                display:block;
+                padding: 5px 10px;
+                width: auto;
+            }
+            #menu__ID{
+                background-color: #212b35;
+            }
+            .dropdown__ID {
+                display: block;
+            }
+            .dropdown-content__ID {
+                background-color: #212b35;
+                margin-left: 20px;
+                position:static;
+                max-height:600px;
+            }
+            #username__ID { display:none; }
+            #m_icon__ID { display:block; }
+        }
+        @media screen and (min-width: 768px) {
+            #username__ID { display:block; }
+            #m_icon__ID { display:none; }
+            .dropdown__ID:hover .dropdown-content__ID {display: block;}
+        }
+    </style>
+</div>

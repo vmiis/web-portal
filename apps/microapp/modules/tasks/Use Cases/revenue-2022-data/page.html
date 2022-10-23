@@ -1,0 +1,74 @@
+<section>
+    <section>
+        <div id=toolbar__ID class="navbar navbar-default" style='background-color: #ccc;'>
+            <div>
+                <button id=query__ID type=button class="btn btn-secondary" title='Search for keyword'>Query</button>
+                <span id=name__ID style='margin-left:50px; margin-right:50px;font-weight:bold;'></span> Total Number of records: <span id=total__ID></span>
+                <button id=export__ID type=button class="btn btn-secondary" title='Export' style='margin-left:50px;margin-right:30px'>Export</button>
+            </div>
+        </div>
+        <div id=table__ID>
+            <table id=grid__ID></table>
+        </div>
+    </section>
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------
+        var name="Revenue grouped by month in 2022"
+        var columns=`
+                Month|Month
+                Amount|Amount
+            `
+        $('#title__ID').text(name);
+        var records=[];
+        //-------------------------------
+        $('#D__ID').on('load',function(){  query(); })
+        $('#query__ID').on('click',function(){ query(); })
+        //-------------------------------------------------
+        var query=function(){  
+            $('#grid').html('');
+            $vm.request({cmd:'file-contents',path:'/finance/revenue-2022.csv',encoding:'utf8'},function(res){
+                if(res.result=="403"){
+                    alert("No permissions");
+                    return;
+                }
+                //-------------------------------------------------
+                records=$vm.csv_txt_to_rows_1(res.result);
+                //-------------------------------------------------
+                $vm.grid_render_1("__ID", {
+                        name:name,
+                        columns:columns,
+                        rows:records,
+                        cell_render:cell_render
+                })
+                //-------------------------------------------------
+            });
+        }
+        //-------------------------------------------------
+        var cell_render=function(records,row,id,td){
+            switch(id){
+                case "amountPaid": 
+                    var v=$(td).text();
+                    if(v!=''){
+                        var vv=parseFloat(v).toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                        }); 
+                        $(td).text(vv);
+                        $(td).css('text-align','right')
+                        $(td).css('width','100px')
+                    }
+                    break;
+            }
+        }
+        //-------------------------------------------------
+        $('#export__ID').on('click',function(){
+            $vm.download_csv(name+".csv",records);
+        })
+        //-------------------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

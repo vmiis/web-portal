@@ -1,0 +1,117 @@
+<div id=D__ID>
+    <div id=panel__ID class="panel__ID">
+        <div class="block__ID new_c__ID">
+            <span class='title_1__ID'>What can we do with a micro application?</span>
+            <div style="margin-top:6px; width:100%; height:20px; border-top:2px solid #435044"></div>
+        </div>
+        <div class="panel2__ID">
+
+            <div class="block__ID">
+                <span class='title_2__ID'>Examples of displaying contents of a csv file stored on a file server</span>
+                <ul>
+                    <li><a href="?/revenue-2022-data">Revenue 2022</a></li>
+                    <li><a href="?/revenue-2022-chart">Revenue 2022 chart</a></li>
+                </ul>
+            </div>
+            <div class="block__ID">
+                <span class='title_2__ID'>Database records</span>
+                <ul>
+                    <li><a href="?/Student Data">Students</a></li>
+                    <li><a href="?/Membership-Application Data">Membership Application</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            $('#panel__ID').css('min-height',$vm.min_height);
+            //--------------------------------------------------------
+            $('#D__ID a').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var module_name=$(this).attr('href').replace('?\/','');
+                switch(module_name){
+                    default: if(module_name!="") $vm.show_module(module_name,{}); break;
+                }
+            })
+            //---------------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            height:100%;
+            background-color: #fff;
+        }
+        .panel__ID{
+            padding:20px 50px 50px 50px;
+            font-size:14px;
+    		max-width: 100%;
+    		column-count: 1;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+        }
+        .panel2__ID{
+            font-size:14px;
+    		max-width: 100%;
+    		column-count: 1;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+        }
+        .block__ID{
+            break-inside: avoid-column;
+        }
+        .title_1__ID{
+            font-size: 120%;
+            font-weight: bold;
+            color:#1a6c61;
+        }
+        .title_2__ID{
+            /*font-size: 100%;*/
+            font-weight: bold;
+            color:#6a7473;
+        }
+
+        #panel__ID li a{
+            color:#555;
+            text-decoration: none;
+            margin-right:20px;
+        }
+        #panel__ID li i{
+            color:#ccc;
+            font-size:80%;
+        }
+        
+        #_panel__ID li a:link{
+            color:#555;
+        }
+        #panel__ID li a:visited{
+            color:#555;
+        }
+        #panel__ID li a:hover{
+            color:red;
+        }
+        #panel__ID li a:hover i{
+            color:red;
+        }
+        .new_c__ID{
+            break-before:column;             
+        }
+
+        @media screen and (max-width: 1200px) {
+            .panel__ID{
+                padding:20px;
+                column-count: 1;
+            }
+            .panel2__ID{
+                padding:20px;
+                column-count: 1;
+            }
+            .new_c__ID{
+                break-before:unset;             
+            }
+        }
+    </style>
+</div>

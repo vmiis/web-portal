@@ -14,7 +14,7 @@
                 <li><a href='?/Data-collection'>Data collection, try it yourself</a></li>
                 <li><a href='?/WIMR-Apps'>WIMR micro applications</a></li>
                 <li><a href='?/Micro-Apps'>Micro applications</a></li>
-                <!--<li><a href='?/linux-commands'>Common used Linux commands</a></li>-->
+                <li><a href='?/microapp'>Micro application template</a></li>
                 <li><a href='?/linux'>Linux system maintenance</a></li>
                 <br>
                 <span class=LT__ID>IT System Status (Maintained by me)</span>
@@ -37,7 +37,10 @@
                 var href=$(this).attr('href');
                 if(href.substring(0,4)=='http'){ window.open(href); return; }
                 var module_name=href.replace('?\/','');
-                if(module_name!="") $vm.show_module(module_name,{}); 
+                if(module_name=="microapp"){
+                    if($vm.localhost==true) window.open('/vmiis/web-portal/apps/'+module_name+'/');   else window.open('/apps/'+module_name+'/');
+                }
+                else if(module_name!="") $vm.show_module(module_name,{}); 
             })
             //--------------------------------------------------------
         }

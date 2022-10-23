@@ -1,0 +1,251 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            $vm.grid_render_1=function(domid,input){
+                $('#name'+domid).text(input.name);
+                var rows=input.rows;
+                var headers=[];
+                var ps=[];
+                var tp=[];                
+                var uid=[];                
+                var columns=input.columns;
+                headers=[];
+                ps=[];                
+                tp=[];
+                uid=[];                
+                var records=[];                
+                try{
+                    var aa=columns.split('\n');
+                    for(var i=0; i<aa.length;i++){
+                        aa[i]=aa[i].trim();
+                        if(aa[i]!=""){
+                            var bb=aa[i].split('|');
+                            for(var k=0;k<bb.length;k++) bb[k]=bb[k].trim();
+                            if(bb[0].length>1){
+                                var nm=bb[0];
+                                var pp=bb[1];
+                                headers.push(nm);
+                                ps.push(pp.replace('\r',''));
+                                if(bb.length==2){
+                                    tp.push('');
+                                    uid.push('');
+                                }
+                                else if(bb.length==3){
+                                    tp.push(bb[2].replace('\r',''));
+                                    uid.push('');
+                                }
+                                else if(bb.length==4) {
+                                    tp.push(bb[2].replace('\r','')); 
+                                    uid.push(bb[3].replace('\r','')); 
+                                }     
+                                else{
+                                    tp.push('');
+                                    uid.push('');
+                                }
+                            }
+                        }
+                    }
+                    for(var i=0;i<rows.length;i++){
+                        var record={};
+                        for(var j=0;j<headers.length;j++){
+                            var bb=ps[j].split('.');
+                            if(ps[j].indexOf('@')!=-1) bb=[ps[j]];  //ignore '.', bb contains only one element
+                            var c=rows[i];
+                            for(var k=0;k<bb.length;k++){
+                                if(c==undefined || c==null) break;
+                                if(bb[k]=='[0]') c=c[0];
+                                else c=c[bb[k]];
+                            }
+                            if(c==null) c="";
+                            var type=tp[j].split(' ')[0];
+                            if(type=='DATE') c=c.substr(0,10);
+                            if(type=='TIME') c=c.substr(11,5);
+                            if(type=='DOLLAR') c="$"+c;
+                            if(type=='LINK') c="<a target=_blank href="+c+">"+c+"</a>";
+                            if(type=='IMAGE') c="<img src="+encodeURI(c)+" style='width:"+tp[j].split(' ')[1]+"px;height:auto'></img>";
+                            if(type=='ON'){
+                                var s="";
+                                if(c=='on') s='<i style="color:green;padding-left:10px;cursor:pointer" class="fas fa-check"></i>';
+                                c=s;
+                            }
+                            record[headers[j]]=c;
+                        }
+                        records.push(record);
+                    }
+                }
+                catch(e){
+                    alert(e);
+                    return;
+                }
+                var txt="<tr><th></th><th></th>";
+                var N=headers.length;
+                for(var i=0;i<N;i++){
+                    txt+="<th data-header="+ps[i]+">"+headers[i]+"</th>";
+                }
+                txt+="</tr>"
+                for(var i=0;i<records.length;i++){
+                    txt+="<tr><td>"+(i+1)+"</td><td><i style='cursor:pointer' class='fa fa-pencil-square-o' i="+i+"></i></td>"
+                    for(var j=0;j<N;j++){
+                            if(tp[j]=='DOLLAR') txt+="<td style='text-align:right'>"+records[i][headers[j]]+"</td>";
+                            else if(tp[j]=='WRAP') txt+="<td style='white-space: break-spaces'>"+records[i][headers[j]]+"</td>";
+                            else if(tp[j]=='MQ') txt+="<td><u style='cursor:pointer' uid="+uid[j]+" mq_id="+records[i][headers[j]]+">"+headers[j]+"</u></td>";
+                            else if(tp[j].substr(0,4)=="LEN_"){
+                                var len=tp[j].split('_').pop();
+                                len=parseInt(len);
+                                var c=records[i][headers[j]].substr(0,len)+"...";
+                                txt+="<td>"+c+"</td>";
+                            }
+                            else if(tp[j]=='webUrl'){
+                                txt+="<td><a target=_black style='text-decoration: underline;color:black' href='"+rows[i]['webUrl']+"'>"+records[i][headers[j]]+"</a></td>";
+                            }
+                            else txt+="<td>"+records[i][headers[j]]+"</td>";
+                    }
+                    txt+="</tr>"
+                }
+                $('#grid'+domid).html(txt);
+                $('#grid'+domid).find('i').on('click',function(){
+                    i=$(this).attr('i');
+                    $vm.show_module('jsonv',{json_data:rows[i]})
+                });
+                if(input.cell_render!=undefined){
+                    $('#grid'+domid+" td").each(function(index){
+                        var col = $(this).parent().children().index($(this));
+                        var row = $(this).parent().parent().children().index($(this).parent())-1; var I=row;
+                        var column_name=$('#grid'+domid+' th:nth-child('+(col+1)+')').attr('data-header');
+                        input.cell_render(records,row,column_name,$(this))
+                    })
+                }
+                $('#total'+domid).text(records.length);
+                //--------------------------------------------------------
+                return records;
+            }
+            //-------------------------------------------------
+            $vm.pivot_data_1=function(data, F, M, V){
+                var records=[];
+                var n_r=[],n_c=[F];
+                for(var i=0;i<data.length;i++){
+                    var r=data[i][F];
+                    var c=data[i][M]; if(c=="") c="No name";
+                    if(n_r.indexOf(r)==-1) n_r.push(r);
+                    if(n_c.indexOf(c)==-1) n_c.push(c);
+                }
+                for(var i=0;i<n_r.length;i++){
+                    var row={};  row[F]=n_r[i];
+                    for(var j=0;j<n_c.length;j++){
+                        var p=n_c[j];
+                        if(p!=F) row[p]='';
+                    }
+                    records.push(row);
+                }
+                for(var i=0;i<data.length;i++){
+                    var r=data[i][F];
+                    var c=data[i][M]; if(c=="") c="No name";
+                    var v=data[i][V];
+                    var I=n_r.indexOf(r);
+                    records[I][c]=v;
+                }
+                return records;
+            }
+            //-------------------------------------------------
+            $vm.pivot_column_1=function(data, F, M){
+                var n_c=[F];
+                for(var i=0;i<data.length;i++){
+                    var c=data[i][M]; if(c=="") c="No name";
+                    if(n_c.indexOf(c)==-1) n_c.push(c);
+                }
+                columns="";
+                for(var i=0;i<n_c.length;i++){
+                    if(columns!="") columns+="\r\n";
+                    columns+=n_c[i]+"|"+n_c[i];
+                }
+                return columns;
+            }
+            //-------------------------------------------------
+            $vm.pivot_column_array_1=function(data, F, M){
+                var n_c=[F];
+                for(var i=0;i<data.length;i++){
+                    var c=data[i][M]; if(c=="") c="No name";
+                    if(n_c.indexOf(c)==-1) n_c.push(c);
+                }
+                return n_c;
+            }
+            //-------------------------------------------------
+            $vm.records_value_to_money_1=function(records,start,end){
+                var formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                });
+                var J=end;
+                var keys=Object.keys(records[0])
+                if(J==-1) J=keys.length;
+                for(var i=0;i<records.length;i++){
+                    for(var j=start;j<J;j++){
+                        var v=records[i][keys[j]];
+                        records[i][keys[j]]=formatter.format(v);;
+                    }
+                }
+            }
+            //-------------------------------------------------
+            $vm.records_value_to_money_2=function(records,head){
+                var hds=head.split(',')
+                var formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                });
+                for(var i=0;i<records.length;i++){
+                    for(var j=0;j<hds.length;j++){
+                        var v=records[i][hds[j]];
+                        if(v!=undefined) records[i][hds[j]]=formatter.format(v);;
+                    }
+                }
+            }
+            //-------------------------------------------------
+            $vm.records_value_to_month_name_1=function(records,j){
+                var keys=Object.keys(records[0])
+                for(var i=0;i<records.length;i++){
+                    var v=records[i][keys[j]];
+
+                    const date = new Date();
+                    date.setMonth(v-1);
+                    var nm=date.toLocaleString('en-US', {month: 'long',});
+                    records[i][keys[j]]=nm;
+                }
+            }
+            //-------------------------------------------------
+            $vm.records_sum_1=function(records,head,sum){
+                var hds=head.split(',')
+                for(var i=0;i<records.length;i++){
+                    var a=0;
+                    for(var j=0;j<hds.length;j++){
+                        var v=records[i][hds[j]];
+                        if(v!=undefined && v!=""){
+                            a+=parseFloat(v);
+                        }
+                    }
+                    records[i][sum]=a;
+                }
+            }
+            //-------------------------------------------------
+            $vm.csv_encode_1=function(s){ return s.replace(/"[^"]+"/g, function (match){ return match.replace(/,/g, '|'); });}
+            $vm.csv_decode_1=function(s){ return s.replace(/\|/g,',').replace(/(^"|"$)/g, ''); }
+            //-------------------------------------------------
+            $vm.csv_txt_to_rows_1=function(txt,compare){
+                var lines=txt.split('\r\n');
+                var rows=[];
+                var nms=lines[0].split(',');
+                for(var i=1;i<lines.length;i++){
+                    var line=$vm.csv_encode_1(lines[i]);
+                    var c=line.split(',');
+                    if(c.length>1){
+                        var row={}
+                        for(var j=0;j<nms.length;j++){ row[nms[j].trim()]=$vm.csv_decode_1(c[j]); }
+                        rows.push(row);
+                    }
+                }
+                if(compare!=undefined) rows.sort(compare);
+                return rows;
+            }
+            //-------------------------------------------------
+        }
+    </script>   
+</div>

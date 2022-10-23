@@ -1,0 +1,38 @@
+﻿<div id=D__ID>
+	<div>
+		<div style='max-width:1000px; margin:auto;padding-top:50px;font-size:100%'>
+			<h4>Permissions Control</h4>
+			<div style="margin:2px 2px 2px 20px">
+				We use a configuration file to control the permissions. An exampe is as follow.<br><br>
+<pre style='background-color: #333;color:#fff'>
+{
+    "groups":{
+        "global_admin":["admin@company365.com","supert@company365.com"],
+        "it":["tom@company365.com",expert@gmail.com],
+        "finance":["david@gmail.com"]
+    },
+    "permission_table":{
+        "/finance_read":    {"azure_groups":[], "groups":["finance"], "users":[]   },
+        "student_full":     {"azure_groups":[], "groups":["it"], "users":[]   },
+        "student_read":     {"azure_groups":["all_staff"], "groups":[], "users":["jimmy@gmail.com","anna@gmail.com"]   }
+    }
+}
+</pre>
+				An administrator can use a text editor to edit the configuration file.
+				<br><br> 
+				Notes: 
+				<br>"/finance_read" means reading the files in the folder /finance.
+				<br>"student_read" means reading the data in database table called "student". 
+			</div>
+		</div>
+	</div>
+    <script>
+    	function F__ID(){
+    	}
+    </script>
+    <style>
+        #D__ID{
+			background-color: #fff;
+        }
+    </style>
+</div>

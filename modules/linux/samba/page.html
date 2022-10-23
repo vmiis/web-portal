@@ -4,10 +4,9 @@
     # config samba server
     sudo smbpasswd -a ubuntu (xxxxxxxx)
     sudo nano /etc/samba/smb.conf
-    #-----------------
-    [global]
+ #-----------------
+ [global]
     ntlm auth = true
-    # original
     workgroup = WORKGROUP
     server string = %h server (Samba, Ubuntu)
     log file = /var/log/samba/log.%m
@@ -22,22 +21,12 @@
     pam password change = yes
     map to guest = bad user
     usershare allow guests = yes
-    [servers]
+ [servers]
     path = /home/ubuntu/servers
     valid users = ubuntu
     read only = no
-    #-----------------
-    [global]
-    ntlm auth = true
-    [storage]
-    path = /home/ubuntu/storage  
-    valid users = ubuntu 
-    read only = no
-    [servers]
-    path = /home/ubuntu/servers  
-    valid users = ubuntu 
-    read only = no
-</pre>
+ #-----------------
+  </pre>
 
 <pre style='background-color: #333;color:#fff'>
     sudo systemctl status smbd
@@ -52,6 +41,8 @@
 <pre style='background-color: #333;color:#fff'>
     sudo nano /etc/fstab
     //02.vmiis.com/storage  /home/ubuntu/storage cifs  username=ubuntu,password=********
+    sudo mount -a
+    TCP 139,445 UDP 137
 </pre>
 
 
