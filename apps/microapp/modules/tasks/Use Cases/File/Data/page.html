@@ -1,0 +1,40 @@
+﻿<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+	VmInclude:__CURRENT_PATH__view.html
+</section>
+<script>
+    function F__ID(m){
+        //-------------------------------------
+        /*VmInclude:__COMPONENT__/g/grid.01.js*/
+        //-------------------------------------
+        var txt=$('#fields__ID').text();
+        var ns=txt.split('\n');
+        var fields="";
+        for(var i=0;i<ns.length;i++){
+            var a=ns[i].trim();
+            if(a!=""){
+                if(fields!="") fields+=",";
+                fields+=a;
+            }
+        }
+        m.fields=fields;
+        //-------------------------------------
+        if (typeof window['C__ID'] == 'function') {
+            try{eval('C__ID')(m);}
+            catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+        }
+        //-----------------------------------------
+        m.cell_render=function(records,I,field,td){
+            switch(field){
+                case 'Invoice':
+                case 'Payment_Receipt':
+                    m.set_file_link_s0(records,I,field,td);
+                    break;
+            }
+        }
+        //-------------------------------------        
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>
