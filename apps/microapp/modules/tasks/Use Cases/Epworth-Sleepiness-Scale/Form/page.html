@@ -1,0 +1,48 @@
+﻿<div id=D__ID>
+	VmInclude:__CURRENT_PATH__view.html
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(m){
+    		//-------------------------------------
+			/*VmInclude:__COMPONENT__/f/form.01.js*/
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			//-------------------------------------
+			if (typeof window['C__ID'] == 'function') {
+				try{eval('C__ID')(m);}
+				catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+			}
+			//-----------------------------------------
+			function get_value(name,format,type){
+				if(type==undefined){ 
+					var v=document.forms["F__ID"][name].value;;
+					if(format=="float"){
+						var v=parseFloat(v);  if(isNaN(v)==true) v=0.0;  return v;
+					}
+					else{
+						return v;
+					}
+				}
+			}
+			function set_value(name,value){ document.forms["F__ID"][name].value=value; }
+			function form_process(){
+				var v1=get_value('ESS_1','float');
+				var v2=get_value('ESS_2','float');
+				var v3=get_value('ESS_3','float');
+				var v4=get_value('ESS_4','float');
+				var v5=get_value('ESS_5','float');
+				var v6=get_value('ESS_6','float');
+				var v7=get_value('ESS_7','float');
+				var v8=get_value('ESS_8','float');
+				var v=v1+v2+v3+v4+v5+v6+v7+v8;
+				set_value('ESS',v);
+			}
+			m.form_process=function(){
+				form_process();
+			}
+			//-----------------------------------------
+		}
+    </script>
+    <style>
+		/*VmInclude:__CURRENT_PATH__style.css*/
+    </style>
+</div>

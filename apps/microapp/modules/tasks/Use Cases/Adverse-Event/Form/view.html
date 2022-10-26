@@ -1,0 +1,135 @@
+﻿<div id=form_container__ID bp=576 style='display:flow-root;max-width:750px;'>
+    <form id=F__ID>
+        <div class=r__ID>
+            <div w='100|70'>
+                <h1 class=t1__ID>Adverse Event</h1>
+            </div>
+            <div w='100|30'>
+                <span class=t3__ID>Participant ID</span>
+                <input type=text  name=Participant_uid  />
+            </div>
+        </div>
+        <hr style="border-top: 1px solid #ccc;">
+        <div class=r__ID>
+            <div w='100|100'>
+                <span class=t3__ID>Adverse Event</span>
+                <input type=text  name=Adverse_Event  />
+            </div>
+        </div>
+        
+        <div class=r__ID>
+            <div w='100|50'>
+                <span class=t3__ID>Onset Time</span>
+                <input type=time  name=Onset_Time  />
+            </div>
+            <div w='100|50'>
+                <span class=t3__ID>Onset Date</span>
+                <input type=date  name=Onset_Date  />
+            </div>
+        </div>
+        
+        <div class=r__ID>
+            <div w='100|50'>
+                <span class=t3__ID>Resolution Time</span>
+                <input type=time  name=Resolution_Time  />
+            </div>
+            <div w='100|50'>
+                <span class=t3__ID>Resolution Date</span>
+                <input type=date  name=Resolution_Date  />
+            </div>
+        </div>
+        
+        <div class=r__ID>
+            <div w='100|50'>
+                <span class=t3__ID>Was AE Serious?</span>
+                <select name="Serious_AE">
+                    <option></option>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+            <div w='100|50'>
+                <span class=t3__ID>Frequency</span>
+                <select name="Frequency">
+                    <option></option>
+                    <option>Single episode</option>
+                    <option>Intermittent</option>
+                    <option>Continuous</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class=r__ID>
+            <div w='100|33'>
+                <span class=t3__ID>Intensity</span>
+                <select name="Intensity">
+                    <option></option>
+                    <option>Mild</option>
+                    <option>Moderate</option>
+                    <option>Severe</option>
+                </select>
+            </div>
+            <div w='100|33'>
+                <span class=t3__ID>Realtionship to study</span>
+                <select name="Realtionship">
+                    <option></option>
+                    <option>Not Related</option>
+                    <option>Possibly Related</option>
+                    <option>Related</option>
+                </select>
+            </div>
+            <div w='100|33'>
+                <span class=t3__ID>Study Agent Action</span>
+                <select name="Study_Agent_Action">
+                    <option></option>
+                    <option>None</option>
+                    <option>Dosage decrease</option>
+                    <option>Interrupted</option>
+                    <option>Patient withdrawn</option>
+                    <option>Drug discontinued</option>
+                    <option>Not applicable</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class=r__ID>
+            <div w='100|50'>
+                <span class=t3__ID>Treatment Required</span>
+                <select name="Treatment_Required">
+                    <option></option>
+                    <option>None</option>
+                    <option>Concomitant Medication</option>
+                    <option>Non-drug Tx</option>
+                    <option>Hospitalization</option>
+                    <option>Other (specify)</option>
+                </select>
+            </div>
+            <div w='100|50'>
+                <span class=t3__ID>Other</span>
+                <input type=text  name=Other_Treatment  />
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|50'>
+                <span class=t3__ID>Outcome</span>
+                <select name="Outcome">
+                    <option></option>
+                    <option>Resolved with no Sequelae</option>
+                    <option>Resolved with Sequelae</option>
+                    <option>Continuing</option>
+                    <option>Fatal</option>
+                    <option>Unknown</option>
+                </select>
+            </div>
+        </div>
+
+        <div class=r__ID>
+            <div w='100|100' class=c_print>
+                <button id=submit__ID >Submit</button>
+            </div>
+        </div>
+
+        <div style='padding:15px'>&nbsp;</div>
+
+    </form>
+</div>

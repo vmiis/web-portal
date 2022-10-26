@@ -1,0 +1,111 @@
+﻿<div id=form_container__ID bp=576 style='display:flow-root;max-width:900px;'>
+    <div class=header__ID>
+        <h1 class=hA__ID>Incident Report</h1>
+    </div>
+    <form id=F__ID>
+        <div style='padding:20px 50px;border-bottom:1px solid #ccc;'>
+            This Incident Investigation Form should be used to record all incidents, including near misses, and may also be used to report hazards in the workplace.
+            The form should be completed as soon as possible following the incident. If the person involved cannot complete the form it may be completed on their behalf.			
+        </div>
+        <div class=r__ID>
+            <div w='100|50'>
+                <span>Full Name</span>
+                <input type=text  name=Full_Name Required /></span>
+            </div>
+            <div w='100|50'>
+                <span>Contact Number</span>
+                <input type=text  name=Contact_Number Required /></span>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|50'>
+                <span>Email Address</span>
+                <input type=email  name=Email_Address Required /></span>
+            </div>
+            <div w='100|50'>
+                <span>Manager / Supervisor Name</span>
+                <input type=text  name=Manager Required /></span>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|50'>
+                <span>Department / Group</span>
+                <input type=text  name=Department Required /></span>
+            </div>
+            <div w='100|50'>
+                <span>Name of person reporting incident</span>
+                <input type=text  name=Name_of_person_reporting  /></span>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100'>
+                <span>Role</span><br>
+                <label><input type='radio' name=Role value=Employee  >&nbsp&nbspEmployee</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Role value=Affiliate>&nbsp&nbspAffiliate</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Role value=Patient>&nbsp&nbspPatient</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Role value=Visitor>&nbsp&nbspVisitor</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Role value=Student>&nbsp&nbspStudent</label>&nbsp&nbsp&nbsp&nbsp
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100'>
+                <span>Nature of incident being reported</span><br>
+                <label><input type='radio' name=Incident value=Incident  >&nbsp&nbspIncident</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Incident value=Near_Miss>&nbsp&nbspNear Miss</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Incident value=Hazard>&nbsp&nbspHazard</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Incident value=Visitor>&nbsp&nbspVisitor</label>&nbsp&nbsp&nbsp&nbsp
+                <label><input type='radio' name=Incident value='COVID-19'>&nbsp&nbspCOVID-19 infection or symptoms</label>&nbsp&nbsp&nbsp&nbsp
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|50'>
+                <span>Incident Date</span>
+                <input type=date  name=Incident_Date Required /></span>
+            </div>
+            <div w='100|50'>
+                <span>Incident Time</span>
+                <input type=time  name=Incident_Time Required /></span>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100'>
+                <span>Location of Incident</span>
+                <input type=text  name=Location_of_Incident Required /></span>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100'>
+                <span>Incident type</span><br>
+                <label><input type='radio' name=Incident_Type value=Security  >&nbsp&nbspSecurity</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Travel'>&nbsp&nbspTravel - Driving, Flying </label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Ergonomics'>&nbsp&nbspErgonomics eg. chair broke whilst in use</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Psychological Health'>&nbsp&nbspPsychological Health</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Disease (other)'>&nbsp&nbspDisease (other)</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Offsite work'>&nbsp&nbspOffsite work</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Chemicals'>&nbsp&nbspChemicals</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Cuts and bruises'>&nbsp&nbspCuts and bruises</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Slips and trips'>&nbsp&nbspSlips and trips</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='radio' name=Incident_Type value='Other'>&nbsp&nbspOther</label>&nbsp&nbsp&nbsp&nbsp<br>
+                <label><input type='text' name=Other_Incident_Type placeholder=Other />
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100'>
+                <span>Please briefly describe the incident/near miss/hazard</span>
+                <textarea name=describtion Required style='height:120px'></textarea>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100'>
+                <span>Please describe the steps you took after the incident or near miss</span>
+                <textarea name=steps_after Required style='height:120px'></textarea>
+            </div>
+        </div>
+        <div class=r__ID>
+            <div w='100|100' class=c_print>
+                <button id=submit__ID >Submit</button>
+            </div>
+        </div>
+        <div style="padding:15px">&nbsp;</div>
+    </form>
+</div>

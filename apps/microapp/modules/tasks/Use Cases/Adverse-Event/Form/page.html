@@ -1,0 +1,20 @@
+﻿<div id=D__ID>
+	VmInclude:__CURRENT_PATH__view.html
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(m){
+    		//-------------------------------------
+			/*VmInclude:__COMPONENT__/f/form.01.js*/
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			//-------------------------------------
+			if (typeof window['C__ID'] == 'function') {
+				try{eval('C__ID')(m);}
+				catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+			}
+			//-----------------------------------------
+		}
+    </script>
+    <style>
+		/*VmInclude:__CURRENT_PATH__style.css*/
+    </style>
+</div>

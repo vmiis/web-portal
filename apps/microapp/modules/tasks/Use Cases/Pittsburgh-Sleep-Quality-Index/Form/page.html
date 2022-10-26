@@ -1,0 +1,122 @@
+﻿<div id=D__ID>
+	VmInclude:__CURRENT_PATH__view.html
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(m){
+    		//-------------------------------------
+			/*VmInclude:__COMPONENT__/f/form.01.js*/
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			//-------------------------------------
+			if (typeof window['C__ID'] == 'function') {
+				try{eval('C__ID')(m);}
+				catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+			}
+			//-----------------------------------------
+			function get_value(name,format,type){
+				if(type==undefined){ 
+					var v=document.forms["F__ID"][name].value;;
+					if(format=="float"){
+						var v=parseFloat(v);  if(isNaN(v)==true) v=0.0;  return v;
+					}
+					else{
+						return v;
+					}
+				}
+			}
+			function set_value(name,value){ document.forms["F__ID"][name].value=value; }
+			function form_process(){
+				var v=get_value("PSQI4","float");
+				if(v>=7) v=0;
+				else if(v<7 && v>=6) v=1;
+				else if(v<6 && v>=5) v=2;
+				else if(v<5) v=3;
+				set_value("PSQIDURAT",v);
+				var PSQIDURAT=v;
+				
+				var v5b=get_value("PSQI5b","float");
+				var v5c=get_value("PSQI5c","float");
+				var v5d=get_value("PSQI5d","float");
+				var v5e=get_value("PSQI5e","float");
+				var v5f=get_value("PSQI5f","float");
+				var v5g=get_value("PSQI5g","float");
+				var v5h=get_value("PSQI5h","float");
+				var v5i=get_value("PSQI5i","float");
+				var v5j=get_value("PSQI5j","float");
+				var v=v5b+v5c+v5d+v5e+v5f+v5g+v5h+v5i+v5j;
+				if(v>=1 && v<=9) v=1;
+				else if(v>9 && v<=18) v=2;
+				else if(v>18) v=3;
+				set_value("PSQIDISTB",v);
+				var PSQIDISTB=v;
+				
+				var v=0;
+				var v2=get_value("PSQI2","float");
+				if(v2>=0 && v2<=15) v2=0;
+				else if(v2>15 && v2<=30) v2=1;
+				else if(v2>30 && v2<=60) v2=2;
+				else if(v2>60) v2=3;
+				var v5a=get_value("PSQI5a","float");
+				if((v2+v5a)==0) v=0;
+				else if((v2+v5a)>=1 && (v2+v5a)<=2) v=1;
+				else if((v2+v5a)>=3 && (v2+v5a)<=4) v=2;
+				else if((v2+v5a)>=5 && (v2+v5a)<=6) v=3;
+				set_value("PSQILATEN",v);
+				var PSQILATEN=v;
+				
+
+				var v=0;
+				var v8=get_value("PSQI8","float");
+				var v9=get_value("PSQI9","float");
+				if((v8+v9)==0) v=0;;
+				if((v8+v9)>=1 && (v8+v9)<=2) v=1;
+				if((v8+v9)>=3 && (v8+v9)<=4) v=2;
+				if((v8+v9)>=5 && (v8+v9)<=6) v=3;
+				set_value("PSQIDAYDYS",v);
+				var PSQIDAYDYS=v;
+
+				var startTime = get_value("PSQI1");
+				var endTime   = get_value("PSQI3");;
+				var startTimeArray = startTime.split(":");
+				var startInputHrs = parseInt(startTimeArray[0]);
+				var startInputMins = parseInt(startTimeArray[1]);
+
+				var endTimeArray = endTime.split(":");
+				var endInputHrs = parseInt(endTimeArray[0]);
+				var endInputMins = parseInt(endTimeArray[1]);
+
+				var startMin = startInputHrs*60 + startInputMins;
+				var endMin = endInputHrs*60 + endInputMins;
+				var result;
+				if (endMin < startMin) {
+					var minutesPerDay = 24*60;
+					result = minutesPerDay - startMin;  // Minutes till midnight
+					result += endMin; // Minutes in the next day
+				} else {
+					result = endMin - startMin;
+				}
+
+				var v4=get_value("PSQI4","float");
+				var v4=v4*60*100;
+				var v4=v4/result;
+				var v=0;
+				if(v4>=85) v=0;
+				if(v4<85 && v4>=75) v=1;
+				if(v4<75 && v4>=65) v=2;
+				if(v4<65) v=3;
+				set_value("PSQIHSE",v);
+				var PSQIHSE=v;
+				
+				var v=get_value("PSQI6","float"); set_value("PSQISLPQUAL",v); var PSQISLPQUAL=v;
+				var v=get_value("PSQI7","float"); set_value("PSQIMEDS",v);var PSQIMEDS=v;
+				var v=PSQIDURAT+PSQIDISTB+PSQILATEN+PSQIDAYDYS+PSQIHSE+PSQISLPQUAL+PSQIMEDS; set_value("PSQI",v);
+			}
+			m.form_process=function(){
+				form_process();
+			}
+			//-----------------------------------------
+		}
+    </script>
+    <style>
+		/*VmInclude:__CURRENT_PATH__style.css*/
+    </style>
+</div>

@@ -1,0 +1,37 @@
+﻿<div id=D__ID>
+	VmInclude:__CURRENT_PATH__view.html
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(m){
+    		//-------------------------------------
+			/*VmInclude:__COMPONENT__/f/form.01.js*/
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			//-------------------------------------
+			if (typeof window['C__ID'] == 'function') {
+				try{eval('C__ID')(m);}
+				catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+			}
+			//-----------------------------------------
+			function form_process(){
+				var ISI_1a=parseInt(document.forms["F__ID"]["ISI_1a"].value);
+				var ISI_1b=parseInt(document.forms["F__ID"]["ISI_1b"].value);
+				var ISI_1c=parseInt(document.forms["F__ID"]["ISI_1c"].value);
+				var ISI_2=parseInt(document.forms["F__ID"]["ISI_2"].value);
+				var ISI_3=parseInt(document.forms["F__ID"]["ISI_3"].value);
+				var ISI_4=parseInt(document.forms["F__ID"]["ISI_4"].value);
+				var ISI_5=parseInt(document.forms["F__ID"]["ISI_5"].value);
+				var ISI_1=ISI_1a+ISI_1b+ISI_1c;
+				var ISI=ISI_1+ISI_2+ISI_3+ISI_4+ISI_5;
+				document.forms["F__ID"]["ISI_1"].value=ISI_1;
+				document.forms["F__ID"]["ISI"].value=ISI;
+			}
+			m.form_process=function(){
+				form_process();
+			}
+			//-----------------------------------------
+		}
+    </script>
+    <style>
+		/*VmInclude:__CURRENT_PATH__style.css*/
+    </style>
+</div>
