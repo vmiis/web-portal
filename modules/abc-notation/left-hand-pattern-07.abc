@@ -1,0 +1,13 @@
+X:1
+T:Left Hand Pattern:  1 -> 5 -> 1(8) -> 3(10) -> 5(12) -> 3(10)
+C:zhiming@vmiis.com
+M:4/4
+L:1/8
+Q:1/4=120
+K:C
+V:1
+"①"e2e2f2g2|"⑤"g2f2e2d2|"①"c2c2d2e2|"⑤"e2>d2d4|
+"①"e2e2f2g2|"⑤"g2f2e2d2|"①"c2c2d2e2|"⑤"d2>c2"①"c4|
+V:2 celf=bass
+C,G,CEG2E2|G,,D,G,B,D2B,2|C,G,CEG2E2|G,,D,G,B,D2B,2|
+C,G,CEG2E2|G,,D,G,B,D2B,2|C,G,CEG2E2|G,,D,G,B,C,4|

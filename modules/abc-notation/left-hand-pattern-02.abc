@@ -1,5 +1,5 @@
 X:1
-T:Left Hand Pattern: 1 (root)
+T:Left Hand Pattern: 1+5
 C:zhiming@vmiis.com
 M:4/4
 L:1/4
@@ -9,5 +9,5 @@ V:1
 "①"eefg|"⑤"gfed|"①"ccde|"⑤"e>dd2|
 "①"eefg|"⑤"gfed|"①"ccde|"⑤"d>c"①"c2|
 V:2 celf=bass
-C,4|G,,4|C,4|G,,4|
-C,4|G,,4|C,4|G,,2C,2|
+[C,G,]4|[G,,D,]4|[C,G,]4|[G,,D,]4|
+[C,G,]4|[G,,D,]4|[C,G,]4|[G,,D,]2[C,G,]2|
