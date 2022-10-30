@@ -1,54 +1,31 @@
 <div id=D__ID>
-    <div class=panel__ID>
-    </div>
+    <div style="padding:5px;font-size:11px"><i> <a href="?/About-Micro-App"><u>What is a micro app?</u></a></i></div>
     <div id=panel__ID class=panel__ID>
-        <ul _style="list-style-type:decimal;">
+        <ul style="list-style-type:decimal;">
             <div class="list__ID">
-                <span class=LT__ID>Piano</span>
-                <li><a href='?/abcjs-local'>Compose and enjoy music yourself</a></li>
-                <li><a href='?/piano-left-hand-pattern'>Basic piano left hand patterns</a></li>
-                <li><a href='?/sheet-music'>Sheet music</a></li>
-                <li><a href='?/Piano-scales'>Piano scales</a></li>
-                <br>
-                <span class=LT__ID>Micro application</span>
-                <li><a href='?/About-Micro-App'>What is a micro application</a></li>
-                <li><a href='?/microapp'>Micro application template</a></li>
-                <li><a href='?/WIMR-Apps'>WIMR micro applications</a></li>
-                <li><a href='?/Micro-Apps'>Examples of micro application</a></li>
-                <br>
-                <span class=LT__ID>Business data collection</span>
-                <li><a href='?/Data-collection'>Data collection, try it yourself</a></li>
+                <span class=LT__ID>Basic piano left hand patterns</span>
                 
-                <br>
-                <span class=LT__ID>IT System Status (Maintained by me)</span>
-                <li><a href='?/ssl-check'>SSL expiry date</a></li>
-                <li><a href='?/domain-check'>Domain expiry date</a></li>
-                <li><a href='?/api-server-status'>API Server Status</a></li>
-                <li><a href='?/db-server-status'>Database Server Status</a></li>
-                <li><a href='?/db-backup-status'>Database Backup Status</a></li>
+                <li><a href='?/abcjs' nm="left-hand-pattern-01">Pattern 1</a></li>
+
+                                
                 
-                <span class=LT__ID>Notes</span>
-                <li><a href='?/linux'>Linux system maintenance</a></li>
-                <br>
-                
-                <!--<li><a href='?/Others'>Others</a></li>-->
-            </div>
+        </div>
             <!---------------------------------------------------------------------------------------->
     </ul>
     </div>
     <script>
         function F__ID(){
             //--------------------------------------------------------
-            $('#panel__ID a').on('click',function(e){
+            $('#D__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 var href=$(this).attr('href');
-                if(href.substring(0,4)=='http'){ window.open(href); return; }
                 var module_name=href.replace('?\/','');
-                if(module_name=="microapp"){
-                    if($vm.localhost==true) window.open('/vmiis/web-portal/apps/'+module_name+'/');   else window.open('/apps/'+module_name+'/');
-                }
-                else if(module_name!="") $vm.show_module(module_name,{}); 
+                var nm=$(this).attr('nm');
+                var url=$vm.hosting_path+"/modules/abc-notation/"+nm+".abc";
+                $.get(url+'?_='+$vm.ver[0],function(txt){
+                    $vm.show_module(module_name,{musicnotes:txt}); 
+                },'text');
             })
             //--------------------------------------------------------
         }

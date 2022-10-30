@@ -343,6 +343,7 @@
         "abcjs":{url:$H+"/abcjs/page.html"},
         "abcjs-local":{url:$H+"/abcjs-local/page.html",router:1},
         "sheet-music":{url:H+"/panels/sheet-music.html",router:1},
+        "piano-left-hand-pattern":{url:H+"/panels/piano-left-hand-pattern.html",router:1},
         "ssl-check":{url:$H+"/ssl-check/page.html",router:1},
         "domain-check":{url:$H+"/domain-check/page.html",router:1},
         "api-server-status":{url:$H+"/api-server-status/page.html",router:1},
