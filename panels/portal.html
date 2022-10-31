@@ -10,6 +10,9 @@
                 <li><a href='?/sheet-music'>Sheet music</a></li>
                 <li><a href='?/Piano-scales'>Piano scales</a></li>
                 <br>
+                <span class=LT__ID>Investment Research - Live Accounts</span>
+                <li><a href='?/api_gsheet_1qsVamSRfA0i7G3AlvDD8nnpkFv1D9rYJkBJOg5i8j5I/edit?rm=minimal&usp=sharing' >Account 3 -- AUDCHF</a></li>
+                <br>
                 <span class=LT__ID>Micro application</span>
                 <li><a href='?/About-Micro-App'>What is a micro application</a></li>
                 <li><a href='?/microapp'>Micro application template</a></li>
@@ -47,6 +50,14 @@
                 var module_name=href.replace('?\/','');
                 if(module_name=="microapp"){
                     if($vm.localhost==true) window.open('/vmiis/web-portal/apps/'+module_name+'/');   else window.open('/apps/'+module_name+'/');
+                }
+                else if(module_name!="" && module_name.substring(0,4)=='api_'){
+                    var aa=module_name.split('_');
+                    if(aa.length>=3){
+                        switch(aa[1]){
+                            case "gsheet": $vm.show_module('gsheet',{src:module_name.replace('api_gsheet_',''),topic:''}); break;
+                        }
+                    }
                 }
                 else if(module_name!="") $vm.show_module(module_name,{}); 
             })
