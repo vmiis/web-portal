@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online Forms</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="site.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <div id=header>
+            <div id=logo>
+                <span id=logo_a>Business</span><br>
+                <span id=logo_b>Data Collection</span>
+            </div>
+        </div>
+        <div id=layout>
+            <div id=content></div>
+            <div id=footer>
+                Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
+            </div>
+        </div>
+    </body>
+    <script>
+        (function(){typeof $vm=="undefined"&&($vm={});$vm.__print__=0;window.onbeforeprint=function(){$vm.__print__=1};window.onafterprint=function(){$vm.__print__=0};var n=document.getElementById("content"),t=new XMLHttpRequest;t.onreadystatechange=function(){var u,r,t,i;if(this.readyState==4){if(this.status==200){n.innerHTML=this.responseText;u=document.getElementsByTagName("head")[0];t=n.getElementsByTagName("script");for(i in t)r=document.createElement("script"),r.type="text/javascript",t[i].text!=undefined&&(r.text=t[i].text),t[i].src!=undefined&&t[i].src!=""&&(r.src=t[i].src),(t[i].src!=undefined&&t[i].src!=""||t[i].text!=undefined)&&u.appendChild(r)}this.status==404&&(n.innerHTML="Page not found.")}};t.open("GET","form.html",!0);t.send();window.onscroll=function(){var t=-window.scrollY/2,n=-t/100;n>.5&&(n=.5);document.getElementById("header").style.background="rgba(0,0,0,"+n+")"}})()
+    </script>
+    <style>
+        body{
+            background-image: url(https://images.unsplash.com/photo-1625111978179-fc2d01517377?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80);
+        }
+    </style>
+</html>

@@ -54,6 +54,9 @@
                 })
                 //------------------------------------
                 var notes=m.input.musicnotes;
+                var op=m.input.op; if(op==undefined) op=0;
+                //$('#instrument__ID').val(op);
+
                 $('#abc__ID').val(notes);
                 setTimeout(function(){
                     $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
@@ -61,7 +64,7 @@
                     $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10)+"px");
                 },1000);
                 var steps=0; $('#tran__ID').val(0);
-                var instrument=0; $('#instrument__ID').val(0);
+                var instrument=op; $('#instrument__ID').val(instrument);
                 var voice1=true; $('#voice1__ID').prop('checked',true);
                 var voice2=true; $('#voice2__ID').prop('checked',true);
                 //------------------------------------
