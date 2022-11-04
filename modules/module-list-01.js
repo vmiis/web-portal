@@ -16,7 +16,7 @@
     var modules={
         "chinese": {url:$vm.hosting_path+"/panels/chinese/panel.html", router:1},
         "thinking": {url:$vm.hosting_path+"/panels/thinking/panel.html", router:1},
-        "old-melody": {url:$vm.hosting_path+"/panels/old-melody/panel.html", router:1},
+        "Old-melody": {url:$vm.hosting_path+"/panels/old-melody/panel.html", router:1},
         "main-panel":{url:$vm.hosting_path+"/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
         //"app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},
