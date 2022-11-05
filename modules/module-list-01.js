@@ -334,6 +334,7 @@
         "life": {url:$H+"/thinking/life.html", router:1},
         "understanding": {url:$H+"/thinking/understanding.html", router:1},
         "investment": {url:$H+"/thinking/investment.html", router:1},
+        "pareto-principle": {url:$H+"/thinking/pareto-principle.html", router:1},
         
         "Portal": {url:H+"/panels/portal.html", router:1},
         "Data-collection": {url:H+"/panels/data-collection.html", router:1},

@@ -1,0 +1,19 @@
+X:1
+T:送别
+C:zhiming@vmiis.com
+M:4/4
+L:1/8
+Q:1/4=80
+K:C
+V:1
+%%MIDI program 4
+g2eg|c'3b|a2c'2|g4|
+g2cd|e2dc|d4-|-d4|
+g2eg|c'3b|a2c'2|g4|
+g2de|f3b,|c4-|-c4|
+a2c'2|c'4|b2ab|c'4|
+ab c'a|ag ec|d4-|d4|
+g2eg|c'3b|a2c'2|g4|
+g2de|f3b,|c4-|-c4|
+z|
+

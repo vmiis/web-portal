@@ -6,6 +6,7 @@ L:1/8
 Q:1/4=60
 K:C
 V:1
+%%MIDI program 56
 Ge ec|d/2e/2d2e|e2AG|c4|
 eg ge|ag2e|e2e/2d/2c|d4|
 e2BG|A/2B/2 A2c|Be eB|A/2B/2A3|

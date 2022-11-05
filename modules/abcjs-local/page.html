@@ -9,25 +9,6 @@
             <div w='100|40' id=left__ID>
                 <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
                 <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
-                <label>
-                    Select instrument:
-                    <select id="instrument__ID">
-                        <option value="0">Acoustic Piano</option>
-                        <option value="4">Electric Piano</option>
-                        <option value="6">Harpsichord</option>
-                        <option value="7">Clavi</option>
-                        <option value="8">Celesta</option>
-                        <option value="23">Tango Accordion</option>
-                        <option value="24">Acoustic Guitar (nylon)</option>
-                        <option value="25">Acoustic Guitar (steel)</option>
-                        <option value="26">Electric Guitar (jazz)</option>
-                        <option value="56">Trumpet</option>
-                        <option value="57">Trombone</option>
-                        <option value="58">Tuba</option>
-                        <option value="59">Muted Trumpet</option>
-                        <option value="60">French Horn</option>
-                    </select>
-                </label><br>
                 <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
                 <div>
                     <label><input type="radio" name=score value="1"> Score 1</input></label>&nbsp;&nbsp;
@@ -45,6 +26,7 @@
                 <textarea id="abc__ID" style="width:100%;font-size: 90%;font-family: monospace; overflow: auto;"></textarea><br>
                 <duv id="warnings__ID"></duv><br><br>
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf">ABC Quick Reference Card</a>
+                <br><a target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
             <div w='100|60'>
                 <div style='width:100%;padding-bottom:15px;display:inline-block'>
@@ -64,7 +46,7 @@
             $('#D__ID').on('load',function(){
                 //------------------------------------
                 setTimeout(function(){
-                    $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
+                    $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-110)+"px");
                     $('#paper_w__ID').css('min-height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
                     $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10)+"px");
                 },1000);
@@ -91,11 +73,10 @@
                         synth: {el:"#midi__ID",
                             options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
                                 midiTranspose:steps,
-                                program:instrument,
+                                //program:instrument,
                                 voicesOff:voice_off,
                                 chordsOff:true,
-                                soundFontUrl:"https://paulrosen.github.io/midi-js-soundfonts/abcjs/"
-                                //soundFontUrl:"https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
+                                soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/"
                             },
                             cursorControl:cursorControl
                         },
@@ -143,7 +124,7 @@
                 $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
                 $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
                 $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
-                var notes="X:1\n\T:Score @@@\nC:Your name\nM:4/4\nL:1/8\nQ:1/4=80\nK:C\nV:1\nCDEF|GABc|cBAG|FEDC|";
+                var notes="X:1\n\T:Score @@@\nC:Your name\nM:4/4\nL:1/8\nQ:1/4=80\nK:C\nV:1\n%%MIDI program 1\nCDEF|GABc|cBAG|FEDC|";
                 var load_score=function(s){
                     var txt=localStorage.getItem("vm-score_"+s);
                     if(txt==undefined){
