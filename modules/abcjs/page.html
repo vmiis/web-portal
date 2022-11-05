@@ -1,5 +1,5 @@
 <div id="D__ID">
-    <div id="container__ID" bp=576 style='display:flow-root;max-width:1220px'>
+    <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
             <div w='100|100' style="position:fixed">
                 <duv id="midi__ID"></duv>    
@@ -8,60 +8,21 @@
         <div style="padding-top:40px">
             <div w='100|40' id=left__ID>
                 <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
+                <button id=print__ID type="button" style="float:right">Print</button>
                 <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
                 <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
-                <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto;"></textarea><br>
+                <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
                 <duv id="warnings__ID"></duv><br><br>
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a>
                 <br><a target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
             <div w='100|60'>
-                <div style='width:100%;padding-bottom:15px;display:inline-block'>
-                    <button id=print__ID type="button" style="float:right">Print</button>
-                </div>
                 <div id=paper_w__ID style="width:100%;overflow:auto">
                     <div id="paper__ID" ></div>
                 </div>
             </div>
         </div>
     </div>
-                <!--
-                <label>
-                    Select instrument:
-                    <select id="instrument__ID">
-                        <option value="0">1 Acoustic Piano</option>
-                        <option value="1">2 Bright Acoustic Piano</option>
-                        <option value="2">3 Electric Grand Piano</option>
-                        <option value="3">4 Honkytonk Piano</option>
-                        <option value="4">5 Electric Piano 1</option>
-                        <option value="5">6 Electric Piano 2</option>
-                        <option value="6">7 Harpsichord</option>
-                        <option value="7">8 Clavi</option>
-                        <option value="8">9 Celesta</option>
-                        <option value="9">10 Glockenspiel</option>
-                        <option value="10">11 Music Box</option>
-                        <option value="11">12 Vibraphone</option>
-                        <option value="23">24 Tango Accordion</option>
-                        <option value="24">25 Acoustic Guitar (nylon)</option>
-                        <option value="25">26 Acoustic Guitar (steel)</option>
-                        <option value="26">27 Electric Guitar (jazz)</option>
-                        <option value="40">41 Violin</option>
-                        <option value="42">43 Cello</option>
-                        <option value="43">44 Contrabass</option>
-                        <option value="44">45 Tremolo Strings</option>
-                        <option value="45">46 Pizzicato Strings</option>
-                        <option value="46">47 Orchestral Harp</option>
-                        <option value="47">48 Timpani</option>
-                        
-                        <option value="56">57 Trumpet</option>
-                        <option value="57">58 Trombone</option>
-                        <option value="58">59 Tuba</option>
-                        <option value="59">60 Muted Trumpet</option>
-                        <option value="60">61 French Horn</option>
-                    </select>
-                </label><br>
-                -->
-
     <script>
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);

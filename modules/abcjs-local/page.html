@@ -1,5 +1,5 @@
 <div id="D__ID">
-    <div id="container__ID" bp=576 style='display:flow-root;max-width:1220px'>
+    <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
             <div w='100|100' style="position:fixed">
                 <duv id="midi__ID"></duv>    
@@ -8,6 +8,7 @@
         <div style="padding-top:40px">
             <div w='100|40' id=left__ID>
                 <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
+                <button id=print__ID type="button" style="float:right">Print</button>
                 <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
                 <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
                 <div>
@@ -23,15 +24,12 @@
                     <label><input type="radio" name=score value="10"> Score 10</input></label>
                 </div>
                 
-                <textarea id="abc__ID" style="width:100%;font-size: 90%;font-family: monospace; overflow: auto;"></textarea><br>
+                <textarea id="abc__ID" style="width:100%;font-size: 90%;font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
                 <duv id="warnings__ID"></duv><br><br>
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf">ABC Quick Reference Card</a>
                 <br><a target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
             <div w='100|60'>
-                <div style='width:100%;padding-bottom:15px;display:inline-block'>
-                    <button id=print__ID type="button" style="float:right">Print</button>
-                </div>
                 <div id=paper_w__ID style="width:100%;overflow:auto">
                     <div id="paper__ID" ></div>
                 </div>
