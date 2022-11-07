@@ -69,6 +69,20 @@
 					<input type="phone" class="form-control" name=Phone />
 				</div>
 			</div>
+			<hr>
+			<div>
+				<div w='100|50'>
+					<div style='padding-left:30px'>
+						<img id="captcha_img__ID" />
+					</div>
+					<span>Type in the code above</span>
+					<input type=text class="form-control" name=_captcha_code />
+					<div style="display:none">
+						<input type=text name=_captcha_hash />
+						<input type=text name=_captcha_time />
+					</div>
+				</div>
+			</div>
 			<div>
 				<div w='100|100'>
 					<button id=submit__ID type="submit" class="btn btn-secondary">Submit</button>
@@ -83,6 +97,17 @@
             VmInclude:__COMPONENT__/f/form.01.js
     		//-------------------------------------
 			new ResizeObserver($vm.responsive).observe(form_container__ID);
+    		
+			//-------------------------------------
+			$('#D__ID').on('show',function(){
+				$vm.request({api:m.api,cmd:'captcha'},function(res){
+					$('#F__ID input[name=_captcha_hash]').val(res.result.hash);
+					$('#F__ID input[name=_captcha_time]').val(res.result.time);
+					$('#captcha_img__ID').prop("src",res.result.img);
+				})
+			})
+			//m.after_insert=function(data,res)
+			//-------------------------------------
     	}
     </script>
     <style>

@@ -6,7 +6,7 @@
             </div>
         </div>
         <div style="padding-top:40px">
-            <div w='100|40' id=left__ID>
+            <div w='100|45' id=left__ID>
                 <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
                 <button id=print__ID type="button" style="float:right">Print</button>
                 <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
@@ -16,7 +16,7 @@
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a>
                 <br><a target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
-            <div w='100|60'>
+            <div w='100|55'>
                 <div id=paper_w__ID style="width:100%;overflow:auto">
                     <div id="paper__ID" ></div>
                 </div>
@@ -161,7 +161,7 @@
                         self.cursor.setAttribute("x2", ev.left - 2+6);
                         self.cursor.setAttribute("y1", ev.top);
                         self.cursor.setAttribute("y2", ev.top + ev.height);
-                        var h1=$('#paper__ID').offset().top+ev.top;
+                        var h1=$('#paper__ID').offset().top+ev.top+ev.height;
                         var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/2;
                         var hh=h2-h1;
                         var h=$("#paper_w__ID").scrollTop()-$(window).scrollTop();
