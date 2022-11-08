@@ -1,0 +1,242 @@
+<div id="D__ID">
+    <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
+        <div>
+            <div w='100|100' style="position:fixed">
+                <duv id="midi__ID"></duv>    
+            </div>
+        </div>
+        <div style="padding-top:40px">
+            <div w='100|45' id=left__ID>
+                <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
+                <button id=print__ID type="button" style="float:right">Print</button>
+                <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
+                <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
+                
+                <div style="display:none">
+                    <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
+                </div>
+                
+                <textarea id="number__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
+                
+                <duv id="warnings__ID"></duv><br><br>
+                <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a>
+                <br><a target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
+                <br><u id=abc_code__ID style="cursor:pointer">ABC Code</u>
+            </div>
+            <div w='100|55'>
+                <div id=paper_w__ID style="width:100%;overflow:auto">
+                    <div id="paper__ID" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function F__ID(m){
+			new ResizeObserver($vm.responsive).observe(container__ID);
+            var cursor=0;
+            $('#D__ID').on('load',function(){
+                $('#abc_code__ID').on('click',function(){
+                    navigator.clipboard.writeText($('#abc__ID').val());
+                    alert("ABC code is copied to clipboard");
+                })
+                $('#number__ID').on('input',function(){
+                    var nt=$('#number__ID').val();
+                    var ls=nt.split('\n');
+                    for(var i=0;i<ls.length;i++){
+                        if(ls[i][0]=='%' || ls[i][1]==':'){}
+                        else{
+                            ls[i]=ls[i].replace(/0/g, 'z')
+                            ls[i]=ls[i].replace(/1/g, 'C')
+                            ls[i]=ls[i].replace(/2/g, 'D')
+                            ls[i]=ls[i].replace(/3/g, 'E')
+                            ls[i]=ls[i].replace(/4/g, 'F')
+                            ls[i]=ls[i].replace(/5/g, 'G')
+                            ls[i]=ls[i].replace(/6/g, 'A')
+                            ls[i]=ls[i].replace(/7/g, 'B')
+                            ls[i]=ls[i].replace(/-------/g, '8')
+                            ls[i]=ls[i].replace(/------/g, '7')
+                            ls[i]=ls[i].replace(/-----/g, '6')
+                            ls[i]=ls[i].replace(/----/g, '5')
+                            ls[i]=ls[i].replace(/---/g, '4')
+                            ls[i]=ls[i].replace(/--/g, '3')
+                            ls[i]=ls[i].replace(/-/g, '2')
+                            ls[i]=ls[i].replace(/\./g, '>')
+                            ls[i]=ls[i].replace(/_/g, '-')
+                        }
+                    }
+                    var txt="";
+                    for(var i=0;i<ls.length;i++){
+                        txt+=ls[i]+"\n";
+                    }
+                    $('#abc__ID').val(txt);
+                    $('#abc__ID').triggerHandler('change');
+                })
+                //------------------------------------
+                $('#print__ID').on('click',function(){
+                    create(1); window.print(); create();
+                })
+                //------------------------------------
+                var notes=m.input.musicnotes;
+                var op=m.input.op; if(op==undefined) op=0;
+                //$('#instrument__ID').val(op);
+
+                $('#number__ID').val(notes);
+                $('#number__ID').triggerHandler('input');
+                setTimeout(function(){
+                    //$('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-110)+"px");
+                    $('#number__ID').css('height',($(window).height()-$('#number__ID').offset().top-130)+"px");
+                    $('#paper_w__ID').css('min-height',($(window).height()-$('#number__ID').offset().top-90)+"px");
+                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10)+"px");
+                },1000);
+                var steps=0; $('#tran__ID').val(0);
+                var instrument=op; $('#instrument__ID').val(instrument);
+                var voice1=true; $('#voice1__ID').prop('checked',true);
+                var voice2=true; $('#voice2__ID').prop('checked',true);
+                //------------------------------------
+                var abc_editor="";
+                var create=function(print){
+                    var OS=false;
+                    if(print==1) OS=true;
+                    cursor=0;
+                    if(abc_editor!=""){
+                        abc_editor.synth.synthControl.pause();
+                    }
+                    var voice_off=[];
+                    if(voice1==false) voice_off.push(0);
+                    if(voice2==false) voice_off.push(1);
+                    abc_editor = new ABCJS.Editor("abc__ID", { 
+                        canvas_id: "paper__ID", 
+                        warnings_id:"warnings__ID",
+                        synth: {el:"#midi__ID",
+                            options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
+                                midiTranspose:steps,
+                                //program:instrument,
+                                voicesOff:voice_off,
+                                chordsOff:true,
+                                //soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/"
+                                //soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
+                                soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/"
+                            },
+                            cursorControl:cursorControl
+                        },
+                        abcjsParams: {
+                            visualTranspose: steps,
+                            responsive: "resize",
+                            oneSvgPerLine: OS
+                        },
+                        selectionChangeCallback:function(){
+                            var lastSelection = document.querySelectorAll("#paper__ID" + " .abcjs-note_selected path");
+                            if(lastSelection!=undefined){
+                                if(lastSelection.length!=0){
+                                    var d=$(lastSelection[0]).attr('d');
+                                    if(d!=undefined){
+                                        xx=d.split(' ');
+                                        if(xx.length>2){
+                                            var y=parseFloat(xx[2].replace('c',''));
+                                            var h=$("#paper_w__ID").scrollTop();
+                                            var hh=$('#paper__ID').offset().top+y;
+                                            var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/3;
+                                            var h3=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()*2/3;
+                                            if(hh<h2) $("#paper_w__ID").scrollTop(h+(hh-h2));
+                                            if(hh>h3) $("#paper_w__ID").scrollTop(h+(hh-h3));
+                                        }
+                                    }
+                                }
+                            }
+                        }                     
+                    })
+                }
+                create();
+                //------------------------------------
+                $('#abc__ID').on('input',function(){
+                    //this.style.height = "auto";
+                    //this.style.height = this.scrollHeight + "px";
+                    cursor=0;
+                })
+                $('#abc__ID').triggerHandler('input');
+                //------------------------------------
+                $('#tran__ID').on('change',function(){       steps=$('#tran__ID').val(); create(); })
+                $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
+                $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
+                $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
+            })
+            function CursorControl(rootSelector) {
+                var self = this;
+                // This demonstrates two methods of indicating where the music is.
+                // 1) An element is created that is moved along for each note.
+                // 2) The currently being played note is given a class so that it can be transformed.
+                self.cursor = null; // This is the svg element that will move with the music.
+                self.rootSelector = rootSelector; // This is the same selector as the renderAbc call uses.
+                self.onStart = function() {
+                    // This is called when the timer starts so we know the svg has been drawn by now.
+                    // Create the cursor and add it to the sheet music's svg.
+                    var svg = document.querySelector(self.rootSelector + " svg");
+                    if(cursor==0){
+                        cursor=1;
+                        self.cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        self.cursor.setAttribute("class", "abcjs-cursor");
+                        self.cursor.setAttributeNS(null, 'x1', 0);
+                        self.cursor.setAttributeNS(null, 'y1', 0);
+                        self.cursor.setAttributeNS(null, 'x2', 0);
+                        self.cursor.setAttributeNS(null, 'y2', 0);
+                        svg.appendChild(self.cursor);
+                    }
+                };
+                self.removeSelection = function() {
+                    // Unselect any previously selected notes.
+                    var lastSelection = document.querySelectorAll(self.rootSelector + " .abcjs-highlight");
+                    for (var k = 0; k < lastSelection.length; k++)
+                        lastSelection[k].classList.remove("abcjs-highlight");
+                };
+                self.onEvent = function(ev) {
+                    // This is called every time a note or a rest is reached and contains the coordinates of it.
+                    if (ev.measureStart && ev.left === null)
+                        return; // this was the second part of a tie across a measure line. Just ignore it.
+                    self.removeSelection();
+                    // Select the currently selected notes.
+                    for (var i = 0; i < ev.elements.length; i++ ) {
+                        var note = ev.elements[i];
+                        for (var j = 0; j < note.length; j++) {
+                            note[j].classList.add("abcjs-highlight");
+                        }
+                    }
+                    // Move the cursor to the location of the current note.
+                    if (self.cursor) {
+                        self.cursor.setAttribute("x1", ev.left - 2+6);
+                        self.cursor.setAttribute("x2", ev.left - 2+6);
+                        self.cursor.setAttribute("y1", ev.top);
+                        self.cursor.setAttribute("y2", ev.top + ev.height);
+                        var h1=$('#paper__ID').offset().top+ev.top+ev.height;
+                        var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/2;
+                        var hh=h2-h1;
+                        var h=$("#paper_w__ID").scrollTop()-$(window).scrollTop();
+                        if(hh<0) $("#paper_w__ID").scrollTop(h-hh);
+                    }
+                };
+                self.onFinished = function() {
+                        self.removeSelection();
+
+                    if (self.cursor) {
+                        self.cursor.setAttribute("x1", 0);
+                        self.cursor.setAttribute("x2", 0);
+                        self.cursor.setAttribute("y1", 0);
+                        self.cursor.setAttribute("y2", 0);
+                    }
+                };
+            }
+            var cursorControl = new CursorControl("#paper__ID");
+        }
+    </script>
+    <style>
+        #container__ID{
+            background-color:#fff;
+            padding:20px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: Verdana,sans-serif;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        /*VmInclude:__CURRENT_PATH__/style.css*/
+    </style>
+</div>

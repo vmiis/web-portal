@@ -1,0 +1,15 @@
+X:1
+T:花儿为什么这样红
+C:zhiming@vmiis.com
+%%composerfont 10
+M:2/4
+L:1/8
+Q:1/4=80
+K:C
+V:1
+%%MIDI program 24 % 吉他
+  A2GA             |BC'2C'   |A>C' BG   |A4-       |
+  A2 C'B/A/        |GAGF     |EDE2-     |E4        |
+  D'3C'/D'/        |E'2>F'2  |D'>F' E'D'|D'C' C'2- |
+  C'E'/E'/ E'D'/E'/|D'C'C'B  |Bz^GA     |B3C'      |
+  A>C' BA          |GA GF    |ED EF/E/  |E4        |

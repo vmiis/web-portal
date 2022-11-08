@@ -7,11 +7,11 @@ Q:1/4=60
 K:C
 V:1
 %%MIDI program 56
-Ge ec|d/2e/2d2e|e2AG|c4|
-eg ge|ag2e|e2e/2d/2c|d4|
-e2BG|A/2B/2 A2c|Be eB|A/2B/2A3|
-Be eB|BA/2B/2A2|dA/2c/2 BA|G4|
-eg ge|ag/2a/2g2|e/2ge/2 ce/2e/|g4|
-eg ge|ed/2e/2d2|BA/2B/2 AG|e4|
-eg ge|ag/2a/2g2|e/2ge/2 ce|g4|
-eg ge/2e/2|ed/2e/2d2|BA/2B/2 AG|c4|
+Ge ec|d/e/d2e|e2AG|c4|
+eg ge|ag2e|e2e/d/c|d4|
+e2BG|A/B/ A2c|Be eB|A/B/A3|
+Be eB|BA/B/A2|dA/c/ BA|G4|
+eg ge|ag/a/g2|e/ge/ ce/e/|g4|
+eg ge|ed/e/d2|BA/B/ AG|e4|
+eg ge|ag/a/g2|e/ge/ ce|g4|
+eg ge/e/|ed/e/d2|BA/B/ AG|c4|
