@@ -54,27 +54,59 @@
                 $('#number__ID').on('input',function(){
                     var nt=$('#number__ID').val();
                     var ls=nt.split('\n');
+                    var k="C";
                     for(var i=0;i<ls.length;i++){
-                        if(ls[i][0]=='%' || ls[i][1]==':'){}
+                        var line=ls[i]; //if(line==null || line==undefined) line="";
+                        line=line.trim();
+                        var cs=line.split(':');
+                        var c0=cs[0].trim();
+                        var c1=""; if(cs.length>1) c1=cs[1].trim().split(' ')[0];
+                        if(c0=="K") k=c1;
+                    }
+                    for(var i=0;i<ls.length;i++){
+                        var line=ls[i]; //if(line==null || line==undefined) line="";
+                        line=line.trim();
+                        if(line[0]=='%' || line.length>1 && line[1]==':'){}
                         else{
-                            ls[i]=ls[i].replace(/0/g, 'z')
-                            ls[i]=ls[i].replace(/1/g, 'C')
-                            ls[i]=ls[i].replace(/2/g, 'D')
-                            ls[i]=ls[i].replace(/3/g, 'E')
-                            ls[i]=ls[i].replace(/4/g, 'F')
-                            ls[i]=ls[i].replace(/5/g, 'G')
-                            ls[i]=ls[i].replace(/6/g, 'A')
-                            ls[i]=ls[i].replace(/7/g, 'B')
-                            ls[i]=ls[i].replace(/-------/g, '8')
-                            ls[i]=ls[i].replace(/------/g, '7')
-                            ls[i]=ls[i].replace(/-----/g, '6')
-                            ls[i]=ls[i].replace(/----/g, '5')
-                            ls[i]=ls[i].replace(/---/g, '4')
-                            ls[i]=ls[i].replace(/--/g, '3')
-                            ls[i]=ls[i].replace(/-/g, '2')
-                            ls[i]=ls[i].replace(/\./g, '>')
-                            ls[i]=ls[i].replace(/_/g, '-')
+                            if(k=="F"){
+                                line=line.replace(/1/g, 'F')
+                                line=line.replace(/2/g, 'G')
+                                line=line.replace(/3/g, 'A')
+                                line=line.replace(/4/g, 'B')
+                                line=line.replace(/5/g, 'c')
+                                line=line.replace(/6/g, 'd')
+                                line=line.replace(/7/g, 'e')
+                            }
+                            if(k=="G"){
+                                line=line.replace(/1/g, 'G')
+                                line=line.replace(/2/g, 'A')
+                                line=line.replace(/3/g, 'B')
+                                line=line.replace(/4/g, 'c')
+                                line=line.replace(/5/g, 'd')
+                                line=line.replace(/6/g, 'e')
+                                line=line.replace(/7/g, 'f')
+                            }
+                            else{
+                                line=line.replace(/1/g, 'C')
+                                line=line.replace(/2/g, 'D')
+                                line=line.replace(/3/g, 'E')
+                                line=line.replace(/4/g, 'F')
+                                line=line.replace(/5/g, 'G')
+                                line=line.replace(/6/g, 'A')
+                                line=line.replace(/7/g, 'B')
+                            }
+                            line=line.replace(/0/g, 'z')
+                            line=line.replace(/-------/g, '8')
+                            line=line.replace(/------/g, '7')
+                            line=line.replace(/-----/g, '6')
+                            line=line.replace(/----/g, '5')
+                            line=line.replace(/---/g, '4')
+                            line=line.replace(/--/g, '3')
+                            line=line.replace(/-/g, '2')
+                            line=line.replace(/\./g, '>')
+                            line=line.replace(/_/g, '-')
                         }
+                        ls[i]=line;
                     }
                     var txt="";
                     for(var i=0;i<ls.length;i++){
