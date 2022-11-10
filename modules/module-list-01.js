@@ -19,6 +19,8 @@
         "Old-melody": {url:$vm.hosting_path+"/panels/old-melody/panel.html", router:1},
         "Nice-melody": {url:$vm.hosting_path+"/panels/nice-melody/panel.html", router:1},
         "Numbered-melody": {url:$vm.hosting_path+"/panels/numbered-melody/panel.html", router:1},
+        "Build-website": {url:$vm.hosting_path+"/panels/build-website/page.html", router:1},
+        
         "main-panel":{url:$vm.hosting_path+"/panels/main/panel.html",title:"Portal",description:"main panel",router:1},
         //"app-panel":{url:$vm.hosting_path+"/modules/panels/app-panel.html",description:"main panel",router:1},
         "diagram":                                  {url:$H+"/diagram/diagram.html",router:1},

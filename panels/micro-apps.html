@@ -37,7 +37,7 @@
                 if(module_name=='About-Micro-App') $vm.show_module(module_name,{}); 
                 else if($vm.localhost==true){
                     if(module_name.indexOf(".html")==-1) window.open('/vmiis/web-portal/apps/'+module_name+'/');
-                    window.open('/vmiis/web-portal/apps/'+module_name);   
+                    else window.open('/vmiis/web-portal/apps/'+module_name);   
                 }
                 else{
                     if(module_name.indexOf(".html")==-1) window.open('/apps/'+module_name+'/');

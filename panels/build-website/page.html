@@ -1,0 +1,107 @@
+<div id=D__ID>
+    <div id=panel__ID class=panel__ID>
+        <ul _style="list-style-type:decimal;">
+            <div class="list__ID">
+                <span class=LT__ID>Build your website with basic HTML,Javascript and CSS Knowledge</span>
+                <br><br>
+                <li><a target=_blank href='apps/simple-layout/index.html'>Start up with a simple layout, header/content/footer</a></li>
+                <li><a target=_blank href='apps/templates/002/index.html'>Modular structure, move the contents into separate module files </a></li>
+                <li><a target=_blank href='apps/templates/003/index.html'>Add menu on header section </a></li>
+                <li><a target=_blank href='apps/templates/004/index.html'>Load modules into the contents section </a></li>
+                <li><a target=_blank href='apps/templates/005/index.html'>Apply CSS to the header and footer </a></li>
+                <li><a target=_blank href='apps/templates/006/index.html'>Add logo and background image </a></li>
+                <li><a target=_blank href='apps/templates/007/index.html'>Recreate home module</a></li>
+            </div>
+            <!---------------------------------------------------------------------------------------->
+    </ul>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            $('#D__ID a').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var href=$(this).attr('href');
+                window.open(href);
+            })
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        .list__ID li a:first-child{
+            white-space: nowrap;
+        }
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        .panel__ID{
+            padding:20px 50px 10px 50px;
+            font-size:14px;
+    		max-width: 100%;
+    		column-count: 3;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+        }
+        .panel__ID div{
+            break-inside: avoid-column;
+        }
+	    .panel__ID span{
+			color:#283f55;
+			font-weight: bold;
+            /*font-weight: 600;*/
+			/*margin:3px 10px;*/
+            white-space: nowrap;
+	    }
+
+        a {
+            text-decoration: none;
+        }
+        a:link {
+            color:#555;
+        }
+        a:visited {
+            color:#555;
+        }
+        a:hover {
+            color:red;
+        }
+        a:active {
+            color:#555;
+        }
+        #D__ID input::placeholder {
+            color: #ccc;
+            padding-left:6px;
+        }
+        .break__ID{
+            break-before:column;
+            display:block;
+        }        
+        @media screen and (max-width:768px){
+            .break__ID{
+                break-before:unset;
+            }        
+            .panel__ID{
+                padding:20px;
+                column-count: 1;
+            }
+        }
+        .LT__ID{
+            margin-left:-40px;
+            /*cursor:pointer;*/
+        }
+        #panel__ID ul li, #panel__ID ul span{
+            break-inside: avoid-column;
+        }
+        #bp__ID{
+            color:#117a8b;
+        }
+        #bp__ID:hover{
+            color:red;
+        }
+    </style>
+</div>
+

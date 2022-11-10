@@ -37,13 +37,13 @@
             <div id=content></div>
             <div id=footer></div>
         </div>
-        <iframe id=iframe_music style='display:none' src="https://www.youtube.com/embed/_4kHxtiuML0?enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         <!----------------------------------------------->
         <script app code>
             //---------------------------------------------
-            $VmAPI={};$vm.ver=[2.19,0.09]; $vm['jquery-ui-min-js']=1;
+            $VmAPI={};$vm.ver=[2.20,0.10]; $vm['jquery-ui-min-js']=1;
             $vm.flexindex=new FlexSearch({  doc: {id: "id",field: ["title","contents"]}    });
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
+            //$vm.loading_url_info=1;
             //---------------------------------------------
             $vm.module_list={
                 index:  {url:$vm.hosting_path+"/index.html",description:"main entry, layout, module list setup"},
@@ -92,9 +92,11 @@
             }
             //---------------------------------------------
             $vm.play=0;
+            $vm.audio=new Audio("http://localhost:8000/vmiis/web-portal/data/music.mp3");
+            $vm.audio.loop=true;
             $vm.music=function(id){ 
-                if($vm.play==0) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*'); 
-                if($vm.play==1) $('#iframe_music')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+                if($vm.play==0) $vm.audio.play();
+                if($vm.play==1) $vm.audio.pause();;
                 if($vm.play==0){$vm.play=1;$('#'+id).text("Pause");} else{ $vm.play=0; $('#'+id).text("Play");}
             }
             //---------------------------------------------
@@ -164,13 +166,13 @@
                     $.get(url+'?_='+new Date().getTime(),function(new_txt){
                         localStorage.setItem($vm.hosting_path+url+"txt",new_txt);
                         localStorage.setItem($vm.hosting_path+url+"ver",$vm.ver[1]);
-                        console.log('%cloading from url. '+url+' '+ver+'/'+$vm.ver[1],"color:#b55");
+                        if($vm.loading_url_info==1) console.log('%cloading from url. '+url+' '+ver+'/'+$vm.ver[1],"color:#b55");
                         $('head').append('<scr'+'ipt>'+new_txt+'</scr'+'ipt>');
                         $vm.get_module_list();
                     },'text');
                 }
                 else{
-                    console.log('%cloading from storage. '+url+' '+ver+'/'+$vm.ver[1],"color:#055");
+                    if($vm.loading_url_info==1) console.log('%cloading from storage. '+url+' '+ver+'/'+$vm.ver[1],"color:#055");
                     $('head').append('<scr'+'ipt>'+txt+'</scr'+'ipt>');
                     $vm.get_module_list();
                 }
@@ -213,13 +215,13 @@
                         $.get($vm.hosting_path+url+'?_='+new Date().getTime(),function(new_txt){
                             localStorage.setItem($vm.hosting_path+url+"txt",new_txt);
                             localStorage.setItem($vm.hosting_path+url+"ver",$vm.ver[0]);
-                            console.log('%cloading from url. '+url+' '+ver+'/'+$vm.ver[1],"color:#b55");
+                            if($vm.loading_url_info==1) console.log('%cloading from url. '+url+' '+ver+'/'+$vm.ver[1],"color:#b55");
                             $('head').append('<scr'+'ipt>'+new_txt+'</scr'+'ipt>');
                             end();
                         },'text');
                     }
                     else{
-                        console.log('%cloading from storage. '+url+' '+ver+'/'+$vm.ver[1],"color:#055");
+                        if($vm.loading_url_info==1) console.log('%cloading from storage. '+url+' '+ver+'/'+$vm.ver[1],"color:#055");
                         $('head').append('<scr'+'ipt>'+txt+'</scr'+'ipt>');
                         end();
                     }
