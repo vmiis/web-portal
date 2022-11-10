@@ -92,7 +92,7 @@
             }
             //---------------------------------------------
             $vm.play=0;
-            $vm.audio=new Audio("http://localhost:8000/vmiis/web-portal/data/music.mp3");
+            $vm.audio=new Audio($vm.hosting_path+"/data/music.mp3");
             $vm.audio.loop=true;
             $vm.music=function(id){ 
                 if($vm.play==0) $vm.audio.play();
