@@ -1,5 +1,5 @@
 @media print{
-	#left__ID,#midi__ID,#print__ID{
+	#left__ID,#midi__ID,#print__ID,#piano__ID{
 		display:none;
 	}
     #paper__ID{
@@ -203,10 +203,10 @@
 }
 .abcjs-highlight {
     /*fill: #0a9ecc;*/
-    fill: red
+    fill: red;
 }
 .abcjs-cursor {
     stroke: #188b12;
-	stroke-width: 17;
+	stroke-width: 15;
     opacity: 0.5;
 }        
