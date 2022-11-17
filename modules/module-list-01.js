@@ -347,6 +347,8 @@
         "Others": {url:H+"/panels/others.html", router:1},
         "Micro-Apps": {url:H+"/panels/micro-apps.html", router:1},
         "About-Micro-App":{url:$H+"/shared/microapp/page.html",router:1},
+        
+        "midi-player":{url:$H+"/midi-player/page.html",router:1},
         "abcjs":{url:$H+"/abcjs/page.html"},
         "abcjs-local":{url:$H+"/abcjs-local/page.html",router:1},
         "abcjs-numbered":{url:$H+"/abcjs-numbered/page.html",router:1},
