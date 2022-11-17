@@ -1,5 +1,5 @@
 @media print{
-	#left__ID,#midi__ID,#print__ID{
+	#left__ID,#midi__ID,#print__ID,#piano__ID{
 		display:none;
 	}
     #paper__ID{
