@@ -1,14 +1,48 @@
 <div id="D__ID">
     <div style="max-width:1200px; margin:0 auto;">
-        <div style="padding-top:20px">
+        <div style="display:none">
             <input type="file" id="file__ID" name="file__ID" /><br><br>
-            <button id="play__ID">Play</button>
-            <button id="pause__ID">Pause</button>
-            <button id="stop__ID">Stop</button>
         </div>
-        <div style="position:fixed;bottom:60px;">
+        <div style="padding:30px 0 0 90px">
+            <div><h3>MIDI file player on Piano</h3></div>
+            <div class="audio-player" style="width:600px">
+                <div class="timeline" id="timeline__ID">
+                    <div class="progress" id="progress__ID"></div>
+                </div>
+                <div class="controls">
+                    <div class="play-container">
+                        <div style="width:90px">
+                            <u style="cursor:pointer" id="open_file__ID">Choose File</u>
+                        </div>
+                    </div>
+                    <div class="play-container" style="width:50px">
+                        <div class="toggle-play play" id="pp__ID">
+                        </div>
+                    </div>
+                    <div class="time">
+                        <div class="current" id="current__ID">00:00</div>
+                        <div class="divider">/</div>
+                        <div class="length" id="midi_length__ID">00:00</div>
+                    </div>
+                    <div class="name" id="midi_name__ID"></div>
+                    <div class="volume-container">
+                        <div class="volume-button">
+                            <div class="volume icono-volumeMedium"></div>
+                        </div>
+                        <div class="volume-slider">
+                            <div class="volume-percentage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+        <div style="padding-top:20px">
             <div class="piano__ID" id="channel1__ID" >
-                <span style="margin-right:15px">Channel 1 </span> 
+                <span style="width:80px;margin-right:15px">
+                    Channel 1 
+                    <br><span id="ch_1__ID">Piano</span>
+                </span>
                 <div name="21" class="key__ID white__ID"></div>
                 <div name="22" class="key__ID black__ID"></div>
                 <div name="23" class="key__ID white__ID"></div>
@@ -108,7 +142,10 @@
 
             </div>                
             <div class="piano__ID" id="channel2__ID" >
-                <span style="margin-right:15px">Channel 2 </span> 
+                <span style="width:80px;margin-right:15px">
+                    Channel 2 
+                    <br><span id="ch_2__ID">Piano</span>
+                </span>
                 <div name="21" class="key__ID white__ID"></div>
                 <div name="22" class="key__ID black__ID"></div>
                 <div name="23" class="key__ID white__ID"></div>
@@ -208,7 +245,10 @@
 
             </div>                
             <div class="piano__ID" id="channel3__ID" >
-                <span style="margin-right:15px">Channel 3 </span> 
+                <span style="width:80px;margin-right:15px">
+                    Channel 3 
+                    <br><span id="ch_3__ID">Piano</span>
+                </span> 
                 <div name="21" class="key__ID white__ID"></div>
                 <div name="22" class="key__ID black__ID"></div>
                 <div name="23" class="key__ID white__ID"></div>
@@ -323,8 +363,33 @@
             var c1="";
             var c2="";
             var c3="";
+            var audio_duration=0;
+            //------------------------------------
+            $('#timeline__ID').on('click',function(e){
+                //var timelineWidth = window.getComputedStyle(timeline).width;
+                var timelineWidth=$(this).width();
+                var timeToSeek = e.offsetX / parseInt(timelineWidth) * audio_duration;
+                if(timeToSeek!=0)  Player.skipToSeconds(timeToSeek);
+                //alert(timeToSeek);
+            })
+            $('#pp__ID').on('click',function(e){
+                if(Player.isPlaying()){
+                    $(this).removeClass("pause");
+                    $(this).addClass("play");
+                    Player.pause();
+                }
+                else{
+                    $(this).removeClass("play");
+                    $(this).addClass("pause");
+                    Player.play();
+                }
+            })
+            $('#open_file__ID').on('click',function(e){
+                $('#file__ID').trigger('click');
+            })
             //------------------------------------
             $('#D__ID').on('load',function(){
+
             })
             //------------------------------------
 
@@ -338,29 +403,6 @@
                 });
             }
             //------------------------------------
-            var play=function(){
-                c1=acoustic_grand_piano;
-                c2=acoustic_grand_piano;
-                c3=acoustic_grand_piano;
-                /*
-                if(ac=="") ac=new AudioContext();
-                if(acoustic_grand_piano==""){
-                    Soundfont.instrument(ac, 'acoustic_grand_piano', { from: 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/' }).then(function (instrument) {
-                        acoustic_grand_piano=instrument;
-                        //Player.play();
-                    });
-                    Soundfont.instrument(ac, 'violin', { from: 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/' }).then(function (instrument) {
-                        violin=instrument;
-                        //Player.play();
-                    });
-                }
-                else Player.play();   
-                */
-                Player.play();
-            }
-            var pause = function() {	Player.pause();    }
-            var stop = function() {	    Player.stop();    }
-            //------------------------------------
             var key_on_c1=function(noteNumber){                $("#channel1__ID div[name='"+noteNumber+"']").addClass('sel__ID');            }
             var key_off_c1=function(noteNumber){               $("#channel1__ID div[name='"+noteNumber+"']").removeClass('sel__ID');         }
             var key_on_c2=function(noteNumber){                $("#channel2__ID div[name='"+noteNumber+"']").addClass('sel__ID');            }
@@ -369,26 +411,31 @@
             var key_off_c3=function(noteNumber){               $("#channel3__ID div[name='"+noteNumber+"']").removeClass('sel__ID');         }
             //------------------------------------
             var event_process=function(event){
-                console.log(event)
-                /*
-                if (event.name == 'Sequence/channel Name') {
-                    if(event.string=="Piano"){
-                        if(event.channel==2) c2=acoustic_grand_piano;
-                        if(event.channel==3) c3=acoustic_grand_piano;
-                        console.log("Piano "+event.channel);
-                    }
-                    if(event.string=="Violin"){
-                        if(event.channel==2) c2=violin;
-                        if(event.channel==3) c3=violin;
+//                console.log(event.name)
+//if(event.string!=undefined) 
+console.log(event);
+                //if (event.name == 'Sequence/channel Name') {
+                if (event.string !=undefined) {
+                    //if(event.string=="Piano"){
+                        if(event.channel==1){ $('#ch_1__ID').text(event.string+"aa");/*c2=acoustic_grand_piano;*/ }
+                        if(event.channel==2){ $('#ch_2__ID').text(event.string+"aa");/*c2=acoustic_grand_piano;*/ }
+                        if(event.channel==3){ $('#ch_3__ID').text(event.string+"aa");/*c2=acoustic_grand_piano;*/ }
+                        //console.log("Piano "+event.channel);
+                    //}
+                    
+                    //if(event.string=="Violin"){
+                        //if(event.channel==2){ $('#ch_1__ID').text(event.string);/*c2=acoustic_grand_piano;*/ }
+                        //if(event.channel==2){ $('#ch_2__ID').text(event.string);/*c2=acoustic_grand_piano;*/ }
+                        //if(event.channel==3){ $('#ch_3__ID').text(event.string);/*c2=acoustic_grand_piano;*/ }
                         
-                        console.log("Violin "+event.channel);
-                    }
+                        //console.log("Violin "+event.channel);
+                    //}
+                    
                 }
-                */
                 if (event.name == 'Note on') {
-                    if(event.channel==1) c1.play(event.noteName, ac.currentTime, {gain:event.velocity/100});
-                    if(event.channel==2) c2.play(event.noteName, ac.currentTime, {gain:event.velocity/100});
-                    if(event.channel==3) c3.play(event.noteName, ac.currentTime, {gain:event.velocity/100});
+                    if(event.channel==1) c1.play(event.noteName, ac.currentTime, {gain:event.velocity/10});
+                    if(event.channel==2) c2.play(event.noteName, ac.currentTime, {gain:event.velocity/10});
+                    if(event.channel==3) c3.play(event.noteName, ac.currentTime, {gain:event.velocity/10});
                     if(event.channel==1) key_on_c1(event.noteNumber);
                     if(event.channel==2) key_on_c2(event.noteNumber);
                     if(event.channel==3) key_on_c3(event.noteNumber);
@@ -398,21 +445,62 @@
                     if(event.channel==2) key_off_c2(event.noteNumber);
                     if(event.channel==3) key_off_c3(event.noteNumber);
                 }
+                var p=100-Player.getSongPercentRemaining();
+                $("#progress__ID").css("width",p+"%");
+                var ss=audio_duration-Player.getSongTimeRemaining();
+                ss=parseInt(ss);
+                var hours   = Math.floor(ss / 3600);
+                var minutes = Math.floor((ss - (hours * 3600)) / 60);
+                var seconds = ss - (hours * 3600) - (minutes * 60);
+                if (hours   < 10) {hours   = "0"+hours;}
+                if (minutes < 10) {minutes = "0"+minutes;}
+                if (seconds < 10) {seconds = "0"+seconds;}
+                var r=/*hours+':'+*/minutes+':'+seconds;
+                //console.log(r);
+                $("#current__ID").text(r);
             }
             //------------------------------------
-            $('#play__ID').on('click',function(){        play();    })
-            $('#pause__ID').on('click',function(){       pause();   })
-            $('#stop__ID').on('click',function(){        stop();    })
+            var tm=setInterval(() => {
+                if(MidiPlayer){
+                    Player=new MidiPlayer.Player();
+                    clearInterval(tm)
+                    Player.on('endOfFile', function() {    $('#pp__ID').removeClass("pause");  $('#pp__ID').addClass("play");  });
+                    Player.on('midiEvent', function(event) {   event_process(event);   });                    
+                    //Player.on('fileLoaded', function(event) { });                    
+                    //Player.on('playing', function(event) {});                    
+                }  
+            }, 1000);
             //------------------------------------
-            $('#file__ID').on('change',function(){    
+            $('#file__ID').on('change',function(e){    
+                $('#midi_name__ID').text(e.target.files[0].name);
                 var file = document.querySelector('input[name=file__ID]').files[0];
                 var reader = new FileReader();
                 if (file) reader.readAsArrayBuffer(file);
                 reader.addEventListener("load", function () {
-                    Player = new MidiPlayer.Player( event_process );
+                    //Player = new MidiPlayer.Player( event_process );
                     Player.loadArrayBuffer(reader.result);
+                    //------------
+                    
+                    c1=acoustic_grand_piano;
+                    c2=acoustic_grand_piano;
+                    c3=acoustic_grand_piano;
+                    
+                    //alert(Player.getSongTime());
+                    var ss=Player.getSongTime();
+                    audio_duration=ss;
+                    ss=parseInt(ss);
+                    var hours   = Math.floor(ss / 3600);
+                    var minutes = Math.floor((ss - (hours * 3600)) / 60);
+                    var seconds = ss - (hours * 3600) - (minutes * 60);
+                    if (hours   < 10) {hours   = "0"+hours;}
+                    if (minutes < 10) {minutes = "0"+minutes;}
+                    if (seconds < 10) {seconds = "0"+seconds;}
+                    var r=/*hours+':'+*/minutes+':'+seconds;
+                    $('#midi_length__ID').text(r);
+                    //------------
                 }, false);
             })
+            //------------------------------------
         }
     </script>
     <style>
@@ -456,6 +544,125 @@
         .sel__ID {
             background-color:#55b361;
         }
+
+
+
+.audio-player {
+  height: 50px;
+  /*width: 350px;*/
+  background: #444;
+  box-shadow: 0 0 20px 0 #000a;
+  font-family: arial;
+  color: white;
+  font-size: 0.75em;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 6px auto;
+}
+.audio-player .timeline {
+  background: white;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 0 #0008;
+}
+.audio-player .timeline .progress {
+  background: coral;
+  width: 0%;
+  height: 100%;
+  transition: 0.25s;
+}
+.audio-player .controls {
+  display: flex;
+  /*justify-content: space-between;*/
+  align-items: stretch;
+  padding: 0 20px;
+}
+.audio-player .controls > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.audio-player .controls .toggle-play.play {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  height: 0;
+  width: 0;
+  border: 7px solid #0000;
+  border-left: 13px solid white;
+}
+.audio-player .controls .toggle-play.play:hover {
+  transform: scale(1.1);
+}
+.audio-player .controls .toggle-play.pause {
+  height: 15px;
+  width: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.audio-player .controls .toggle-play.pause:before {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  background: white;
+  content: "";
+  height: 15px;
+  width: 3px;
+}
+.audio-player .controls .toggle-play.pause:after {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  background: white;
+  content: "";
+  height: 15px;
+  width: 3px;
+}
+.audio-player .controls .toggle-play.pause:hover {
+  transform: scale(1.1);
+}
+.audio-player .controls .time {
+  display: flex;
+}
+.audio-player .controls .time > * {
+  padding: 2px;
+}
+.audio-player .controls .volume-container {
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.audio-player .controls .volume-container .volume-button {
+  height: 26px;
+  display: flex;
+  align-items: center;
+}
+.audio-player .controls .volume-container .volume-button .volume {
+  transform: scale(0.7);
+}
+.audio-player .controls .volume-container .volume-slider {
+  position: absolute;
+  left: -3px;
+  top: 15px;
+  z-index: -1;
+  width: 0;
+  height: 15px;
+  background: white;
+  box-shadow: 0 0 20px #000a;
+  transition: 0.25s;
+}
+.audio-player .controls .volume-container .volume-slider .volume-percentage {
+  background: coral;
+  height: 100%;
+  width: 75%;
+}
+.audio-player .controls .volume-container:hover .volume-slider {
+  left: -123px;
+  width: 120px;
+}
+
+
 
     </style>
 </div>
