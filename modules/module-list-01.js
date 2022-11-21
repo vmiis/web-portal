@@ -368,6 +368,8 @@
         "linux-certbot":{url:$H+"/linux/certbot/page.html",router:1},
         "linux-mongodb":{url:$H+"/linux/mongodb/page.html",router:1},
         "linux-common":{url:$H+"/linux/common/page.html",router:1},
+        
+        "ud1":{url:$H+"/dev/d1/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
