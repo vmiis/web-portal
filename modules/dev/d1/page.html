@@ -123,86 +123,80 @@
             var currentMIDI="";
             var t0="";
             var hT=undefined;
-            var I=0;
             var J=0;
             var nI=0;
             var nJ=0;
             var tk=5;
             var notes="";
             var notesL;
+            var n1=[];
+            var n2=[];            
             //-------------------------------
             var platNotes=function(note){
-                console.log(note.ticks);
-                acoustic_grand_piano.play(note.midi)
+                //console.log(note.ticks);
+                acoustic_grand_piano.play(note.midi,ac.currentTime, {gain:note.velocity} )
                 key_on(note.midi);
             }
             var platNotesOff=function(note){
-                console.log(note.midi)
+                //console.log(note.midi)
                 key_off(note.midi);
             }
             //-------------------------------
             var timer=function(){
                 var dt=(new Date()).getTime()-t0;
-                if(dt>(I*tk)){
-                    //console.log(I);
-                    var ticks=I*tk;
-                    for(var i=0;i<10;i++){
-                        if(nI<notesL){
-                            if(ticks>=notes[nI].ticks){
-                                platNotes(notes[nI]);
-                                nI++;       
-                            }
-                            else{
-                                break;
-                            } 
-                        }
-                    }
-                    for(var i=0;i<10;i++){
-                        if(nJ<notesL){
-                            if(ticks>=(notes[nJ].ticks+notes[nJ].durationTicks)){
-                                platNotesOff(notes[nJ]);
-                                nJ++;       
-                            }
-                            else{
-                                break;
-                            } 
-                        }
-                    }
-
-
-                    I++;
-                }
+                var ticks=dt/tk;
                 /*
-                if(dt>(J*tk)){
-                    var ticks=J*tk;
-                    for(var i=0;i<10;i++){
-                        if(nJ<notesL){
-                            if(ticks>=(notes[nJ].ticks+notes[nJ].durationTicks)){
-                                platNotesOff(notes[nJ]);
-                                nJ++;       
-                            }
-                            else{
-                                break;
-                            } 
+                for(var i=0;i<20;i++){
+                    if(nJ<notesL){
+                        var n_ticks=(notes[nJ].ticks+notes[nJ].durationTicks);
+                        if(ticks>=n_ticks){
+                            platNotesOff(notes[nJ]);
+                            //console.log(nJ+"---off"+"----"+nI+"      "+notes[nJ].durationTicks);
+                            nJ++;       
                         }
+                        else{
+                            //break;
+                        } 
                     }
-                    J++;
+                }
+                for(var i=0;i<20;i++){
+                    if(nI<notesL){
+                        var n_ticks=notes[nI].ticks;
+                        if(ticks>=n_ticks){
+                            platNotes(notes[nI]);
+                            //console.log(nI+"---on");
+                            nI++;       
+                        }
+                        else{
+                            //break;
+                        } 
+                    }
                 }
                 */
+                if(nI<notesL){
+                    var n_ticks=notes[nI].ticks;
+                    if(ticks>=n_ticks){ 
+                        platNotes(notes[nI]);
+                        nI++;       
+                    }
+                }
             }
             //-------------------------------
             $('#start__ID').on('click',function(){
                 if(currentMIDI!=""){
                     t0="";
-                    I=0;
                     nI=0;
                     nJ=0;
+                    n1=[];
+                    n2=[];            
                     var ppq=currentMIDI.header.ppq;
                     var bpm=currentMIDI.header.tempos[0].bpm;
                     tk=60000/bpm/ppq;
                     console.log("---------"+tk+"-----------");
                     notes=currentMIDI.tracks[0].notes;
                     notesL=notes.length;
+                    
+                    
                     t0=(new Date()).getTime();
                     if(hT!=undefined){
                         clearInterval(hT);
@@ -233,7 +227,7 @@
             var key_on=function(noteNumber){         $("#channel1__ID div[name='"+noteNumber+"']").addClass('sel__ID');            }
             var key_off=function(noteNumber){        $("#channel1__ID div[name='"+noteNumber+"']").removeClass('sel__ID');         }
 
-            $("#channel1__ID div[name='"+64+"']").addClass('sel__ID');
+            //$("#channel1__ID div[name='"+64+"']").addClass('sel__ID');
 
         }
     </script>
