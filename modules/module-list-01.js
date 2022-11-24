@@ -370,6 +370,8 @@
         "linux-common":{url:$H+"/linux/common/page.html",router:1},
         
         "ud1":{url:$H+"/dev/d1/page.html",router:1},
+        "ud2":{url:$H+"/dev/d2/page.html",router:1},
+        "ud3":{url:$H+"/dev/d3/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

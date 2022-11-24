@@ -8,7 +8,10 @@
         <div style="padding-top:40px">
             <div w='100|45' id=left__ID>
                 <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
-                <button id=print__ID type="button" style="float:right">Print</button>
+                <div style="float:right">
+                    <button id=midi2__ID type="button" _style="float:right">Waterfall MIDI</button>
+                    <button id=print__ID type="button" _style="float:right">Print</button>
+                </div>
                 <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
                 <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
                 
@@ -192,6 +195,15 @@
                     }
                     $('#abc__ID').val(txt);
                     $('#abc__ID').triggerHandler('change');
+                })
+                //------------------------------------
+                $('#midi2__ID').off('click').on('click',function(){
+                    if(abc_editor!=""){
+                        var a=$('#abc__ID').val();
+                        //var txt=ABCJS.synth.getMidiFile(a, { midiOutputType: "binary" });
+                        //console.log(txt[0].buffer);
+                        $vm.show_module("ud1",{abc:a}); 
+                    }
                 })
                 //------------------------------------
                 $('#print__ID').off('click').on('click',function(){

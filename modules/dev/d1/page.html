@@ -1,12 +1,72 @@
 <div id="D__ID">
     <div style="width:100%;height:100%;display:contents; position: relative;">
-
-        <div style="_display:none">
-            <input type="file" id="file__ID" name="file__ID" /><br><br>
+        <div id=tool__ID style="_height:100px;padding:6px;background-color:#cbd5db;">
+            <input type="file" id="file__ID" name="file__ID" /> <button id="start__ID">Start</button> <button id="stop__ID">Stop</button> <span id="title__ID" style="margin-left:80px;margin-right:80px"></span> <button id="download__ID">Download</button> <a id="midi-download"></a>
         </div>
-<button id="start__ID">Start</button>
-<button id="stop__ID">Stop</button>
-        <div style="position:absolute;bottom:0px; width:100%;">
+        <div id=notes__ID>
+            <div name="21" class="bar__ID"></div>
+            <div name="23" class="bar__ID"></div>
+            
+            <div name="24" class="bar__ID"></div>
+            <div name="26" class="bar__ID"></div>
+            <div name="28" class="bar__ID"></div>
+            <div name="29" class="bar__ID"></div>
+            <div name="31" class="bar__ID"></div>
+            <div name="33" class="bar__ID"></div>
+            <div name="35" class="bar__ID"></div>
+            
+            <div name="36" class="bar__ID"></div>
+            <div name="38" class="bar__ID"></div>
+            <div name="40" class="bar__ID"></div>
+            <div name="41" class="bar__ID"></div>
+            <div name="43" class="bar__ID"></div>
+            <div name="45" class="bar__ID"></div>
+            <div name="47" class="bar__ID"></div>
+            
+            <div name="48" class="bar__ID"></div>
+            <div name="50" class="bar__ID"></div>
+            <div name="52" class="bar__ID"></div>
+            <div name="53" class="bar__ID"></div>
+            <div name="55" class="bar__ID"></div>
+            <div name="57" class="bar__ID"></div>
+            <div name="59" class="bar__ID"></div>
+            
+            <div name="60" class="bar__ID"></div>
+            <div name="62" class="bar__ID"></div>
+            <div name="64" class="bar__ID"></div>
+            <div name="65" class="bar__ID"></div>
+            <div name="67" class="bar__ID"></div>
+            <div name="69" class="bar__ID"></div>
+            <div name="71" class="bar__ID"></div>
+            
+            <div name="72" class="bar__ID"></div>
+            <div name="74" class="bar__ID"></div>
+            <div name="76" class="bar__ID"></div>
+            <div name="77" class="bar__ID"></div>
+            <div name="79" class="bar__ID"></div>
+            <div name="81" class="bar__ID"></div>
+            <div name="83" class="bar__ID"></div>
+            
+            <div name="84" class="bar__ID"></div>
+            <div name="86" class="bar__ID"></div>
+            <div name="88" class="bar__ID"></div>
+            <div name="89" class="bar__ID"></div>
+            <div name="91" class="bar__ID"></div>
+            <div name="93" class="bar__ID"></div>
+            <div name="95" class="bar__ID"></div>
+            
+            <div name="96" class="bar__ID"></div>
+            <div name="98" class="bar__ID"></div>
+            <div name="100" class="bar__ID"></div>
+            <div name="101" class="bar__ID"></div>
+            <div name="103" class="bar__ID"></div>
+            <div name="105" class="bar__ID"></div>
+            <div name="107" class="bar__ID"></div>
+            
+            <div name="108" class="bar__ID"></div>
+        </div>
+
+        <div id=piano__ID style="position:absolute;bottom:0px; width:100%;">
             <div class="piano__ID" id="channel1__ID" >
                 <div name="21" class="key__ID white__ID"></div>
                 <div name="22" class="key__ID black__ID"></div>
@@ -115,133 +175,244 @@
             if(ac=="") ac=new AudioContext();
             Soundfont.instrument(ac, 'acoustic_grand_piano', { from: 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/' }).then(function (instrument) {
                 acoustic_grand_piano=instrument;
-                console.log(acoustic_grand_piano);
             });
-
-
             //-------------------------------
             var currentMIDI="";
+            var H0=180;
+            var T0=180;
+            var ppq;
             var t0="";
+            var t2="";
             var hT=undefined;
             var J=0;
-            var nI=0;
-            var nJ=0;
-            var tk=5;
+            var I1=0;
+            var I2=0;
+            var Y=0;
+            var tk=5; //ms per tick
             var notes="";
             var notesL;
             var n1=[];
             var n2=[];            
+            var running=0;
+            var step=60;
+            var abc_code="";
             //-------------------------------
             var platNotes=function(note){
-                //console.log(note.ticks);
-                acoustic_grand_piano.play(note.midi,ac.currentTime, {gain:note.velocity} )
+                acoustic_grand_piano.play(note.midi, ac.currentTime, {gain:6*note.velocity} )
                 key_on(note.midi);
             }
             var platNotesOff=function(note){
-                //console.log(note.midi)
                 key_off(note.midi);
             }
             //-------------------------------
             var timer=function(){
-                var dt=(new Date()).getTime()-t0;
-                var ticks=dt/tk;
-                /*
-                for(var i=0;i<20;i++){
-                    if(nJ<notesL){
-                        var n_ticks=(notes[nJ].ticks+notes[nJ].durationTicks);
-                        if(ticks>=n_ticks){
-                            platNotesOff(notes[nJ]);
-                            //console.log(nJ+"---off"+"----"+nI+"      "+notes[nJ].durationTicks);
-                            nJ++;       
+                if(running==1){
+                    var dt=(new Date()).getTime()-t0;
+                    var ticks=dt/tk;
+                    if(ticks>Y){
+                        Y=Y+20;
+                        var yy=-step*Y/ppq;
+                        $('div.note__ID').css("margin-bottom",yy+"px");
+                    }
+                    
+                    if(I2<n2.length){
+                        var n_ticks=n2[I2].ticks+T0;
+                        if(ticks>=n_ticks){ 
+                            platNotesOff(n2[I2]);
+                            I2++;
                         }
-                        else{
-                            //break;
-                        } 
+                    }
+                    if(I1<n1.length){
+                        var n_ticks=n1[I1].ticks+T0;
+                        if(ticks>=n_ticks){ 
+                            platNotes(n1[I1]);
+                            //console.log(I1+"   "+n1[I1].midi+"   "+n1[I1].name+"   "+n1[I1].durationTicks)
+                            I1++;       
+                        }
                     }
                 }
-                for(var i=0;i<20;i++){
-                    if(nI<notesL){
-                        var n_ticks=notes[nI].ticks;
-                        if(ticks>=n_ticks){
-                            platNotes(notes[nI]);
-                            //console.log(nI+"---on");
-                            nI++;       
-                        }
-                        else{
-                            //break;
-                        } 
-                    }
-                }
-                */
-                if(nI<notesL){
-                    var n_ticks=notes[nI].ticks;
-                    if(ticks>=n_ticks){ 
-                        platNotes(notes[nI]);
-                        nI++;       
+                if(I1>n1.length){
+                    $('#start__ID').text("Start");
+                    if(hT!=undefined){
+                        clearInterval(hT);
+                        hT=undefined;
+                        running=0;
                     }
                 }
             }
             //-------------------------------
+            $('#download__ID').on('click',function(){
+                if(abc_code!=""){
+               		var a = document.getElementById("midi-download");
+   	    	        var midi = ABCJS.synth.getMidiFile(abc_code, { midiOutputType: "encoded" })
+		            a.setAttribute("href", midi)
+		            a.click();
+                }
+            })
+            //-------------------------------
             $('#start__ID').on('click',function(){
                 if(currentMIDI!=""){
-                    t0="";
-                    nI=0;
-                    nJ=0;
-                    n1=[];
-                    n2=[];            
-                    var ppq=currentMIDI.header.ppq;
-                    var bpm=currentMIDI.header.tempos[0].bpm;
-                    tk=60000/bpm/ppq;
-                    console.log("---------"+tk+"-----------");
-                    notes=currentMIDI.tracks[0].notes;
-                    notesL=notes.length;
-                    
-                    
-                    t0=(new Date()).getTime();
-                    if(hT!=undefined){
-                        clearInterval(hT);
+                    if(running==0){
+                        running=1;
+                        $('#start__ID').text("Pause");
+                        t0=(new Date()).getTime();
+                        I1=0;
+                        I2=0;
+                        Y=0;
+                        if(hT!=undefined){
+                            clearInterval(hT);
+                        }
+                        hT=setInterval(timer,1);
                     }
-                    hT=setInterval(timer,1);
+                    else if(running==1){
+                        running=2;
+                        $('#start__ID').text("Continue");
+                        t2=(new Date()).getTime();
+                    }
+                    else if(running==2){
+                        running=1;
+                        t0=t0+((new Date()).getTime()-t2);
+                    }
                 }
                 else alert("No MIDI file");
             })
-
+            //------------------------------------
             $('#stop__ID').on('click',function(){
+                $('#start__ID').text("Start");
+                if(hT!=undefined){
+                    clearInterval(hT);
+                    hT=undefined;
+                    running=0;
+                }
+            })
+            //------------------------------------
+            var midi_parse=function(buffer){
+                $('#notes__ID div').html('');
+                $('#start__ID').text("Start");
+                running=0;
                 if(hT!=undefined){
                     clearInterval(hT);
                     hT=undefined;
                 }
-            })
+                
+                const midi = new Midi(buffer);
+                currentMIDI=midi;
+//console.log(midi)                
+                n1=structuredClone(currentMIDI.tracks[0].notes);
+                n2=structuredClone(currentMIDI.tracks[0].notes);
+                for(var i=0;i<n1.length;i++){
+                    n1[i].name=currentMIDI.tracks[0].notes[i].name;
+                }
+                for(var i=0;i<n2.length;i++){
+                    n2[i].ticks=n2[i].ticks+n2[i].durationTicks;
+                    n2[i].name=currentMIDI.tracks[0].notes[i].name;
+                }
+                var compare=function( a, b ) {
+                    if ( Date.parse(a.ticks) < Date.parse(b.ticks) ){
+                        return -1;
+                    }
+                    if ( Date.parse(a.ticks) > Date.parse(b.ticks) ){
+                        return 1;
+                    }
+                    return 0;
+                }
+                n2.sort(compare);
+                ppq=currentMIDI.header.ppq;
+                var bpm=currentMIDI.header.tempos[0].bpm;
+                tk=60000/bpm/ppq;
+                T0=H0/step*ppq;
+                var W=$("#notes__ID div[name='21']").width();
 
+                for(var i=0;i<n1.length;i++){
+                    var a=n1[i];
+                    var num=n1[i].midi;
+                    var t=n1[i].ticks;
+                    var B=H0+step*(t/ppq);
+                    var L=0;
+                    var H=step*n1[i].durationTicks/ppq;
+                    var K=n1[i].name.replace('6','').replace('5','').replace('4','').replace('3','').replace('2','').replace('1','');
+                    var W1=W;
+                    if(num==49 || num==51 || num==54 || num==56 || num==68 || num==61 || num==63 || num==66 || num==68 || num==70 || num==73 || num==75 ){
+                        num++;
+                        W1=W*2/3;
+                        L=-W/3;
+                    }
+                    var bar=$("#notes__ID div[name='"+num+"']");
+                    $("<div class=note__ID style='left:"+L+"px;bottom:"+B+"px;height:"+H+"px; width:"+W1+"px'>"+K+"</div>").prependTo(bar);
+                }
+            }
+            //------------------------------------
             $('#file__ID').on('change',function(e){    
                 var file=e.target.files[0];
                 const reader = new FileReader();
 				reader.onload = function (e) {
-					const midi = new Midi(e.target.result);
-                    console.log(midi);
-                    currentMIDI=midi;
+                    midi_parse(e.target.result);
+                    $('#title__ID').text('');
 				};
 				reader.readAsArrayBuffer(file);
             })
             //------------------------------------
             var key_on=function(noteNumber){         $("#channel1__ID div[name='"+noteNumber+"']").addClass('sel__ID');            }
             var key_off=function(noteNumber){        $("#channel1__ID div[name='"+noteNumber+"']").removeClass('sel__ID');         }
-
-            //$("#channel1__ID div[name='"+64+"']").addClass('sel__ID');
-
+            //------------------------------------
+            $('#D__ID').on('load',function(){
+                $('#notes__ID').css('height',$vm.min_height-$('#tool__ID').height()-$('#piano__ID').height()-12); 
+                var abc=m.input.abc;
+                abc_code=abc;
+                if(abc!=undefined){
+                    var ls=abc.split('\n');
+                    for(i=0;i<ls.length;i++){
+                        if(ls[i][0]=='T'){
+                            $('#title__ID').text(ls[i].split(':').pop());
+                            $('#file__ID').text('');
+                            break;
+                        }
+                    }
+                    var bs=ABCJS.synth.getMidiFile(abc, { midiOutputType: "binary" });
+                    midi_parse(bs[0].buffer);
+                }
+            })
+            //------------------------------------
         }
     </script>
     <style>
         #D__ID{
             background-color: #fff;
         }
-        
+        #notes__ID{
+            border:1px solid #333;
+            display: flex; padding:0 6px;
+            break-inside: avoid-column;
+            padding-left:3px; 
+            padding-right:3px;
+        }
         .piano__ID {
-            display: flex; padding:6px;
+            display: flex; 
+            padding:2px 6px 6px 6px;
             break-inside: avoid-column;
         }        
         .key__ID {
             width: var(--width);
+        }
+        .bar__ID{
+            width: 1.92307692307692vw;
+            height:100%;
+            position: relative; 
+            overflow: hidden;
+            background-color: #333;
+            border-left: 1px solid #222;
+            overflow: visible;
+            overflow-y: clip;
+        }
+        .note__ID{
+            position: absolute; 
+            background-color: rgb(94, 192, 94);
+            border: 1px solid rgb(23, 32, 23);
+            vertical-align: middle;
+            text-align: center;
+            border-radius: 4px;
+            color: yellow;
+            z-index: 1000;
         }
         .white__ID {
             --width: 1.92307692307692vw;
@@ -271,7 +442,7 @@
         }
 
 
-        .black__ID {
+        .black__ID{
             --width: 1.121112929623566vw;
             height: calc(var(--width) * 4.3);
             _background-color: black;
@@ -293,9 +464,6 @@
         .sel__ID {
             background-color:#55b361;
         }
-
-
-
 
         /*
         .piano {

@@ -762,7 +762,7 @@
             }
             //------------------------------------
             var event_process=function(event){
-console.log(event);
+//console.log(event);
                 if (event.name == 'Note on' || event.name == 'Note off') {
                     if(event.channel==1) c1.play(event.noteName, ac.currentTime, {gain:event.velocity/10});
                     if(event.channel==2) c2.play(event.noteName, ac.currentTime, {gain:event.velocity/10});
