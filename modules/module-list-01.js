@@ -353,6 +353,7 @@
         "abcjs-local":{url:$H+"/abcjs-local/page.html",router:1},
         "abcjs-numbered":{url:$H+"/abcjs-numbered/page.html",router:1},
         "abcjs-numbered-local":{url:$H+"/abcjs-numbered-local/page.html",router:1},
+        "abcjs-waterfall":{url:$H+"/abcjs-waterfall/page.html"},
         "sheet-music":{url:H+"/panels/sheet-music.html",router:1},
         "piano-left-hand-pattern":{url:H+"/panels/piano-left-hand-pattern.html",router:1},
         "ssl-check":{url:$H+"/ssl-check/page.html",router:1},
@@ -370,8 +371,10 @@
         "linux-common":{url:$H+"/linux/common/page.html",router:1},
         
         "ud1":{url:$H+"/dev/d1/page.html",router:1},
-        "ud2":{url:$H+"/dev/d2/page.html",router:1},
-        "ud3":{url:$H+"/dev/d3/page.html",router:1},
+        "ud2":{url:$H+"/dev/abcjs/page.html",router:1},
+        "ud3":{url:$H+"/dev/abcjs-waterfall/page.html",router:1},
+        "ud4":{url:$H+"/dev/abcjs-local/page.html",router:1},
+        "ud5":{url:$H+"/dev/abcjs-numbered-local/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

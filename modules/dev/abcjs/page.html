@@ -2,9 +2,10 @@
     <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
             <div w='100|45' id=left__ID style="padding:0 10px">
-                <div style="height:34px;background-color: #eee; padding:3px 6px 3px 6px">
+                <div style="height:48px;background-color: #eee; padding:3px 6px 3px 6px">
                     <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label> <label  style="margin-left:30px">Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
-                    <button id=print__ID type="button" style="margin-left:30px">Print Staff</button>
+                    <button id=print__ID type="button" style="float:right" class="button__ID">Print Staff</button>
+                    <button id=water__ID type="button" style="float:right" class="button__ID">Waterfall</button>
                 </div>
                 <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
                 <div id="warnings__ID"></div><br>
@@ -133,24 +134,19 @@
             var voice1=true;
             var voice2=true;
             var steps=0;
+            var key=[];
             //---------------------------------------------------
             $('#D__ID').on('load',function(){
-                var key=[];
-                for(var i=0;i<108;i++) key.push(0);
-                //------------------------------------
-                $('#print__ID').off('click').on('click',function(){
-                    create(1); window.print(); create();
-                })
                 //------------------------------------
                 notes=m.input.musicnotes;
                 if(notes!=undefined && notes!=""){
-                    play_notes();
+                    abc_init();
                 }
                 else{
                     var url=$vm.hosting_path+"/modules/abc-notation/The-Sound-of-Silence.abc";
                     $.get(url+'?_='+$vm.ver[0],function(txt){
                         notes=txt;
-                        play_notes();
+                        abc_init();
                     },'text');
                 }
                 setTimeout( function(){
@@ -216,7 +212,7 @@
                 })
             }
             //---------------------------------------------------
-            var play_notes=function(){
+            var abc_init=function(){
                 var op=m.input.op; if(op==undefined) op=0;
                 $('#abc__ID').val(notes);
                 setTimeout(function(){
@@ -232,8 +228,6 @@
                 create();
                 //------------------------------------
                 $('#abc__ID').on('input',function(){
-                    //this.style.height = "auto";
-                    //this.style.height = this.scrollHeight + "px";
                     cursor=0;
                 })
                 $('#abc__ID').triggerHandler('input');
@@ -244,10 +238,12 @@
             $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
             $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
             $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
+            $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
+            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:notes});  })
             //------------------------------------
             var play_key=function(pitches,t,m){
                 for(var i=21;i<108;i++){
-                    if(t>=key[i]){
+                    if(key[i]!=0 && t>=key[i]){
                         key[i]=0;
                         $("div[name='"+i+"']").removeClass('sel__ID');
                     }
@@ -255,10 +251,8 @@
                 for(var i=0;i<pitches.length;i++){
                     var pitch=pitches[i].pitch;
                     var duration=pitches[i].duration;
-                    key[pitch]=t+m*duration;
-                    if(key[pitch]!=0){
-                        $("div[name='"+pitch+"']").addClass('sel__ID');
-                    }
+                    key[pitch]=Math.floor(t+m*duration);
+                    $("div[name='"+pitch+"']").addClass('sel__ID');
                 }
             }
             //------------------------------------
@@ -268,22 +262,19 @@
                 var K=1;
 
                 var self = this;
-                // This demonstrates two methods of indicating where the music is.
-                // 1) An element is created that is moved along for each note.
-                // 2) The currently being played note is given a class so that it can be transformed.
                 self.cursor = null; // This is the svg element that will move with the music.
                 self.rootSelector = rootSelector; // This is the same selector as the renderAbc call uses.
                 self.onStart = function() {
-                    // This is called when the timer starts so we know the svg has been drawn by now.
-                    // Create the cursor and add it to the sheet music's svg.
+                    $("#paper_w__ID").scrollTop(0);
+                    $("#channel1__ID div").removeClass('sel__ID');
+                    key=[]; for(var i=0;i<108;i++) key.push(0);
+
                     var svg = document.querySelector(self.rootSelector + " svg");
                     
                     const {x, y, width, height} = svg.viewBox.baseVal;
                     HS=height;
                     HH=$("#paper__ID").outerHeight();
                     if(HS!=0) K=HH/HS;
-                    key=[];
-                    for(var i=0;i<108;i++) key.push(0);
 
                     if(cursor==0){
                         cursor=1;
@@ -335,7 +326,7 @@
                         self.cursor.setAttribute("y1", 0);
                         self.cursor.setAttribute("y2", 0);
                     }
-                    for(var i=0;i<108;i++) $("div[name='"+i+"']").removeClass('sel__ID');
+                    $("#channel1__ID div").removeClass('sel__ID')
                 };
             }
             //------------------------------------

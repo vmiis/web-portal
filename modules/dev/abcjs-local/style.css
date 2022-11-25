@@ -300,3 +300,22 @@
 .sel__ID {
 	background-color:#55b361;
 }
+.button__ID {
+	background-color: rgb(63, 157, 201);
+	border: none;
+	color: white;
+	padding: 6px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 3px;
+}
+.button__ID:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+

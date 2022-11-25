@@ -210,3 +210,112 @@
 	stroke-width: 15;
     opacity: 0.5;
 }        
+
+
+
+
+.piano__ID {
+	display: flex; 
+	padding:2px 6px 6px 6px;
+	break-inside: avoid-column;
+}        
+.key__ID {
+	width: var(--width);
+}
+.bar__ID{
+	width: 1.92307692307692vw;
+	height:100%;
+	position: relative; 
+	overflow: hidden;
+	background-color: #333;
+	border-left: 1px solid #222;
+	overflow: visible;
+	overflow-y: clip;
+}
+.note__ID{
+	position: absolute; 
+	background-color: rgb(94, 192, 94);
+	border: 1px solid rgb(23, 32, 23);
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 4px;
+	color: yellow;
+	z-index: 1000;
+}
+.white__ID {
+	/*
+	--width: 1.92307692307692vw;
+	height: calc(var(--width) * 4);
+	*/
+	height:60px;
+	_background-color: white;
+	_border: 1px solid #333;
+
+	background: #f5f5f5 linear-gradient(to bottom, transparent, #fff, transparent);
+	border: 1px solid;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.15);
+	border-right-width: 0;
+	border-bottom-width: 2px;
+
+	border-radius: 0 0 4px 4px;
+
+}
+.white__ID:last-child {
+	border-right-width: 1px;
+}
+
+
+.white__ID:active {
+	background: #d9d9d9 linear-gradient(to bottom, #f1f1f1, transparent, #f1f1f1);
+	border-bottom-width: 1px;
+	border-left-color: rgba(0, 0, 0, 0.15);
+	box-shadow: inset -2px 0 0 0 rgba(0, 0, 0, 0.15), inset 1px 0 0 0 rgba(0, 0, 0, 0.15);
+}
+
+
+.black__ID{
+	/*
+	--width: 1.121112929623566vw;
+	height: calc(var(--width) * 4.3);
+	*/
+	height:40px;
+	_background-color: black;
+	/*
+	margin-left: calc(var(--width) / -2);
+	margin-right: calc(var(--width) / -2);
+	*/
+	border: 1px solid #333;
+	z-index: 2;
+
+	background: #111 linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.075), transparent);
+	box-shadow: inset 0 0 0 1px #000, inset 0 -4px 0 1px #000, inset 0 -5px 0 1px rgba(255, 255, 255, 0.2);
+
+	border-radius: 0 0 4px 4px;
+}
+.black__ID:active {
+	background: #000 linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2));
+	box-shadow: inset 0 0 0 1px #000, inset 0 -2px 0 1px #000, inset 0 -3px 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.sel__ID {
+	background-color:#55b361;
+}
+.button__ID {
+	background-color: rgb(63, 157, 201);
+	border: none;
+	color: white;
+	padding: 6px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 3px;
+}
+.button__ID:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+

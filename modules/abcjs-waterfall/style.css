@@ -213,7 +213,12 @@
 
 
 
-
+#notes__ID{
+	border:1px solid #333;
+	display: flex; 
+	break-inside: avoid-column;
+	padding-left:5px; 
+}
 .piano__ID {
 	display: flex; 
 	padding:2px 6px 6px 6px;
@@ -223,12 +228,12 @@
 	width: var(--width);
 }
 .bar__ID{
-	width: 1.92307692307692vw;
+	/*width: 1.92307692307692vw;*/
 	height:100%;
 	position: relative; 
 	overflow: hidden;
-	background-color: #333;
-	border-left: 1px solid #222;
+	background-color: #fff;
+	border-left: 1px solid #eee;
 	overflow: visible;
 	overflow-y: clip;
 }
@@ -239,7 +244,7 @@
 	vertical-align: middle;
 	text-align: center;
 	border-radius: 4px;
-	color: yellow;
+	color: black;
 	z-index: 1000;
 }
 .white__ID {
@@ -247,7 +252,7 @@
 	--width: 1.92307692307692vw;
 	height: calc(var(--width) * 4);
 	*/
-	height:60px;
+	height:80px;
 	_background-color: white;
 	_border: 1px solid #333;
 
@@ -278,7 +283,7 @@
 	--width: 1.121112929623566vw;
 	height: calc(var(--width) * 4.3);
 	*/
-	height:40px;
+	height:52px;
 	_background-color: black;
 	/*
 	margin-left: calc(var(--width) / -2);

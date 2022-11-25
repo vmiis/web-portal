@@ -1,123 +1,125 @@
 <div id="D__ID">
     <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
-            <div w='100|100' style="position:fixed">
-                <duv id="midi__ID"></duv>    
-            </div>
-        </div>
-        <div style="padding-top:40px">
-            <div w='100|45' id=left__ID>
-                <duv id="midi__ID" style="padding:0px;position:fixed;"></duv>
-                <button id=print__ID type="button" style="float:right">Print</button>
-                <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label><br>
-                <label>Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
+            <div w='100|45' id=left__ID style="padding:0 10px">
+                <div style="height:48px;background-color: #eee; padding:3px 6px 3px 6px">
+                    <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label> <label  style="margin-left:30px">Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
+                    <button id=print__ID type="button" style="float:right" class="button__ID">Print Staff</button>
+                    <button id=water__ID type="button" style="float:right" class="button__ID">Waterfall</button>
+                </div>
                 <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
-                <duv id="warnings__ID"></duv><br><br>
-                <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a>
-                <br><a target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
+                <div id="warnings__ID"></div><br>
+                <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a> 
+                <a style='margin-left:20px' target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
-            <div w='100|55'>
+            <div w='100|55' style="padding:0 10px">
+                <div style="height:30px;background-color: #333;">
+                    <div id="midi__ID"></div>
+                </div>
                 <div id=paper_w__ID style="width:100%;overflow:auto">
                     <div id="paper__ID" ></div>
                 </div>
-                <div class="piano__ID" id="piano__ID" style="height:60px;padding:10px 30px 0 15px">
-                    <div name="21" class="key__ID white__ID"></div>
-                    <div name="22" class="key__ID black__ID"></div>
-                    <div name="23" class="key__ID white__ID"></div>
-                    
-                    <div name="24" class="key__ID white__ID"></div>
-                    <div name="25" class="key__ID black__ID"></div>
-                    <div name="26" class="key__ID white__ID"></div>
-                    <div name="27" class="key__ID black__ID"></div>
-                    <div name="28" class="key__ID white__ID"></div>
-                    <div name="29" class="key__ID white__ID"></div>
-                    <div name="30" class="key__ID black__ID"></div>
-                    <div name="31" class="key__ID white__ID"></div>
-                    <div name="32" class="key__ID black__ID"></div>
-                    <div name="33" class="key__ID white__ID"></div>
-                    <div name="34" class="key__ID black__ID"></div>
-                    <div name="35" class="key__ID white__ID"></div>
-                    
-                    <div name="36" class="key__ID white__ID"></div>
-                    <div name="37" class="key__ID black__ID"></div>
-                    <div name="38" class="key__ID white__ID"></div>
-                    <div name="39" class="key__ID black__ID"></div>
-                    <div name="40" class="key__ID white__ID"></div>
-                    <div name="41" class="key__ID white__ID"></div>
-                    <div name="42" class="key__ID black__ID"></div>
-                    <div name="43" class="key__ID white__ID"></div>
-                    <div name="44" class="key__ID black__ID"></div>
-                    <div name="45" class="key__ID white__ID"></div>
-                    <div name="46" class="key__ID black__ID"></div>
-                    <div name="47" class="key__ID white__ID"></div>
+                <div id=piano__ID>
+                    <div class="piano__ID" id="channel1__ID" >
+                
+                        <div name="21" class="key__ID white__ID"></div>
+                        <div name="22" class="key__ID black__ID"></div>
+                        <div name="23" class="key__ID white__ID"></div>
+                        
+                        <div name="24" class="key__ID white__ID"></div>
+                        <div name="25" class="key__ID black__ID"></div>
+                        <div name="26" class="key__ID white__ID"></div>
+                        <div name="27" class="key__ID black__ID"></div>
+                        <div name="28" class="key__ID white__ID"></div>
+                        <div name="29" class="key__ID white__ID"></div>
+                        <div name="30" class="key__ID black__ID"></div>
+                        <div name="31" class="key__ID white__ID"></div>
+                        <div name="32" class="key__ID black__ID"></div>
+                        <div name="33" class="key__ID white__ID"></div>
+                        <div name="34" class="key__ID black__ID"></div>
+                        <div name="35" class="key__ID white__ID"></div>
+                        
+                        <div name="36" class="key__ID white__ID"></div>
+                        <div name="37" class="key__ID black__ID"></div>
+                        <div name="38" class="key__ID white__ID"></div>
+                        <div name="39" class="key__ID black__ID"></div>
+                        <div name="40" class="key__ID white__ID"></div>
+                        <div name="41" class="key__ID white__ID"></div>
+                        <div name="42" class="key__ID black__ID"></div>
+                        <div name="43" class="key__ID white__ID"></div>
+                        <div name="44" class="key__ID black__ID"></div>
+                        <div name="45" class="key__ID white__ID"></div>
+                        <div name="46" class="key__ID black__ID"></div>
+                        <div name="47" class="key__ID white__ID"></div>
 
-                    <div name="48" class="key__ID white__ID"></div>
-                    <div name="49" class="key__ID black__ID"></div>
-                    <div name="50" class="key__ID white__ID"></div>
-                    <div name="51" class="key__ID black__ID"></div>
-                    <div name="52" class="key__ID white__ID"></div>
-                    <div name="53" class="key__ID white__ID"></div>
-                    <div name="54" class="key__ID black__ID"></div>
-                    <div name="55" class="key__ID white__ID"></div>
-                    <div name="56"  class="key__ID black__ID"></div>
-                    <div name="57" class="key__ID white__ID"></div>
-                    <div name="58" class="key__ID black__ID"></div>
-                    <div name="59" class="key__ID white__ID"></div>
+                        <div name="48" class="key__ID white__ID"></div>
+                        <div name="49" class="key__ID black__ID"></div>
+                        <div name="50" class="key__ID white__ID"></div>
+                        <div name="51" class="key__ID black__ID"></div>
+                        <div name="52" class="key__ID white__ID"></div>
+                        <div name="53" class="key__ID white__ID"></div>
+                        <div name="54" class="key__ID black__ID"></div>
+                        <div name="55" class="key__ID white__ID"></div>
+                        <div name="56"  class="key__ID black__ID"></div>
+                        <div name="57" class="key__ID white__ID"></div>
+                        <div name="58" class="key__ID black__ID"></div>
+                        <div name="59" class="key__ID white__ID"></div>
 
-                    <div name="60" class="key__ID white__ID"></div>
-                    <div name="61" class="key__ID black__ID"></div>
-                    <div name="62" class="key__ID white__ID"></div>
-                    <div name="63" class="key__ID black__ID"></div>
-                    <div name="64" class="key__ID white__ID"></div>
-                    <div name="65" class="key__ID white__ID"></div>
-                    <div name="66" class="key__ID black__ID"></div>
-                    <div name="67" class="key__ID white__ID"></div>
-                    <div name="68" class="key__ID black__ID"></div>
-                    <div name="69" class="key__ID white__ID"></div>
-                    <div name="70" class="key__ID black__ID"></div>
-                    <div name="71" class="key__ID white__ID"></div>
+                        <div name="60" class="key__ID white__ID"></div>
+                        <div name="61" class="key__ID black__ID"></div>
+                        <div name="62" class="key__ID white__ID"></div>
+                        <div name="63" class="key__ID black__ID"></div>
+                        <div name="64" class="key__ID white__ID"></div>
+                        <div name="65" class="key__ID white__ID"></div>
+                        <div name="66" class="key__ID black__ID"></div>
+                        <div name="67" class="key__ID white__ID"></div>
+                        <div name="68" class="key__ID black__ID"></div>
+                        <div name="69" class="key__ID white__ID"></div>
+                        <div name="70" class="key__ID black__ID"></div>
+                        <div name="71" class="key__ID white__ID"></div>
 
-                    <div name="72" class="key__ID white__ID"></div>
-                    <div name="73" class="key__ID black__ID"></div>
-                    <div name="74" class="key__ID white__ID"></div>
-                    <div name="75" class="key__ID black__ID"></div>
-                    <div name="76" class="key__ID white__ID"></div>
-                    <div name="77" class="key__ID white__ID"></div>
-                    <div name="78" class="key__ID black__ID"></div>
-                    <div name="79" class="key__ID white__ID"></div>
-                    <div name="80" class="key__ID black__ID"></div>
-                    <div name="81" class="key__ID white__ID"></div>
-                    <div name="82" class="key__ID black__ID"></div>
-                    <div name="83" class="key__ID white__ID"></div>
+                        <div name="72" class="key__ID white__ID"></div>
+                        <div name="73" class="key__ID black__ID"></div>
+                        <div name="74" class="key__ID white__ID"></div>
+                        <div name="75" class="key__ID black__ID"></div>
+                        <div name="76" class="key__ID white__ID"></div>
+                        <div name="77" class="key__ID white__ID"></div>
+                        <div name="78" class="key__ID black__ID"></div>
+                        <div name="79" class="key__ID white__ID"></div>
+                        <div name="80" class="key__ID black__ID"></div>
+                        <div name="81" class="key__ID white__ID"></div>
+                        <div name="82" class="key__ID black__ID"></div>
+                        <div name="83" class="key__ID white__ID"></div>
 
-                    <div name="84" class="key__ID white__ID"></div>
-                    <div name="85" class="key__ID black__ID"></div>
-                    <div name="86" class="key__ID white__ID"></div>
-                    <div name="87" class="key__ID black__ID"></div>
-                    <div name="88" class="key__ID white__ID"></div>
-                    <div name="89" class="key__ID white__ID"></div>
-                    <div name="90" class="key__ID black__ID"></div>
-                    <div name="91" class="key__ID white__ID"></div>
-                    <div name="92" class="key__ID black__ID"></div>
-                    <div name="93" class="key__ID white__ID"></div>
-                    <div name="94" class="key__ID black__ID"></div>
-                    <div name="95" class="key__ID white__ID"></div>
+                        <div name="84" class="key__ID white__ID"></div>
+                        <div name="85" class="key__ID black__ID"></div>
+                        <div name="86" class="key__ID white__ID"></div>
+                        <div name="87" class="key__ID black__ID"></div>
+                        <div name="88" class="key__ID white__ID"></div>
+                        <div name="89" class="key__ID white__ID"></div>
+                        <div name="90" class="key__ID black__ID"></div>
+                        <div name="91" class="key__ID white__ID"></div>
+                        <div name="92" class="key__ID black__ID"></div>
+                        <div name="93" class="key__ID white__ID"></div>
+                        <div name="94" class="key__ID black__ID"></div>
+                        <div name="95" class="key__ID white__ID"></div>
 
-                    <div name="96" class="key__ID white__ID"></div>
-                    <div name="97" class="key__ID black__ID"></div>
-                    <div name="98" class="key__ID white__ID"></div>
-                    <div name="99" class="key__ID black__ID"></div>
-                    <div name="100" class="key__ID white__ID"></div>
-                    <div name="101" class="key__ID white__ID"></div>
-                    <div name="102" class="key__ID black__ID"></div>
-                    <div name="103" class="key__ID white__ID"></div>
-                    <div name="104" class="key__ID black__ID"></div>
-                    <div name="105" class="key__ID white__ID"></div>
-                    <div name="106" class="key__ID black__ID"></div>
-                    <div name="107" class="key__ID white__ID"></div>
-                    
-                    <div name="108" class="key__ID white__ID"></div>
+                        <div name="96" class="key__ID white__ID"></div>
+                        <div name="97" class="key__ID black__ID"></div>
+                        <div name="98" class="key__ID white__ID"></div>
+                        <div name="99" class="key__ID black__ID"></div>
+                        <div name="100" class="key__ID white__ID"></div>
+                        <div name="101" class="key__ID white__ID"></div>
+                        <div name="102" class="key__ID black__ID"></div>
+                        <div name="103" class="key__ID white__ID"></div>
+                        <div name="104" class="key__ID black__ID"></div>
+                        <div name="105" class="key__ID white__ID"></div>
+                        <div name="106" class="key__ID black__ID"></div>
+                        <div name="107" class="key__ID white__ID"></div>
+                        
+                        <div name="108" class="key__ID white__ID"></div>
 
+                    </div>                
                 </div>                
             </div>
         </div>
@@ -126,97 +128,122 @@
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);
             var cursor=0;
+            var notes="";
+            var abc_editor="";
+            var voice_off=[];
+            var voice1=true;
+            var voice2=true;
+            var steps=0;
+            var key=[];
+            //---------------------------------------------------
             $('#D__ID').on('load',function(){
-                var key=[];
-                for(var i=0;i<108;i++) key.push(0);
                 //------------------------------------
-                $('#print__ID').off('click').on('click',function(){
-                    create(1); window.print(); create();
-                })
-                //------------------------------------
-                var notes=m.input.musicnotes;
-                var op=m.input.op; if(op==undefined) op=0;
-                //$('#instrument__ID').val(op);
-
-                $('#abc__ID').val(notes);
-                setTimeout(function(){
-                    $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-110)+"px");
-                    $('#paper_w__ID').css('min-height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
-                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10-60)+"px");
+                notes=m.input.musicnotes;
+                if(notes!=undefined && notes!=""){
+                    abc_init();
+                }
+                else{
+                    var url=$vm.hosting_path+"/modules/abc-notation/The-Sound-of-Silence.abc";
+                    $.get(url+'?_='+$vm.ver[0],function(txt){
+                        notes=txt;
+                        abc_init();
+                    },'text');
+                }
+                setTimeout( function(){
+                    var w=$('#paper_w__ID').width();
+                    var w1=w/52;
+                    var w2=w1*0.6;
+                    var wm=w2/2;
+                    $('#channel1__ID div.white__ID').css('width',w1+'px')
+                    $('#channel1__ID div.black__ID').css('width',w2+'px')
+                    $('#channel1__ID div.black__ID').css('margin-left',-wm+'px')
+                    $('#channel1__ID div.black__ID').css('margin-right',-wm+'px')
                 },1000);
-                var steps=0; $('#tran__ID').val(0);
-                var instrument=op; $('#instrument__ID').val(instrument);
-                var voice1=true; $('#voice1__ID').prop('checked',true);
-                var voice2=true; $('#voice2__ID').prop('checked',true);
-                //------------------------------------
-                var abc_editor="";
-                var create=function(print){
-                    var OS=false;
-                    if(print==1) OS=true;
-                    cursor=0;
-                    if(abc_editor!=""){
-                        abc_editor.synth.synthControl.pause();
-                    }
-                    var voice_off=[];
-                    if(voice1==false) voice_off.push(0);
-                    if(voice2==false) voice_off.push(1);
-                    abc_editor = new ABCJS.Editor("abc__ID", { 
-                        canvas_id: "paper__ID", 
-                        warnings_id:"warnings__ID",
-                        synth: {el:"#midi__ID",
-                            options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
-                                midiTranspose:steps,
-                                //program:instrument,
-                                voicesOff:voice_off,
-                                chordsOff:true,
-                                soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/"
-                            },
-                            cursorControl:cursorControl
+            })
+            //---------------------------------------------------
+            var create=function(print){
+                var OS=false;
+                if(print==1) OS=true;
+                cursor=0;
+                if(abc_editor!=""){
+                    abc_editor.synth.synthControl.pause();
+                }
+                voice_off=[];
+                if(voice1==false) voice_off.push(0);
+                if(voice2==false) voice_off.push(1);
+                abc_editor = new ABCJS.Editor("abc__ID", { 
+                    canvas_id: "paper__ID", 
+                    warnings_id:"warnings__ID",
+                    synth: {el:"#midi__ID",
+                        options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
+                            midiTranspose:steps,
+                            //program:instrument,
+                            voicesOff:voice_off,
+                            chordsOff:true,
+                            soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/"
                         },
-                        abcjsParams: {
-                            visualTranspose: steps,
-                            responsive: "resize",
-                            oneSvgPerLine: OS
-                        },
-                        selectionChangeCallback:function(){
-                            var lastSelection = document.querySelectorAll("#paper__ID" + " .abcjs-note_selected path");
-                            if(lastSelection!=undefined){
-                                if(lastSelection.length!=0){
-                                    var d=$(lastSelection[0]).attr('d');
-                                    if(d!=undefined){
-                                        xx=d.split(' ');
-                                        if(xx.length>2){
-                                            var y=parseFloat(xx[2].replace('c',''));
-                                            var h=$("#paper_w__ID").scrollTop();
-                                            var hh=$('#paper__ID').offset().top+y;
-                                            var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/3;
-                                            var h3=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()*2/3;
-                                            if(hh<h2) $("#paper_w__ID").scrollTop(h+(hh-h2));
-                                            if(hh>h3) $("#paper_w__ID").scrollTop(h+(hh-h3));
-                                        }
+                        cursorControl:cursorControl
+                    },
+                    abcjsParams: {
+                        visualTranspose: steps,
+                        responsive: "resize",
+                        oneSvgPerLine: OS
+                    },
+                    selectionChangeCallback:function(){
+                        var lastSelection = document.querySelectorAll("#paper__ID" + " .abcjs-note_selected path");
+                        if(lastSelection!=undefined){
+                            if(lastSelection.length!=0){
+                                var d=$(lastSelection[0]).attr('d');
+                                if(d!=undefined){
+                                    xx=d.split(' ');
+                                    if(xx.length>2){
+                                        var y=parseFloat(xx[2].replace('c',''));
+                                        var h=$("#paper_w__ID").scrollTop();
+                                        var hh=$('#paper__ID').offset().top+y;
+                                        var h2=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()/3;
+                                        var h3=$('#paper_w__ID').offset().top+$('#paper_w__ID').height()*2/3;
+                                        if(hh<h2) $("#paper_w__ID").scrollTop(h+(hh-h2));
+                                        if(hh>h3) $("#paper_w__ID").scrollTop(h+(hh-h3));
                                     }
                                 }
                             }
-                        }                     
-                    })
-                }
+                        }
+                    }                     
+                })
+            }
+            //---------------------------------------------------
+            var abc_init=function(){
+                var op=m.input.op; if(op==undefined) op=0;
+                $('#abc__ID').val(notes);
+                setTimeout(function(){
+                    $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-80)+"px");
+                    $('#paper_w__ID').css('min-height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
+                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10-60)+"px");
+                },1000);
+                steps=0; $('#tran__ID').val(0);
+                var instrument=op; $('#instrument__ID').val(instrument);
+                voice1=true; $('#voice1__ID').prop('checked',true);
+                voice2=true; $('#voice2__ID').prop('checked',true);
+                //------------------------------------
                 create();
                 //------------------------------------
                 $('#abc__ID').on('input',function(){
-                    //this.style.height = "auto";
-                    //this.style.height = this.scrollHeight + "px";
                     cursor=0;
                 })
                 $('#abc__ID').triggerHandler('input');
                 //------------------------------------
-                $('#tran__ID').on('change',function(){       steps=$('#tran__ID').val(); create(); })
-                $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
-                $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
-                $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
-            })
+            }
+            //------------------------------------
+            $('#tran__ID').on('change',function(){       steps=$('#tran__ID').val(); create(); })
+            $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
+            $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
+            $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
+            $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
+            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:notes});  })
+            //------------------------------------
             var play_key=function(pitches,t,m){
                 for(var i=21;i<108;i++){
-                    if(t>=key[i]){
+                    if(key[i]!=0 && t>=key[i]){
                         key[i]=0;
                         $("div[name='"+i+"']").removeClass('sel__ID');
                     }
@@ -224,35 +251,30 @@
                 for(var i=0;i<pitches.length;i++){
                     var pitch=pitches[i].pitch;
                     var duration=pitches[i].duration;
-                    key[pitch]=t+m*duration;
-                    if(key[pitch]!=0){
-                        $("div[name='"+pitch+"']").addClass('sel__ID');
-                    }
+                    key[pitch]=Math.floor(t+m*duration);
+                    $("div[name='"+pitch+"']").addClass('sel__ID');
                 }
             }
             //------------------------------------
-            function CursorControl(rootSelector) {
+            var CursorControl=function(rootSelector) {
                 var HS=1;
                 var HH=1;
                 var K=1;
 
                 var self = this;
-                // This demonstrates two methods of indicating where the music is.
-                // 1) An element is created that is moved along for each note.
-                // 2) The currently being played note is given a class so that it can be transformed.
                 self.cursor = null; // This is the svg element that will move with the music.
                 self.rootSelector = rootSelector; // This is the same selector as the renderAbc call uses.
                 self.onStart = function() {
-                    // This is called when the timer starts so we know the svg has been drawn by now.
-                    // Create the cursor and add it to the sheet music's svg.
+                    $("#paper_w__ID").scrollTop(0);
+                    $("#channel1__ID div").removeClass('sel__ID');
+                    key=[]; for(var i=0;i<108;i++) key.push(0);
+
                     var svg = document.querySelector(self.rootSelector + " svg");
                     
                     const {x, y, width, height} = svg.viewBox.baseVal;
                     HS=height;
                     HH=$("#paper__ID").outerHeight();
                     if(HS!=0) K=HH/HS;
-                    key=[];
-                    for(var i=0;i<108;i++) key.push(0);
 
                     if(cursor==0){
                         cursor=1;
@@ -304,16 +326,18 @@
                         self.cursor.setAttribute("y1", 0);
                         self.cursor.setAttribute("y2", 0);
                     }
-                    for(var i=0;i<108;i++) $("div[name='"+i+"']").removeClass('sel__ID');
+                    $("#channel1__ID div").removeClass('sel__ID')
                 };
             }
+            //------------------------------------
             var cursorControl = new CursorControl("#paper__ID");
+            //------------------------------------
         }
     </script>
     <style>
         #container__ID{
             background-color:#fff;
-            padding:20px;
+            padding-top:10px;
             margin-left: auto;
             margin-right: auto;
             font-family: Verdana,sans-serif;
@@ -321,32 +345,5 @@
             line-height: 1.5;
         }
         /*VmInclude:__CURRENT_PATH__/style.css*/
-
-
-        .piano__ID {
-            display: flex; padding:6px;
-            break-inside: avoid-column;
-        }        
-        .key__ID {
-            height: calc(var(--width) * 2);
-            width: var(--width);
-        }
-        .white__ID {
-            --width: 25px;
-            background-color: white;
-            border: 1px solid #333;
-        }
-        .black__ID {
-            --width: 15px;
-            background-color: black;
-            margin-left: calc(var(--width) / -2);
-            margin-right: calc(var(--width) / -2);
-            border: 1px solid #333;
-            z-index: 2;
-        }
-        .sel__ID {
-            background-color:#55b361;
-        }
-
     </style>
 </div>
