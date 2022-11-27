@@ -1,30 +1,37 @@
 <div id="D__ID">
     <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
-            <div w='100|45' id=left__ID style="padding:0 10px">
-                <div style="height:48px;background-color: #eee; padding:3px 6px 3px 6px">
-                    <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label> <label  style="margin-left:30px">Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
-                    <button id=print__ID type="button" style="float:right" class="button__ID">Print Staff</button>
-                    <button id=water__ID type="button" style="float:right" class="button__ID">Waterfall</button>
-                </div>
-                <div>
-                    <label><input type="radio" name=score value="1"> Score 1</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="2"> Score 2</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="3"> Score 3</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="4"> Score 4</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="5"> Score 5</input></label>&nbsp;&nbsp;<br>
-                    <label><input type="radio" name=score value="6"> Score 6</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="7"> Score 7</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="8"> Score 8</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="9"> Score 9</input></label>&nbsp;&nbsp;
-                    <label><input type="radio" name=score value="10"> Score 10</input></label>
+            <div w='100|45' id=left__ID style="padding:0 1px 0 2px">
+                <div style="height:43px;background-color: #eee; padding:3px 6px 3px 6px">
+                    <div>
+                        <div style="display:inline-block;padding: 6px 0 0 20px;">
+                            Score: 
+                            <label><input type="radio" name=score value="1"> 1</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="2"> 2</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="3"> 3</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="4"> 4</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="5"> 5</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="6"> 6</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="7"> 7</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="8"> 8</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="9"> 9</input></label>&nbsp;&nbsp;
+                            <label><input type="radio" name=score value="10"> 10</input></label>
+                        </div>
+                        <button id=water__ID type="button" style="float:right" class="button__ID">Falling Notes</button>
+                    </div>
                 </div>
                 <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
                 <div id="warnings__ID"></div><br>
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a> 
                 <a style='margin-left:20px' target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
-            <div w='100|55' style="padding:0 10px">
+            <div w='100|55' style="padding:0 0px">
+                <div id=tool_bar__ID style="height:43px;background-color: #eee; padding:2px 6px 0px 6px">
+                    <div style="display:inline-block;padding: 6px 0 0 20px;">
+                        <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label> <label  style="margin-left:30px">Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
+                    </div>    
+                    <button id=print__ID type="button" style="float:right" class="button__ID">Print Staff</button>
+                </div>
                 <div style="height:30px;background-color: #333;">
                     <div id="midi__ID"></div>
                 </div>
@@ -196,10 +203,10 @@
                     synth: {el:"#midi__ID",
                         options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true,
                             midiTranspose:steps,
-                            //program:instrument,
                             voicesOff:voice_off,
                             chordsOff:true,
-                            soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/"
+                            soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/",
+                            soundFontVolumeMultiplier:2
                         },
                         cursorControl:cursorControl
                     },
@@ -236,8 +243,7 @@
                 $('#abc__ID').val(notes);
                 setTimeout(function(){
                     $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-80)+"px");
-                    $('#paper_w__ID').css('min-height',($(window).height()-$('#abc__ID').offset().top-90)+"px");
-                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10-60)+"px");
+                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-66)+"px");
                 },1000);
                 steps=0; $('#tran__ID').val(0);
                 var instrument=op; $('#instrument__ID').val(instrument);
@@ -259,6 +265,11 @@
             $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
             $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
             $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:notes});  })
+            $('#D__ID').on('hide',function(){   
+                if(abc_editor!=""){
+                    abc_editor.synth.synthControl.pause();
+                }
+            })
             //------------------------------------
             var play_key=function(pitches,t,m){
                 for(var i=21;i<108;i++){
@@ -353,19 +364,17 @@
             //------------------------------------
             var cursorControl = new CursorControl("#paper__ID");
             //------------------------------------
-            /*
-            var notes="X:1\n\T:Score @@@\nC:Your name\nM:4/4\nL:1/8\nQ:1/4=80\nK:C\nV:1\n%%MIDI program 1\nCDEF|GABc|cBAG|FEDC|";
-            load_score(ss);
-            */
         }
     
     </script>
     <style>
+        #D__ID{
+            background-color: #fff;
+        }
         #container__ID{
+            height:100%;
             background-color:#fff;
-            padding:20px;
-            margin-left: auto;
-            margin-right: auto;
+            padding:0px;
             font-family: Verdana,sans-serif;
             font-size: 15px;
             line-height: 1.5;

@@ -19,7 +19,7 @@
                     <label><input type="radio" name=score value="9"> Score 9</input></label>&nbsp;&nbsp;
                     <label><input type="radio" name=score value="10"> Score 10</input></label>
                 </div>
-                <div style="_display:none">
+                <div style="display:none">
                     <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
                 </div>
                 <textarea id="number__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
@@ -160,8 +160,7 @@
             $('#container__ID input[name=score').on('change',function(){  ss=$(this).val();   load_score(ss); abc_init(); })
             $('#number__ID').on('keyup',function(){ if(ss!=0) localStorage.setItem("vm-num-score_"+ss,$('#number__ID').val()); })
             //---------------------------------------------------
-            $('#number__ID').on('input',function(){
-                var nt=$('#number__ID').val();
+            var number_convert=function(nt){
                 var ls=nt.split('\n');
                 var k="C";
                 for(var i=0;i<ls.length;i++){
@@ -221,6 +220,12 @@
                 for(var i=0;i<ls.length;i++){
                     txt+=ls[i]+"\n";
                 }
+                return txt;
+            }
+            //---------------------------------------------------
+            $('#number__ID').on('input',function(){
+                var nt=$('#number__ID').val();
+                var txt=number_convert(nt);
                 $('#abc__ID').val(txt);
                 $('#abc__ID').triggerHandler('change');
             })
@@ -297,7 +302,6 @@
             //---------------------------------------------------
             var abc_init=function(){
                 var op=m.input.op; if(op==undefined) op=0;
-console.log(notes);                
                 $('#number__ID').val(notes);
                 setTimeout(function(){
                     $('#number__ID').css('height',($(window).height()-$('#number__ID').offset().top-80)+"px");
@@ -321,7 +325,7 @@ console.log(notes);
             $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
             $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
             $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
-            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:notes});  })
+            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-numbered-waterfall",{musicnotes:notes});  })
             $('#abc__ID').on('input',function(){   cursor=0;  })
             //------------------------------------
             var play_key=function(pitches,t,m){

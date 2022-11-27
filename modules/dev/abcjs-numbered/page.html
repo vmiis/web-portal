@@ -1,24 +1,11 @@
 <div id="D__ID">
     <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
-            <div w='100|45' id=left__ID style="padding:0 1px 0 2px">
-                <div style="height:43px;background-color: #eee; padding:3px 6px 3px 6px">
-                    <div>
-                        <div style="display:inline-block;padding: 6px 0 0 20px;">
-                            Score: 
-                            <label><input type="radio" name=score value="1"> 1</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="2"> 2</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="3"> 3</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="4"> 4</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="5"> 5</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="6"> 6</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="7"> 7</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="8"> 8</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="9"> 9</input></label>&nbsp;&nbsp;
-                            <label><input type="radio" name=score value="10"> 10</input></label>
-                        </div>
-                        <button id=water__ID type="button" style="float:right" class="button__ID">Falling Notes</button>
-                    </div>
+            <div w='100|45' id=left__ID style="padding:0 10px">
+                <div style="height:48px;background-color: #eee; padding:3px 6px 3px 6px">
+                    <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label> <label  style="margin-left:30px">Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
+                    <button id=print__ID type="button" style="float:right" class="button__ID">Print Staff</button>
+                    <button id=water__ID type="button" style="float:right" class="button__ID">Waterfall</button>
                 </div>
                 <div style="display:none">
                     <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
@@ -28,13 +15,7 @@
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a> 
                 <a style='margin-left:20px' target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
             </div>
-            <div w='100|55' style="padding:0 0px">
-                <div id=tool_bar__ID style="height:43px;background-color: #eee; padding:2px 6px 0px 6px">
-                    <div style="display:inline-block;padding: 6px 0 0 20px;">
-                        <label>Transpose half-steps: <input id=tran__ID type="number" min="-24" max="24" step="1" value="0"></label> <label  style="margin-left:30px">Voice 1: <input id=voice1__ID type="checkbox" ></label> <label>Voice 2: <input id=voice2__ID type="checkbox" ></label>
-                    </div>    
-                    <button id=print__ID type="button" style="float:right" class="button__ID">Print Staff</button>
-                </div>
+            <div w='100|55' style="padding:0 10px">
                 <div style="height:30px;background-color: #333;">
                     <div id="midi__ID"></div>
                 </div>
@@ -149,7 +130,6 @@
     <script>
         function F__ID(m){
 			new ResizeObserver($vm.responsive).observe(container__ID);
-            var ss=1;
             var cursor=0;
             var notes="";
             var abc_editor="";
@@ -157,18 +137,32 @@
             var voice1=true;
             var voice2=true;
             var steps=0;
-            var key;
+            var key=[];
             //---------------------------------------------------
-            var load_score=function(s){
-                notes=localStorage.getItem("vm-num-score_"+s);
-                if(notes==undefined || notes==""){
-                    var ns="X:1\n\T:Score @@@\nC:Your name\n%%composerfont 10\n\M:4/4\nL:1/8\nQ:1/4=80\nK:C\nV:1\n%%MIDI program 1\n1234|5671'|";
-                    notes=ns.replace('@@@',s);
+            $('#D__ID').on('load',function(){
+                //------------------------------------
+                notes=m.input.musicnotes;
+                if(notes!=undefined && notes!=""){
+                    abc_init();
                 }
-            }
-            //---------------------------------------------------
-            $('#container__ID input[name=score').on('change',function(){  ss=$(this).val();   load_score(ss); abc_init(); })
-            $('#number__ID').on('keyup',function(){ if(ss!=0) localStorage.setItem("vm-num-score_"+ss,$('#number__ID').val()); })
+                else{
+                    var url=$vm.hosting_path+"/modules/abc-notation/numbered-melody/flower.abc";
+                    $.get(url+'?_='+$vm.ver[0],function(txt){
+                        notes=txt;
+                        abc_init();
+                    },'text');
+                }
+                setTimeout( function(){
+                    var w=$('#paper_w__ID').width();
+                    var w1=w/52;
+                    var w2=w1*0.6;
+                    var wm=w2/2;
+                    $('#channel1__ID div.white__ID').css('width',w1+'px')
+                    $('#channel1__ID div.black__ID').css('width',w2+'px')
+                    $('#channel1__ID div.black__ID').css('margin-left',-wm+'px')
+                    $('#channel1__ID div.black__ID').css('margin-right',-wm+'px')
+                },1000);
+            })
             //---------------------------------------------------
             var number_convert=function(nt){
                 var ls=nt.split('\n');
@@ -240,25 +234,25 @@
                 $('#abc__ID').triggerHandler('change');
             })
             //------------------------------------
-            $('#D__ID').on('load',function(){
-                //------------------------------------
-                if(notes==""){
-                    load_score(1);
-                    abc_init();
-                }
-                //------------------------------------
-                setTimeout( function(){
-                    var w=$('#paper_w__ID').width();
-                    var w1=w/52;
-                    var w2=w1*0.6;
-                    var wm=w2/2;
-                    $('#channel1__ID div.white__ID').css('width',w1+'px')
-                    $('#channel1__ID div.black__ID').css('width',w2+'px')
-                    $('#channel1__ID div.black__ID').css('margin-left',-wm+'px')
-                    $('#channel1__ID div.black__ID').css('margin-right',-wm+'px')
+            var abc_init=function(){
+                var op=m.input.op; if(op==undefined) op=0;
+                $('#number__ID').val(notes);
+                setTimeout(function(){
+                    $('#number__ID').css('height',($(window).height()-$('#number__ID').offset().top-80)+"px");
+                    $('#paper_w__ID').css('min-height',($(window).height()-$('#number__ID').offset().top-90)+"px");
+                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-10-60)+"px");
                 },1000);
-            })
-            //---------------------------------------------------
+                steps=0; $('#tran__ID').val(0);
+                var instrument=op; $('#instrument__ID').val(instrument);
+                voice1=true; $('#voice1__ID').prop('checked',true);
+                voice2=true; $('#voice2__ID').prop('checked',true);
+                //------------------------------------
+                create();
+                //------------------------------------
+                $('#number__ID').triggerHandler('input');
+                //------------------------------------
+            }
+            //------------------------------------
             var create=function(print){
                 var OS=false;
                 if(print==1) OS=true;
@@ -278,8 +272,7 @@
                             //program:instrument,
                             voicesOff:voice_off,
                             chordsOff:true,
-                            soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/",
-                            soundFontVolumeMultiplier:2
+                            soundFontUrl:"https://gleitz.github.io/midi-js-soundfonts/FatBoy/"
                         },
                         cursorControl:cursorControl
                     },
@@ -311,32 +304,13 @@
                 })
             }
             //---------------------------------------------------
-            var abc_init=function(){
-                var op=m.input.op; if(op==undefined) op=0;
-                $('#number__ID').val(notes);
-                setTimeout(function(){
-                    $('#number__ID').css('height',($(window).height()-$('#abc__ID').offset().top-80)+"px");
-                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-66)+"px");
-                },1000);
-                steps=0; $('#tran__ID').val(0);
-                var instrument=op; $('#instrument__ID').val(instrument);
-                voice1=true; $('#voice1__ID').prop('checked',true);
-                voice2=true; $('#voice2__ID').prop('checked',true);
-                //------------------------------------
-                create();
-                //------------------------------------
-                $('#number__ID').triggerHandler('input');
-                $('#abc__ID').triggerHandler('change');
-                //------------------------------------
-            }
-            //------------------------------------
             $('#tran__ID').on('change',function(){       steps=$('#tran__ID').val(); create(); })
             $('#instrument__ID').on('change',function(){ instrument=$('#instrument__ID').val(); create(); })
             $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
             $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
             $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
-            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:$("#abc__ID").val()});  })
-            $('#abc__ID').on('input',function(){   cursor=0;  })
+            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-numbered-waterfall",{musicnotes:notes});  })
+            $('#abc__ID').on('input',function(){ cursor=0; })
             //------------------------------------
             var play_key=function(pitches,t,m){
                 for(var i=21;i<108;i++){
@@ -363,7 +337,7 @@
                 self.rootSelector = rootSelector; // This is the same selector as the renderAbc call uses.
                 self.onStart = function() {
                     $("#paper_w__ID").scrollTop(0);
-                    $("#channel1__ID div").removeClass('sel__ID')
+                    $("#channel1__ID div").removeClass('sel__ID');
                     key=[]; for(var i=0;i<108;i++) key.push(0);
 
                     var svg = document.querySelector(self.rootSelector + " svg");
@@ -372,8 +346,6 @@
                     HS=height;
                     HH=$("#paper__ID").outerHeight();
                     if(HS!=0) K=HH/HS;
-                    key=[];
-                    for(var i=0;i<108;i++) key.push(0);
 
                     if(cursor==0){
                         cursor=1;
@@ -434,13 +406,11 @@
         }
     </script>
     <style>
-        #D__ID{
-            background-color: #fff;
-        }
         #container__ID{
-            height:100%;
             background-color:#fff;
-            padding:0px;
+            padding-top:10px;
+            margin-left: auto;
+            margin-right: auto;
             font-family: Verdana,sans-serif;
             font-size: 15px;
             line-height: 1.5;
