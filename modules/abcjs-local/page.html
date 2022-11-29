@@ -155,7 +155,7 @@
             var voice1=true;
             var voice2=true;
             var steps=0;
-            var key;
+            var key="";
             //---------------------------------------------------
             var load_score=function(s){
                 notes=localStorage.getItem("vm-score_"+s);
@@ -264,7 +264,7 @@
             $('#voice1__ID').on('change',function(){ voice1=$('#voice1__ID').prop('checked');create(); })
             $('#voice2__ID').on('change',function(){ voice2=$('#voice2__ID').prop('checked');create(); })
             $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
-            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:notes});  })
+            $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:$("#abc__ID").val()});  })
             $('#D__ID').on('hide',function(){   
                 if(abc_editor!=""){
                     abc_editor.synth.synthControl.pause();
@@ -272,17 +272,18 @@
             })
             //------------------------------------
             var play_key=function(pitches,t,m){
+                if(key=="") return;
                 for(var i=21;i<108;i++){
                     if(key[i]!=0 && t>=key[i]){
                         key[i]=0;
-                        $("div[name='"+i+"']").removeClass('sel__ID');
+                        $("#piano__ID div[name='"+i+"']").removeClass('sel__ID');
                     }
                 }
                 for(var i=0;i<pitches.length;i++){
                     var pitch=pitches[i].pitch;
                     var duration=pitches[i].duration;
                     key[pitch]=Math.floor(t+m*duration);
-                    $("div[name='"+pitch+"']").addClass('sel__ID');
+                    $("#piano__ID div[name='"+pitch+"']").addClass('sel__ID');
                 }
             }
             //------------------------------------

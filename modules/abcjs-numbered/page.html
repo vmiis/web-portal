@@ -237,6 +237,7 @@
                 var nt=$('#number__ID').val();
                 var txt=number_convert(nt);
                 $('#abc__ID').val(txt);
+                //$('#abc__ID').triggerHandler('input');
                 $('#abc__ID').triggerHandler('change');
             })
             //------------------------------------
@@ -317,19 +318,24 @@
             $('#print__ID').on('click',function(){  create(1); window.print(); create(); })
             $('#water__ID').on('click',function(){  $vm.show_module("abcjs-waterfall",{musicnotes:$("#abc__ID").val()});  })
             $('#abc__ID').on('input',function(){ cursor=0; })
+            $('#D__ID').on('hide',function(){   
+                if(abc_editor!=""){
+                    abc_editor.synth.synthControl.pause();
+                }
+            })
             //------------------------------------
             var play_key=function(pitches,t,m){
                 for(var i=21;i<108;i++){
                     if(key[i]!=0 && t>=key[i]){
                         key[i]=0;
-                        $("div[name='"+i+"']").removeClass('sel__ID');
+                        $("#piano__ID div[name='"+i+"']").removeClass('sel__ID');
                     }
                 }
                 for(var i=0;i<pitches.length;i++){
                     var pitch=pitches[i].pitch;
                     var duration=pitches[i].duration;
                     key[pitch]=Math.floor(t+m*duration);
-                    $("div[name='"+pitch+"']").addClass('sel__ID');
+                    $("#piano__ID div[name='"+pitch+"']").addClass('sel__ID');
                 }
             }
             //------------------------------------

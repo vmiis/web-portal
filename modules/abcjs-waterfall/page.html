@@ -190,7 +190,7 @@
     <script>
         function F__ID(m){
             $('#instrument__ID').on('change',function(){
-                Soundfont.instrument(ac, $(this).val(), { from: 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/', gain:2 }).then(function (inst) {
+                Soundfont.instrument(ac, 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/'+$(this).val()+'-mp3.js').then(function (inst) {
                     instrument=inst;
                 });
             })
@@ -206,8 +206,8 @@
             var ac="";
             var instrument="";
             if(ac=="") ac=new AudioContext();
-            
-            Soundfont.instrument(ac, 'acoustic_grand_piano', { from: 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/' }).then(function (inst) {
+            Soundfont.instrument(ac, 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/acoustic_grand_piano-mp3.js').then(function (inst) {     
+                console.log(inst);
                 instrument=inst;
             });
             //-------------------------------
@@ -236,7 +236,7 @@
             var abc_cursor="";
             //-------------------------------
             var platNotes=function(note){
-                instrument.play(note.midi, ac.currentTime, {duration: note.durationTicks*tk/1000, gain: 5*note.velocity } )
+                instrument.play(note.midi, ac.currentTime, {duration: note.durationTicks*tk/1000, gain: 2.6*note.velocity } )
                 key_on(note.midi);
             }
             var platNotesOff=function(note){
@@ -300,6 +300,7 @@
             $('#start__ID').on('click',function(){
                 if(currentMIDI!=""){
                     if(running==0){
+                        abc_clean();
                         running=1;
                         visualObjStart=0;
                         timingCallbacks.reset();

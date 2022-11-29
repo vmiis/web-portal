@@ -255,14 +255,14 @@
                 for(var i=21;i<108;i++){
                     if(key[i]!=0 && t>=key[i]){
                         key[i]=0;
-                        $("div[name='"+i+"']").removeClass('sel__ID');
+                        $("#piano__ID div[name='"+i+"']").removeClass('sel__ID');
                     }
                 }
                 for(var i=0;i<pitches.length;i++){
                     var pitch=pitches[i].pitch;
                     var duration=pitches[i].duration;
                     key[pitch]=Math.floor(t+m*duration);
-                    $("div[name='"+pitch+"']").addClass('sel__ID');
+                    $("#piano__ID div[name='"+pitch+"']").addClass('sel__ID');
                 }
             }
             //------------------------------------
