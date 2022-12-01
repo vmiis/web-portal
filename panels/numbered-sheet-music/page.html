@@ -28,7 +28,7 @@
                 var module_name=href.replace('?\/','');
                 var nm=$(this).attr('nm');
                 var op=$(this).attr('op'); if(op==undefined) op=0;
-                var url=$vm.hosting_path+"/modules/abc-notation/numbered-melody/"+nm+".abc";
+                var url=$vm.hosting_path+"/modules/music-notation/numbered/"+nm+".txt";
                 $.get(url+'?_='+$vm.ver[0],function(txt){
                     $vm.show_module(module_name,{musicnotes:txt,op:op}); 
                 },'text');

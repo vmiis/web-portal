@@ -1,0 +1,18 @@
+X:1
+T:假如爱有天意
+C:zhiming@vmiis.com 
+%%composerfont 10
+M:3/4
+L:1/4
+Q:1/4=100
+K:C
+V:1
+%%MIDI program 41 % 中提琴
+  E'2E'     |  D'>C'B       |  C'2D'          |  E'2E'/G'/    |
+  A'2A'     |  B'>A'G'/D'/  |  E'3-           |  E'2E'/G'/    |
+  A'2A'     |  G'2E'/D'/    |  E'>F' E'/D'/   |  C'2 A/B/     |
+  C'2D'/E'/ |  D'>B G       |  A3-            |  A  E'G'      |
+  A'3       |  B'3          |  B'2D''         |  C''2 A'/2A'/ |
+  A'2 A'    |  G'>A' G'/D'/ |  F'E'2-         |  E' E'G'      |
+  A'3       |  B'3          |  ^G'B'2         |  C''3         |
+  C'2E'     |  D'>B G       |  A3             |  z3           |

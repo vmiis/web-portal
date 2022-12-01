@@ -243,7 +243,13 @@
                 $('#abc__ID').val(notes);
                 setTimeout(function(){
                     $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-80)+"px");
-                    $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-66)+"px");
+                    if($(window).width()>576){
+                        $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-66)+"px");
+                    }
+                    else{
+                        $("#tool_bar__ID").hide();
+                        $('#paper_w__ID').css('height',($("#left__ID").height()-30-$("#piano__ID").height())+"px");
+                    }
                 },1000);
                 steps=0; $('#tran__ID').val(0);
                 var instrument=op; $('#instrument__ID').val(instrument);
