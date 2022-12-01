@@ -239,7 +239,7 @@
             var abc_cursor="";
             //-------------------------------
             var platNotes=function(note){
-                instrument.play(note.midi, ac.currentTime, {duration: note.durationTicks*tk/1000, gain: 2.6*note.velocity } )
+                instrument.play(note.midi, ac.currentTime, {duration: note.durationTicks*tk/1000, gain: 5*note.velocity } )
                 key_on(note.midi);
             }
             var platNotesOff=function(note){
