@@ -351,12 +351,12 @@
         "midi-player":{url:$H+"/midi-player/page.html",router:1},
         
         "abcjs":{url:$H+"/abcjs/page.html"},
+        "abcjs-numbered":{url:$H+"/abcjs-numbered/page.html"},
         "abcjs-waterfall":{url:$H+"/abcjs-waterfall/page.html"},
         
         "abcjs-local":{url:$H+"/abcjs-local/page.html",router:1},
-        "abcjs-local_waterfall":{url:$H+"/abcjs-local_waterfall/page.html"},
-        "abcjs-numbered":{url:$H+"/abcjs-numbered/page.html",router:1},
         "abcjs-numbered-local":{url:$H+"/abcjs-numbered-local/page.html",router:1},
+        
         "sheet-music":{url:H+"/panels/sheet-music.html",router:1},
         "piano-left-hand-pattern":{url:H+"/panels/piano-left-hand-pattern.html",router:1},
         "numbered-left-hand":{url:H+"/panels/numbered-left-hand/page.html","title":"Left hand pattern"},
