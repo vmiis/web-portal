@@ -470,6 +470,9 @@
                     if((ev.top*K-$("#paper_w__ID").height()/2)>hs){
                         $("#paper_w__ID").scrollTop(ev.top*K-100);
                     }
+                    else if(hs>ev.top*K){
+                        $("#paper_w__ID").scrollTop(0);
+                    }
                 }
             }
             //---------------------------------------------------

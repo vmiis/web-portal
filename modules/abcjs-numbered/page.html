@@ -184,8 +184,10 @@
                 for(var i=0;i<ls.length;i++){
                     var line=ls[i]; //if(line==null || line==undefined) line="";
                     line=line.trim();
-                    if(line[0]=='%' || line.length>1 && line[1]==':'){}
+                    if(line[0]=='%' || (line.length>1 && line[0]!='|' && line[1]==':') ){}
                     else{
+                        line=line.replace(/\[1/g, '@@YI');
+                        line=line.replace(/\[2/g, '@@ER');
                         if(k=="F"){
                             line=line.replace(/1/g, 'F')
                             line=line.replace(/2/g, 'G')
@@ -223,6 +225,8 @@
                         line=line.replace(/-/g, '2')
                         line=line.replace(/\./g, '>')
                         line=line.replace(/_/g, '-')
+                        line=line.replace(/@@YI/g, '[1');
+                        line=line.replace(/@@ER/g, '[2');
                     }
                     ls[i]=line;
                 }
