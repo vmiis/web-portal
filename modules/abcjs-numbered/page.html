@@ -319,6 +319,18 @@
                         }
                     }                     
                 })
+                $('#midi__ID button.abcjs-midi-reset').on('click',function(){  
+                    $("#channel1__ID div").removeClass('sel__ID')
+                    var lastSelection = document.querySelectorAll("#paper__ID .abcjs-highlight");
+                    for (var k = 0; k < lastSelection.length; k++)  lastSelection[k].classList.remove("abcjs-highlight");
+                    var c = document.querySelectorAll("#paper__ID line.abcjs-cursor");
+                    if(c.length!=0){
+                        c[0].setAttribute("x1", 0);
+                        c[0].setAttribute("x2", 0);
+                        c[0].setAttribute("y1", 0);
+                        c[0].setAttribute("y2", 0);
+                    }
+                })
             }
             //---------------------------------------------------
             $('#tran__ID').on('change',function(){       steps=$('#tran__ID').val(); create(); })
