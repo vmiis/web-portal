@@ -4,13 +4,12 @@
             <div w='100|45' id=left__ID style="padding:0 1px 0 2px">
                 <div style="height:43px;background-color: #eee; padding:3px 6px 3px 6px">
                     <div>
+                        <button id=num_abc__ID type="button" class="button__ID">Numbered / ABC</button>
                         <button id=water__ID type="button" style="float:right" class="button__ID">Falling Notes</button>
                     </div>
                 </div>
-                <div style="display:none">
-                    <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
-                </div>
-                <textarea id="number__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea><br>
+                <textarea id="abc__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea>
+                <textarea id="number__ID" style="width:100%;font-size: 90%; font-family: monospace; overflow: auto; white-space: nowrap;"></textarea>
                 <div id="warnings__ID"></div><br>
                 <a target="_blank" href="http://www.stephenmerrony.co.uk/uploads/ABCquickRefv0_6.pdf"><u>ABC Quick Reference Card</u></a> 
                 <a style='margin-left:20px' target="_blank" href="modules/abcjs/program-table.html"><u>MIDI program table</u></a>
@@ -183,7 +182,7 @@
                 }
                 for(var i=0;i<ls.length;i++){
                     var line=ls[i]; //if(line==null || line==undefined) line="";
-                    line=line.trim();
+                    //line=line.trim();
                     if(line[0]=='%' || (line.length>1 && line[0]!='|' && line[1]==':') ){}
                     else{
                         line=line.replace(/\[1/g, '@@YI');
@@ -216,12 +215,12 @@
                             line=line.replace(/7/g, 'B')
                         }
                         line=line.replace(/0/g, 'z')
-                        line=line.replace(/-------/g, '8')
-                        line=line.replace(/------/g, '7')
-                        line=line.replace(/-----/g, '6')
-                        line=line.replace(/----/g, '5')
-                        line=line.replace(/---/g, '4')
-                        line=line.replace(/--/g, '3')
+                        line=line.replace(/-------/g, '8      ')
+                        line=line.replace(/------/g, '7     ')
+                        line=line.replace(/-----/g, '6    ')
+                        line=line.replace(/----/g, '5   ')
+                        line=line.replace(/---/g, '4  ')
+                        line=line.replace(/--/g, '3 ')
                         line=line.replace(/-/g, '2')
                         line=line.replace(/\./g, '>')
                         line=line.replace(/_/g, '-')
@@ -248,8 +247,10 @@
             var abc_init=function(){
                 var op=m.input.op; if(op==undefined) op=0;
                 $('#number__ID').val(notes);
+                show_num_abc();
                 setTimeout(function(){
                     $('#number__ID').css('height',($(window).height()-$('#abc__ID').offset().top-80)+"px");
+                    $('#abc__ID').css('height',($(window).height()-$('#abc__ID').offset().top-80)+"px");
                     if($(window).width()>576){
                         $('#paper_w__ID').css('height',($(window).height()-$('#paper_w__ID').offset().top-66)+"px");
                     }
@@ -345,6 +346,22 @@
                     abc_editor.synth.synthControl.pause();
                 }
             })
+            var numabc=1;
+            $("#num_abc__ID").on('click',function(){
+                if(numabc==1) numabc=0; else numabc=1;
+                show_num_abc();
+            })
+            //------------------------------------
+            var show_num_abc=function(){
+                if(numabc==1){
+                    $('#abc__ID').hide();
+                    $('#number__ID').show();
+                } 
+                else{
+                    $('#abc__ID').show();
+                    $('#number__ID').hide();
+                }
+            }
             //------------------------------------
             var play_key=function(pitches,t,m){
                 for(var i=21;i<108;i++){
