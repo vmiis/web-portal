@@ -307,6 +307,14 @@
                                 if(d!=undefined){
                                     xx=d.split(' ');
                                     if(xx.length>2){
+
+                                        var K=1;
+                                        var svg = document.querySelector("#paper__ID" + " svg");
+                                        const {xxx, yyy, width, height} = svg.viewBox.baseVal;
+                                        var HS=height;
+                                        var HH=$("#paper__ID").outerHeight();
+                                        if(HS!=0) K=HH/HS;
+
                                         var y=parseFloat(xx[2].replace('c',''));
                                         var h=$("#paper_w__ID").scrollTop();
                                         var hh=$('#paper__ID').offset().top+y;

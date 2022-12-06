@@ -5,6 +5,7 @@
             <div class="list__ID">
                 <span class=LT__ID>Sheet music</span>
                 
+                <li><a href='?/abcjs' nm="canon-in-d">Canon in D</a></li>
                 <li><a href='?/abcjs' nm="childhood">Childhood</a></li>
                 <li><a href='?/abcjs' nm="shanghai-bund">Shanghai Bund</a></li>
                 <li><a href='?/abcjs' nm="dreaming-of-home-and-mother">Dreaming of Home and Mother</a></li>
@@ -32,7 +33,7 @@
                 var href=$(this).attr('href');
                 var module_name=href.replace('?\/','');
                 var nm=$(this).attr('nm');
-                var url=$vm.hosting_path+"/modules/abc-notation/"+nm+".abc";
+                var url=$vm.hosting_path+"/modules/music-notation/abc/"+nm+".txt";
                 $.get(url+'?_='+$vm.ver[0],function(txt){
                     $vm.show_module(module_name,{musicnotes:txt}); 
                 },'text');

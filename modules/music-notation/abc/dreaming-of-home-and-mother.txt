@@ -1,0 +1,22 @@
+T:Dreaming of Home and Mother
+C:zhiming@vmiis.com
+%%composerfont 10
+K:C
+L:1/4
+Q: 1/4=130
+V:1
+G2EG|c3B|A2c2|G4|
+V:2 clef=bass
+C,G,CG,|A,,E,A,E,|F,,C,F,C,|G,,D,G,D,
+V:1
+G2CD|E2DC|D4-|-D4
+V:2 clef=bass
+C,G,CG,|A,,E,A,E,|D,,A,,D,A,,|G,,D,G,D,
+V:1
+G2EG|c3B|A2c2|G4|
+V:2 clef=bass
+C,G,CG,|A,,E,A,E,|F,,C,F,C,|G,,D,G,D,
+V:1
+G2DE|F3B,|C4-|-C4
+V:2 clef=bass
+C,G,CG,|G,,D,G,D,|C,G,CG,|C,4
