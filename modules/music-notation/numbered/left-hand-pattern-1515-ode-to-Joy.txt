@@ -1,6 +1,6 @@
 X:1
 T:Left Hand 1515 (欢乐颂)
-C:zhiming@vmiis.com
+N:https://www.vmiis.com
 %%composerfont 10
 M:4/4
 Q:1/4=120

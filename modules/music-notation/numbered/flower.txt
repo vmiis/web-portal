@@ -1,6 +1,6 @@
 X:1
 T:花儿为什么这样红
-C:zhiming@vmiis.com
+N:https://www.vmiis.com
 %%composerfont 10
 M:4/4
 Q:1/4=80

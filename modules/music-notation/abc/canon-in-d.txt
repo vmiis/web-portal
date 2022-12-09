@@ -1,6 +1,6 @@
 X:1
 T:Canon in D
-C:zhiming@vmiis.com
+C:Johann Pachelbel
 %%composerfont 10
 M:4/4
 Q:1/4=100
@@ -62,3 +62,5 @@ V:2
  B,,F,B,D F,,C,F,A, | G,,D,G,B, D,,A,,D,F, | G,,D,G,B, A,,E,A,C | D,A,DF A,,E,A,C |
  B,,F,B,D F,,C,F,A, | G,,D,G,B, D,,A,,D,F, | G,,D,G,B, A,,E,A,C | D,A,DF A,,E,A,C |
  B,,F,B,D F,,C,F,A, | G,,D,G,B, D,,A,,D,F, | G,,D,G,B, A,,E,A,C- |C4 [D,,A,,F,]4- | [D,,A,,F,]8 |] 
+%%text
+%%center https://www.vmiis.com

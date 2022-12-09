@@ -259,7 +259,8 @@
                     }
                     if(ticks>Y){
                         Y=Y+20;
-                        var yy=-step*Y/ppq;
+                        //var yy=-step*Y/ppq;
+                        var yy=-step*ticks/ppq;
                         $('div.note__ID').css("margin-bottom",yy+"px");
                     }
                     
@@ -273,16 +274,6 @@
                     else{
                         $('#stop__ID').trigger('click');
                     }
-                    /*
-                    if(I1<n1.length){
-                        var n_ticks=n1[I1].ticks+T0;
-                        if(ticks>=n_ticks){ 
-                            console.log("  "+ticks+"  "+n_ticks)
-                            platNotes(n1[I1]);
-                            I1++;       
-                        }
-                    }
-                    */
                     for(var k=0;k<8;k++){
                         if((I1+k)<n1.length){
                             var n_ticks=n1[I1+k].ticks+T0;
