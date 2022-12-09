@@ -1,0 +1,27 @@
+<div id="D__ID">
+    <div>
+        <input type="text" id="pw__ID" />
+        <textarea id="txt1__ID"></textarea>
+        <button id="btn1__ID">D</button>    
+        <button id="btn2__ID">E</button>
+        <textarea id="txt2__ID"></textarea>
+    </div>
+    <script>
+        function F__ID(m){
+            $('#btn1__ID').on('click',function(e){
+                var txt1=$('#txt1__ID').val();
+                var ddd=CryptoJS.AES.decrypt(txt1,'12345678');
+                var txt2 = ddd.toString(CryptoJS.enc.Utf8);
+                $('#txt2__ID').val(txt2);
+            })
+            $('#btn2__ID').on('click',function(e){
+                var txt2=$('#txt2__ID').val();
+                var txt1=CryptoJS.AES.encrypt(txt2,'12345678').toString();
+                $('#txt1__ID').val(txt1);
+            })
+        }
+    </script>
+    <style>
+
+    </style>
+</div>
