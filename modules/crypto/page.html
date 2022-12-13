@@ -1,28 +1,133 @@
 <div id="D__ID">
-    Under development
-    <div>
-        <input type="text" id="pw__ID" />
-        <textarea id="txt1__ID"></textarea>
-        <button id="btn1__ID">D</button>    
-        <button id="btn2__ID">E</button>
-        <textarea id="txt2__ID"></textarea>
+    <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
+        <div>
+            <div w='100|100'>
+                <button id="open__ID">Open</button> <button id="save__ID">Save</button> 
+                <br><br>Password: <input type="password" id="pw__ID" style="width:200px" />
+            </div>
+        </div>
+        <div style="display:none">
+            <input type="file" id="file__ID" />
+        </div>
+        <div>
+            <div w='100|100'>
+                
+            </div>
+        </div>
+        <div>
+            <div w='100|50'>
+                <textarea id="txt1__ID" style="width:100%;height:500px"></textarea>
+                <br><button id="btn1__ID" style="float: right">Decrypt &#8594</button>    
+            </div>
+            <div w='100|50'>
+                <textarea id="txt2__ID" style="width:100%;height:500px"></textarea>
+                <br><button id="btn2__ID">&#8592 Encrypt</button>
+            </div>
+        </div>
     </div>
     <script>
         function F__ID(m){
+			new ResizeObserver($vm.responsive).observe(container__ID);
             $('#btn1__ID').on('click',function(e){
                 var txt1=$('#txt1__ID').val();
-                var ddd=CryptoJS.AES.decrypt(txt1,'12345678');
+                var pw=$('#pw__ID').val();
+                var ddd=CryptoJS.AES.decrypt(txt1,pw);
                 var txt2 = ddd.toString(CryptoJS.enc.Utf8);
                 $('#txt2__ID').val(txt2);
             })
             $('#btn2__ID').on('click',function(e){
+                var pw=$('#pw__ID').val();
                 var txt2=$('#txt2__ID').val();
-                var txt1=CryptoJS.AES.encrypt(txt2,'12345678').toString();
+                var txt1=CryptoJS.AES.encrypt(txt2,pw).toString();
                 $('#txt1__ID').val(txt1);
             })
+            $('#file__ID').on('change',function(e){
+                var file=e.target.files[0];
+                const reader = new FileReader();
+				reader.onload = function (e) {
+                    $('#txt1__ID').text(e.target.result);
+				};
+				reader.readAsText(file);
+            })
+            $('#open__ID').on('click',function(){
+                $('#file__ID').trigger('click');
+            })
+            $('#save__ID').on('click',function(){
+                saveAs($('#txt1__ID').val());
+            })
+            async function saveAs(txt){
+                if( window.showSaveFilePicker ) {
+                    const handle = await showSaveFilePicker();
+                    const writable = await handle.createWritable();
+                    await writable.write(txt);
+                    writable.close();
+                }
+            }
         }
     </script>
     <style>
+        #D__ID{
+            background-color: #fff;
+        }
+        #D__ID div{
+            padding:2px 3px;
+        }
+        #D__ID input[type=password],
+        #D__ID textarea
+        {
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid;
+            padding: 0 .625em;
+            box-sizing: border-box;
+            outline: 0;
+            margin: 0;
+            text-align: left;
+            border-color: #c3cad8;
+            color: #2c3345;
+            height: 2.5em;
+        }
+        #D__ID textarea{
+            display: block;
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+        }
+
+        #D__ID input[type=password]:hover, 
+        #D__ID textarea:hover
+        {
+            border-color: #a9bff9;
+            box-shadow: 0 0 0 2px #c9d8fe;
+        }
+
+        #D__ID button{
+            display: inline-block;
+            font-weight: 400;
+            color: #212529;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        #F__ID button:hover {
+            color: #fff;
+            background-color: #545b62;
+            border-color: #4e555b;
+        }
+
 
     </style>
 </div>
