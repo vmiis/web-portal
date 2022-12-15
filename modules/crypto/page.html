@@ -2,7 +2,7 @@
     <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
             <div w='100|100'>
-                <button id="open__ID">Open</button> <button id="save__ID">Save</button> 
+                <button id="open__ID">Open</button> <button id="save__ID">Save As</button>  <button id="clear__ID">Clear</button> 
                 <br><br>Password: <input type="password" id="pw__ID" style="width:200px" />
             </div>
         </div>
@@ -55,9 +55,26 @@
             $('#save__ID').on('click',function(){
                 saveAs($('#txt1__ID').val());
             })
+            $('#clear__ID').on('click',function(){
+                $('#txt1__ID').val('');
+                $('#txt2__ID').val('');
+                $('#pw__ID').val('');
+            })
             async function saveAs(txt){
                 if( window.showSaveFilePicker ) {
-                    const handle = await showSaveFilePicker();
+                    const handle = await showSaveFilePicker(
+
+                        {
+                            types: [
+                            {
+                                description: "Text files",
+                                accept: {
+                                "application/text": [".txt"]
+                                }
+                            }
+                            ]
+                        }
+                    );
                     const writable = await handle.createWritable();
                     await writable.write(txt);
                     writable.close();
