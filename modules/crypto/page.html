@@ -1,25 +1,30 @@
 <div id="D__ID">
     <div id="container__ID" bp=576 style='display:flow-root;max-width:100%'>
         <div>
-            <div w='100|100'>
-                <button id="open__ID">Open</button> <button id="save__ID">Save As</button>  <button id="clear__ID">Clear</button> 
-                <br><br>Password: <input type="password" id="pw__ID" style="width:200px" />
+            <div w='100|50'>
+                <div style="float: right">
+                    Load/Save Decrypted info from/to a local file<br>
+                    <div style="float: right">
+                        <button id="open__ID">Load</button> <button id="save__ID">Save As</button>  <button id="clear__ID">Clear</button> 
+                    </div>
+                </div>
+            </div>
+            <div w='100|50'>
+                Password for Encryption/Decryption: <br>
+                <input type="password" id="pw__ID" style="width:200px" />
             </div>
         </div>
         <div style="display:none">
             <input type="file" id="file__ID" />
         </div>
         <div>
-            <div w='100|100'>
-                
-            </div>
-        </div>
-        <div>
             <div w='100|50'>
+                Encrypted Info<br>
                 <textarea id="txt1__ID" style="width:100%;height:500px"></textarea>
                 <br><button id="btn1__ID" style="float: right">Decrypt &#8594</button>    
             </div>
             <div w='100|50'>
+                Decrypted info<br>
                 <textarea id="txt2__ID" style="width:100%;height:500px"></textarea>
                 <br><button id="btn2__ID">&#8592 Encrypt</button>
             </div>
@@ -87,7 +92,7 @@
             background-color: #fff;
         }
         #D__ID div{
-            padding:2px 3px;
+            padding:2px 6px;
         }
         #D__ID input[type=password],
         #D__ID textarea
