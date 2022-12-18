@@ -238,11 +238,11 @@
             var visualObjStart="";
             var abc_cursor="";
             //-------------------------------
-            var platNotes=function(note){
+            var playNotes=function(note){
                 instrument.play(note.midi, ac.currentTime, {duration: note.durationTicks*tk/1000, gain: 5*note.velocity } )
                 key_on(note.midi);
             }
-            var platNotesOff=function(note){
+            var playNotesOff=function(note){
                 key_off(note.midi);
             }
             //-------------------------------
@@ -267,7 +267,7 @@
                     if(I2<n2.length){
                         var n_ticks=n2[I2].ticks+T0;
                         if(ticks>=n_ticks){ 
-                            platNotesOff(n2[I2]);
+                            playNotesOff(n2[I2]);
                             I2++;
                         }
                     }
@@ -278,7 +278,7 @@
                         if((I1+k)<n1.length){
                             var n_ticks=n1[I1+k].ticks+T0;
                             if(ticks>=n_ticks){ 
-                                platNotes(n1[I1+k]);
+                                playNotes(n1[I1+k]);
                             }
                             else{
                                 I1=I1+k;       

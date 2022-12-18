@@ -1,6 +1,22 @@
 <div id="D__ID">
     <div id="container__ID">
         Under Development
+		<p>
+			<input placeholder="Your ID" id='your__ID'>
+			<input placeholder="Peer ID" id='peer__ID'>
+			<button id=connect__ID>Connect</button>
+		</p>
+		<hr>
+		<div __id='talks__ID'>
+		  <!--This will be added by JavaScript -->
+		</div>
+		<!--
+		<p>
+			<input placeholder="Message" id='message__ID' size='50'>
+			<button id=send__ID _onclick="send()">Send</button>
+		</p>
+		-->
+					  
         <div style="padding:50px 180px">
             <div id="staffDiv" class="staff" style="width:200px;height:260px"></div>
         </div>
@@ -107,8 +123,6 @@
         </div>                
     </div>
     <script>
-        function F__ID(m){
-
 
 
 // Staff.js
@@ -730,13 +744,13 @@ function arrayMax(arr) {
   return arr.reduce(function (p, v) { return ( p > v ? p : v ); });
 }
 
-            
 
 
 
 
 
 
+        function F__ID(m){
 
 
 
@@ -752,11 +766,11 @@ function arrayMax(arr) {
                 instrument=inst;
             });
             //-------------------------------
-            var platNotes=function(note){
+            var playNotes=function(note){
                 instrument.play(note, ac.currentTime, {/*duration: note.durationTicks*tk/1000,*/ gain: 5/**note.velocity*/ } )
                 key_on(note);
             }
-            var platNotesOff=function(note){
+            var playNotesOff=function(note){
                 key_off(note);
             }
             //-------------------------------
@@ -765,6 +779,55 @@ function arrayMax(arr) {
             //------------------------------------
             
             
+			var inputs;
+			var outputs;
+
+			navigator.requestMIDIAccess()
+				.then(onMIDISuccess, onMIDIFailure);
+
+			function onMIDISuccess(midiAccess) {
+				console.log(midiAccess);
+
+				inputs = midiAccess.inputs;
+				outputs = midiAccess.outputs;
+				
+				for (var input of midiAccess.inputs.values()){
+					input.onmidimessage = getMIDIMessage;
+				}
+
+			}
+			var I=0;
+			function getMIDIMessage(midiMessage) {
+				var cmd=midiMessage.data[0];
+				if(cmd==254) return;
+				//console.log(cmd);
+				//if(I>10) return;
+				//console.log(I++);
+				//[144, 72, 64]
+				if(cmd==144){
+					var n=midiMessage.data[1];
+					notes.push(n);
+					myStaff.setNotes(notes);
+					for(var i=0;i<notes.length;i++){
+						playNotes(notes[i]);
+						send('1|'+notes[i]);
+					}
+				} 
+				if(cmd==128){
+					var n=midiMessage.data[1];
+					send('0|'+n);
+					playNotesOff(n);
+					const index = notes.indexOf(n);
+					if (index > -1) notes.splice(index, 1); 
+					myStaff.setNotes(notes);
+				} 
+			}
+
+			function onMIDIFailure() {
+				console.log('Could not access your MIDI devices.');
+			}
+
+
             var myStaff;
             $('#D__ID').on('load',function(){
                 $('#container__ID').css('min-height',$vm.min_height+"px");
@@ -798,20 +861,74 @@ function arrayMax(arr) {
             //---------------------------------------------------
             var notes=[]
             $('.key__ID').on('mousedown',function(e){
-                notes.push($(this).attr('name'));
+                var n=$(this).attr('name');
+                notes.push(n);
                 myStaff.setNotes(notes);
                 for(var i=0;i<notes.length;i++){
-                    platNotes(notes[i]);
+                    playNotes(notes[i]);
+					send('1|'+notes[i]);
                 }
             })
             $('.key__ID').on('mouseup',function(e){
                 var n=$(this).attr('name');
-                platNotesOff(n);
+                send('0|'+n);
+				playNotesOff(n);
+                const index = notes.indexOf(n);
+                if (index > -1) notes.splice(index, 1); 
+				myStaff.setNotes(notes);
+            })
+			var remote_mousedown=function(n){
+                notes.push(n);
+                myStaff.setNotes(notes);
+                for(var i=0;i<notes.length;i++){
+                    playNotes(notes[i]);
+                }
+			}
+			var remote_mouseup=function(n){
+                playNotesOff(n);
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
                 myStaff.setNotes(notes);
-            })
+			}
             //---------------------------------------------------
+			var remote_connected=0;
+			async function receiveLoop(btn) {
+				your__ID.disabled = peer__ID.disabled = btn.disabled = true;
+				while(true) {
+					try {
+						// Get peer's response
+						const res = await fetch(`https://ppng.io/${peer__ID.value}-${your__ID.value}`);
+						// Create talk element
+						const talk = document.createElement('div');
+						// Set peer's message
+						var c=await res.text();
+						ss=c.split('|');
+						if(ss.length==2){
+							if(ss[0]==1) remote_mousedown(ss[1])
+							if(ss[0]==0) remote_mouseup(ss[1])
+						}
+						//talk.innerText = ss;//await res.text();
+						// Add peer's message
+						//talks__ID.appendChild(talk);
+						remote_connected=1;
+					} catch(err) {
+						console.error(err);
+						remote_connected=0;
+					}
+				}
+			}
+            $('#connect__ID').on('click',function(){
+				receiveLoop(this);
+			})
+			function send(m) {
+				if(remote_connected==1){
+					fetch(`https://ppng.io/${your__ID.value}-${peer__ID.value}`, {
+						'method': 'POST',
+						body: m
+					});
+				}
+			}
+			//---------------------------------------------------
         }
     </script>
     <style>
