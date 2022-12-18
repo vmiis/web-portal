@@ -383,6 +383,8 @@
         "ud7":{url:$H+"/dev/abcjs-numbered/page.html",router:1},
 
         "abcjs-numbered-waterfall":{url:$H+"/dev/abcjs-numbered-waterfall/page.html",router:1},
+        "Web-template":{url:H+"/panels/web-template.html",router:1},
+        "piano-connection":{url:$H+"/piano-connection/page.html",router:1},
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------
