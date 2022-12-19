@@ -306,7 +306,7 @@
 			//--------------------------------------
 			var ws=null;
 			var connect=function(){
-				ws = new WebSocket("ws://06.vmiis.com:80");
+				ws = new WebSocket("wss://06.vmiis.com");
 				ws.addEventListener("open", () =>{
 					console.log("We are connected");
 					remote_connected=1;
