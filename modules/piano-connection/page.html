@@ -202,47 +202,20 @@
                 if (index > -1) notes.splice(index, 1); 
 				myStaff.setNotes(notes);
             })
-			var remote_mousedown=function(n){
+			var remote_keydown=function(n){
                 notes.push(n);
                 myStaff.setNotes(notes);
                 for(var i=0;i<notes.length;i++){
                     playNotes(notes[i]);
                 }
 			}
-			var remote_mouseup=function(n){
+			var remote_keyup=function(n){
                 playNotesOff(n);
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
                 myStaff.setNotes(notes);
 			}
             //---------------------------------------------------
-			var remote_connected=0;
-			async function receiveLoop(btn) {
-				your__ID.disabled = peer__ID.disabled = btn.disabled = true;
-				remote_connected=1;
-				while(true) {
-					try {
-						// Get peer's response
-						const res = await fetch(`https://ppng.io/${peer__ID.value}-${your__ID.value}`);
-						// Create talk element
-						//const talk = document.createElement('div');
-						// Set peer's message
-						var c=await res.text();
-						ss=c.split('|');
-						if(ss.length==2){
-							if(ss[0]==1) remote_mousedown(ss[1])
-							if(ss[0]==0) remote_mouseup(ss[1])
-						}
-						//talk.innerText = ss;//await res.text();
-						// Add peer's message
-						//talks__ID.appendChild(talk);
-					} catch(err) {
-						console.error(err);
-						remote_connected=0;
-					}
-				}
-			}
-			//---------------------------------------------------
 			function onMIDIMessage(event) {
 				var cmd=event.data[0];
 				if(cmd==144){
@@ -286,6 +259,7 @@
 				midiAccess.inputs.forEach((entry) => {entry.onmidimessage = onMIDIMessage;});
 			}
 			//--------------------------------------
+			var remote_connected=0;
 			let midi = null;  // global MIDIAccess object
 			function onMIDISuccess(midiAccess) {
 				console.log(midiAccess);
@@ -317,8 +291,8 @@
 					if(d.substring(0,2)=="n:"){
 						var ss=d.substring(2).split('|');
 						if(ss.length==2){
-							if(ss[0]==1) remote_mousedown(ss[1])
-							if(ss[0]==0) remote_mouseup(ss[1])
+							if(ss[0]==1) remote_keydown(ss[1])
+							if(ss[0]==0) remote_keyup(ss[1])
 						}
 					}
 					console.log(d);
