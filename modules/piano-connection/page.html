@@ -5,8 +5,7 @@
 				<b>Play piano for a remote student, teacher or friend.</b> <span style="margin-left:30px" id=msg__ID>No MIDI device connected.</span>
 			</p>
 			<p>
-				Connect your digital piano to a remote computer: <input placeholder="Your ID" id='your__ID'>
-				<input placeholder="Peer ID" id='peer__ID'>
+				Connect your digital piano to a remote computer: <input placeholder="Your ID" id='your__ID'> <input placeholder="Peer ID" id='peer__ID'>
 				<button id=connect__ID>Connect</button>
 			</p>
 		</div>
@@ -220,12 +219,13 @@
 			var remote_connected=0;
 			async function receiveLoop(btn) {
 				your__ID.disabled = peer__ID.disabled = btn.disabled = true;
+				remote_connected=1;
 				while(true) {
 					try {
 						// Get peer's response
 						const res = await fetch(`https://ppng.io/${peer__ID.value}-${your__ID.value}`);
 						// Create talk element
-						const talk = document.createElement('div');
+						//const talk = document.createElement('div');
 						// Set peer's message
 						var c=await res.text();
 						ss=c.split('|');
@@ -236,22 +236,10 @@
 						//talk.innerText = ss;//await res.text();
 						// Add peer's message
 						//talks__ID.appendChild(talk);
-						remote_connected=1;
 					} catch(err) {
 						console.error(err);
 						remote_connected=0;
 					}
-				}
-			}
-            $('#connect__ID').on('click',function(){
-				receiveLoop(this);
-			})
-			function send(m) {
-				if(remote_connected==1){
-					fetch(`https://ppng.io/${your__ID.value}-${peer__ID.value}`, {
-						'method': 'POST',
-						body: m
-					});
 				}
 			}
 			//---------------------------------------------------
@@ -309,8 +297,6 @@
 					$('#msg__ID').text(event.port.name+" "+event.port.manufacturer+" "+event.port.state);
 					if(event.port.state=="connected") startLoggingMIDIInput(midiAccess);
 				};
-
-
 			}
 			//--------------------------------------
 			function onMIDIFailure(msg) {
@@ -318,6 +304,36 @@
 			}
 			navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 			//--------------------------------------
+			var ws=null;
+			var connect=function(){
+				ws = new WebSocket("ws://06.vmiis.com:80");
+				ws.addEventListener("open", () =>{
+					console.log("We are connected");
+					remote_connected=1;
+					ws.send(`u:${your__ID.value}|${peer__ID.value}`);
+				});
+				ws.addEventListener('message', function (event) {
+					var d=event.data;
+					if(d.substring(0,2)=="n:"){
+						var ss=d.substring(2).split('|');
+						if(ss.length==2){
+							if(ss[0]==1) remote_mousedown(ss[1])
+							if(ss[0]==0) remote_mouseup(ss[1])
+						}
+					}
+					console.log(d);
+				});
+			}
+			function send(m) {
+				if(remote_connected==1){
+					ws.send("n:"+m);
+				}
+			}
+            $('#connect__ID').on('click',function(){
+				your__ID.disabled = peer__ID.disabled = connect__ID.disabled = true;
+				connect();
+			})
+
         }
     </script>
     <style>
