@@ -190,8 +190,28 @@
                 //console.log(myStaff.getNotes());
             })
             //---------------------------------------------------
+			var kn=["A","A#","B","C","C#","D","D#","E","F","F#","G","G#"];
             var notes=[];
 			var nT=0
+            //---------------------------------------------------
+            var display_chord_name=function(){
+                //$('#cord__ID').text(notes);
+                //var cn=Tonal.Chord.detect(["D", "F#", "A", "C"]);
+				
+				notes.sort();
+				console.log(notes)
+
+				var kk=[];
+				for(var i=0;i<notes.length;i++){
+					var a=(notes[i]-21)%12;
+					var c=kn[a];
+					kk.push(c);
+				}
+				console.log(kk)
+                var cn=Tonal.Chord.detect(kk);
+                $('#cord__ID').text(cn);
+			}
+			//---------------------------------------------------
 			setInterval( function(){
 				nT++;
 				if(nT>5){
@@ -204,13 +224,11 @@
                 var n=$(this).attr('name');
                 notes.push(n);
                 myStaff.setNotes(notes);
+				display_chord_name();
                 for(var i=0;i<notes.length;i++){
                     playNotes(notes[i]);
 					send('1|'+notes[i]);
                 }
-                $('#cord__ID').text(notes);
-                //var cn=Tonal.Chord.detect(["D", "F#", "A", "C"]);
-                //console.log(cn);
             })
             $('.key__ID').on('mouseup',function(e){
 				nT=0;
@@ -220,10 +238,12 @@
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
 				myStaff.setNotes(notes);
+				display_chord_name();
             })
 			var remote_keydown=function(n){
                 notes.push(n);
                 myStaff.setNotes(notes);
+				display_chord_name();
                 for(var i=0;i<notes.length;i++){
                     playNotes(notes[i]);
                 }
@@ -233,6 +253,7 @@
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
                 myStaff.setNotes(notes);
+				display_chord_name();
 			}
             //---------------------------------------------------
 			function onMIDIMessage(event) {
@@ -247,6 +268,7 @@
 					}
 					notes.push(n);
 					myStaff.setNotes(notes);
+					display_chord_name();
 				} 
 				else if(cmd==128){
 					nT=0;
@@ -256,6 +278,7 @@
 					const index = notes.indexOf(n);
 					if (index > -1) notes.splice(index, 1); 
 					myStaff.setNotes(notes);
+					display_chord_name();
 				} 
 			}
 
