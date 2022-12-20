@@ -2,11 +2,21 @@
     <div id="container__ID">
 		<div style="padding:30px">
 			<p>
-				<b>Play piano for a remote student, teacher or friend.</b> <span style="margin-left:30px" id=msg__ID>No MIDI device connected.</span>
+				<h3>Play piano for a remote student, teacher or friend.</h3>
 			</p>
 			<p>
 				Connect your digital piano to a remote computer: <input placeholder="Your ID" id='your__ID'> <input placeholder="Peer ID" id='peer__ID'>
-				<button id=connect__ID>Connect</button>
+				<button id=connect__ID class="button__ID">Connect</button>
+                <br>
+                Sound: <select id=instrument__ID>
+                    <option value="acoustic_grand_piano">Acoustic grand piano</option>
+                    <option value="bright_acoustic_piano">Bright acoustic piano</option>
+                    <option value="electric_grand_piano">Electric grand piano</option>
+                    <option value="acoustic_bass">Acoustic bass</option>
+                    <option value="acoustic_guitar_nylon">Acoustic guitar nylon</option>
+                    <option value="acoustic_guitar_steel">Acoustic guitar steel</option>
+                    <option value="violin">Violin</option>
+            </select>
 			</p>
 		</div>
 		<!--
@@ -17,9 +27,10 @@
 		-->
 					  
         <div style="padding:50px 180px">
-            <div id="staffDiv" class="staff" style="width:200px;height:260px"></div>
+            <div id="staffDiv" class="staff" style="width:200px;height:260px;display:inline-block"></div><div style="display:inline-block;padding-left:50px"><span id="cord__ID"></span></div>
         </div>
         <div id=piano__ID style="width:100%;position:fixed;bottom:0">
+            <span style="margin-left:3px" id=msg__ID>No MIDI device connected.</span><br>
             <div class="piano__ID" id="channel1__ID" >
                 <div name="21" class="key__ID white__ID"></div>
                 <div name="22" class="key__ID black__ID"></div>
@@ -132,6 +143,11 @@
             Soundfont.instrument(ac, 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/acoustic_grand_piano-mp3.js').then(function (inst) {     
                 instrument=inst;
             });
+            $('#instrument__ID').on('change',function(){
+                Soundfont.instrument(ac, 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/'+$(this).val()+'-mp3.js').then(function (inst) {
+                    instrument=inst;
+                });
+            })
             //-------------------------------
             var playNotes=function(note){
                 instrument.play(note, ac.currentTime, {/*duration: note.durationTicks*tk/1000,*/ gain: 5/**note.velocity*/ } )
@@ -192,6 +208,9 @@
                     playNotes(notes[i]);
 					send('1|'+notes[i]);
                 }
+                $('#cord__ID').text(notes);
+                //var cn=Tonal.Chord.detect(["D", "F#", "A", "C"]);
+                //console.log(cn);
             })
             $('.key__ID').on('mouseup',function(e){
 				nT=0;
@@ -307,7 +326,7 @@
 				your__ID.disabled = peer__ID.disabled = connect__ID.disabled = true;
 				connect();
 			})
-
+			//--------------------------------------
         }
     </script>
     <style>
