@@ -328,7 +328,7 @@
 			//--------------------------------------
 			var ws=null;
 			var connect=function(){
-				ws = new WebSocket("wss://06.vmiis.com:442");
+				ws = new WebSocket("wss://06.vmiis.com");
 				ws.addEventListener("open", () =>{
 					console.log("We are connected");
 					remote_connected=1;
@@ -338,7 +338,7 @@
 					var d=event.data;
 					if(d.substring(0,2)=="n:"){
 						var ss=d.substring(2).split('|');
-						if(ss.length==2){
+						if(ss.length>=2){
 							if(ss[0]==1) remote_keydown(ss[1],ss[2])
 							if(ss[0]==0) remote_keyup(ss[1])
 						}
