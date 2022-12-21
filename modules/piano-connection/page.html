@@ -5,27 +5,12 @@
 				<h3>Play piano for a remote student, teacher or friend.</h3>
 			</p>
 			<p>
-				Connect your digital piano to a group: <input placeholder="Group ID" id='group__ID'>
+				Connect your digital piano to a cloud group: <input placeholder="Group ID" id='group__ID'>
 				<button id=connect__ID class="button__ID">Connect</button>
                 <br>
-                Sound: <select id=instrument__ID>
-                    <option value="acoustic_grand_piano">Acoustic grand piano</option>
-                    <option value="bright_acoustic_piano">Bright acoustic piano</option>
-                    <option value="electric_grand_piano">Electric grand piano</option>
-                    <option value="acoustic_bass">Acoustic bass</option>
-                    <option value="acoustic_guitar_nylon">Acoustic guitar nylon</option>
-                    <option value="acoustic_guitar_steel">Acoustic guitar steel</option>
-                    <option value="violin">Violin</option>
-            </select>
+                Sound: <select id=instrument__ID></select>
 			</p>
 		</div>
-		<!--
-		<p>
-			<input placeholder="Message" id='message__ID' size='50'>
-			<button id=send__ID _onclick="send()">Send</button>
-		</p>
-		-->
-					  
         <div style="padding:50px 180px">
             <div id="staffDiv" class="staff" style="width:200px;height:260px;display:inline-block"></div><div style="display:inline-block;padding-left:50px"><span id="cord__ID"></span></div>
         </div>
@@ -140,22 +125,51 @@
             var ac="";
             var instrument="";
             if(ac=="") ac=new AudioContext();
-            Soundfont.instrument(ac, 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/acoustic_grand_piano-mp3.js').then(function (inst) {     
-                instrument=inst;
-            });
             $('#instrument__ID').on('change',function(){
-                Soundfont.instrument(ac, 'https://gleitz.github.io/midi-js-soundfonts/FatBoy/'+$(this).val()+'-mp3.js').then(function (inst) {
-                    instrument=inst;
-                });
+				var n=document.getElementById('instrument__ID').selectedIndex;
+				var info=player.loader.instrumentInfo(n)
+				console.log('select',n,info);
+				player.loader.startLoad(audioContext, info.url, info.variable);
+				player.loader.waitLoad(function () {
+					console.log('done',info.variable);
+					tone=window[info.variable];
+					player.cancelQueue(audioContext);
+				});
             })
             //-------------------------------
-            var playNotes=function(note){
-                instrument.play(note, ac.currentTime, {/*duration: note.durationTicks*tk/1000,*/ gain: 5/**note.velocity*/ } )
-                key_on(note);
-            }
-            var playNotesOff=function(note){
-                key_off(note);
-            }
+            var audioContext=ac;
+            var tone = _tone_0000_JCLive_sf2_file;
+            var midiNotes = [];            
+            var player = new WebAudioFontPlayer();
+            player.loader.decodeAfterLoading(audioContext, '_tone_0000_JCLive_sf2_file');
+			function midNoteOn(pitch, velocity) {
+				midiNoteOff(pitch);
+				var envelope = player.queueWaveTable(audioContext, audioContext.destination, tone, 0, pitch, 123456789, velocity / 100);
+				var note = {
+					pitch: pitch,
+					envelope: envelope
+				};
+				midiNotes.push(note);
+                key_on(pitch);
+			}
+			function midiNoteOff(pitch) {
+                key_off(pitch);
+				for (var i = 0; i < midiNotes.length; i++) {
+					if (midiNotes[i].pitch == pitch) {
+						if (midiNotes[i].envelope) {
+							midiNotes[i].envelope.cancel();
+						}
+						midiNotes.splice(i, 1);
+						return;
+					}
+				}
+			}
+            var sel = document.getElementById('instrument__ID');
+			for(var i = 0; i < player.loader.instrumentKeys().length; i++) {
+				var opt = document.createElement('option');
+				opt.innerHTML = ''+(i+1)+'. '+player.loader.instrumentInfo(i).title;
+				sel.appendChild(opt);
+			}
             //-------------------------------
             var key_on=function(noteNumber){         $("#channel1__ID div[name='"+noteNumber+"']").addClass('sel__ID');            }
             var key_off=function(noteNumber){        $("#channel1__ID div[name='"+noteNumber+"']").removeClass('sel__ID');         }
@@ -182,12 +196,8 @@
                     accidental: "sharp",
                     color: "#000000"
                 }
-                // create a new staff
                 myStaff =  new Staff(options);
-                // set notes (C major chord)
-                myStaff.setNotes([60,64,67]);
                 myStaff.setNotes([]);
-                //console.log(myStaff.getNotes());
             })
             //---------------------------------------------------
 			var kn=["A","A#","B","C","C#","D","D#","E","F","F#","G","G#"];
@@ -195,19 +205,13 @@
 			var nT=0
             //---------------------------------------------------
             var display_chord_name=function(){
-                //$('#cord__ID').text(notes);
-                //var cn=Tonal.Chord.detect(["D", "F#", "A", "C"]);
-				
 				notes.sort();
-				console.log(notes)
-
-				var kk=[];
+                var kk=[];
 				for(var i=0;i<notes.length;i++){
 					var a=(notes[i]-21)%12;
 					var c=kn[a];
 					kk.push(c);
 				}
-				console.log(kk)
                 var cn=Tonal.Chord.detect(kk);
                 $('#cord__ID').text(cn);
 			}
@@ -222,24 +226,18 @@
             $('.key__ID').on('mousedown',function(e){
 				nT=0;
                 var n=$(this).attr('name');
-                playNotes(n);
-				send('1|'+n);
+                var v=50;
+                midNoteOn(n, v);
+				send('1|'+n+"|"+v);
                 
                 notes.push(n);
                 myStaff.setNotes(notes);
 				display_chord_name();
-                
-                /*
-                for(var i=0;i<notes.length;i++){
-                    //playNotes(notes[i]);
-					send('1|'+notes[i]);
-                }
-                */
             })
             $('.key__ID').on('mouseup',function(e){
 				nT=0;
                 var n=$(this).attr('name');
-                playNotesOff(n);
+                midiNoteOff(n);
                 send('0|'+n);
                 
                 const index = notes.indexOf(n);
@@ -248,21 +246,15 @@
 				display_chord_name();
             })
             //---------------------------------------------------
-            var remote_keydown=function(n){
-                playNotes(n);
+            var remote_keydown=function(n,v){
+                midNoteOn(n,v);
                 
                 notes.push(n);
                 myStaff.setNotes(notes);
 				display_chord_name();
-                
-                /*
-                for(var i=0;i<notes.length;i++){
-                    playNotes(notes[i]);
-                }
-                */
 			}
 			var remote_keyup=function(n){
-                playNotesOff(n);
+                midiNoteOff(n);
                 
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
@@ -271,31 +263,29 @@
 			}
             //---------------------------------------------------
 			function onMIDIMessage(event) {
-				var cmd=event.data[0];
-				if(cmd==144){
-					nT=0;
-					var n=event.data[1];
-					const index = notes.indexOf(n);
-					if(index==-1){
-						playNotes(n);
-						send('1|'+n);
-					}
-					notes.push(n);
-					myStaff.setNotes(notes);
-					display_chord_name();
-				} 
-				else if(cmd==128){
-					nT=0;
-					var n=event.data[1];
-					send('0|'+n);
-					playNotesOff(n);
-					const index = notes.indexOf(n);
-					if (index > -1) notes.splice(index, 1); 
-					myStaff.setNotes(notes);
-					display_chord_name();
-				} 
+				var data = event.data;
+				var cmd = data[0] >> 4;
+				var channel = data[0] & 0xf;
+				var type = data[0] & 0xf0;
+				var pitch = data[1];
+				var velocity = data[2];
+				switch (type) {
+                    case 144:
+                        //console.log(velocity)
+                        midNoteOn(pitch, velocity);
+                        notes.push(pitch);
+                        myStaff.setNotes(notes);
+                        display_chord_name();
+                        break;
+                    case 128:
+                        midiNoteOff(pitch);
+                        const index = notes.indexOf(pitch);
+                        if (index > -1) notes.splice(index, 1); 
+                        myStaff.setNotes(notes);
+                        display_chord_name();
+                        break;
+				}
 			}
-
 			//--------------------------------------
 			function listInputsAndOutputs(midiAccess) {
 				for (const entry of midiAccess.inputs) {
@@ -347,11 +337,10 @@
 					if(d.substring(0,2)=="n:"){
 						var ss=d.substring(2).split('|');
 						if(ss.length==2){
-							if(ss[0]==1) remote_keydown(ss[1])
+							if(ss[0]==1) remote_keydown(ss[1],ss[2])
 							if(ss[0]==0) remote_keyup(ss[1])
 						}
 					}
-					console.log(d);
 				});
 			}
 			function send(m) {
