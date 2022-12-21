@@ -273,12 +273,14 @@
                     case 144:
                         //console.log(velocity)
                         midNoteOn(pitch, velocity);
+                        send('1|'+pitch+"|"+velocity);
                         notes.push(pitch);
                         myStaff.setNotes(notes);
                         display_chord_name();
                         break;
                     case 128:
                         midiNoteOff(pitch);
+                        send('0|'+pitch);
                         const index = notes.indexOf(pitch);
                         if (index > -1) notes.splice(index, 1); 
                         myStaff.setNotes(notes);
