@@ -5,7 +5,7 @@
 				<h3>Play piano for a remote student, teacher or friend.</h3>
 			</p>
 			<p>
-				Connect your digital piano to a remote computer: <input placeholder="Your ID" id='your__ID'> <input placeholder="Peer ID" id='peer__ID'>
+				Connect your digital piano to a group: <input placeholder="Group ID" id='group__ID'>
 				<button id=connect__ID class="button__ID">Connect</button>
                 <br>
                 Sound: <select id=instrument__ID>
@@ -222,34 +222,48 @@
             $('.key__ID').on('mousedown',function(e){
 				nT=0;
                 var n=$(this).attr('name');
+                playNotes(n);
+				send('1|'+n);
+                
                 notes.push(n);
                 myStaff.setNotes(notes);
 				display_chord_name();
+                
+                /*
                 for(var i=0;i<notes.length;i++){
-                    playNotes(notes[i]);
+                    //playNotes(notes[i]);
 					send('1|'+notes[i]);
                 }
+                */
             })
             $('.key__ID').on('mouseup',function(e){
 				nT=0;
                 var n=$(this).attr('name');
+                playNotesOff(n);
                 send('0|'+n);
-				playNotesOff(n);
+                
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
 				myStaff.setNotes(notes);
 				display_chord_name();
             })
-			var remote_keydown=function(n){
+            //---------------------------------------------------
+            var remote_keydown=function(n){
+                playNotes(n);
+                
                 notes.push(n);
                 myStaff.setNotes(notes);
 				display_chord_name();
+                
+                /*
                 for(var i=0;i<notes.length;i++){
                     playNotes(notes[i]);
                 }
+                */
 			}
 			var remote_keyup=function(n){
                 playNotesOff(n);
+                
                 const index = notes.indexOf(n);
                 if (index > -1) notes.splice(index, 1); 
                 myStaff.setNotes(notes);
@@ -322,11 +336,11 @@
 			//--------------------------------------
 			var ws=null;
 			var connect=function(){
-				ws = new WebSocket("wss://06.vmiis.com");
+				ws = new WebSocket("wss://06.vmiis.com:442");
 				ws.addEventListener("open", () =>{
 					console.log("We are connected");
 					remote_connected=1;
-					ws.send(`u:${your__ID.value}|${peer__ID.value}`);
+					ws.send(`u:${group__ID.value}`);
 				});
 				ws.addEventListener('message', function (event) {
 					var d=event.data;
@@ -346,7 +360,7 @@
 				}
 			}
             $('#connect__ID').on('click',function(){
-				your__ID.disabled = peer__ID.disabled = connect__ID.disabled = true;
+				group__ID.disabled = connect__ID.disabled = true;
 				connect();
 			})
 			//--------------------------------------
