@@ -384,7 +384,15 @@
 
         "abcjs-numbered-waterfall":{url:$H+"/dev/abcjs-numbered-waterfall/page.html",router:1},
         "Web-template":{url:H+"/panels/web-template.html",router:1},
+        "Piano-References":{url:H+"/panels/piano-references.html",router:1},
+
         "piano-connection":{url:$H+"/piano-connection/page.html",router:1},
+    };
+
+    for(var i=1;i<4;i++){
+        var p=i.toString().padStart(4, '0');
+console.log(p);        
+        modules["chat"+p]={url:$H+"/chat/"+p+".html",router:1}
     }
     set_prefix(prefix,modules);
     //-------------------------------------------------------------------------------------

@@ -1,37 +1,36 @@
 <div id=D__ID>
+    <div style="padding:5px;font-size:11px"><i> <a href="?/About-Micro-App"><u>What is a micro app?</u></a></i></div>
     <div id=panel__ID class=panel__ID>
         <ul style="list-style-type:decimal;">
-            <div>
-                <span class=LT__ID>与AI机器人对话</span>
-                <li><a href='?/chat0001'>意识一定要基于碳基生命体吗？</a></li>
-                <li><a href='?/chat0002'>您认同机器的自学习能力会超越人类吗？</a></li>
-                <li><a href='?/chat0003'>如果某种与人类接近的智能不依赖于碳基结构作为载体，那么人类的进化是否会有非碳基结构成为成为人类的组成部分？</a></li>
-            </div>
-            <div>
-                <span class=LT__ID>与自己对话</span>
-                <li><a href='?/life'>生命意义的猜想</a></li>
-                <li><a href='?/understanding'>我理解世界的三段过程</a></li>
-                <li><a href='?/investment'>我对投资本质的一种理解</a></li>
-                <li><a href='?/pareto-principle'>对帕累托法则的思考</a></li>
-                                
-            </div>
-        </ul>
+            <div class="list__ID">
+                <span class=LT__ID>Piano References</span>
+                
+
+                <li><a href='https://muted.io/scales/'          nm="canon-in-d">Scales & Modes</a></li>
+                <li><a href='https://muted.io/key-signatures/'  nm="canon-in-d">Key signatures</a></li>
+                <li><a href='https://muted.io/piano-chords/'    nm="canon-in-d">Chords</a></li>
+                
+                
+        </div>
+            <!---------------------------------------------------------------------------------------->
+    </ul>
     </div>
     <script>
         function F__ID(){
             //--------------------------------------------------------
-            $('#panel__ID a').on('click',function(e){
+            $('#D__ID a').on('click',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 var href=$(this).attr('href');
-                if(href.substring(0,4)=='http'){ window.open(href); return; }
-                var module_name=href.replace('?\/','');
-                if(module_name!="") $vm.show_module(module_name,{}); 
+                window.open(href);
             })
             //--------------------------------------------------------
         }
     </script>
     <style>
+        .list__ID li a:first-child{
+            white-space: nowrap;
+        }
         #D__ID{
             background-color:#fff;
             height:100%;
@@ -50,10 +49,6 @@
         .panel__ID div{
             break-inside: avoid-column;
         }
-	    .panel__ID a{
-		    /*margin:3px 10px;*/
-            /*white-space: nowrap;*/
-	    }
 	    .panel__ID span{
 			color:#283f55;
 			font-weight: bold;
@@ -62,9 +57,6 @@
             /*white-space: nowrap;*/
 	    }
 
-        .panel__ID li{
-            /*text-decoration: none;*/
-        }
         a {
             text-decoration: none;
         }
