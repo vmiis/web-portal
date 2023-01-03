@@ -389,9 +389,8 @@
         "piano-connection":{url:$H+"/piano-connection/page.html",router:1},
     };
 
-    for(var i=1;i<4;i++){
+    for(var i=1;i<10;i++){
         var p=i.toString().padStart(4, '0');
-console.log(p);        
         modules["chat"+p]={url:$H+"/chat/"+p+".html",router:1}
     }
     set_prefix(prefix,modules);
