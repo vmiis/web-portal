@@ -389,7 +389,7 @@
         "piano-connection":{url:$H+"/piano-connection/page.html",router:1},
     };
 
-    for(var i=1;i<10;i++){
+    for(var i=1;i<20;i++){
         var p=i.toString().padStart(4, '0');
         modules["chat"+p]={url:$H+"/chat/"+p+".html",router:1}
     }
