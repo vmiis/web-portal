@@ -31,6 +31,8 @@
     m["Pittsburgh-Sleep-Quality-Index-Form"]    ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-pittsburgh-sleep-quality-index"};
     m["Ethnicity-Data"]                         ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-ethnicity",form_module:"!",router:1};
     m["Ethnicity-Form"]                         ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-ethnicity"};
+    m["Student-Captcha-Data"]                   ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-student-captcha",form_module:"Student-Captcha-Form",router:1};
+    m["Student-Captcha-Form"]                   ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-student-captcha"};
     
 
     

@@ -1,0 +1,59 @@
+﻿<div id=D__ID>
+	VmInclude:__CURRENT_PATH__view.html
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(m){
+    		//-------------------------------------
+			/*VmInclude:__COMPONENT__/f/form.01.js*/
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			//-------------------------------------
+			if (typeof window['C__ID'] == 'function') {
+				try{eval('C__ID')(m);}
+				catch(err){	console.log("%c"+err+" --- This error happend in the file __CURRENT_PATH__view.html","color:red");}
+			}
+			//-----------------------------------------
+			$('#D__ID').on('load',function(){
+				if(m.input!=undefined && m.input.record!=undefined){
+					$('#captcha__ID').hide();
+				}
+				else{
+					$('#captcha__ID').show();
+				}
+			})
+			//-----------------------------------------
+			$('#D__ID').on('show',function(){
+				$vm.request({cmd:'captcha'},function(res){
+					$('#F__ID input[name=_captcha_hash]').val(res.result.hash);
+					$('#F__ID input[name=_captcha_time]').val(res.result.time);
+					$('#captcha_img__ID').prop("src",res.result.img);
+				})
+			})
+			//-----------------------------------------
+			$('#change_code__ID').on('click',function(){
+				$vm.request({cmd:'captcha'},function(res){
+					$('#F__ID input[name=_captcha_hash]').val(res.result.hash);
+					$('#F__ID input[name=_captcha_time]').val(res.result.time);
+					$('#captcha_img__ID').prop("src",res.result.img);
+				})
+			})
+			//-------------------------------------
+			m.after_insert=function(data,res){
+				if(res.status=="captcha-error"){
+					$('#submit__ID').show();
+					$vm.alert('The code is not correct.');    //standalone
+				}
+				else{
+					$vm.refresh=1;
+					m.change_status++;
+					if(m.input.goback!=undefined) window.history.go(-1);            //from grid
+					else $vm.alert('Your data has been successfully submitted');    //standalone
+				}
+			}
+			//-------------------------------------
+		}
+    </script>
+    <style>
+		/*VmInclude:__COMPONENT__/f/form.01.css*/
+		/*VmInclude:__CURRENT_PATH__style.css*/
+    </style>
+</div>
