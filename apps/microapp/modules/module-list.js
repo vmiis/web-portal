@@ -34,7 +34,9 @@
     m["Student-Captcha-Data"]                   ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-student-captcha",form_module:"Student-Captcha-Form",router:1};
     m["Student-Captcha-Form"]                   ={url:H+"/tasks/Use Cases/#/page.html",Table:"demo-student-captcha"};
     
-
+    m["Public Data Collection Site"]            ={url:H+"/tasks/Use Cases/Public-Data-Collection/Site/index.html",Table:"demo-membership-application-captcha"};
+    m["Public Data Collection Data"]            ={url:H+"/tasks/Use Cases/Public-Data-Collection/Data/page.html", Table:"demo-membership-application-captcha"};
+    m["ai-test-01"]                             ={url:H+"/tasks/Use Cases/AI/01/page.html",router:1};
     
     for(p in m){  
         m[p].url=m[p].url.replace('*',p); 

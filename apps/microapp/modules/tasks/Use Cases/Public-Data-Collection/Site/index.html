@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online Forms</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="site.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+        <script src="vm2.js"></script>           
+    </head>
+    <body>
+        <div id=header>
+            <div id=logo>
+                <span id=logo_a>Business</span><br>
+                <span id=logo_b>Data Collection</span>
+            </div>
+        </div>
+        <div id=layout>
+            <div id=content></div>
+            <div id=footer>
+                Open Source Code: <u><a target=_blank style='color:#fff' href=https://github.com/vmiis/web-portal >https://github.com/vmiis/web-portal</a></u>
+            </div>
+        </div>
+    </body>
+    <script>
+        window.onscroll=function(){
+            var y=-window.scrollY/2;
+            var r=-y/100; if(r>0.5) r=0.5;
+            document.getElementById("header").style.background = "rgba(0,0,0,"+r+")"
+        };
+        $vm2.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
+        $vm2.module_list={
+            "form.html": {url:$vm2.hosting_path+"/form.html",table:"demo_test"},
+            "form.css":  {url:$vm2.hosting_path+"/form.css"},
+        }
+        $vm2.load_module({name:"form.html",url:$vm2.module_list["form.html"].url,id:1,type:"html",
+            callback:function(){
+                $vm2.load_module({url:$vm2.module_list["form.css"].url,id:1,type:"css"})
+            }
+        })
+    </script>
+    <style>
+        body{
+            background-image: url(https://images.unsplash.com/flagged/photo-1551089862-06f6e0c91989?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+        }
+    </style>
+</html>

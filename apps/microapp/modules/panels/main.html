@@ -37,6 +37,19 @@
                     <li><a href="?/File-Data">Files</a></li>
                 </ul>
             </div>
+            <div class="block__ID">
+                <span class='title_2__ID'>Public Data Collection</span>
+                <ul>
+                    <li><a href="?/Public Data Collection Site">Site</a></li>
+                    <li><a href="?/Public Data Collection Data">Data Collected</a></li>
+                </ul>
+            </div>
+            <div class="block__ID">
+                <span class='title_2__ID'>Others</span>
+                <ul>
+                    <li><a href="?/ai-test-01">AI Test</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <script>
@@ -49,6 +62,9 @@
                 e.stopPropagation();
                 var module_name=$(this).attr('href').replace('?\/','');
                 switch(module_name){
+                    case "Public Data Collection Site":
+                        window.open($vm.module_list[module_name].url);
+                        break;
                     default: if(module_name!="") $vm.show_module(module_name,{}); break;
                 }
             })
